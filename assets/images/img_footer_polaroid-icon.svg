@@ -1,0 +1,9 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="24" height="30" viewBox="0 0 24 30">
+    <g fill="none" fill-rule="nonzero">
+        <path fill="#E2231A" d="M0 23.172h23.815v6.611H0z"/>
+        <path fill="#FF8300" d="M0 16.798h23.815v3.305H0z"/>
+        <path fill="#FFB700" d="M0 11.368h23.815v3.305H0z"/>
+        <path fill="#6CC04A" d="M0 5.938h23.815v3.305H0z"/>
+        <path fill="#009BDE" d="M0 .508h23.815v3.305H0z"/>
+    </g>
+</svg>
