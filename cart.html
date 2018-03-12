@@ -1,0 +1,199 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
+    <script defer src="https://use.fontawesome.com/releases/v5.0.8/js/all.js"></script>
+    <script src="https://code.jquery.com/jquery-3.2.1.slim.min.js" integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN" crossorigin="anonymous"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js" integrity="sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q" crossorigin="anonymous"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js" integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl" crossorigin="anonymous"></script>
+    <title>Cart</title>
+    <style>
+    @media (max-width: 720px){
+        .nav-main {
+            font-size: 18px
+        }
+        .row {
+            font-size: 14px
+        }
+    }
+    </style>
+</head>
+<body>
+    <nav class="navbar fixed-top navbar-expand-md navbar-dark bg-dark">
+        <a class="nav-main navbar-brand text-light">
+            <i class="fas fa-headphones"></i> CD-mon</a>
+        <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+            <span class="navbar-toggler-icon"></span>
+        </button>
+        <div class="collapse navbar-collapse" id="navbarSupportedContent">
+            <ul class="navbar-nav mr-auto">
+                <li class="nav-item active">
+                    <a class="nav-link" href="#">Home <span class="sr-only"></span></a>
+                </li>
+                <li class="nav-item dropdown">
+                    <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                        Category
+                    </a>
+                <div class="dropdown-menu" aria-labelledby="navbarDropdown">
+                    <a class="dropdown-item" href="#">Indonesia</a>
+                    <a class="dropdown-item" href="#">West</a>
+                    <a class="dropdown-item" href="#">Asia</a>
+                </div>
+                </li>
+            </ul>
+            <ul class="navbar-nav">
+                <li class="nav-item">
+                    <a class="nav-link" href="#">Sign Up</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" href="#">Login</a>
+                </li>
+                <li class="nav-item" style="margin: 0px 10px 0px 0px">
+                    <a class="nav-link active flex-end" href="cart.html">Cart <i class="fas fa-shopping-cart"></i></a>
+                </li>
+            </ul>
+            <form class="form-inline">
+                <input class="form-control mr-sm-2" type="search" placeholder="Search" aria-label="Search">
+                <button class="btn btn-outline-info my-2 my-sm-0" type="submit">Search</button>
+            </form>
+        </div>
+    </nav>
+    <br><br><br>
+    <div class="container">
+        <!-- <table class="table table-hover">
+            <thead>
+                <tr>
+                    <th>Product</th>
+                    <th>Price</th>
+                    <th>Quantity</th>
+                    <th>Subtotal</th>
+                    <th>Actions</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr>
+                    <td>
+                        <img width="64" height="64" src="https://is3-ssl.mzstatic.com/image/thumb/Music118/v4/bc/31/ab/bc31ab00-2199-370d-94f2-6f9189a93d3c/075679882493.jpg/1200x630bb.jpg" alt="image table">
+                        <strong>Panic! At The Disco</strong> - Death of A Bachelor Tour Live
+                    </td>
+                    <td>$4.9</td>
+                    <td>
+                        <input type="number" class="form-control">
+                    </td>
+                    <td>$4.9</td>
+                    <td>
+                        <button class="btn btn-success btn-sm"><i class="fa fa-sync-alt"></i></button>
+                        <button class="btn btn-danger btn-sm"><i class="fa fa-trash"></i></button>
+                    </td>
+                </tr>
+                <tr>
+                    <td>
+                        <img width="64" height="64" src="https://1.bp.blogspot.com/-hVblCbVBlos/WLMKDSFdh0I/AAAAAAAAFGA/EMDPFdAtTyobtV2T6zY8DaqeA2tMuEd3wCLcB/s1600/Pee%2BWee%2BGaskins%2B%2528A%2BYouth%2BNot%2BWasted%2529%2B-%2B2016.jpg" alt="image table">
+                        <strong>Pee Wee Gaskins</strong> - A Youth Not Wasted
+                    </td>
+                    <td>$4.9</td>
+                    <td>
+                        <input type="number" class="form-control">
+                    </td>
+                    <td>$4.9</td>
+                    <td>
+                        <button class="btn btn-success btn-sm"><i class="fa fa-sync-alt"></i></button>
+                        <button class="btn btn-danger btn-sm"><i class="fa fa-trash"></i></button>
+                    </td>
+                </tr>
+            </tbody>
+            <tfoot>
+                <tr>
+                    <td></td>
+                    <td></td>
+                    <td></td>
+                    <td><strong>Total</strong> $9.98</td>
+                    <td><a href="#" class="btn btn-info">Checkout <i class="fa fa-angle-right"></i></a></td>
+                </tr>
+            </tfoot>
+        </table> -->
+        <div class="card">
+            <div class="card-header d-none d-md-block">
+                <div class="row">
+                    <div class="col-md-6">
+                        Product
+                    </div>
+                    <div class="col-md-1">
+                        Price
+                    </div>
+                    <div class="col-md-1">
+                        Qty
+                    </div>
+                    <div class="col-md-1">
+                        Subtotal
+                    </div>
+                    <div class="col-md-3">
+                        Actions
+                    </div>
+                </div>
+            </div>
+            <div class="card-body">
+                <div class="row">
+                    <div class="col-md-6 d-none d-md-block">
+                        <p class="card-text">
+                            <img width="64" height="64" src="https://is3-ssl.mzstatic.com/image/thumb/Music118/v4/bc/31/ab/bc31ab00-2199-370d-94f2-6f9189a93d3c/075679882493.jpg/1200x630bb.jpg" alt="image table">
+                            <strong>Panic! At The Disco</strong> - Death of A Bachelor Tour Live
+                        </p>
+                    </div>
+                    <div class="col-md-1 d-none d-md-block">
+                        <p class="card-text">
+                            $4.9
+                        </p>
+                    </div>
+                    <div class="col-md-1 d-none d-md-block">
+                        <input type="number" class="form-control">
+                    </div>
+                    <div class="col-md-1 d-none d-md-block">
+                        <p class="card-text">
+                            $4.9
+                        </p>
+                    </div>
+                    <div class="col-md-3 d-none d-md-block">
+                        <button class="btn btn-success btn-sm"><i class="fa fa-sync-alt"></i></button>
+                        <button class="btn btn-danger btn-sm"><i class="fa fa-trash"></i></button>
+                    </div>
+                    <div class="col-md-6 d-block d-md-none">
+                        <p class="card-text">
+                            <strong>Panic! At The Disco</strong><br> Death of A Bachelor Tour Live
+                        </p>
+                    </div>
+                    <div class="col-md-1 d-block d-md-none">
+                        <p class="card-text">
+                            Price : $4.9
+                        </p>
+                    </div>
+                    <div class="col-md-1 d-block d-md-none">
+                        <p class="card-text">Qty : </p>
+                        <input type="number" class="form-control">
+                    </div>
+                    <div class="col-md-1 d-block d-md-none">
+                        <p class="card-text">
+                            Subtotal : $4.9
+                        </p>
+                    </div>
+                    <div class="col-md-3 d-block d-md-none">
+                        <button class="btn btn-success btn-sm"><i class="fa fa-sync-alt"></i></button>
+                        <button class="btn btn-danger btn-sm"><i class="fa fa-trash"></i></button>
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="col-md-8"></div>
+                    <div class="col-md-1"><strong>Total</strong> $9.98</div>
+                    <div class=col-md-3><a href="#" class="btn btn-info">Checkout <i class="fa fa-angle-right"></i></a></div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="footer-copyright py-3 text-center bg-light">
+        © 2018 Copyright: CD-Mon. All rights reserved.
+    </div>
+</body>
+</html>
