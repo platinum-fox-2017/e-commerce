@@ -1,0 +1,52 @@
+body {
+    background-color: #f4f4f4;
+}
+
+.card {
+    margin-bottom: 20px;
+    border: none;
+}
+
+.card-title {
+    font-weight: 700;
+    font-size: 14px;
+}
+
+.commerce-tagline {
+    padding: 15px 0;
+}
+
+.item {
+    padding-bottom: 12px;
+}
+
+.item-detail {
+    float: left;
+    padding-left: 15px;
+}
+
+@media (max-width: 320px) {
+    .commerce-tagline>h3 {
+        font-size: 1.2rem;
+    }
+}
+
+@media (max-width: 425px) {
+    .item-cart {
+        width: 30%
+    }
+    .item-detail {
+        float: none;
+        padding-left: 85px;
+    }
+}
+
+@media (min-width: 768px) {}
+
+@media (max-width: 992px) {
+    .search {
+        width: 100% !important;
+        margin-bottom: 8px;
+        margin-right: 0 !important
+    }
+}
