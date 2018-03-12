@@ -1,0 +1,221 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <link rel="stylesheet" href="style.css" type="text/css">
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
+    <script src="https://code.jquery.com/jquery-3.2.1.slim.min.js" integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN" crossorigin="anonymous"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js" integrity="sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q" crossorigin="anonymous"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js" integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl" crossorigin="anonymous"></script>
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.4.0/css/font-awesome.min.css">
+    <title>Ecommerce</title>
+  </head>
+  <body>
+    <nav class="navbar navbar-expand-md fixed-top navbar-top">
+      <div class="container">
+      <a class="navbar-brand" href="index.html" style="color:white;">Hijabana</a>
+      <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarsExampleDefault" aria-controls="navbarsExampleDefault" aria-expanded="false" aria-label="Toggle navigation">
+      <span class="navbar-toggler-icon"><i class="fa fa-chevron-circle-down"></i></span>
+      </button>
+      <div class="collapse navbar-collapse" id="navbarsExampleDefault">
+        <ul class="navbar-nav mr-auto">
+          <li class="nav-item dropdown">
+            <a class="nav-link dropdown-toggle" href="http://example.com" id="dropdown01" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">Category</a>
+            <div class="dropdown-menu" aria-labelledby="dropdown01">
+              <a class="dropdown-item" href="#">Basics</a>
+              <a class="dropdown-item" href="#">Jilbab</a>
+              <a class="dropdown-item" href="#">Pakaian Wanita</a>
+              <a class="dropdown-item" href="#">Produk Beauty</a>
+              <a class="dropdown-item" href="#">Tas & Sepatu</a>
+            </div>
+          </li>
+          <li>
+            <form class="form-inline my-2 my-lg-0">
+              <input class="form-control mr-sm-2" type="text" placeholder="Search" aria-label="Search">
+              <button class="btn btn-outline-success my-2 my-sm-0" type="submit">Search</button>
+            </form>
+          </li>
+        </ul>
+        <ul class="nav navbar-nav navbar-right">
+          <li>
+            <a href="cart.html"><span class="fa fa-shopping-cart fa-2x" style="margin-right:10px"></span></a>
+          </li>
+          <li><a href="#" style="color:white;margin-left:10px"><button class="btn btn-primary" data-toggle="modal" data-target="#exampleModal">Sign In</button></a></li>
+          <li><a href="#" style="color:white;margin-left:10px"><button class="btn btn-info">Register</button></a></li>
+        </ul>
+      </div>
+    </nav>
+    <div class="container cart">
+      <div class="row">
+        <div class="col-sm-12 col-md-12 table-responsive">
+          <table class="table table-hover">
+            <thead>
+              <tr>
+                <th>Produk</th>
+                <th>Jumlah</th>
+                <th class="text-center">Harga</th>
+                <th class="text-center">Subtotal</th>
+                <th> </th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr>
+                <td class="col-sm-8 col-md-6">
+                  <div class="media">
+                    <a class="thumbnail pull-left" href="#"> <img class="media-object" src="assets/images/xena.jpg" style="width: 72px; height: 72px; margin-right:15px;"> </a>
+                    <div class="media-body">
+                      <h5 class="media-heading"><a href="#">Xena Flat</a></h5>
+                      <h6 class="media-heading"> oleh <a href="#">Hijabana</a></h6>
+                      <span>Material : </span><span class="text-success"><strong>Pu leather (brokat dan kulit sintetis)</strong></span>
+                    </div>
+                  </div>
+                </td>
+                <td class="col-sm-1 col-md-1" style="text-align: center">
+                  <input type="email" class="form-control" id="exampleInputEmail1" value="1">
+                </td>
+                <td class="col-sm-1 col-md-1 text-center"><strong>RP 75.000</strong></td>
+                <td class="col-sm-1 col-md-1 text-center"><strong>RP 75.000</strong></td>
+                <td class="col-sm-1 col-md-1">
+                  <button type="button" class="btn btn-danger">
+                  <span class="glyphicon glyphicon-remove"></span> hapus
+                  </button>
+                </td>
+              </tr>
+              <tr>
+                <td class="col-md-6">
+                  <div class="media">
+                    <a class="thumbnail pull-left" href="#"> <img class="media-object" src="assets/images/gema-collection.jpg" style="width: 72px; height: 72px;margin-right:15px;"> </a>
+                    <div class="media-body">
+                      <h5 class="media-heading"><a href="#">mukena sutra paris</a></h5>
+                      <h6 class="media-heading"> by <a href="#">Hijabana</a></h6>
+                      <span>Material: </span><span class="text-success"><strong>Katun</strong></span>
+                    </div>
+                  </div>
+                </td>
+                <td class="col-md-1" style="text-align: center">
+                  <input type="email" class="form-control" id="exampleInputEmail1" value="2">
+                </td>
+                <td class="col-md-1 text-center"><strong>RP 225.000</strong></td>
+                <td class="col-md-1 text-center"><strong>RP 225.000</strong></td>
+                <td class="col-md-1">
+                  <button type="button" class="btn btn-danger">
+                  <span class="glyphicon glyphicon-remove"></span> hapus
+                  </button>
+                </td>
+              </tr>
+              <tr>
+                <td>   </td>
+                <td>   </td>
+                <td>   </td>
+                <td>
+                  <h6>Subtotal</h6>
+                </td>
+                <td class="text-right">
+                  <h6><strong>Rp 300.000</strong></h6>
+                </td>
+              </tr>
+              <tr>
+                <td>   </td>
+                <td>   </td>
+                <td>   </td>
+                <td>
+                  <h6>Estimasi Biaya Pengiriman</h6>
+                </td>
+                <td class="text-right">
+                  <h6><strong>Rp 17.000</strong></h6>
+                </td>
+              </tr>
+              <tr>
+                <td>   </td>
+                <td>   </td>
+                <td>   </td>
+                <td>
+                  <h5>Total</h5>
+                </td>
+                <td class="text-right">
+                  <h5><strong>RP 317.000</strong></h5>
+                </td>
+              </tr>
+              <tr>
+                <td>   </td>
+                <td>   </td>
+                <td>   </td>
+                <td>
+                  <a href="index.html">
+                  <button type="button" class="btn btn-info">
+                  <span class="fa fa-shopping-cart"></span> Belanja lagi
+                  </button>
+                  </a>
+                </td>
+                <td>
+                  <button type="button" class="btn btn-success">
+                  lanjutkan pembayaran <span class="fa fa-play"></span>
+                  </button>
+                </td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+      </div>
+    </div>
+    <div class="page-footer">
+      <div class="container">
+        <div class="row row-footer">
+          <div class="col-sm-7 footer-info">
+            <h5>Tentang Hijabana</h5>
+            <p>Hijabana adalah sebuah ecommerce yang menyediakan kebutuhan hijab untuk semua wanita yang sangat nyaman dan berkelas</p>
+          </div>
+          <div class="col-sm-3 footer-info">
+            <h5>Kontak</h5>
+            <p><i class="fa fa-map-marker"></i> &nbsp; &nbsp; Jl. Dago 25 Kanayakan dalam</p>
+            <p><i class="fa fa-envelope-square"></i> &nbsp; &nbsp; info@hijabana.com</p>
+            <p><i class="fa fa-mobile"></i> &nbsp; &nbsp; +62 812 9012 3454</p>
+          </div>
+          <div class="col-sm-2 footer-info">
+            <h5>Ikuti Kami</h5>
+            <p><a href="facebook.com"><i class="fa fa-facebook-square"></i>&nbsp; &nbsp;hijabana</a></p>
+            <p><a href="instagram.com"><i class="fa fa-instagram"></i>&nbsp; &nbsp;hijabana_id</a></p>
+            <p><a href="twitter.com"><i class="fa fa-twitter"></i>&nbsp; &nbsp;hijabana</a></p>
+          </div>
+        </div>
+        <hr>
+        <div class="footer-copyright py-3 text-center">
+          <i style="color:white;">© 2018 Copyright:
+          <a href="#" style="color:white;"> Hijabana </a></i>
+        </div>
+      </div>
+    </div>
+    
+    <div class="modal fade" id="exampleModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+            <div class="modal-dialog" role="document">
+              <div class="modal-content">
+                <div class="modal-header">
+                  <h5 class="modal-title" id="exampleModalLabel">Sign In</h5>
+                  <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                  </button>
+                </div>
+                <div class="modal-body">
+                  <form action="index.html">
+                    <div class="form-group">
+                      <label for="recipient-email" class="form-control-label">Email:</label>
+                      <input type="text" class="form-control" id="recipient-email">
+                    </div>
+                    <div class="form-group">
+                      <label for="message-text" class="form-control-label">Password:</label>
+                      <input type="text" class="form-control" id="recipient-password">
+                    </div>
+                  </form>
+                </div>
+                <div class="modal-footer">
+                  <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+                  <button type="button" class="btn btn-primary">Sign in</button>
+                </div>
+              </div>
+            </div>
+          </div>
+
+  </body>
+</html>
