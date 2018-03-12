@@ -1,0 +1,89 @@
+.navbar {
+    margin-bottom:0 !important;
+    background-color: #00979d !important;
+
+
+}
+
+#navbarDropdown{
+    color: white;
+    font-family: Lucida Grande;
+}
+
+#global-nav{
+    /* line-height: 150px; */
+    font-size: 16px;
+    height: 150px;
+    -webkit-transition: height .5s, line-height .5s; /* Safari */
+    transition: height .5s, line-height .5s;
+}
+
+#title-image {
+  display: inline-block;
+  -webkit-transition: all .5s;
+    transition: all .5s;
+    height: 100px;
+    width: auto;
+}
+
+#dropdown-content {
+    display: none;
+    position: absolute;
+    background-color: #00696d;
+    min-width: 160px;
+    box-shadow: 0px 8px 16px 0px rgba(0,0,0,0.2);
+    z-index: 1;
+}
+
+
+/* Links inside the dropdown */
+#dropdown-content a {
+    color: white;
+    padding: 12px 16px;
+    text-decoration: none;
+    display: block;
+}
+
+/* Change color of dropdown links on hover */
+#dropdown-content a:hover {
+    background-color: #99d5d7;
+    color:#00696d;
+}
+
+#navbar-header li:hover {
+    background-color: #99d5d7;
+    /* color:white; */
+}
+
+
+/* Show the dropdown menu on hover */
+#dropdown:hover #dropdown-content {
+    display: block;
+}
+
+/* Change the background color of the dropdown button when the dropdown content is shown */
+#ropdown:hover #dropbtn {
+    background-color: #3e8e41;
+}
+
+.scrolled-nav #title-image  {
+  height: 40px;
+  width: auto;
+}
+
+.scrolled-nav {
+  height: 60px !important;
+  /* line-height: 60px !important; */
+}
+
+.navbar a {
+    color: white;
+}
+
+#product {
+    margin-top: 40px;
+}
+
+.card {
+    margin: 20px;
+}
