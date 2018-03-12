@@ -1,0 +1,42 @@
+body {
+background-color: #1C2841
+}
+
+.navbar-brand {
+    color: #1C2841;
+}
+
+.img-fluid {
+    width: auto;
+    height: 240px;
+    margin: 10px auto;
+}
+
+#carouselExampleIndicators {
+    background-color: white
+}
+
+h1 {
+    color: whitesmoke;
+    text-align: center
+}
+
+nav {
+    font-family: Verdana;
+    background-color: white
+}
+.menu {
+    color: mintcream
+}
+
+#items {
+    background-color: #1d2951
+}
+
+footer {
+    background-color: mintcream
+}
+
+.jumbotron {
+    text-align: center
+}
