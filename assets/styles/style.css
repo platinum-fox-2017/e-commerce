@@ -154,6 +154,111 @@ header {
     transform-origin: top left 2px;
     transition: 0.5s;
 }
+
+.product-container {
+    margin-top:15px;
+    margin-bottom: 20px;
+}
+
+.product-headings{
+    text-align: center;
+}
+
+
+
+
 .site-footer{
-    background-color: rgb(0,0,0)
+    position: relative;
+    /* box-sizing: border-box; */
+    margin:auto;
+    width: auto;
+    /* top:1.0em; */
+    height: 120px;
+    background-size: 100%;
+    background-color: rgba(25, 25, 25, 0.905);
+    opacity: 0.9;
+}
+
+.footer-content{
+    top:2.0em;
+    text-align: center;
+    position: relative;
+    font-size: 1.3rem;
+    font-family: "Roboto Mono", monospace;
+    color: rgba(255, 255, 255, 0.935);
+}
+
+
+p > a {
+    color: #ffffff;
+    text-decoration: none;
+    transition: .3s
+}
+
+p > a:hover, a:focus, a:active {
+    color: #ffffff;
+    outline: none
+}
+
+.text-link {
+    color: #4c3d6d;
+    display: inline-block;
+    position: relative;
+    text-decoration: none;
+    transition: .3s
+}
+
+.text-link:before, .text-link:after {
+    bottom: 5%;
+    content: '';
+    position: absolute;
+    top: 5%;
+    transition: .3s;
+    width: 47%;
+    z-index: -1
+}
+
+.text-link:before {
+    background: #71e2a6;
+    left: 5%;
+    -webkit-transform: translateY(4px);
+    transform: translateY(4px)
+}
+
+.text-link:after {
+    background: #e9b921;
+    left: 49%;
+    -webkit-transform: translateY(-4px);
+    transform: translateY(-4px)
+}
+
+.text-link:hover, .text-link:focus {
+    color: #ffffff;
+    outline: none
+}
+
+.text-link:hover:before, .text-link:focus:before {
+    background: #4c3d6d;
+    -webkit-transform: translateY(0);
+    transform: translateY(0)
+}
+
+.text-link:hover:after, .text-link:focus:after {
+    background: #4c3d6d;
+    -webkit-transform: translateY(0);
+    transform: translateY(0)
+}
+
+.text-link:active {
+    color: #ffffff;
+    outline: none;
+    transition-duration: 0.1s
+}
+
+.text-link:active:before, .text-link:active:after {
+    width: 35%
+}
+
+.text-link:active:before {
+    left: 15%
 }
