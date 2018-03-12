@@ -1,0 +1,22 @@
+{
+  "name": "e-commerce",
+  "version": "1.0.0",
+  "description": "layouting e-commerce web app",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/reynaldipane/e-commerce.git"
+  },
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/reynaldipane/e-commerce/issues"
+  },
+  "homepage": "https://github.com/reynaldipane/e-commerce#readme",
+  "dependencies": {
+    "live-server": "^1.2.0"
+  }
+}
