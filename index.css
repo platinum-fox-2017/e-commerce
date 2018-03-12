@@ -1,0 +1,50 @@
+body {
+  margin: 0px;
+  padding: 0px;
+}
+header .row,
+footer .row {
+  display: flex;
+  align-items: center;
+}
+container .col-md-3{
+  background-color: navy;
+  margin: 2px;
+}
+footer {
+  font-size: 12px;
+  padding: 20px 0;
+}
+
+footer .col-md-8 {
+  display: flex;
+  justify-content: flex-end;
+}
+
+footer ul {
+  list-style: none;
+}
+
+.fa {
+  padding: 20px;
+  font-size: 30px;
+  width: 50px;
+  text-align: center;
+  text-decoration: none;
+  margin: 5px 2px;
+}
+
+.fa-facebook {
+  background: #3B5998;
+  color: white;
+}
+
+.fa-twitter {
+  background: #55ACEE;
+  color: white;
+}
+
+.fa-instagram {
+  background: #125688;
+  color: white;
+}
