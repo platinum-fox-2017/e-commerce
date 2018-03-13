@@ -16,10 +16,10 @@
     <nav class="navbar navbar-expand-md fixed-top navbar-top">
       <div class="container">
         <a class="navbar-brand" href="index.html" style="color:white;">Hijabana</a>
-        <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarsExampleDefault" aria-controls="navbarsExampleDefault" aria-expanded="false" aria-label="Toggle navigation">
+        <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarsDropdown" aria-controls="navbarsDropdown" aria-expanded="false" aria-label="Toggle navigation">
         <span class="navbar-toggler-icon"><i class="fa fa-chevron-circle-down"></i></span>
         </button>
-        <div class="collapse navbar-collapse" id="navbarsExampleDefault">
+        <div class="collapse navbar-collapse" id="navbarsDropdown">
           <ul class="navbar-nav mr-auto">
             <li class="nav-item dropdown">
               <a class="nav-link dropdown-toggle" href="http://example.com" id="dropdown01" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">Category</a>
@@ -34,16 +34,15 @@
             <li>
               <form class="form-inline my-2 my-lg-0">
                 <input class="form-control mr-sm-2" type="text" placeholder="Search" aria-label="Search">
-                <button class="btn btn-outline-success my-2 my-sm-0" type="submit">Search</button>
+                <button class="btn btn-success my-2 my-sm-0" type="submit">Search</button>
               </form>
             </li>
           </ul>
           <ul class="nav navbar-nav navbar-right">
             <li>
-              <a href="cart.html"><span class="fa fa-shopping-cart fa-2x" style="margin-right:10px"></span></a>
+              <button class="btn btn-sm btn-outline-info" data-toggle="modal" data-target="#cartModal" ><span class="fa fa-shopping-cart fa-2x" style="margin-right:10px"></span></button>
             </li>
-            <li><a href="#" style="color:white;margin-left:10px"><button class="btn btn-primary" data-toggle="modal" data-target="#exampleModal">Sign In</button></a></li>
-            <li><a href="#" style="color:white;margin-left:10px"><button class="btn btn-info">Register</button></a></li>
+            <li><a href="#" style="color:white;margin-left:10px"><button class="btn btn-info" data-toggle="modal" data-target="#exampleModal">Sign In</button></a></li>
           </ul>
         </div>
     </nav>
@@ -76,125 +75,46 @@
         </div>
       </div>
     </div>
+    <div id="produk">
     <div class="container">
       <div class="category">
         <h4>Terbaru</h4>
         <hr>
         <div class="row">
-          <div class="col-sm-2">
+          <div class="col-sm-2" v-for="item in items" v-if="item.status == 'terbaru'">
             <div class="img-thumbnail">
-              <img src="assets/images/janeska-outer-jacket.jpeg" class="img-responsive img-body" > 
-              <div class="caption">
-                <center>
-                  <p>Janeska Outer</p>
-                  <p class="price">Rp 250.000</p>
-                </center>
-              </div>
-            </div>
-          </div>
-          <div class="col-sm-2">
-            <div class="img-thumbnail">
-              <img src="assets/images/kindoyao.jpg" class="img-responsive img-body" > 
-              <div class="caption">
-                <center>
-                  <p>Kindayo Dress</p>
-                  <p class="price">Rp 325.000</p>
-                </center>
-              </div>
-            </div>
-          </div>
-          <div class="col-sm-2">
-            <div class="img-thumbnail">
-              <img src="assets/images/vicria.jpg" class="img-responsive img-body" > 
-              <div class="caption">
-                <center>
-                  <p>Vicria Bag</p>
-                  <p class="price">Rp 350.000</p>
-                </center>
-              </div>
-            </div>
-          </div>
-          <div class="col-sm-2">
-            <div class="img-thumbnail">
-              <img src="assets/images/xena.jpg" class="img-responsive img-body" > 
-              <div class="caption">
-                <center>
-                  <p>Xena Flat</p>
-                  <p class="price">Rp 195.000</p>
-                </center>
-              </div>
-            </div>
-          </div>
-          <div class="col-sm-2">
-            <div class="img-thumbnail">
-              <img src="assets/images/gema-collection.jpg" class="img-responsive img-body" > 
-              <div class="caption">
-                <center>
-                  <p>mukena sutra paris</p>
-                  <p class="price">Rp 225.000</p>
-                </center>
-              </div>
-            </div>
-          </div>
-          <div class="col-sm-2">
-            <div class="img-thumbnail">
-              <img src="assets/images/milyarda-hijab-Deeja-Prealy .jpg" class="img-responsive img-body" > 
-              <div class="caption">
-                <center>
-                  <p>Deeja Prealy Hijab </p>
-                  <p class="price">Rp 78.000</p>
-                </center>
-              </div>
+              <center>
+                <img :src="item.imgSource" class="img-responsive img-body" > 
+                <div class="caption">
+                  <p class="item">{{item.name}}</p>
+                  <p class="item">tersedia : {{item.stock}}</p>
+                  <p class="price"> Rp {{currencyFormat(item.price)}}</p>
+                </div>
+                <div class="col-sm-12">
+                    <button class="btn btn-sm btn-xs btn-info btn-block" v-on:click="addToCart(item)">tambahkan</button>
+                </div>
+              </center>
             </div>
           </div>
         </div>
-        <div class="category">
-          <h4>Promo</h4>
-          <hr>
-        </div>
+      </div>
+      <div class="category">
+        <h4>Promo</h4>
+        <hr>
         <div class="row">
-          <div class="col-sm-3">
+          <div class="col-sm-3" v-for="item in items" v-if="item.status == 'promo'">
             <div class="img-thumbnail">
-              <img src="assets/images/instant.jpg" class="img-responsive img-body" > 
-              <div class="caption">
-                <center>
-                  <p>Instant lcb coklat</p>
-                  <p class="price"><strike>Rp 75.000</strike> Rp 60.000</p>
-                </center>
-              </div>
-            </div>
-          </div>
-          <div class="col-sm-3">
-            <div class="img-thumbnail">
-              <img src="assets/images/sneakers.jpg" class="img-responsive img-body" > 
-              <div class="caption">
-                <center>
-                  <p>Sneaker</p>
-                  <p class="price"><strike>Rp 75.000</strike> Rp 56.000</p>
-                </center>
-              </div>
-            </div>
-          </div>
-          <div class="col-sm-3">
-            <div class="img-thumbnail">
-              <img src="assets/images/java-seven_java-seven-mukena-ayra-stm-064_full02.jpg" class="img-responsive img-body" > 
-              <div class="caption">
-                <center>
-                  <p>Seven mukena Ayra</p>
-                  <p class="price"><strike>Rp 75.000</strike> Rp 56.000</p>
-                </center>
-              </div>
-            </div>
-          </div>
-          <div class="col-sm-3">
-            <div class="img-thumbnail">
-              <img src="assets/images/cardigan.jpg" class="img-responsive img-body" > 
-              <div class="caption">
-                <center>
-                  <p>Anya Cardigan</p>
-                  <p class="price"><strike>Rp 75.000</strike> Rp 56.000</p>
-                </center>
-              </div>
+              <center>
+                <img :src="item.imgSource" class="img-responsive img-body" > 
+                <div class="caption">
+                  <p class="item">{{item.name}}</p>
+                  <p class="item">tersedia : {{item.stock}}</p>
+                  <p class="price"><strike>Rp {{currencyFormat(item.price)}}</strike> Rp {{currencyFormat(promo(item.name))}}</p>
+                </div>
+                <div class="col-sm-12">
+                    <button class="btn btn-sm btn-xs btn-info btn-block" v-on:click="addToCart(item)">tambahkan</button>
+                </div>
+              </center>
             </div>
           </div>
         </div>
@@ -227,25 +147,24 @@
         </div>
       </div>
     </div>
-
     <div class="modal fade" id="exampleModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
       <div class="modal-dialog" role="document">
         <div class="modal-content">
           <div class="modal-header">
             <h5 class="modal-title" id="exampleModalLabel">Sign In</h5>
             <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-              <span aria-hidden="true">&times;</span>
+            <span aria-hidden="true">&times;</span>
             </button>
           </div>
           <div class="modal-body">
             <form action="index.html">
               <div class="form-group">
                 <label for="recipient-email" class="form-control-label">Email:</label>
-                <input type="text" class="form-control" id="recipient-email">
+                <input type="text" class="form-control" id="email">
               </div>
               <div class="form-group">
                 <label for="message-text" class="form-control-label">Password:</label>
-                <input type="text" class="form-control" id="recipient-password">
+                <input type="text" class="form-control" id="password">
               </div>
             </form>
           </div>
@@ -256,6 +175,57 @@
         </div>
       </div>
     </div>
-
+    <div class="modal fade" id="cartModal" tabindex="-1" role="dialog" aria-labelledby="cartModalLabel" aria-hidden="true">
+      <div class="modal-dialog" role="document">
+        <div class="modal-content">
+          <div class="modal-header">
+            <h5 class="modal-title" id="cartModalLabel">Keranjang Belanja</h5>
+            <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+            <span aria-hidden="true">&times;</span>
+            </button>
+          </div>
+          <div class="modal-body">
+            <table class="table table-responsive">
+              <thead>
+                <th></th>
+                <th>Produk</th>
+                <th>Qty</th>
+                <th>Harga Satuan</th>
+                <th>Subtotal</th>
+                <th></th>                
+              </thead>
+              <tbody>
+                <tr v-for="data in cart">
+                  <td><img class="media-object" :src="data.image" style="width: 50px; height: 50px;"></td>
+                  <td>{{data.name}}</td>
+                  <td>{{data.quantity}}</td>
+                  <td>{{currencyFormat(data.price)}}</td>
+                  <td>{{currencyFormat(data.subtotal)}}</td>
+                  <td>
+                    <button type="button" class="btn btn-danger btn-xs" v-on:click="substractItem(data)"><span class="fa fa-minus"></span></button>
+                    <button type="button" class="btn btn-info btn-xs" v-on:click="addItem(data)"><span class="fa fa-plus"></span></button>
+                  </td>
+                </tr>
+                <tr>
+                  <td></td>
+                  <td></td>
+                  <td></td>
+                  <td><b>Total Pembelian<b></td>
+                  <td><b>{{currencyFormat(getTotal())}}</b></td>
+                  <td></td>
+                </tr>
+              </tbody>
+            </table>
+          </div>
+          <div class="modal-footer">
+            <button type="button" class="btn btn-info" data-dismiss="modal">belanja lagi</button>
+            <button type="button" class="btn btn-primary">lanjutkan pembayaran</button>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
   </body>
 </html>
+<script src="https://cdn.jsdelivr.net/npm/vue@2.5.15/dist/vue.js"></script>
+<script src="assets/script/data.js"></script>
