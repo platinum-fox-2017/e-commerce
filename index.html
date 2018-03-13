@@ -11,12 +11,15 @@
 </head>
 
 <body>
-
+    <div id = "app">
     <nav id="global-nav" class="navbar fixed-top navbar-expand-lg">
         <a id="site-title" class="navbar-brand" href="#">
-           <img id="title-image" src="Assets/LOGO FM 2 copy emoji.png" class="d-inline-block align-top" alt="">
-         </a>
-      </button>
+           <img id="title-image" src="Assets/arudinoLogo White.png" class="d-inline-block align-top" alt="">
+        </a>
+        <button id="btn-collapse" class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+            <span class="navbar-toggler-icon"></span>
+        </button>
+
         <div class="collapse navbar-collapse" id="navbarSupportedContent">
             <ul id="navbar-header" class="navbar-nav mr-auto">
                 <li class="nav-item active">
@@ -37,28 +40,95 @@
             </ul>
 
             <form class="form-inline my-2 my-lg-0">
-                <input class="form-control mr-sm-2" type="search" placeholder="Search" aria-label="Search">
-                <button class="btn btn-outline-success my-2 my-sm-0" type="submit">Search</button>
+                <input id="search-bar" class="form-control mr-sm-2" type="search" placeholder="Search.." aria-label="Search">
+                <button class="btn btn-search my-2 my-sm-0" type="submit"><i class="fa fa-search"></i></button>
             </form>
 
             <ul class="nav navbar-nav">
                 <li class="nav-item">
-                    <a class="search nav-link" href="#"><i class="fa fa-search"></i>
-                    <input id="search-bar" class="form-control mr-sm-2" type="search" placeholder="Search" aria-label="Search">
-                    </a>
-                </li>
-                <li class="nav-item">
                     <a class="nav-link" href="#">Sign In</a>
                 </li>
                 <li class="nav-item">
-                    <a class="nav-link" href="#"><i class="fa fa-shopping-cart"></i></a>
+                    <a class="nav-link" href="#" data-toggle="modal" data-target="#cartModal"><i class="fa fa-shopping-cart"></i> Cart <span class="badge">3</span></a>
                 </li>
 
             </ul>
-        </div>
+            <!-- </div> -->
     </nav>
 
 
+    <!-- MODAL -->
+    <div class="modal fade" id="cartModal">
+        <div class="modal-dialog modal-lg">
+            <div class="modal-content">
+
+                <!-- Modal Header -->
+                <div class="modal-header">
+                    <h4 class="modal-title">Shopping Cart</h4>
+                    <button type="button" class="close" data-dismiss="modal">&times;</button>
+                </div>
+
+                <!-- Modal body -->
+                <div class="modal-body">
+                    <div class="container">
+                        <table id="cart" class="table table-hover table-condensed">
+                            <thead>
+                                <tr>
+                                    <th style="width:50%">Product</th>
+                                    <th style="width:10%">Price</th>
+                                    <th style="width:8%">Quantity</th>
+                                    <th style="width:22%" class="text-center">Subtotal</th>
+                                    <th style="width:10%"></th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <tr>
+                                    <td data-th="Product">
+                                        <div class="row">
+                                            <!-- <div class="col-sm-2 hidden-xs">
+                                                <img src="http://placehold.it/100x100" alt="..." class="img-responsive" />
+                                            </div> -->
+                                            <div class="col-sm-10">
+                                                <h4 class="nomargin">Product 1</h4>
+                                                <p>Quis aute iure reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Lorem ipsum dolor sit amet.</p>
+                                            </div>
+                                        </div>
+                                    </td>
+                                    <td data-th="Price">$1.99</td>
+                                    <td data-th="Quantity">
+                                        <input type="number" class="form-control text-center" value="1">
+                                    </td>
+                                    <td data-th="Subtotal" class="text-center">1.99</td>
+                                    <td class="actions" data-th="">
+                                        <button class="btn btn-info btn-sm"><i class="fa fa-refresh"></i></button>
+                                        <button class="btn btn-danger btn-sm"><i class="fa fa-trash-o"></i></button>
+                                    </td>
+                                </tr>
+                            </tbody>
+                            <tfoot>
+                                <tr class="visible-xs">
+                                    <td class="text-center"><strong>Total 1.99</strong></td>
+                                </tr>
+                                <tr>
+                                    <td><a href="#" class="btn btn-warning"><i class="fa fa-angle-left"></i> Continue Shopping</a></td>
+                                    <td colspan="2" class="hidden-xs"></td>
+                                    <td class="hidden-xs text-center"><strong>Total $1.99</strong></td>
+                                    <td><a href="#" class="btn btn-success btn-block">Checkout <i class="fa fa-angle-right"></i></a></td>
+                                </tr>
+                            </tfoot>
+                        </table>
+                    </div>
+                </div>
+
+                <!-- Modal footer -->
+                <!-- <div class="modal-footer">
+                </div> -->
+
+            </div>
+        </div>
+    </div>
+
+    <!-- CAROUSEL TOP -->
     <div id="carouselHeader" class="carousel slide" data-ride="carousel">
         <!-- <ol class="carousel-indicators">
             <li data-target="#carouselHeader" data-slide-to="0" class="active"></li>
@@ -88,87 +158,150 @@
 
     <div class="container">
         <div class="row">
-            <div class="col-md-3 col-sm-6">
-                <div class="card" style="width: 16rem;">
-                  <img class="card-img-top" src="Assets/hiking_boots_-_kat_stan.jpg" alt="Card image cap">
-                  <div class="card-body">
-                    <h5 class="card-title">Dark Blue Fancy Boots</h5>
-                    <p class="card-text">Some quick example text to build on the card title and make up the bulk of the card's content.</p>
-                    <a href="#" class="btn btn-primary">Add to Cart</a>
-                  </div>
+            <div class="col-lg-4 col-md-6 col-sm-12 col-xs-12">
+                <div class="card text-center">
+                    <div class="card-image">
+                        <img class="card-img-top" src="Assets/Catalog/a000066_featured.jpg" alt="Card image cap">
+                        <div class="overlay d-none d-md-block">
+                            <div class="text">
+                                <h5>Arduino Uno Rev3</h5><br>
+                                <p>
+                                    The UNO is the best board to get started with electronics and coding. If this is your first experience tinkering with the platform, the UNO is the most robust board you can start playing with.
+                                </p>
+                                <a id="btn-buy" href="#" class="btn btn-default">Buy Now</a>
+                            </div>
+
+                        </div>
+                    </div>
+
+                    <div class="card-body">
+                        <p class="card-text">$25.00</p>
+                        <h5 class="card-title">Arduino Uno Rev3</h5>
+                        <a id="btn-buy" href="#" class="btn btn-default d-md-none">Buy Now</a>
+                    </div>
+
                 </div>
             </div>
-            <div class="col-md-3 col-sm-6">
-                <div class="card" style="width: 16rem;">
-                  <img class="card-img-top" src="Assets/hiking_boots_-_kat_stan.jpg" alt="Card image cap">
-                  <div class="card-body">
-                    <h5 class="card-title">Casual Leather Boots</h5>
-                    <p class="card-text">Some quick example text to build on the card title and make up the bulk of the card's content.</p>
-                    <a href="#" class="btn btn-primary">Add to Cart</a>
-                  </div>
+            <div class="col-lg-4 col-md-6 col-sm-12 col-xs-12">
+                <div class="card text-center">
+                    <div class="card-image">
+                        <img class="card-img-top" src="Assets/Catalog/a000067_front_2_1.jpg" alt="Card image cap">
+                        <div class="overlay d-none d-md-block">
+                            <div class="text">
+                                <h5>Arduino Mega 2560 Rev3</h5><br>
+                                <p>
+                                    The MEGA 2560 is designed for more complex projects. With 54 digital I/O pins, 16 analog inputs and a larger space for your sketch it is the recommended board for 3D printers and robotics projects.
+                                </p>
+                                <a id="btn-buy" href="#" class=" btn btn-default">Buy Now</a>
+                            </div>
+
+                        </div>
+                    </div>
+
+                    <div class="card-body">
+                        <p class="card-text">$38.50</p>
+                        <h5 class="card-title">Arduino Mega 2560 Rev3</h5>
+                        <a id="btn-buy" href="#" class="btn btn-default d-md-none">Buy Now</a>
+
+                    </div>
                 </div>
             </div>
-            <div class="col-md-3 col-sm-6">
-                <div class="card" style="width: 16rem;">
-                  <img class="card-img-top" src="Assets/hiking_boots_-_kat_stan.jpg" alt="Card image cap">
-                  <div class="card-body">
-                    <h5 class="card-title">Brodo Dark Blue Boots</h5>
-                    <p class="card-text">Some quick example text to build on the card title and make up the bulk of the card's content.</p>
-                    <a href="#" class="btn btn-primary">Add to Cart</a>
-                  </div>
-                </div>
-            </div>
-            <div class="col-md-3 col-sm-6">
-                <div class="card" style="width: 16rem;">
-                  <img class="card-img-top" src="Assets/hiking_boots_-_kat_stan.jpg" alt="Card image cap">
-                  <div class="card-body">
-                    <h5 class="card-title">Brodo Dark Blue Boots</h5>
-                    <p class="card-text">Some quick example text to build on the card title and make up the bulk of the card's content.</p>
-                    <a href="#" class="btn btn-primary">Add to Cart</a>
-                  </div>
+            <div class="col-lg-4 col-md-6 col-sm-12 col-xs-12">
+                <div class="card text-center">
+                    <div class="card-image">
+                        <img class="card-img-top" src="Assets/Catalog/abx00011_featured.jpg" alt="Card image cap">
+                        <div class="overlay d-none d-md-block">
+                            <div class="text">
+                                <h5>Arduino MKR1000 WIFI with Headers Mounted</h5><br>
+                                <p>
+                                    Arduino MKR1000 is a powerful board that combines the functionality of the Zero and the Wi-Fi Shield. It is the ideal solution for makers wanting to design IoT projects with minimal previous experience in networking.
+                                </p>
+                                <a id="btn-buy" href="#" class="btn btn-default">Buy Now</a>
+                            </div>
+
+                        </div>
+                    </div>
+
+                    <div class="card-body">
+                        <p class="card-text">$36.99</p>
+                        <h5 class="card-title">Arduino MKR1000 WIFI with Headers Mounted</h5>
+                        <a id="btn-buy" href="#" class="btn btn-default d-md-none">Buy Now</a>
+                    </div>
                 </div>
             </div>
         </div>
 
         <div class="row">
-            <div class="col-md-3 col-sm-6">
-                <div class="card" style="width: 16rem;">
-                  <img class="card-img-top" src="Assets/hiking_boots_-_kat_stan.jpg" alt="Card image cap">
-                  <div class="card-body">
-                    <h5 class="card-title">Dark Blue Fancy Boots</h5>
-                    <p class="card-text">Some quick example text to build on the card title and make up the bulk of the card's content.</p>
-                    <a href="#" class="btn btn-primary">Add to Cart</a>
-                  </div>
+            <div class="col-lg-4 col-md-6 col-sm-12 col-xs-12">
+                <div class="card text-center">
+                    <div class="card-image">
+                        <img class="card-img-top" src="Assets/Catalog/akx00006_featured_1.jpg" alt="Card image cap">
+                        <div class="overlay d-none d-md-block">
+                            <div class="text">
+                                <h5>Arduino MKR IoT Bundle</h5><br>
+                                <p>
+                                    TThe MKR IoT Bundle is a great way to get started with the Internet of Things!
+                                </p>
+                                <a id="btn-buy" href="#" class="btn btn-default">Buy Now</a>
+                            </div>
+
+                        </div>
+                    </div>
+
+
+                    <div class="card-body">
+                        <p class="card-text">$69.00</p>
+                        <h5 class="card-title">Arduino MKR IoT Bundle</h5>
+                        <a id="btn-buy" href="#" class="btn btn-default d-md-none">Buy Now</a>
+                    </div>
                 </div>
             </div>
-            <div class="col-md-3 col-sm-6">
-                <div class="card" style="width: 16rem;">
-                  <img class="card-img-top" src="Assets/hiking_boots_-_kat_stan.jpg" alt="Card image cap">
-                  <div class="card-body">
-                    <h5 class="card-title">Casual Leather Boots</h5>
-                    <p class="card-text">Some quick example text to build on the card title and make up the bulk of the card's content.</p>
-                    <a href="#" class="btn btn-primary">Add to Cart</a>
-                  </div>
+            <div class="col-lg-4 col-md-6 col-sm-12 col-xs-12">
+                <div class="card text-center">
+                    <div class="card-image">
+                        <img class="card-img-top" src="Assets/Catalog/k000007_featured_3.jpg" alt="Card image cap">
+                        <div class="overlay d-none d-md-block">
+                            <div class="text">
+                                <h5>Arduino Starter Kit Multi-language</h5><br>
+                                <p>
+                                    The UNO is the best board to get started with electronics and coding. If this is your first experience tinkering with the platform, the UNO is the most robust board you can start playing with.
+                                </p>
+                                <a id="btn-buy" href="#" class="btn btn-default">Buy Now</a>
+                            </div>
+
+                        </div>
+                    </div>
+
+
+                    <div class="card-body">
+                        <p class="card-text">$87.99</p>
+                        <h5 class="card-title">Arduino Starter Kit Multi-language</h5>
+                        <a id="btn-buy" href="#" class="btn btn-default d-md-none">Buy Now</a>
+                    </div>
                 </div>
             </div>
-            <div class="col-md-3 col-sm-6">
-                <div class="card" style="width: 16rem;">
-                  <img class="card-img-top" src="Assets/hiking_boots_-_kat_stan.jpg" alt="Card image cap">
-                  <div class="card-body">
-                    <h5 class="card-title">Brodo Dark Blue Boots</h5>
-                    <p class="card-text">Some quick example text to build on the card title and make up the bulk of the card's content.</p>
-                    <a href="#" class="btn btn-primary">Add to Cart</a>
-                  </div>
-                </div>
-            </div>
-            <div class="col-md-3 col-sm-6">
-                <div class="card" style="width: 16rem;">
-                  <img class="card-img-top" src="Assets/hiking_boots_-_kat_stan.jpg" alt="Card image cap">
-                  <div class="card-body">
-                    <h5 class="card-title">Brodo Dark Blue Boots</h5>
-                    <p class="card-text">Some quick example text to build on the card title and make up the bulk of the card's content.</p>
-                    <a href="#" class="btn btn-primary">Add to Cart</a>
-                  </div>
+            <div class="col-lg-4 col-md-6 col-sm-12 col-xs-12">
+                <div class="card text-center">
+                    <div class="card-image">
+                        <img class="card-img-top" src="Assets/Catalog/ABX00012_featured_2.jpg" alt="Card image cap">
+                        <div class="overlay d-none d-md-block">
+                            <div class="text">
+                                <h5>Arduino MKR ZERO (I2S bus & SD for sound, music & digital audio data)</h5><br>
+                                <p>
+                                    he Starter Kit is a great way to get started with Arduino, coding and electronics! The Starter Kit includes the components you need to make 15 fun projects following the step-by-step tutorials on the Project Book.
+                                </p>
+                                <a id="btn-buy" href="#" class="btn  btn-default">Buy Now</a>
+                            </div>
+
+                        </div>
+                    </div>
+
+
+                    <div class="card-body">
+                        <p class="card-text">$21.90</p>
+                        <h5 class="card-title">Arduino MKR ZERO (I2S bus & SD for sound, music & digital audio data)</h5>
+                        <a id="btn-buy" href="#" class="btn btn-default d-md-none">Buy Now</a>
+                    </div>
                 </div>
             </div>
         </div>
@@ -176,91 +309,109 @@
     </div>
 
 
+    <!-- <div class="container product-list">
+        <div class="row">
+            <div class="col-lg-3 col-md-2 col-sm-1">
+                <div class="grid-product">
+                    <img src="Assets/Catalog/a000066_featured.jpg" alt="">
+                    <div class="product-info">
+                        <div class="price">
+                            <p>$25.00</p>
+                        </div>
+                        <div class="product-name">
+                            <h5>Tes 1234</h5>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="col-lg-3 col-md-2 col-sm-1">
+                <div class="grid-product">
+                    <img src="Assets/Catalog/a000066_featured.jpg" alt="">
+                    <div class="product-info">
+                        <div class="price">
+                            <p>$25.00</p>
+                        </div>
+                        <div class="product-name">
+                            <h5>Tes 1234</h5>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div> -->
 
 
-    <!--Footer-->
-          <footer class="page-footer font-small stylish-color-dark pt-4 mt-4">
 
-              <!--Footer Links-->
-              <div class="container text-center text-md-left">
 
-                  <!-- Footer links -->
-                  <div class="row text-center text-md-left mt-3 pb-3">
+    <footer class="page-footer font-small pt-4 mt-4">
 
-                      <!--First column-->
-                      <div class="col-md-3 col-lg-3 col-xl-3 mx-auto mt-3">
-                          <h6 class="text-uppercase mb-4 font-weight-bold">Faduino</h6>
-                          <p>Here you can use rows and columns here to organize your footer content. Lorem ipsum dolor sit amet, consectetur adipisicing elit.</p>
-                      </div>
-                      <!--/.First column-->
+        <div class="container text-center text-md-left">
 
-                      <hr class="w-100 clearfix d-md-none">
+            <div class="row text-center text-md-left mt-3 pb-3">
 
-                      <!--Second column-->
-                      <div class="col-md-2 col-lg-2 col-xl-2 mx-auto mt-3">
-                          <h6 class="text-uppercase mb-4 font-weight-bold">Products</h6>
-                          <p><a href="#!">New Release</a></p>
-                          <p><a href="#!">Best Seller</a></p>
-                          <p><a href="#!">Man's Catalog</a></p>
-                          <p><a href="#!">Woman's Catalog</a></p>
-                      </div>
-                      <!--/.Second column-->
+                <hr class="w-100 clearfix d-md-none">
 
-                      <hr class="w-100 clearfix d-md-none">
+                <div class="col-md-2 col-lg-2 col-xl-2 mx-auto mt-3">
+                    <h6 class="text-uppercase mb-4 font-weight-bold">Products</h6>
+                    <p><a href="#!">New Products</a></p>
+                    <p><a href="#!">Special Offers</a></p>
+                    <p><a href="#!">Arduino</a></p>
+                </div>
 
-                      <!--Third column-->
-                      <div class="col-md-3 col-lg-2 col-xl-2 mx-auto mt-3">
-                          <h6 class="text-uppercase mb-4 font-weight-bold">Useful links</h6>
-                          <p><a href="#!">Your Account</a></p>
-                          <p><a href="#!">Become an Affiliate</a></p>
-                          <p><a href="#!">Shipping Rates</a></p>
-                          <p><a href="#!">Help</a></p>
-                      </div>
-                      <!--/.Third column-->
+                <hr class="w-100 clearfix d-md-none">
 
-                      <hr class="w-100 clearfix d-md-none">
+                <div class="col-md-3 col-lg-2 col-xl-2 mx-auto mt-3">
+                    <h6 class="text-uppercase mb-4 font-weight-bold">Useful links</h6>
+                    <p><a href="#!">Sign In</a></p>
+                    <p><a href="#!">Contact Us</a></p>
+                    <p><a href="#!">About Us</a></p>
+                    <p><a href="#!">Help</a></p>
+                </div>
 
-                      <!--Fourth column-->
-                      <div class="col-md-4 col-lg-3 col-xl-3 mx-auto mt-3">
-                          <h6 class="text-uppercase mb-4 font-weight-bold">Contact</h6>
-                          <p><i class="fa fa-home mr-3"></i>Bandung, Indonesia</p>
-                          <p><i class="fa fa-envelope mr-3"></i> brofad@gmail.com</p>
-                          <p><i class="fa fa-phone mr-3"></i> +62 818 09498000</p>
-                          <p><i class="fa fa-print mr-3"></i> +62 818 09498000</p>
-                      </div>
-                  </div>
+                <hr class="w-100 clearfix d-md-none">
 
-                  <hr>
+                <div class="col-md-4 col-lg-3 col-xl-3 mx-auto mt-3">
+                    <h6 class="text-uppercase mb-4 font-weight-bold">Contact</h6>
+                    <p><i class="fa fa-home mr-3"></i>Bandung, Indonesia</p>
+                    <p><i class="fa fa-envelope mr-3"></i> contact@faduino.com</p>
+                    <p><i class="fa fa-phone mr-3"></i> +62 818 09498000</p>
+                    <p><i class="fa fa-print mr-3"></i> +62 818 09498000</p>
+                </div>
+            </div>
 
-                  <div class="row py-3 d-flex align-items-center">
-                      <div class="col-md-8 col-lg-8">
-                          <p class="text-center text-md-left grey-text">© 2018 Copyright:<strong> fadhilmch</strong></p>
+            <hr>
 
-                      </div>
+            <div class="row align-items-center">
+                <div class="col-md-8 col-lg-8">
+                    <p class="text-center text-md-left grey-text">© 2018 Copyright:<strong> fadhilmch</strong></p>
 
-                      <div class="col-md-4 col-lg-4 ml-lg-0">
+                </div>
 
-                          <div class="text-center text-md-right">
-                              <ul class="list-unstyled list-inline">
-                                  <li class="list-inline-item"><a class="btn-floating btn-sm rgba-white-slight mx-1"><i class="fa fa-facebook"></i></a></li>
-                                  <li class="list-inline-item"><a class="btn-floating btn-sm rgba-white-slight mx-1"><i class="fa fa-twitter"></i></a></li>
-                                  <li class="list-inline-item"><a class="btn-floating btn-sm rgba-white-slight mx-1"><i class="fa fa-instagram"></i></a></li>
-                              </ul>
-                          </div>
+                <div class="col-md-4 col-lg-4 ml-lg-0">
 
-                      </div>
+                    <div class="text-center text-md-right">
+                        <ul id="social-medial" class="list-unstyled list-inline">
+                            <li class="list-inline-item"><a class="btn-floating btn-sm rgba-white-slight mx-1"><i class="fa fa-facebook"></i></a></li>
+                            <li class="list-inline-item"><a class="btn-floating btn-sm rgba-white-slight mx-1"><i class="fa fa-twitter"></i></a></li>
+                            <li class="list-inline-item"><a class="btn-floating btn-sm rgba-white-slight mx-1"><i class="fa fa-instagram"></i></a></li>
+                        </ul>
+                    </div>
 
-                  </div>
+                </div>
 
-              </div>
+            </div>
 
-          </footer>
+        </div>
+
+    </footer>
 
 
 
     <script src="https://code.jquery.com/jquery-3.3.1.min.js" integrity="sha256-FgpCb/KJQlLNfOu91ta32o/NMZxltwRo8QtmkMRdAu8=" crossorigin="anonymous"></script>
+    <script src="https://cdn.jsdelivr.net/npm/vue@2.5.15/dist/vue.js"></script>
     <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js" integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl" crossorigin="anonymous"></script>
     <script src="script.js" charset="utf-8"></script>
+</div>
 </body>
 
 </html>
