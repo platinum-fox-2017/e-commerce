@@ -8,11 +8,6 @@ a#header-text.btn.btn-link.dropdown-toggle {
 #header_font{
     color:rgb(68, 68, 68);
     padding:15px;
-    /* padding-top:10px;
-    padding-bottom:10px;
-    padding-left:5px;
-    padding-right:5px; */
-    /* font-family:  "Segoe UI Mono", "Roboto Mono", Menlo, Courier, monospace; */
 }
 #header_font:hover {
     color: rgb(133, 133, 133);
@@ -26,9 +21,6 @@ header {
     margin-top:5px;
     margin-bottom:6px;
     display: -webkit-flex, inline-flex;
-    /* background-color: rgba(255, 255, 255, 0.329) */
-    /* justify-content: sp; */
-    /* justify-content: space-evenly; */
 }
 /* #bar {
     position: fixed;
@@ -275,4 +267,45 @@ p > a:hover, a:focus, a:active {
 
 .text-link:active:before {
     left: 15%
+}
+
+/* --- */
+
+.table>tbody>tr>td, .table>tfoot>tr>td{
+    vertical-align: middle;
+}
+@media screen and (max-width: 600px) {
+    table#cart tbody td .form-control{
+		width:20%;
+		display: inline !important;
+	}
+	.actions .btn{
+		width:36%;
+		margin:1.5em 0;
+	}
+	
+	.actions .btn-info{
+		float:left;
+	}
+	.actions .btn-danger{
+		float:right;
+	}
+	
+	table#cart thead { display: none; }
+	table#cart tbody td { display: block; padding: .6rem; min-width:320px;}
+	table#cart tbody tr td:first-child { background: #333; color: #fff; }
+	table#cart tbody td:before {
+		content: attr(data-th); font-weight: bold;
+		display: inline-block; width: 8rem;
+	}
+	
+	
+	
+	table#cart tfoot td{display:block; }
+	table#cart tfoot td .btn{display:block;}
+	
+}
+
+#img-sizing {
+    width: 33.33%
 }

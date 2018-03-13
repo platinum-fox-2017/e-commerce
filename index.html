@@ -5,6 +5,14 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
     <title>e-commerce</title>
+
+<!-- bootstrap -->
+    <link href="//netdna.bootstrapcdn.com/bootstrap/3.2.0/css/bootstrap.min.css" rel="stylesheet" id="bootstrap-css">
+    <script src="//netdna.bootstrapcdn.com/bootstrap/3.2.0/js/bootstrap.min.js"></script>
+    <script src="//code.jquery.com/jquery-1.11.1.min.js"></script>
+    <link href="//maxcdn.bootstrapcdn.com/font-awesome/4.1.0/css/font-awesome.min.css" rel="stylesheet">
+
+<!-- spectre -->
     <link rel="stylesheet" href="https://unpkg.com/spectre.css/dist/spectre.min.css">
     <link rel="stylesheet" href="https://unpkg.com/spectre.css/dist/spectre-exp.min.css">
     <link rel="stylesheet" href="https://unpkg.com/spectre.css/dist/spectre-icons.min.css">
@@ -42,16 +50,19 @@
                             <img id="img-header" src="./assets/images/icon-account.svg">
                         </div>
                     </div>
+
                     <div class="column col-1 text-center">
-                        <div class="col-content">
-                            <img id="img-header" src="./assets/images/icon-cart.svg">
+                        <div class="col-content" cursor="pointer">
+                            <img id="img-header" onclick="showModal()" data-toggle="modal" data-target="#exampleModal" src="./assets/images/icon-cart.svg">
                         </div>
                     </div>
 
                 </div>
             </div>
+        
+
     </header>
-  
+    
     <div class="container" id="video-contain">
         <video autoplay muted loop class="video-responsive" object-fit= "cover" frameborder="0" webkitallowfullscreen mozallowfullscreen allowfullscreen type="video/mp4" src="./assets/images/hp-video.one-shot-ellen.mp4" ></video>    
         <div class="video-text">
@@ -98,64 +109,67 @@
             <h1>Our Most Wanted Products</h1>
         </div>
         <div class="container">
-            <div class="columns">
-                <div class="column col-1 col-md-12 col-sm-12">
+            <div class="columns" id="app">
+                    <!-- modals // to activate/deactivate class = active/none -->
+    <div class="modal" id="modal-id">
+            <a href="#close" class="modal-overlay" aria-label="Close"></a>
+            <div class="modal-container">
+                <div class="modal-header">
+                <a href="#close" class="btn btn-clear float-right" aria-label="Close" onclick="closeModal()"></a>
+                <div class="modal-title h5">Your Cart</div>
                 </div>
-                <div class="column col-2 col-md-6 col-sm-12">
-                    <div class="card">
-                        <div class="card-image">
-                            <img src="./assets/images/108ec8a814b24d0f9f0ec06966a6148f_ecb74c59-71af-43e8-b357-84043790f9f1_600x600.jpg" onmouseover="this.src='./assets/images/362b405cf1ec4fc2bc470c6a2aada817_ec33ffa9-5aa7-4d7a-a572-6deaffe46c1b_600x600.jpg'" onmouseout="this.src='./assets/images/108ec8a814b24d0f9f0ec06966a6148f_ecb74c59-71af-43e8-b357-84043790f9f1_600x600.jpg'"class="img-responsive">
-                        </div>
-                        <div class="card-header">
-                            <div class="card-title h5">Polaroid</div>
-                            <div class="card-subtitle text-gray">SX-70 Land Camera</div>
-                            <div class="card-subtitle text-gray">$110.00</div>
-                        </div>
-                        <div class="card-body">
-                            Empower every person and every organization on the planet to achieve more.
-                        </div>
-                        <div class="card-footer">
-                            <button class="btn btn-primary">Buy</button>
-                        </div>
+                <div class="modal-body">
+                <div class="content">
+                    <table id="cart" class="table table-hover table-condensed">
+                            <thead>
+                                <tr>
+                                    <th style="width:50%">Product</th>
+                                    <th style="width:10%">Price</th>
+                                    <th style="width:8%">Quantity</th>
+                                    <th style="width:22%" class="text-center">Subtotal</th>
+                                    <th style="width:10%"></th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <tr v-for="items in carts">
+                                    <td data-th="Product">
+                                        <div class="row">
+                                            <div class="col-sm-2 hidden-sm" id="img-sizing"><img :src="items.picture" alt="..." class="img-responsive"/></div>
+                                            <div class="col-sm-10">
+                                                <h4 class="nomargin">{{items.name}}</h4>
+                                                <p>{{items.type}}</p>
+                                            </div>
+                                        </div>
+                                    </td>
+                                    <td data-th="Price">${{items.price}}</td>
+                                    <td data-th="Quantity">
+                                        <input type="number" min='1' v-model="items.quantity" class="form-control text-center" :value="items.quantity">
+                                    </td>
+                                    <td data-th="Subtotal" class="text-center">{{dollarSign(setSubtotal(items.type, items.quantity))}}</td>
+                                    <td class="actions" data-th="">
+                                        <button class="btn btn-info btn-sm"><i class="fa fa-refresh"></i></button>
+                                        <button class="btn btn-danger btn-sm" @click='removeItem(items.type)'><i class="fa fa-trash-o"></i></button>								
+                                    </td>
+                                </tr>
+                            </tbody>
+                            <tfoot>
+                                <tr class="visible-xs">
+                                    <td class="text-center"><strong>Total</strong></td>
+                                </tr>
+                                <tr>
+                                    <td><a href="#" class="btn btn-warning" onclick="closeModal()"><i class="fa fa-angle-left"></i> Continue Shopping</a></td>
+                                    <td colspan="2" class="hidden-xs"></td>
+                                    <td class="hidden-xs text-center"><strong>Total {{dollarSign(total())}}</strong></td>
+                                    <td><a href="#" class="btn btn-success btn-block">Checkout <i class="fa fa-angle-right"></i></a></td>
+                                </tr>
+                            </tfoot>
+                        </table>
                     </div>
                 </div>
-                <div class="column col-2 col-md-6 col-sm-12">
-                        <div class="card">
-                            <div class="card-image">
-                                <img src="./assets/images/500c4f6cdddc4398b2cd6cb6af2a1c79_600x600.jpg" onmouseover="this.src='./assets/images/c103f8303f7b4e7093333212fe65b056_600x600.jpg'" onmouseout="this.src='./assets/images/500c4f6cdddc4398b2cd6cb6af2a1c79_600x600.jpg'"class="img-responsive">
-                            </div>
-                            <div class="card-header">
-                                <div class="card-title h5">Polaroid</div>
-                                <div class="card-subtitle text-gray">One Step2</div>
-                                <div class="card-subtitle text-gray">$200.00</div>
-                            </div>
-                            <div class="card-body">
-                                Empower every person and every organization on the planet to achieve more.
-                            </div>
-                            <div class="card-footer">
-                                <button class="btn btn-primary">Buy</button>
-                            </div>
-                        </div>
-                </div>
-                <div class="column col-2 col-md-6 col-sm-12">
-                        <div class="card">
-                            <div class="card-image">
-                                <img src="./assets/images/997a5ea65d614690b580afb65db3fa4f_600x600.jpg"  onmouseover="this.src='./assets/images/c7e7a2268f9f4f87a44525e2b3004e3d_c52db247-fb71-425c-a8a3-e5f5e2bd22d0_600x600.jpg'" onmouseout="this.src='./assets/images/997a5ea65d614690b580afb65db3fa4f_600x600.jpg'"class="img-responsive">
-                            </div>
-                            <div class="card-header">
-                                <div class="card-title h5">Polaroid</div>
-                                <div class="card-subtitle text-gray">One Step Flash</div>
-                                <div class="card-subtitle text-gray">$190.00</div>
-                            </div>
-                            <div class="card-body">
-                                Empower every person and every organization on the planet to achieve more.
-                            </div>
-                            <div class="card-footer">
-                                <button class="btn btn-primary">Buy</button>
-                            </div>
-                        </div>
-                </div>
-                <div class="column col-2 col-md-6 col-sm-12">
+            </div>
+        </div>
+                <div class="column col-1 col-md-12 col-sm-12"></div>
+                <!-- <div class="column col-2 col-md-6 col-sm-12">
                         <div class="card">
                             <div class="card-image">
                                 <img src="./assets/images/aa8ddfb2be8648b9bb75e5d408c73185_6b751e78-a626-4c36-bdaa-8b820aef55f1_600x600.jpg" onmouseover="this.src='./assets/images/color-film-for-polaroid-i-type-004668-stacks-3-oskar-smolokowski.jpg'" onmouseout="this.src='/assets/images/aa8ddfb2be8648b9bb75e5d408c73185_6b751e78-a626-4c36-bdaa-8b820aef55f1_600x600.jpg'"  class="img-responsive">
@@ -172,37 +186,39 @@
                                 <button class="btn btn-primary">Buy</button>
                             </div>
                         </div>
-                </div>
-                <div class="column col-2 col-md-6 col-sm-12">
+                </div> -->
+                <div class="column col-2 col-md-6 col-sm-12" v-for="name in names">
                         <div class="card">
                             <div class="card-image">
-                                <img src="./assets/images/bdf1c41758ff443d8fd4fc068fd3887c_46f65cac-1af6-4b51-a632-31629aa717d5_600x600.jpg" onmouseover="this.src='./assets/images/iType-Color-WhiteFrame-Frangipani_Beatt-WebStack-00468-01.jpg'" onmouseout="this.src='./assets/images/bdf1c41758ff443d8fd4fc068fd3887c_46f65cac-1af6-4b51-a632-31629aa717d5_600x600.jpg'" class="img-responsive">
+                                <img :src="name.imageUrl[0]" @onmouseover="name.imageUrl[1]" class="img-responsive">
+                                <!-- <img class="img-responsive" :src="name.imageUrl[0]" @mouseover.native="this.src=''" > -->
                             </div>
                             <div class="card-header">
-                                <div class="card-title h5">Polaroid</div>
-                                <div class="card-subtitle text-gray">Color I-type films</div>
-                                <div class="card-subtitle text-gray">$12.00</div>
+                                <div class="card-title h5">{{name.name}}</div>
+                                <div class="card-subtitle text-gray">{{name.type}}</div>
+                                <div class="card-subtitle text-gray">{{dollarSign(name.price)}}</div>
                             </div>
-                            <div class="card-body">
-                                Empower every person and every organization on the planet to achieve more.
-                            </div>
+                            <div class="card-body">{{limitDesc(name.description)}}</div>
                             <div class="card-footer">
-                                <button class="btn btn-primary">Buy</button>
+                                <button class="btn btn-primary" @click="addToCart(name.name, name.type, name.price, name.imageUrl[0])">Buy</button>
                             </div>
                         </div>
                 </div>
-                <div class="column col-1 col-sm-12">
-                </div>
+                <div class="column col-1 col-sm-12"></div>
             </div>
         </div>
     </div>
-    
-
+    <!-- vue js -->
+    <script src="https://cdn.jsdelivr.net/npm/vue"></script>
+    <script src="./assets/js/vue.js"></script>
+    <!--  -->
     <footer class="site-footer">
         <div class="footer-content">
             <p>created by <a href="https://herbyherado.github.io" target="_blank" class="text-link" rel="nofollow">Herby Herado</a></p>
         </div>
     </footer>
+
+    
 
 </body>
 </html>
