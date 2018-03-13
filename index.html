@@ -49,7 +49,7 @@
                     <a class="nav-link" href="#">Sign In</a>
                 </li>
                 <li class="nav-item">
-                    <a class="nav-link" href="#" data-toggle="modal" data-target="#cartModal"><i class="fa fa-shopping-cart"></i> Cart <span class="badge">3</span></a>
+                    <a class="nav-link" href="#" data-toggle="modal" data-target="#cartModal"><i class="fa fa-shopping-cart"></i> Cart <span class="badge">{{getTotalItems()}}</span></a>
                 </li>
 
             </ul>
@@ -82,23 +82,22 @@
                                 </tr>
                             </thead>
                             <tbody>
-                                <tr>
+                                <tr v-for="itemCart in itemsCart">
                                     <td data-th="Product">
-                                        <div class="row">
-                                            <!-- <div class="col-sm-2 hidden-xs">
-                                                <img src="http://placehold.it/100x100" alt="..." class="img-responsive" />
-                                            </div> -->
-                                            <div class="col-sm-10">
-                                                <h4 class="nomargin">Product 1</h4>
-                                                <p>Quis aute iure reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Lorem ipsum dolor sit amet.</p>
+                                        <div class="row" >
+                                            <div class="col-sm-4 hidden-xs d-none d-lg-block">
+                                                <img :src="itemCart.imageUrl" width=100; alt="..." class="img-responsive" />
+                                            </div>
+                                            <div class="col-sm-8">
+                                                <h6 class="nomargin">{{itemCart.name}}</h6>
                                             </div>
                                         </div>
                                     </td>
-                                    <td data-th="Price">$1.99</td>
+                                    <td data-th="Price">{{pricePrint(itemCart.price)}}</td>
                                     <td data-th="Quantity">
-                                        <input type="number" class="form-control text-center" value="1">
+                                        <input v-model="itemCart.quantity" type="number" class="form-control text-center">
                                     </td>
-                                    <td data-th="Subtotal" class="text-center">1.99</td>
+                                    <td data-th="Subtotal" class="text-center">{{pricePrint(setSubtotal(itemCart.id, itemCart.quantity))}}</td>
                                     <td class="actions" data-th="">
                                         <button class="btn btn-info btn-sm"><i class="fa fa-refresh"></i></button>
                                         <button class="btn btn-danger btn-sm"><i class="fa fa-trash-o"></i></button>
@@ -106,13 +105,11 @@
                                 </tr>
                             </tbody>
                             <tfoot>
-                                <tr class="visible-xs">
-                                    <td class="text-center"><strong>Total 1.99</strong></td>
-                                </tr>
+
                                 <tr>
                                     <td><a href="#" class="btn btn-warning"><i class="fa fa-angle-left"></i> Continue Shopping</a></td>
                                     <td colspan="2" class="hidden-xs"></td>
-                                    <td class="hidden-xs text-center"><strong>Total $1.99</strong></td>
+                                    <td class="hidden-xs text-center"><strong>Total {{pricePrint(setTotalPrice())}}</strong></td>
                                     <td><a href="#" class="btn btn-success btn-block">Checkout <i class="fa fa-angle-right"></i></a></td>
                                 </tr>
                             </tfoot>
@@ -158,153 +155,38 @@
 
     <div class="container">
         <div class="row">
-            <div class="col-lg-4 col-md-6 col-sm-12 col-xs-12">
+            <div class="col-lg-4 col-md-6 col-sm-12 col-xs-12" v-for="item in itemsList">
+
                 <div class="card text-center">
+
                     <div class="card-image">
-                        <img class="card-img-top" src="Assets/Catalog/a000066_featured.jpg" alt="Card image cap">
+                        <img class="card-img-top" :src="item.imageUrl" alt="Card image cap">
+                        <p id="stocks" class=" btn btn-default card-text text-md-right small">Stocks: {{item.stock}}</p>
+
                         <div class="overlay d-none d-md-block">
                             <div class="text">
-                                <h5>Arduino Uno Rev3</h5><br>
+                                <h5>{{item.name}}</h5><br>
                                 <p>
-                                    The UNO is the best board to get started with electronics and coding. If this is your first experience tinkering with the platform, the UNO is the most robust board you can start playing with.
+                                    {{item.description}}
                                 </p>
-                                <a id="btn-buy" href="#" class="btn btn-default">Buy Now</a>
+                                <a id="btn-buy" @click="addToCart(item)"  class="btn btn-default" v-bind:class="checkStock(item.stock)">Buy Now</a>
                             </div>
 
                         </div>
                     </div>
 
                     <div class="card-body">
-                        <p class="card-text">$25.00</p>
-                        <h5 class="card-title">Arduino Uno Rev3</h5>
-                        <a id="btn-buy" href="#" class="btn btn-default d-md-none">Buy Now</a>
+                        <p class="card-text">{{pricePrint(item.price)}}</p>
+                        <h5 class="card-title">{{item.name}}</h5>
+
+                        <a id="btn-buy" @click="addToCart(item)"  class="btn btn-default d-md-none" v-bind:class="checkStock(item.stock)">Buy Now</a>
                     </div>
 
-                </div>
-            </div>
-            <div class="col-lg-4 col-md-6 col-sm-12 col-xs-12">
-                <div class="card text-center">
-                    <div class="card-image">
-                        <img class="card-img-top" src="Assets/Catalog/a000067_front_2_1.jpg" alt="Card image cap">
-                        <div class="overlay d-none d-md-block">
-                            <div class="text">
-                                <h5>Arduino Mega 2560 Rev3</h5><br>
-                                <p>
-                                    The MEGA 2560 is designed for more complex projects. With 54 digital I/O pins, 16 analog inputs and a larger space for your sketch it is the recommended board for 3D printers and robotics projects.
-                                </p>
-                                <a id="btn-buy" href="#" class=" btn btn-default">Buy Now</a>
-                            </div>
-
-                        </div>
-                    </div>
-
-                    <div class="card-body">
-                        <p class="card-text">$38.50</p>
-                        <h5 class="card-title">Arduino Mega 2560 Rev3</h5>
-                        <a id="btn-buy" href="#" class="btn btn-default d-md-none">Buy Now</a>
-
-                    </div>
-                </div>
-            </div>
-            <div class="col-lg-4 col-md-6 col-sm-12 col-xs-12">
-                <div class="card text-center">
-                    <div class="card-image">
-                        <img class="card-img-top" src="Assets/Catalog/abx00011_featured.jpg" alt="Card image cap">
-                        <div class="overlay d-none d-md-block">
-                            <div class="text">
-                                <h5>Arduino MKR1000 WIFI with Headers Mounted</h5><br>
-                                <p>
-                                    Arduino MKR1000 is a powerful board that combines the functionality of the Zero and the Wi-Fi Shield. It is the ideal solution for makers wanting to design IoT projects with minimal previous experience in networking.
-                                </p>
-                                <a id="btn-buy" href="#" class="btn btn-default">Buy Now</a>
-                            </div>
-
-                        </div>
-                    </div>
-
-                    <div class="card-body">
-                        <p class="card-text">$36.99</p>
-                        <h5 class="card-title">Arduino MKR1000 WIFI with Headers Mounted</h5>
-                        <a id="btn-buy" href="#" class="btn btn-default d-md-none">Buy Now</a>
-                    </div>
                 </div>
             </div>
         </div>
 
-        <div class="row">
-            <div class="col-lg-4 col-md-6 col-sm-12 col-xs-12">
-                <div class="card text-center">
-                    <div class="card-image">
-                        <img class="card-img-top" src="Assets/Catalog/akx00006_featured_1.jpg" alt="Card image cap">
-                        <div class="overlay d-none d-md-block">
-                            <div class="text">
-                                <h5>Arduino MKR IoT Bundle</h5><br>
-                                <p>
-                                    TThe MKR IoT Bundle is a great way to get started with the Internet of Things!
-                                </p>
-                                <a id="btn-buy" href="#" class="btn btn-default">Buy Now</a>
-                            </div>
 
-                        </div>
-                    </div>
-
-
-                    <div class="card-body">
-                        <p class="card-text">$69.00</p>
-                        <h5 class="card-title">Arduino MKR IoT Bundle</h5>
-                        <a id="btn-buy" href="#" class="btn btn-default d-md-none">Buy Now</a>
-                    </div>
-                </div>
-            </div>
-            <div class="col-lg-4 col-md-6 col-sm-12 col-xs-12">
-                <div class="card text-center">
-                    <div class="card-image">
-                        <img class="card-img-top" src="Assets/Catalog/k000007_featured_3.jpg" alt="Card image cap">
-                        <div class="overlay d-none d-md-block">
-                            <div class="text">
-                                <h5>Arduino Starter Kit Multi-language</h5><br>
-                                <p>
-                                    The UNO is the best board to get started with electronics and coding. If this is your first experience tinkering with the platform, the UNO is the most robust board you can start playing with.
-                                </p>
-                                <a id="btn-buy" href="#" class="btn btn-default">Buy Now</a>
-                            </div>
-
-                        </div>
-                    </div>
-
-
-                    <div class="card-body">
-                        <p class="card-text">$87.99</p>
-                        <h5 class="card-title">Arduino Starter Kit Multi-language</h5>
-                        <a id="btn-buy" href="#" class="btn btn-default d-md-none">Buy Now</a>
-                    </div>
-                </div>
-            </div>
-            <div class="col-lg-4 col-md-6 col-sm-12 col-xs-12">
-                <div class="card text-center">
-                    <div class="card-image">
-                        <img class="card-img-top" src="Assets/Catalog/ABX00012_featured_2.jpg" alt="Card image cap">
-                        <div class="overlay d-none d-md-block">
-                            <div class="text">
-                                <h5>Arduino MKR ZERO (I2S bus & SD for sound, music & digital audio data)</h5><br>
-                                <p>
-                                    he Starter Kit is a great way to get started with Arduino, coding and electronics! The Starter Kit includes the components you need to make 15 fun projects following the step-by-step tutorials on the Project Book.
-                                </p>
-                                <a id="btn-buy" href="#" class="btn  btn-default">Buy Now</a>
-                            </div>
-
-                        </div>
-                    </div>
-
-
-                    <div class="card-body">
-                        <p class="card-text">$21.90</p>
-                        <h5 class="card-title">Arduino MKR ZERO (I2S bus & SD for sound, music & digital audio data)</h5>
-                        <a id="btn-buy" href="#" class="btn btn-default d-md-none">Buy Now</a>
-                    </div>
-                </div>
-            </div>
-        </div>
 
     </div>
 

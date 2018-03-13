@@ -219,6 +219,14 @@ footer a{
     white-space: nowrap;
 }
 
+#stocks {
+    background-color: #00979d;
+    color: white;
+    margin-left: 80%;
+    padding: 2px;
+    font-size: 10px;
+}
+
 /* .overlay p {
     transform: translate(-50%, -50%);
     -ms-transform: translate(-50%, -50%);
@@ -230,7 +238,7 @@ footer a{
     vertical-align: middle;
 }
 
-@media screen and (max-width: 600px) {
+@media screen and (max-width: 992px) {
     table#cart tbody td .form-control{
 		width:20%;
 		display: inline !important;
@@ -259,5 +267,11 @@ footer a{
 
 	table#cart tfoot td{display:block; }
 	table#cart tfoot td .btn{display:block;}
+
+}
+
+.modal-header {
+    background-color: #00979d !important;
+    color: white;
 
 }
