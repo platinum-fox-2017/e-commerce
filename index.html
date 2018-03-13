@@ -1,0 +1,242 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+
+    <!-- Import vue.js -->
+  
+    <!-- Font Awesome -->
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css">
+    <!-- Bootstrap core CSS -->
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/4.0.0/css/bootstrap.min.css" rel="stylesheet">
+    <!-- Material Design Bootstrap -->
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/mdbootstrap/4.5.0/css/mdb.min.css" rel="stylesheet"> 
+    <script defer src="https://use.fontawesome.com/releases/v5.0.8/js/all.js"></script>
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
+    <script src="https://code.jquery.com/jquery-3.2.1.slim.min.js" integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN" crossorigin="anonymous"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js" integrity="sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q" crossorigin="anonymous"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js" integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl" crossorigin="anonymous"></script>    
+    <!-- JQuery -->
+    <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+    <!-- Bootstrap tooltips -->
+    <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.13.0/umd/popper.min.js"></script>
+    <!-- Bootstrap core JavaScript -->
+    <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/4.0.0/js/bootstrap.min.js"></script>
+    <!-- MDB core JavaScript -->
+    <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/mdbootstrap/4.5.0/js/mdb.min.js"></script>
+                
+    <link rel="stylesheet" href="css/style2.css">
+</head>
+<body>
+  <div id="app">
+    <nav class="navbar navbar-expand-lg navbar-light bg-light">
+      <a class="navbar-brand" href="#">Logo</a>
+      <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+        <span class="navbar-toggler-icon"></span>
+      </button>
+        <div class="collapse navbar-collapse" id="navbarSupportedContent">
+          <ul class="navbar-nav mr-auto">
+            <li class="nav-item">
+              <a class="nav-link" href="#">Home <span class="sr-only">(current)</span></a>
+            </li>
+            <li class="nav-item">
+              <a class="nav-link" href="#">Hotels</a>
+            </li>
+            <li class="nav-item dropdown">
+              <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                Destination
+              </a>
+              <div class="dropdown-menu" aria-labelledby="navbarDropdown">
+                <a class="dropdown-item" href="#">Action</a>
+                <a class="dropdown-item" href="#">Another action</a>
+                <div class="dropdown-divider"></div>
+                <a class="dropdown-item" href="#">Something else here</a>
+              </div>
+            </li>
+            <li class="nav-item">
+              <a class="nav-link disabled" href="#">Flight</a>
+            </li>
+          </ul>
+          <a style="margin-right:10px; color:grey; font-size:25px"href="#"><i class="fas fa-shopping-bag"></i></a>
+          <form class="form-inline my-2 my-lg-0">
+            <input class="form-control mr-sm-2" type="search" placeholder="Search" aria-label="Search">
+            <button class="btn btn-success my-2 my-sm-0" type="submit"><i class="fas fa-search"></i></button>
+          </form>
+        </div>
+      </nav>
+    <div id="carouselExampleIndicators" class="carousel slide" data-ride="carousel">
+      <ol class="carousel-indicators">
+        <li data-target="#carouselExampleIndicators" data-slide-to="0" class="active"></li>
+        <li data-target="#carouselExampleIndicators" data-slide-to="1"></li>
+        <li data-target="#carouselExampleIndicators" data-slide-to="2"></li>
+      </ol>
+      <div class="carousel-inner"  >
+        <div class="carousel-item active">
+          <img height="400px" class="d-block w-100" src="./images/london_at_night_panorama-wallpaper-4800x1350.jpg" alt="First slide">
+        </div>
+        <div class="carousel-item" v-for="image in carousels">
+            <img height="400px" class="d-block w-100" v-bind:src="image.images" alt="First slide">
+          </div>
+      </div>
+      <a class="carousel-control-prev" href="#carouselExampleIndicators" role="button" data-slide="prev">
+        <span class="carousel-control-prev-icon" aria-hidden="true"></span>
+        <span class="sr-only">Previous</span>
+      </a>
+      <a class="carousel-control-next" href="#carouselExampleIndicators" role="button" data-slide="next">
+        <span class="carousel-control-next-icon" aria-hidden="true"></span>
+        <span class="sr-only">Next</span>
+      </a>
+    </div>
+    <div class="container" style="text-align: center;
+      font-weight: bold;
+      opacity: 0.75;
+      font-size: 1em;
+      padding-bottom: 5px;
+      margin-top:50px;
+      margin-bottom:65px;
+      letter-spacing: 1px;">
+      <div>
+        <p style="display: block;
+        -webkit-margin-before: 1em;
+        -webkit-margin-after: 1em;
+        -webkit-margin-start: 0px;
+        -webkit-margin-end: 0px;">I don't know where I'm going, but I'm on my way</p>
+      </div>
+      <div style="margin: auto;width: 30px;height: 3px;bottom: 0;left: 0;right: 0;background: black; opacity: 0.2">
+      </div>
+    </div>
+    <div style="text-align: center;
+      font-weight: bold;
+      font-size: 0.88em;
+      padding-bottom: 5px;
+      margin-top:50px;
+      margin-bottom:65px;
+      letter-spacing: 1px;" class="container">
+      <div style="margin-bottom:40px"class="row">
+        <div class="col-md-4">
+          <div class="img-content">
+              <img style="width:300px;height:250px; border-radius:8px" src="//06.img.avito.st/640x480/4140232806.jpg" alt="">
+          </div>
+          <div class="content">
+            <p style="margin-top:10px">Destination:Bali Island</p>
+            <p>Price : USD 1.000</p>
+            <p>Package Available :50 pax </p>
+          </div>
+          <button style="margin-bottom:40px;" class="btn red"type="submit">Add to Cart</button>
+        </div>
+
+        <div class=" col-md-4">
+          <div class="img-content">
+            <img style="width:300px;height:250px; border-radius:8px" src="http://justglobetrotting.com/wp-content/uploads/2015/09/budapest-hungary-1080x675.jpg" alt="">
+          </div>
+          <div class="content">
+            <p style="margin-top:10px">Destination:Budapest</p>
+            <p>Price : USD 2.000</p>
+            <p>Package Available :100 pax </p>
+          </div>
+          <button style="margin-bottom:40px;" class="btn red" type="submit">Add to Cart</button>
+        </div>
+        
+        <div class="col-md-4">
+          <div class="img-content">
+              <img style="width:300px;height:250px; border-radius:8px" src="//do9f0cpkv689t.cloudfront.net/SFImage/Images/swissf273ffe313a06dce84b1ff000062a8f2.png" alt="">
+          </div>
+          <div class="content">
+              <p style="margin-top:10px">Destination:Switerland</p>
+            <p>Price : USD 1.750</p>
+            <p>Package Available :80 pax </p>
+          </div>
+          <button style="margin-bottom:40px;" class="btn red" type="submit">Add to Cart</button>          
+        </div>
+      </div> 
+      <div class="row">
+        <div class="col-md-4">
+            <div class="img-content">
+                <img style="width:300px;height:250px; border-radius:8px" src="https://cuhsxov73uxte8o3fsfcl91m-wpengine.netdna-ssl.com/wp-content/uploads/2015/02/VIENNA.jpg" alt="">
+            </div>
+            <div class="content">
+                <p style="margin-top:10px">Destination: Vienna,austria</p>
+              <p>Price : USD 3.000</p>
+              <p>Package Available :50 pax </p>
+            </div>
+            <button style="margin-bottom:40px;" class="btn red" type="submit">Add to Cart</button>
+          </div>
+    
+          <div class=" col-md-4">
+            <div class="img-content">
+              <img style="width:300px;height:250px; border-radius:8px" src="http://www.nuarthatours.com/wp-content/uploads/2017/10/paket-wisata-malang-bromo-murah-1024x576.jpg" alt="">
+            </div>
+            <div class="content">
+              <p style="margin-top:10px">Destination: Bromo Mountain</p>
+              <p>Price : USD 700</p>
+              <p>Package Available :100 pax </p>
+            </div>
+            <button style="margin-bottom:40px;" class="btn red"  type="submit">Add to Cart</button>
+          </div>
+          
+          <div class="col-md-4">
+            <div class="img-content">
+                <img style="width:300px;height:250px; border-radius:8px" src="http://www.aljannahwisata.com/wp-content/uploads/2016/12/wisata-muslim-jepang-1.jpg" alt="">
+            </div>
+            <div class="content">
+                <p style="margin-top:10px">Destination: Tokya,japan</p>
+              <p>Price : USD 3.000</p>
+              <p>Package Available :50 pax </p>
+            </div>
+            <button style="margin-bottom:40px;" class="btn red" type="submit">Add to Cart</button>          
+          </div>
+      </div>
+    </div> 
+    <footer class="page-footer font-small blue pt-4 mt-4">
+
+      <!--Footer Links-->
+      <div class="container-fluid text-center text-md-left">
+          <div class="row">
+
+              <!--First column-->
+              <div class="col-md-6">
+                  <h5 class="text-uppercase">Footer Content</h5>
+                  <p>Here you can use rows and columns here to organize your footer content.</p>
+              </div>
+              <!--/.First column-->
+
+              <!--Second column-->
+              <div class="col-md-6">
+                  <h5 class="text-uppercase">Links</h5>
+                  <ul class="list-unstyled">
+                      <li>
+                          <a href="#!">Link 1</a>
+                      </li>
+                      <li>
+                          <a href="#!">Link 2</a>
+                      </li>
+                      <li>
+                          <a href="#!">Link 3</a>
+                      </li>
+                      <li>
+                          <a href="#!">Link 4</a>
+                      </li>
+                  </ul>
+              </div>
+              <!--/.Second column-->
+          </div>
+      </div>
+      <!--/.Footer Links-->
+
+      <!--Copyright-->
+      <div class="footer-copyright py-3 text-center">
+          © 2018 Copyright:
+          <a href="https://mdbootstrap.com/material-design-for-bootstrap/"> MDBootstrap.com </a>
+      </div>
+      <!--/.Copyright-->
+
+    </footer>  
+  </div>  
+      <!-- Vue -->
+  <script src="https://cdn.jsdelivr.net/npm/vue@2.5.15/dist/vue.js"></script>
+  <script src="vue.js"></script>   
+</body>
+</html>
