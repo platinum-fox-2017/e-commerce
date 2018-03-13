@@ -29,8 +29,8 @@
       }
     </style>
   </head>
-  <body>
-     <!-- A grey horizontal navbar that becomes vertical on small screens -->
+  <body >
+  <div id="vue-app">     <!-- A grey horizontal navbar that becomes vertical on small screens -->
        <nav class="navbar navbar-expand-sm navbar-dark bg-dark">
       <a class="navbar-brand" href="/index.html">Ekom</a>
       <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarsExample03" aria-controls="navbarsExample03" aria-expanded="false" aria-label="Toggle navigation">
@@ -43,7 +43,10 @@
             <a class="nav-link" href="/index.html">Home <span class="sr-only">(current)</span></a>
           </li>
           <li class="nav-item">
-            <a class="nav-link" href="#" data-toggle="modal" data-target="#cartModal"><i class="fa fa-shopping-cart"></i> My Cart</a>
+            <a class="nav-link" href="#" data-toggle="modal" data-target="#cartModal">
+              <i class="fa fa-shopping-cart"></i> 
+              My Cart ({{ cartProducts.length }})
+            </a>
           </li>
           <li class="nav-item">
             <a class="nav-link" href="/login.html">Login</a>
@@ -56,7 +59,7 @@
     </nav>
 
 
-    <div id="vue-app" class="container">
+    <div  class="container">
     <!-- Modal -->
     <div class="modal fade" id="cartModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
       <div class="modal-dialog modal-dialog-centered modal-lg" role="document">
@@ -188,6 +191,7 @@
         </div>
       </div>
     </div>
+</div>
     <!-- end of vue app -->
     <footer id="footer" class="clearfix">
       <div id="footer-widgets">
