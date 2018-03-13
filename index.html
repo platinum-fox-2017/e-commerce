@@ -9,6 +9,7 @@
   <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
   <link rel="stylesheet" type="text/css" href="index.css">
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/vue/2.5.15/vue.min.js"></script>
   <title>E-commerce</title>
 </head>
 <body>
@@ -33,7 +34,7 @@
             <li><a href="#">Home</a></li>
             <li><a href="#">About</a></li>
             <li class="dropdown">
-              <a class="dropdown-toggle" data-toggle="dropdown" href="#" ria-haspopup="true" aria-expanded="false">Shop <span class="caret"></span></a>
+              <a href="#" class="dropdown-toggle" data-toggle="dropdown"  ria-haspopup="true" aria-expanded="false">Shop<span class="caret"></span></a>
               <ul class="dropdown-menu">
                 <li><a href="#">Accessories</a></li>
                 <li><a href="#">Cameras</a></li>
@@ -51,9 +52,12 @@
             </div>
           <button type="button" class="btn btn-default"> <span class="glyphicon glyphicon-search"></span>
           </button>
-          <button type="button" class="btn btn-default"> <span class="glyphicon glyphicon-shopping-cart"></span>
+          <!-- Trigger the modal with a button -->
+          <button type="button" class="btn btn-default" data-toggle="modal" data-target="#myModal">
+            <span class="glyphicon glyphicon-shopping-cart"></span>
           </button>
           </form>
+          
           <ul class="nav navbar-nav navbar-right">
             <li><a href="#">Sign In</a></li>
             <li><a href="#">Create an Account</a></li>
@@ -74,7 +78,7 @@
       <!-- Wrapper for slides -->
       <div class="carousel-inner">
         <div class="item active">
-          <img src="https://iso.500px.com/wp-content/uploads/2016/03/pedroquintela.jpg" alt="Taking pic" style="width:100%;">
+          <img src="./pic/bird.jpg" alt="bird" style="width:100%;">
           <div class="carousel-caption">
             <h3>CamSiasm</h3>
             <p>Capture your moments with our Cameras</p>
@@ -82,7 +86,7 @@
         </div>
   
         <div class="item">
-          <img src="http://www.lasallecollegevancouver.com/~/media/images/responsive/aiv/digital_media_arts/programme8_1920x1080.ashx" alt="camera front" style="width:100%;">
+          <img src="./pic/camerafront.jpg" alt="camera front" style="width:100%;">
           <div class="carousel-caption">
             <h3>We Only Sell Original Cameras</h3>
             <p>Money Back Guaranted</p>
@@ -90,7 +94,7 @@
         </div>
       
         <div class="item">
-          <img src="http://ppoc-alberta.ca/wp-content/uploads/2018/02/start-a-Photography-Business-in-Nigeria.jpg" alt="night" style="width:100%;">
+          <img src="./pic/night.jpg" alt="night" style="width:100%;">
           <div class="carousel-caption">
             <h3>Clear images</h3>
             <p>Capture at Night</p>
@@ -112,258 +116,146 @@
   <!-- category -->
   <div class="container" id="category">
     <h2>Categories</h2>
-    <div class="row">
+    <div class="row text-center">
       <div class="col-xs-6 col-md-3">
         <a href="collections/accessories" class="thumbnail">
-          <img src="https://www.bhphotovideo.com/images/images2500x2500/Vixen_Optics_37303_T_Mount_SLR_Camera_Adapter_605247.jpg" alt="accessories">
+          <img src="./pic/accessories.jpg" alt="accessories">
           <h4>Accessories</h4>
         </a>
       </div>
       <div class="col-xs-6 col-md-3">
           <a href="collections/cameras" class="thumbnail">
-            <img src="http://www.hobbyhangar.co.nz/content/images/thumbs/0009448_nikon_26499_coolpix_p900_digital_camera_1127274_550.jpeg" alt="camera">
+            <img src="./pic/camera.jpeg" alt="camera">
             <h4>Cameras</h4>
           </a>
       </div>
       <div class="col-xs-6 col-md-3">
-        <a href="collections/accessories" class="thumbnail">
-          <img src="http://moziru.com/images/dslr-clipart-17.jpg" alt="lense">
+        <a href="collections/lenses" class="thumbnail">
+          <img src="./pic/lense.jpg" alt="lense">
           <h4>Lenses</h4>
         </a>
       </div>
       <div class="col-xs-6 col-md-3">
-        <a href="collections/accessories" class="thumbnail">
-          <img src="https://images-na.ssl-images-amazon.com/images/I/719-IxM0u0L._SY355_.jpg" alt="bags">
+        <a href="collections/bags" class="thumbnail">
+          <img src="./pic/bag.jpg" alt="bags">
           <h4>Bags</h4>
         </a>
       </div>
     </div>
   </div>
+  <!-- main -->
+  <div id="app">
   <!-- product by category -->
-  <div class="container">
-    <h2>Accessories</h2>
-    <div class="row">
-      <div class="col-xs-6 col-md-3">
-        <div class="thumbnail">
-          <img src="https://www.canoncamerageek.com/images/highest-rated-Canon-dslr-camera-with-accessory-kit.jpg" alt="accessories">
-          <h3>Accessories1</h3>
-          <p>Cras justo odio, dapibus ac facilisis in, egestas eget quam. Donec id elit non mi porta gravida at eget metus. 
-            Nullam id dolor id nibh ultricies vehicula ut id elit.
-          </p> 
-          <p><a href="cart.html" class="btn btn-primary" role="button">Add To Chart</a> <a href="#" class="btn btn-default" role="button">View</a></p>
+    <div class="container product">
+        <h2>Cameras</h2>
+        <div class="row">
+          <div class="col-xs-6 col-md-3" v-for="data in cameras">
+            <div class="thumbnail">
+              <img class="img-responsive" v-bind:src="data.imgUrl" v-bind:alt="data.imgAlt">
+              <h3>{{data.title}}</h3>
+              <p> {{data.description}}</p> 
+              <p class="itemPrice">$ {{data.price}}</p>
+              <p><a href="#" class="btn btn-primary" v-on:click="addCart(data)" role="button">Add To Chart</a> </p>
+            </div>
           </div>
+        </div>
       </div>
-      <div class="col-xs-6 col-md-3">
-        <div class="thumbnail">
-          <img src="https://www.canoncamerageek.com/images/highest-rated-Canon-dslr-camera-with-accessory-kit.jpg" alt="accessories">
-          <h3>Accessories2</h3>
-          <p>Cras justo odio, dapibus ac facilisis in, egestas eget quam. Donec id elit non mi porta gravida at eget metus. 
-            Nullam id dolor id nibh ultricies vehicula ut id elit.
-          </p> 
-          <p><a href="cart.html" class="btn btn-primary" role="button">Add To Chart</a> <a href="#" class="btn btn-default" role="button">View</a></p>
+      <div class="container product">
+        <h2>Lenses</h2>
+        <div class="row">
+          <div class="col-xs-6 col-md-3" v-for="data in lenses">
+            <div class="thumbnail">
+              <img class="img-responsive" v-bind:src="data.imgUrl" v-bind:alt="data.imgAlt">
+              <h3>{{data.title}}</h3>
+              <p>{{data.description}}</p> 
+              <p class="itemPrice">$ {{data.price}}</p>
+              <p><a href="#" class="btn btn-primary" role="button" >Add To Chart</a></p>
+            </div>
           </div>
+        </div>
       </div>
-      <div class="col-xs-6 col-md-3">
-        <div class="thumbnail">
-          <img src="https://www.canoncamerageek.com/images/highest-rated-Canon-dslr-camera-with-accessory-kit.jpg" alt="accessories">
-          <h3>Accessories3</h3>
-          <p>Cras justo odio, dapibus ac facilisis in, egestas eget quam. Donec id elit non mi porta gravida at eget metus. 
-            Nullam id dolor id nibh ultricies vehicula ut id elit.
-          </p> 
-          <p><a href="cart.html" class="btn btn-primary" role="button">Add To Chart</a> <a href="#" class="btn btn-default" role="button">View</a></p>
+<!-- cart Modal-->
+    <div id="myModal" class="modal fade" role="dialog">
+        <div class="modal-dialog modal-lg modal-sm">
+          <!-- Modal content-->
+          <div class="modal-content">
+            <div class="modal-header">
+              <button type="button" class="close" data-dismiss="modal">&times;</button>
+              <h4 class="modal-title">Shopping Cart</h4>
+            </div>
+            <div class="modal-body" id ="appCart">
+              <div class="container">
+                <div class="row" v-for="cart in carts">
+                  <div class="col-xs-8 col-md-4" >
+                    <a class="thumbnail pull-left" href="#"><img class="img-responsive" v-bind:src="cart.imgUrl" v-bind:alt="cart.imgAlt"></a>
+                    <p>{{cart.title}}</p>
+                  </div>
+                  <div class="col-xs-4 col-md-2">
+                    <p>{{cart.qty}} @ $ {{cart.price}}</p>
+                  </div>
+                  <div class="col-xs-4 col-md-2">
+                    <p>$ {{cart.subTotal}}</p>
+                  </div>
+                  <div class="col-xs-2 col-md-1">
+                    <button type="button" v-on:click="removeCart(cart)" class="btn btn-danger">Remove</button>
+                  </div>
+                </div>
+                <div class="row">
+                  <div class="col-md-offset-8">
+                    <p>Total: $ {{total}}</p>
+                  </div>
+                </div>
+              </div>
+            </div>
+            <div class="modal-footer">
+              <button type="button" v-on:click="clearCart()" class="btn btn-danger" data-dismiss="modal">Clear</button>
+              <button type="button" class="btn btn-success" data-toggle="modal" data-target="#myModal">
+                <span v-on:click="test()" class="glyphicon glyphicon-shopping-cart"> Checkout</span>
+              </button>
+              <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+            </div>
           </div>
-      </div>
-      <div class="col-xs-6 col-md-3">
-        <div class="thumbnail">
-          <img src="https://www.canoncamerageek.com/images/highest-rated-Canon-dslr-camera-with-accessory-kit.jpg" alt="accessories">
-          <h3>Accessories4</h3>
-          <p>Cras justo odio, dapibus ac facilisis in, egestas eget quam. Donec id elit non mi porta gravida at eget metus. 
-            Nullam id dolor id nibh ultricies vehicula ut id elit.
-          </p> 
-          <p><a href="cart.html" class="btn btn-primary" role="button">Add To Chart</a> <a href="#" class="btn btn-default" role="button">View</a></p>
-          </div>
-      </div>
-    </div>
-  </div>
-  <div class="container">
-    <h2>Cameras</h2>
-    <div class="row">
-      <div class="col-xs-6 col-md-3">
-        <div class="thumbnail">
-          <img class="img-responsive" src="https://pisces.bbystatic.com/image2/BestBuy_US/images/products/5578/5578528_rd.jpg" alt="camera">
-          <h3>Cameras1</h3>
-          <p>Cras justo odio, dapibus ac facilisis in, egestas eget quam. Donec id elit non mi porta gravida at eget metus. 
-            Nullam id dolor id nibh ultricies vehicula ut id elit.
-          </p> 
-          <p><a href="cart.html" class="btn btn-primary" role="button">Add To Chart</a> <a href="#" class="btn btn-default" role="button">View</a></p>
+      
         </div>
       </div>
-      <div class="col-xs-6 col-md-3">
-        <div class="thumbnail">
-          <img class="img-responsive" src="https://pisces.bbystatic.com/image2/BestBuy_US/images/products/5578/5578528_rd.jpg" alt="camera">
-          <h3>Cameras2</h3>
-          <p>Cras justo odio, dapibus ac facilisis in, egestas eget quam. Donec id elit non mi porta gravida at eget metus. 
-            Nullam id dolor id nibh ultricies vehicula ut id elit.
-          </p> 
-          <p><a href="cart.html" class="btn btn-primary" role="button">Add To Chart</a> <a href="#" class="btn btn-default" role="button">View</a></p>
-        </div>
-      </div>
-      <div class="col-xs-6 col-md-3">
-        <div class="thumbnail">
-          <img class="img-responsive" src="https://pisces.bbystatic.com/image2/BestBuy_US/images/products/5578/5578528_rd.jpg" alt="camera">
-          <h3>Cameras</h3>
-          <p>Cras justo odio, dapibus ac facilisis in, egestas eget quam. Donec id elit non mi porta gravida at eget metus. 
-            Nullam id dolor id nibh ultricies vehicula ut id elit.
-          </p> 
-          <p><a href="cart.html" class="btn btn-primary" role="button">Add To Chart</a> <a href="#" class="btn btn-default" role="button">View</a></p>
-        </div>
-      </div>
-      <div class="col-xs-6 col-md-3">
-        <div class="thumbnail">
-          <img class="img-responsive" src="https://pisces.bbystatic.com/image2/BestBuy_US/images/products/5578/5578528_rd.jpg" alt="camera">        
-          <h3>Cameras</h3>
-          <p>Cras justo odio, dapibus ac facilisis in, egestas eget quam. Donec id elit non mi porta gravida at eget metus. 
-            Nullam id dolor id nibh ultricies vehicula ut id elit.
-          </p> 
-          <p><a href="cart.html" class="btn btn-primary" role="button">Add To Chart</a> <a href="#" class="btn btn-default" role="button">View</a></p>
-        </div>
-      </div>
-    </div>
-  </div>
-  <div class="container">
-    <h2>Lenses</h2>
-    <div class="row">
-      <div class="col-xs-6 col-md-3">
-        <div class="thumbnail">
-          <img class="img-responsive" src="http://moziru.com/images/dslr-clipart-17.jpg" alt="lense">
-          <h3>Lenses</h3>
-          <p>Cras justo odio, dapibus ac facilisis in, egestas eget quam. Donec id elit non mi porta gravida at eget metus. 
-            Nullam id dolor id nibh ultricies vehicula ut id elit.
-          </p> 
-          <p><a href="cart.html" class="btn btn-primary" role="button">Add To Chart</a> <a href="#" class="btn btn-default" role="button">View</a></p>
-        </div>
-      </div>
-      <div class="col-xs-6 col-md-3">
-        <div class="thumbnail">
-          <img class="img-responsive" src="http://moziru.com/images/dslr-clipart-17.jpg" alt="lense">
-          <h3>Lenses</h3>
-          <p>Cras justo odio, dapibus ac facilisis in, egestas eget quam. Donec id elit non mi porta gravida at eget metus. 
-            Nullam id dolor id nibh ultricies vehicula ut id elit.
-          </p> 
-          <p><a href="cart.html" class="btn btn-primary" role="button">Add To Chart</a> <a href="#" class="btn btn-default" role="button">View</a></p>
-        </div>
-      </div>
-      <div class="col-xs-6 col-md-3">
-        <div class="thumbnail">
-          <img class="img-responsive" src="http://moziru.com/images/dslr-clipart-17.jpg" alt="lense">
-          <h3>Lenses</h3>
-          <p>Cras justo odio, dapibus ac facilisis in, egestas eget quam. Donec id elit non mi porta gravida at eget metus. 
-            Nullam id dolor id nibh ultricies vehicula ut id elit.
-          </p> 
-          <p><a href="cart.html" class="btn btn-primary" role="button">Add To Chart</a> <a href="#" class="btn btn-default" role="button">View</a></p>
-        </div>
-      </div>
-      <div class="col-xs-6 col-md-3">
-        <div class="thumbnail">
-          <img class="img-responsive" src="http://moziru.com/images/dslr-clipart-17.jpg" alt="lense">
-          <h3>Lenses</h3>
-          <p>Cras justo odio, dapibus ac facilisis in, egestas eget quam. Donec id elit non mi porta gravida at eget metus. 
-            Nullam id dolor id nibh ultricies vehicula ut id elit.
-          </p> 
-          <p><a href="cart.html" class="btn btn-primary" role="button">Add To Chart</a> <a href="#" class="btn btn-default" role="button">View</a></p>
-        </div>
-      </div>
-    </div>
-  </div>
-  <div class="container">
-    <h2>Bags</h2>
-    <div class="row">
-      <div class="col-xs-6 col-md-3">
-        <div class="thumbnail">
-          <img class="img-responsive" src="https://images-na.ssl-images-amazon.com/images/I/719-IxM0u0L._SY355_.jpg" alt="bags">
-          <h3>Bags</h3>
-          <p>Cras justo odio, dapibus ac facilisis in, egestas eget quam. Donec id elit non mi porta gravida at eget metus. 
-            Nullam id dolor id nibh ultricies vehicula ut id elit.
-          </p> 
-          <p><a href="#" class="btn btn-primary" role="button">Add To Chart</a> <a href="#" class="btn btn-default" role="button">View</a></p>
-        </div>
-      </div>
-      <div class="col-xs-6 col-md-3">
-        <div class="thumbnail">
-          <img class="img-responsive" src="https://images-na.ssl-images-amazon.com/images/I/719-IxM0u0L._SY355_.jpg" alt="bags">
-          <h3>Bags</h3>
-          <p>Cras justo odio, dapibus ac facilisis in, egestas eget quam. Donec id elit non mi porta gravida at eget metus. 
-            Nullam id dolor id nibh ultricies vehicula ut id elit.
-          </p> 
-          <p><a href="#" class="btn btn-primary" role="button">Add To Chart</a> <a href="#" class="btn btn-default" role="button">View</a></p>
-        </div>
-      </div>
-      <div class="col-xs-6 col-md-3">
-        <div class="thumbnail">
-          <img class="img-responsive" src="https://images-na.ssl-images-amazon.com/images/I/719-IxM0u0L._SY355_.jpg" alt="bags">
-          <h3>Bags</h3>
-          <p>Cras justo odio, dapibus ac facilisis in, egestas eget quam. Donec id elit non mi porta gravida at eget metus. 
-            Nullam id dolor id nibh ultricies vehicula ut id elit.
-          </p> 
-          <p><a href="#" class="btn btn-primary" role="button">Add To Chart</a> <a href="#" class="btn btn-default" role="button">View</a></p>
-        </div>
-      </div>
-      <div class="col-xs-6 col-md-3">
-        <div class="thumbnail">
-          <img class="img-responsive" src="https://images-na.ssl-images-amazon.com/images/I/719-IxM0u0L._SY355_.jpg" alt="bags">
-          <h3>Bags</h3>
-          <p>Cras justo odio, dapibus ac facilisis in, egestas eget quam. Donec id elit non mi porta gravida at eget metus. 
-            Nullam id dolor id nibh ultricies vehicula ut id elit.
-          </p> 
-          <p><a href="#" class="btn btn-primary" role="button">Add To Chart</a> <a href="#" class="btn btn-default" role="button">View</a></p>
-        </div>
-      </div>
-    </div>
   </div>
   <!-- footer -->
   <footer class="container">
-    <div class="row">
-      <div class="col-xs-8 col-md-4">
+      <div class="col-12 col-md-4">
         <h4>Quick Link</h4>
         <ul>
-          <li><a href="#">Search</a></li>
           <li><a href="#">Contact</a></li>
           <li><a href="#">About Us</a></li>
-          <li><a href="#">News</a></li>
           <li><a href="#">FAQ</a></li>
         </ul>
       </div>
-      <div class="col-xs-8 col-md-4">
+      <div class="col-12 col-md-4">
         <h4>Get In Touch</h4>
         <p>Sign up to stay in the loop. Receive updates, access to exclusive deals, and more.</p>
       </div>
-      <div class="col-xs-8 col-md-4">
+      <div class="col-12 col-md-4 text-right">
         <h4>Newsletter</h4>
         <form class="navbar-form navbar-right" action="/">
           <div class="form-group">
             <input type="text" placeholder="Email" name="email">
           </div>
-        <button type="button" class="btn btn-default">Sign Up</button>
+        <button type="button" class="btn btn-default btn-xs btn-md">Sign Up</button>
+      </form>
       </div>
-    </div>
-    <div class="row">
-      <div class="col-xs-8 col-md-4">
-        <p>&copy; 2018 CamSiasm</p>
-      </div>
-      <ul class="col-xs-16 col-md-8">
-        <li class="col-md-1">
+      <p class="col-4 col-md-4">&copy; 2018 CamSiasm</p>
+      <ul class="col-8 col-md-8">
+        <li class="col-1 col-md-1">
           <a href="#" class="fa fa-twitter"></a>
         </li>
-        <li class="col-md-1">
+        <li class="col-1 col-md-1">
           <a href="#" class="fa fa-facebook"></a>
         </li>
-        <li class="col-md-1">
+        <li class="col-1 col-md-1">
           <a href="#" class="fa fa-instagram"></a>
         </li>
       </ul>
-    </div>
   </footer>
 
-  
+  <script src="home.js"></script>
 </body>
 </html>

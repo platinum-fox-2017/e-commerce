@@ -63,7 +63,68 @@
     </nav>
   </div>
 <!-- detail -->
-  <h1>Detail</h1>
+  <div class="container cart">
+    <h2 class="cart_header">Shopping cart</h2>
+    <div class="row">
+      <div class="table-responsive">
+        <table class="table">
+          <thead>
+            <tr>
+              <th>Product</th>
+              <th>Qty</th>
+              <th class="text-center">Price</th>
+              <th class="text-center">Subtotal</th>
+              <th> </th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+              <td class="col-xs-12 col-md-6">
+                <div class="media">
+                  <a class="thumbnail pull-left" href="#"> <img src="./pic/camera.jpeg" style="width: 72px; height: 72px; margin-right:15px;"> </a>
+                  <div>
+                    <a href="#"> Camera digital with digital photography</a>
+                  </div>
+                </div>
+              </td>
+              <td class="col-xs-2 col-md-1" style="text-align: center">
+                <input type="number" class="form-control" id="productqty" value="2" name="productqty">
+              </td>
+              <td class="col-xs-1 col-md-1 text-center"><strong>$ 1,500</strong></td>
+              <td class="col-xs-1 col-md-1 text-center"><strong>$ 3,000</strong></td>
+              <td class="col-sm-1 col-md-1">
+                <button type="button" class="btn btn-default">
+                <span class="glyphicon glyphicon-remove"></span> Remove
+                </button>
+              </td>
+            </tr>
+            <tr>
+              <td>   </td>
+              <td>   </td>
+              <td>   </td>
+              <td>
+                <h4>Subtotal</h4>
+              </td>
+              <td class="text-right">
+                <h4><strong>$3,000</strong></h4>
+              </td>
+            </tr>
+            <tr>
+              <td>    </td>
+              <td>    </td>
+              <td>    </td>
+              <td>    </td>
+              <td>
+                <button type="button" class="btn btn-info">
+                <span class="fa fa-shopping-cart"></span> Checkout
+                </button>
+              </td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+    </div>
+  </div>
   <!-- footer -->
   <footer class="container">
     <div class="row">
@@ -95,13 +156,13 @@
         <p>&copy; 2018 HariPermadi</p>
       </div>
       <ul class="col-xs-16 col-md-8">
-        <li class="col-sm-1">
+        <li class="col-md-1">
           <a href="#" class="fa fa-twitter"></a>
         </li>
-        <li class="col-sm-1">
+        <li class="col-md-1">
           <a href="#" class="fa fa-facebook"></a>
         </li>
-        <li class="col-sm-1">
+        <li class="col-md-1">
           <a href="#" class="fa fa-instagram"></a>
         </li>
       </ul>
