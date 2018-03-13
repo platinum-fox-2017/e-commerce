@@ -106,7 +106,15 @@ new Vue({
       let index = this.cart.findIndex(data => {
         return data.title == title
       });
+      if (this.cart[index].quantity === 1) {
+        if (!confirm('are you sure?')) {
+          return
+        }
+      }
       this.cart[index].quantity -= 1;
+      if (this.cart[index].quantity === 0) {
+        this.cart.splice(index, 1);
+      }
     },
     cartRemoveAll: function(title) {
       let index = this.cart.findIndex(data => {
