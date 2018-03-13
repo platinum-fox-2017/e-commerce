@@ -44,9 +44,13 @@ header {
 #img-header{
     /* padding: 10pfx; */
     margin-top:5px;
-
     height:25px;
     width: auto;
+}
+@media all and (max-width: 500px){
+    #img-header{
+        height:20px;
+    }
 }
 .pad {
     /* margin-left: 40px; */
@@ -82,13 +86,13 @@ header {
     line-height: 15px;
     font-family: Helvetica, sans-serif;
 }
-@media screen and (max-width: 1200) {
+@media screen and (max-width: 1200px) {
     .video-text {
         top: 30%;
     }
     .video-text h1 {
         line-height: 25px;
-        font-size: 30px;
+        font-size: 70px;
     }
 }
 @media all and (max-width: 900px) {
@@ -102,7 +106,7 @@ header {
 }
 @media screen and (max-width: 500px) {
     .video-text {
-        top: 25%;
+        top: 15%;
         margin-bottom:0;
     }
     .video-text h1 {
@@ -152,7 +156,7 @@ header {
     width: 300px;
 }
 @media all and (max-width: 500px) {
-    img{
+    .photo img{
         width: 180px;
     }
 }
