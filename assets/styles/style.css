@@ -2,8 +2,16 @@ body {
     margin: 0;
     padding: 0;
 }
+a#header-text.btn.btn-link.dropdown-toggle {
+    color:rgb(68, 68, 68)
+}
 #header_font{
     color:rgb(68, 68, 68);
+    padding:15px;
+    /* padding-top:10px;
+    padding-bottom:10px;
+    padding-left:5px;
+    padding-right:5px; */
     /* font-family:  "Segoe UI Mono", "Roboto Mono", Menlo, Courier, monospace; */
 }
 #header_font:hover {
@@ -35,7 +43,9 @@ header {
 } */
 #img-header{
     /* padding: 10pfx; */
-    height:20px;
+    margin-top:5px;
+
+    height:25px;
     width: auto;
 }
 .pad {
