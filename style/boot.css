@@ -1,0 +1,147 @@
+.size-of-the-day {
+  /* width: 300px; */
+  height: 300px;
+}
+.margin-side-30px {
+  margin: 30px;
+}
+.margin-side-10px {
+  margin-left: 10px;
+  margin-right: 10px;
+}
+.margin-vert-3px {
+  margin-top: 3px;
+  margin-bottom: 3px;
+}
+.margin-vert-15px {
+  margin-top: 15px;
+  margin-bottom: 15px;
+}
+.margin-vert-30px {
+  margin-top: 30px;
+  margin-bottom: 30px;
+}
+.no-top-padding {
+  padding-top: 0;
+  padding-bottom: 0;
+}
+.padding-vert-4px {
+  padding-top: 4px;
+  padding-bottom: 4px;
+}
+.padding-bottom-30px {
+  padding-bottom: 30px;
+}
+.flexbox {
+  display: flex;
+}
+.wrap {
+  flex-wrap: wrap;
+}
+.align-items {
+  align-items: center;
+}
+.justify {
+  justify-content: center;
+}
+  .justify-around {
+    justify-content: space-around;
+  }
+.flex-basis-30 {
+  flex-basis: 30%;
+}
+.side-border {
+  border-left: 1px solid rgba(10,10,10,0.2);
+  border-right: 1px solid rgba(10,10,10,0.2);
+}
+.bottom-border {
+  border-bottom: 1px solid rgba(10,10,10,0.2);
+}
+.full-width {
+  margin-left: 0;
+  margin-right: 0;
+  padding-right: 0;
+  padding-left: 0;
+  width: 100%;
+}
+.flex-simple {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: space-around;
+}
+.card-img-top {
+  width: 298px; !important
+  height: 200px; !important
+}
+.bg-carousel {
+  background: url(./pictures/placeholders/g2.jpg) no-repeat center fixed;
+  background-size: cover;
+}
+@media (min-width: 200px) {
+  .auto-margin {
+    width: 90%;
+    margin: 0 auto;
+  }
+  a.navbar-brand {
+    font-size: 30px;
+  }
+  .main-margin {
+    margin: 0 11.5%;
+  }
+  .flex-direct {
+    flex-direction: column;
+  }
+  .card-width {
+    width: auto;
+  }
+  .twin-sm {
+    width: 350px;
+    height: 200px;
+  }
+}
+@media (min-width: 750px) {
+  .auto-margin {
+    width: 90%;
+    margin: 0 auto;
+  }
+  a.navbar-brand {
+    font-size: 30px;
+  }
+  .main-margin {
+    margin: 0 11.5%;
+  }
+  .flex-direct {
+    flex-direction: column;
+  }
+  .card-width {
+    width: auto;
+  }
+  /* form-control mr-sm-2 */
+  .search-wide {
+    width: 80%;
+  }
+  .twin-sm {
+    width: 600px;
+    height: 342px;
+  }
+
+}
+@media (min-width: 992px) {
+  .auto-margin {
+    max-width: 1020px;
+    margin: 0 auto;
+  }
+
+  a.navbar-brand {
+    font-size: 20px;
+  }
+  .main-margin {
+    margin: 0 25%;
+  }
+  .flex-direct {
+    flex-direction: row;
+  }
+  .card-width {
+    width: auto;
+  }
+}
