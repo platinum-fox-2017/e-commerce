@@ -27,8 +27,6 @@
     <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/4.0.0/js/bootstrap.min.js"></script>
     <!-- MDB core JavaScript -->
     <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/mdbootstrap/4.5.0/js/mdb.min.js"></script>
-                
-    <link rel="stylesheet" href="css/style2.css">
 </head>
 <body>
   <div id="app">
@@ -60,7 +58,45 @@
               <a class="nav-link disabled" href="#">Flight</a>
             </li>
           </ul>
-          <a style="margin-right:10px; color:grey; font-size:25px"href="#"><i class="fas fa-shopping-bag"></i></a>
+          <div v-if="totalCart > 0">
+              <button class="btn btn-danger">{{totalCart}}</button> 
+          </div>
+          <a style="margin-right:10px; color:lightslategrey; font-size:25px" data-toggle="modal" data-target=".bd-example-modal-lg"><i class="fas fa-shopping-bag"></i></a>
+          <!-- Modal -->
+          <div class="modal fade bd-example-modal-lg" tabindex="-1" role="dialog" aria-labelledby="myLargeModalLabel" aria-hidden="true">
+              <div class="modal-dialog modal-lg">
+              <div class="modal-content">
+                <div class="modal-header">
+                  <h5 class="modal-title" id="exampleModalLabel">Cart Shopping</h5>
+                  <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                  </button>
+                </div>
+                <div class="modal-body" >
+                  <div class="row" style ="margin-bottom:20px"v-for="item in cart">
+                    <img style="width:200px;height:180px;margin-left:10px;border-radius:8px;" v-bind:src="item.image" alt="">
+                    <div style="padding-left:20px; padding-top:10px;">
+                        <p >Destination: {{item.destination}}</p>
+                        <p>Price: ${{item.price}}</p>
+                        <p>{{item.days}}</p>
+                        <p>Package: {{item.quantity}}
+                            <a style="margin-left:10px" v-on:click="addItem(item)"><i class="fas fa-plus"></i></a>
+                            <a style="margin-left:5px;" v-on:click="minItem(item)" ><i class="fas fa-minus"></i></a>
+                        </p>
+                    </div>
+                    <div style="padding-top:2px; margin-left:280px;">
+                      <p><button class="btn btn-danger btn-sm" v-on:click="deleteItem(item)"><i class="fa fa-trash"></i></button></p>
+                    </div>
+                  </div>
+                  <h4>Total Price : ${{totalPrice}}</h4>
+                </div>
+                <div class="modal-footer">
+                  <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+                  <button type="button" class="btn btn-primary">Checkout</button>
+                </div>
+              </div>
+            </div>
+          </div>
           <form class="form-inline my-2 my-lg-0">
             <input class="form-control mr-sm-2" type="search" placeholder="Search" aria-label="Search">
             <button class="btn btn-success my-2 my-sm-0" type="submit"><i class="fas fa-search"></i></button>
@@ -116,78 +152,18 @@
       margin-bottom:65px;
       letter-spacing: 1px;" class="container">
       <div style="margin-bottom:40px"class="row">
-        <div class="col-md-4">
+        <div class="col-md-4" v-for="item in contents">
           <div class="img-content">
-              <img style="width:300px;height:250px; border-radius:8px" src="//06.img.avito.st/640x480/4140232806.jpg" alt="">
+              <img style="width:300px;height:250px; border-radius:8px" v-bind:src="item.image" alt="">
           </div>
           <div class="content">
-            <p style="margin-top:10px">Destination:Bali Island</p>
-            <p>Price : USD 1.000</p>
-            <p>Package Available :50 pax </p>
+            <p style="margin-top:10px">Destination: {{item.destination}}</p>
+            <p>starting from: ${{item.price}}</p>
+            <p>{{item.days}}</p>
+            <p>Package Available: {{item.quantity}} pax</p>
           </div>
-          <button style="margin-bottom:40px;" class="btn red"type="submit">Add to Cart</button>
-        </div>
-
-        <div class=" col-md-4">
-          <div class="img-content">
-            <img style="width:300px;height:250px; border-radius:8px" src="http://justglobetrotting.com/wp-content/uploads/2015/09/budapest-hungary-1080x675.jpg" alt="">
-          </div>
-          <div class="content">
-            <p style="margin-top:10px">Destination:Budapest</p>
-            <p>Price : USD 2.000</p>
-            <p>Package Available :100 pax </p>
-          </div>
-          <button style="margin-bottom:40px;" class="btn red" type="submit">Add to Cart</button>
-        </div>
-        
-        <div class="col-md-4">
-          <div class="img-content">
-              <img style="width:300px;height:250px; border-radius:8px" src="//do9f0cpkv689t.cloudfront.net/SFImage/Images/swissf273ffe313a06dce84b1ff000062a8f2.png" alt="">
-          </div>
-          <div class="content">
-              <p style="margin-top:10px">Destination:Switerland</p>
-            <p>Price : USD 1.750</p>
-            <p>Package Available :80 pax </p>
-          </div>
-          <button style="margin-bottom:40px;" class="btn red" type="submit">Add to Cart</button>          
-        </div>
-      </div> 
-      <div class="row">
-        <div class="col-md-4">
-            <div class="img-content">
-                <img style="width:300px;height:250px; border-radius:8px" src="https://cuhsxov73uxte8o3fsfcl91m-wpengine.netdna-ssl.com/wp-content/uploads/2015/02/VIENNA.jpg" alt="">
-            </div>
-            <div class="content">
-                <p style="margin-top:10px">Destination: Vienna,austria</p>
-              <p>Price : USD 3.000</p>
-              <p>Package Available :50 pax </p>
-            </div>
-            <button style="margin-bottom:40px;" class="btn red" type="submit">Add to Cart</button>
-          </div>
-    
-          <div class=" col-md-4">
-            <div class="img-content">
-              <img style="width:300px;height:250px; border-radius:8px" src="http://www.nuarthatours.com/wp-content/uploads/2017/10/paket-wisata-malang-bromo-murah-1024x576.jpg" alt="">
-            </div>
-            <div class="content">
-              <p style="margin-top:10px">Destination: Bromo Mountain</p>
-              <p>Price : USD 700</p>
-              <p>Package Available :100 pax </p>
-            </div>
-            <button style="margin-bottom:40px;" class="btn red"  type="submit">Add to Cart</button>
-          </div>
-          
-          <div class="col-md-4">
-            <div class="img-content">
-                <img style="width:300px;height:250px; border-radius:8px" src="http://www.aljannahwisata.com/wp-content/uploads/2016/12/wisata-muslim-jepang-1.jpg" alt="">
-            </div>
-            <div class="content">
-                <p style="margin-top:10px">Destination: Tokya,japan</p>
-              <p>Price : USD 3.000</p>
-              <p>Package Available :50 pax </p>
-            </div>
-            <button style="margin-bottom:40px;" class="btn red" type="submit">Add to Cart</button>          
-          </div>
+          <button v-on:click="addCart(item)" style="margin-bottom:40px;" class="btn red"type="submit"><i style="margin-right:6px;"class="fas fa-shopping-cart"></i>Add to Cart</button>
+        </div>          
       </div>
     </div> 
     <footer class="page-footer font-small blue pt-4 mt-4">
