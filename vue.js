@@ -51,15 +51,13 @@ new Vue({
         addCart: function(item){
             for(let i = 0 ; i < this.contents.length ; i++){
                 if(this.contents[i].destination === item.destination){
-                    if(this.contents[i].quantity <= 1){
-                        alert(`add journey to ${item.destination} to cart`)
-                        this.contents[i].quantity = "SOLD OUT"
-                    }else if(this.contents[i].quantity > 1){
+                    if(this.contents[i].quantity === 0){
+                        alert(`Soory journey to ${item.destination} SOLD OUT`)
+                        this.contents[i].quantity = 0
+                        return 
+                    }else if(this.contents[i].quantity >= 1){
                         alert(`add journey to ${item.destination} to cart`)
                         this.contents[i].quantity -= 1
-                    }else{
-                        alert(`Soory journey to ${item.destination} SOLD OUT `)
-                        return 
                     }
                     for(let j = 0 ; j < this.cart.length ; j++){
                         if(this.cart[j].destination === item.destination){
@@ -98,12 +96,11 @@ new Vue({
         addItem: function(item){
             for(let i = 0 ; i < this.contents.length ; i++){
                 if(this.contents[i].destination === item.destination){
-                    if(this.contents[i].quantity <= 1){
-                        this.contents[i].quantity = "SOLD OUT"
-                    }else if(this.contents[i].quantity > 1){
-                        this.contents[i].quantity -= 1
-                    }else{
+                    if(this.contents[i].quantity === 0){
+                        this.contents[i].quantity = 0
                         return 
+                    }else if(this.contents[i].quantity >= 1){
+                        this.contents[i].quantity -= 1
                     }
                     for(let j = 0 ; j < this.cart.length ; j++){
                         if(this.cart[j].destination === item.destination){
