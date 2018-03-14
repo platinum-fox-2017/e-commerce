@@ -55,6 +55,7 @@
         </nav>
       </nav>
 
+      <!-- carousel -->
       <div class="container-fluid bg-light full-width bottom-border">
         <div id="item-of-the-day" class="carousel slide margin-0" data-ride="carousel">
           <ol class="carousel-indicators">
@@ -78,12 +79,14 @@
         </div>
       </div>
 
+      <!-- promos -->
       <div class="container-fluid full-width bottom-border flexbox flex-direct">
         <div class="container-fluid margin-vert-30px flexbox  justify-around align-items" v-for='p_banner in promo_banners'>
           <img class=" margin-side-10px  img-fluid " width="490px" height="280px" v-bind:src="p_banner.imgUrl" alt="placeholder1">
         </div>
       </div>
 
+      <!-- product list -->
       <div class="container-fluid bg-white margin-vert-30px padding-bottom-30px bottom-border ">
         <div class=" row flex-simple margin-side-30px">
           <div class="card card-width margin-vert-15px flex-items" v-for='(cake, index) in cakes' >
@@ -101,6 +104,38 @@
             </div>
           </div>
         </div>
+      </div>
+
+      <!-- footer -->
+      <div class="container-fluid bg-dark">
+        <div class="row bg-dark">
+          <div class="col-md-2 bg-dark p-2">
+          </div>
+          <div class="col-md-3 bg-dark px-2 py-5 py-5 ">
+            <h1 class="h6 text-muted">SUPPORT</h1>
+            <ul class="list-unstyled">
+              <li> <a class="text-muted" href="#">CONTACT US</a> </li>
+              <li> <a class="text-muted" href="#">DELIVERY</a> </li>
+              <li> <a class="text-muted" href="#">FAQ</a> </li>
+              <li> <a class="text-muted" href="#">ABOUT</a> </li>
+            </ul>
+          </div>
+          <div class="col-md-2 bg-dark p-2">
+          </div>
+          <div class="col-md-3 bg-dark px-2 py-5 py-5">
+            <h1 class="h6 text-muted">MY ACCOUNT</h1>
+            <ul class="list-unstyled">
+              <li> <a class="text-muted" href="#">LOGIN</a> </li>
+              <li> <a class="text-muted" href="#">ORDER HISTORY</a> </li>
+              <li> <a class="text-muted" href="#">TRACK ORDER</a> </li>
+              <li> <a class="text-muted" href="#">PROFILE</a> </li>
+            </ul>
+          </div>
+          <div class="col-md-2 bg-dark p-2">
+          </div>
+        </div>
+
+
       </div>
 
       <!-- Modal -->
