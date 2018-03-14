@@ -1,9 +1,47 @@
+.button-cart {
+    opacity: 0;
+}
+
+.image-hover:hover .button-cart {
+    opacity: 1;
+}
+
+.cart-modal-img {
+}
+
+.middle {
+    transition: .5s ease;
+    opacity: 1;
+    position: absolute;
+    top: 42.5%;
+    left: 42.5%;
+    transform: translate(-50%, -50%);
+    -ms-transform: translate(-50%, -50%);
+    text-align: center;
+}
+
 .navbar-logo-image {
     height: 40px;
 }
 
 .carousel-inner {
-    padding: 3%
+    margin-bottom: 50px;
+}
+
+.navbar-brand {
+    font-family: 'Trebuchet MS';
+}
+
+#items {
+    width: 200px;
+    height: 200px;
+    -moz-border-radius: 50px;
+    -webkit-border-radius: 50px;
+    display: block;
+    margin-bottom: 30px;
+    opacity: 1;
+    transition: .5s ease;
+    backface-visibility: hidden;
 }
 
 /* item detail */
