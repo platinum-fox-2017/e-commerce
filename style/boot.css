@@ -5,6 +5,12 @@
 .margin-0 {
 
 }
+.margin-bottom-lg {
+  margin-bottom: 10rem;
+}
+.margin-top-lg {
+  margin-top: 10rem;
+}
 .margin-side-30px {
   margin: 30px;
 }
@@ -76,6 +82,12 @@
 }
 .width-100 {
   width: 100%;
+}
+.width-400px {
+  width: 400px
+}
+.height-500px {
+  height: 500px;
 }
 .flex-simple {
   display: flex;
