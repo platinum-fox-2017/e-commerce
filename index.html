@@ -15,8 +15,8 @@
 
 <body>
     <div id="app">
-    <header>
-      
+        <header>
+
             <nav class="navbar navbar-expand-lg navbar-light bg-light">
                 <a class="navbar-brand" href="#">
                     Sneaker's
@@ -25,7 +25,7 @@
                     aria-expanded="false" aria-label="Toggle navigation">
                     <span class="navbar-toggler-icon"></span>
                 </button>
-            
+
                 <div class="collapse navbar-collapse" id="navbarSupportedContent">
                     <ul class="navbar-nav mr-auto">
                         <li class="nav-item active">
@@ -56,11 +56,11 @@
                     <form class="form-inline my-2 my-lg-0">
                         <input class="form-control mr-sm-2" type="search" placeholder="Search" aria-label="Search">
                         <button class="btn btn-outline-success my-2 my-sm-0" type="submit" id="search-btn">Search</button>
-            
+
                         <button type="button" class="btn btn-outline-success" data-toggle="modal" data-target="#myModal">
                             <i class="fa fa-cart-plus"></i>
                         </button>
-            
+
                         <!-- Modal -->
                         <div class="modal fade" id="myModal" role="dialog">
                             <div class="modal-dialog">
@@ -82,7 +82,13 @@
                                         <p>
                                             Qty: {{ element.count }}
                                         </p>
-                                        
+                                        <p>
+                                            Total: {{ element.goods_price_total }}
+                                        </p>
+                                        <p>
+                                            Grand Total: {{ element.grand_total }}
+                                        </p>
+                                        <button type="button" class="btn btn-default" v-on:click="removeFromCart()">Cancel</button>
                                     </div>
                                     <div class="modal-footer">
                                         <button type="button" class="btn btn-default">Checkout</button>
@@ -92,7 +98,7 @@
                             </div>
                         </div>
                     </form>
-            
+
                 </div>
             </nav>
             <!-- carousel -->
@@ -104,13 +110,13 @@
                 </ol>
                 <div class="carousel-inner">
                     <div class="carousel-item active">
-                        <img class="d-block w-100" src="./images/img3.jpg" alt="First slide" height="500px">
+                        <img class="d-block w-100" src="./images/img3.jpg" alt="First slide" height="600px">
                     </div>
                     <div class="carousel-item">
-                        <img class="d-block w-100" src="./images/hu-race-yellow.jpeg" alt="Second slide" height="500px">
+                        <img class="d-block w-100" src="./images/hu-race-yellow.jpeg" alt="Second slide" height="600">
                     </div>
                     <div class="carousel-item">
-                        <img class="d-block w-100" src="./images/fog-human-race.jpg" alt="Third slide" height="500px">
+                        <img class="d-block w-100" src="./images/fog-human-race.jpg" alt="Third slide" height="600px">
                     </div>
                 </div>
                 <a class="carousel-control-prev" href="#carouselExampleIndicators" role="button" data-slide="prev">
@@ -121,145 +127,145 @@
                     <span class="carousel-control-next-icon" aria-hidden="true"></span>
                     <span class="sr-only">Next</span>
                 </a>
-            
-            <!-- end of carousel -->
-            </header>
-            <div class="container">
-                <!-- Content here -->
-                <div class="row">
-                    
-                    <div v-for="element in goods" class="col-6 col-sm-6 col-md-3">
-                        <div class="image-hover">
-                            <img v-bind:src="element.image" alt="" id="items">
-                            <div class="middle">
-                                <div class="button-cart">
-                                    <button v-on:click="addToCart(element)">add to cart</button>
-                                </div>
+
+                <!-- end of carousel -->
+        </header>
+        <div class="container">
+            <!-- Content here -->
+            <div class="row">
+
+                <div v-for="element in goods" class="col-6 col-sm-6 col-md-3">
+                    <div class="image-hover">
+                        <img v-bind:src="element.image" alt="" id="items">
+                        <div class="middle">
+                            <div class="button-cart">
+                                <button v-on:click="addToCart(element)">add to cart</button>
                             </div>
                         </div>
                     </div>
+                </div>
 
-                </div>
-                <br>
             </div>
-            </div>
-            <hr>
-            <!--Footer-->
-            <footer class="page-footer font-small stylish-color-dark pt-4 mt-4">
-            
-                <!--Footer Links-->
-                <div class="container text-center text-md-left">
-                    <div class="row">
-            
-                        <!--First column-->
-                        <div class="col-md-4">
-                            <h5 class="text-uppercase mb-4 mt-3 font-weight-bold">Footer Content</h5>
-                            <p>Here you can use rows and columns here to organize your footer content. Lorem ipsum dolor sit amet, consectetur
-                                adipisicing elit.</p>
-                        </div>
-                        <!--/.First column-->
-            
-                        <hr class="clearfix w-100 d-md-none">
-            
-                        <!--Second column-->
-                        <div class="col-md-2 mx-auto">
-                            <h5 class="text-uppercase mb-4 mt-3 font-weight-bold">Catalogue</h5>
-                            <ul class="list-unstyled">
-                                <li>
-                                    <a href="#!">Man's Sneakers</a>
-                                </li>
-                                <li>
-                                    <a href="#!">Man's Clothing'</a>
-                                </li>
-                                <li>
-                                    <a href="#!">Woman's Sneakers</a>
-                                </li>
-                                <li>
-                                    <a href="#!">Woman's Clothing</a>
-                                </li>
-                            </ul>
-                        </div>
-                        <!--/.Second column-->
-            
-                        <hr class="clearfix w-100 d-md-none">
-            
-                        <!--Third column-->
-                        <div class="col-md-2 mx-auto">
-                            <h5 class="text-uppercase mb-4 mt-3 font-weight-bold">Company Info</h5>
-                            <ul class="list-unstyled">
-                                <li>
-                                    <a href="#!">Partners</a>
-                                </li>
-                                <li>
-                                    <a href="#!">Careers</a>
-                                </li>
-                                <li>
-                                    <a href="#!">Press</a>
-                                </li>
-                                <li>
-                                    <a href="#!">Corporate Information</a>
-                                </li>
-                            </ul>
-                        </div>
-                        <!--/.Third column-->
-            
-                        <hr class="clearfix w-100 d-md-none">
-            
-                        <!--Fourth column-->
-                        <div class="col-md-2 mx-auto">
-                            <h5 class="text-uppercase mb-4 mt-3 font-weight-bold">Help</h5>
-                            <ul class="list-unstyled">
-                                <li>
-                                    <a href="#!">Catalogue</a>
-                                </li>
-                                <li>
-                                    <a href="#!">Community & Newsletters</a>
-                                </li>
-                                <li>
-                                    <a href="#!">Corporate</a>
-                                </li>
-                                <li>
-                                    <a href="#!">Products</a>
-                                </li>
-                            </ul>
-                        </div>
-                        <!--/.Fourth column-->
-                    </div>
-                </div>
-                <!--/.Footer Links-->
-            
-                <hr>
-            
-                <!--Call to action-->
-                <div class="text-center py-3">
-                    <ul class="list-unstyled list-inline mb-0">
-                        <li class="list-inline-item">
-                            <h5 class="mb-1">Register for free</h5>
-                        </li>
-                        <li class="list-inline-item">
-                            <a href="#!" class="btn btn-danger btn-rounded">Sign up now!</a>
-                        </li>
-                    </ul>
-                </div>
-                <!--/.Call to action-->
-            
-                <hr>
-            
-                <!--Copyright-->
-                <div class="footer-copyright py-3 text-center">
-                    © 2018 Copyright:
-                    <a href="https://davidyunius.com/"> davidyunius.com </a>
-                </div>
-                <!--/.Copyright-->
-            
-            </footer>
+            <br>
         </div>
-        
+        </div>
+        <hr>
+        <!--Footer-->
+        <footer class="page-footer font-small stylish-color-dark pt-4 mt-4">
+
+            <!--Footer Links-->
+            <div class="container text-center text-md-left">
+                <div class="row">
+
+                    <!--First column-->
+                    <div class="col-md-4">
+                        <h5 class="text-uppercase mb-4 mt-3 font-weight-bold">Footer Content</h5>
+                        <p>Here you can use rows and columns here to organize your footer content. Lorem ipsum dolor sit amet,
+                            consectetur adipisicing elit.</p>
+                    </div>
+                    <!--/.First column-->
+
+                    <hr class="clearfix w-100 d-md-none">
+
+                    <!--Second column-->
+                    <div class="col-md-2 mx-auto">
+                        <h5 class="text-uppercase mb-4 mt-3 font-weight-bold">Catalogue</h5>
+                        <ul class="list-unstyled">
+                            <li>
+                                <a href="#!">Man's Sneakers</a>
+                            </li>
+                            <li>
+                                <a href="#!">Man's Clothing'</a>
+                            </li>
+                            <li>
+                                <a href="#!">Woman's Sneakers</a>
+                            </li>
+                            <li>
+                                <a href="#!">Woman's Clothing</a>
+                            </li>
+                        </ul>
+                    </div>
+                    <!--/.Second column-->
+
+                    <hr class="clearfix w-100 d-md-none">
+
+                    <!--Third column-->
+                    <div class="col-md-2 mx-auto">
+                        <h5 class="text-uppercase mb-4 mt-3 font-weight-bold">Company Info</h5>
+                        <ul class="list-unstyled">
+                            <li>
+                                <a href="#!">Partners</a>
+                            </li>
+                            <li>
+                                <a href="#!">Careers</a>
+                            </li>
+                            <li>
+                                <a href="#!">Press</a>
+                            </li>
+                            <li>
+                                <a href="#!">Corporate Information</a>
+                            </li>
+                        </ul>
+                    </div>
+                    <!--/.Third column-->
+
+                    <hr class="clearfix w-100 d-md-none">
+
+                    <!--Fourth column-->
+                    <div class="col-md-2 mx-auto">
+                        <h5 class="text-uppercase mb-4 mt-3 font-weight-bold">Help</h5>
+                        <ul class="list-unstyled">
+                            <li>
+                                <a href="#!">Catalogue</a>
+                            </li>
+                            <li>
+                                <a href="#!">Community & Newsletters</a>
+                            </li>
+                            <li>
+                                <a href="#!">Corporate</a>
+                            </li>
+                            <li>
+                                <a href="#!">Products</a>
+                            </li>
+                        </ul>
+                    </div>
+                    <!--/.Fourth column-->
+                </div>
+            </div>
+            <!--/.Footer Links-->
+
+            <hr>
+
+            <!--Call to action-->
+            <div class="text-center py-3">
+                <ul class="list-unstyled list-inline mb-0">
+                    <li class="list-inline-item">
+                        <h5 class="mb-1">Register for free</h5>
+                    </li>
+                    <li class="list-inline-item">
+                        <a href="#!" class="btn btn-danger btn-rounded">Sign up now!</a>
+                    </li>
+                </ul>
+            </div>
+            <!--/.Call to action-->
+
+            <hr>
+
+            <!--Copyright-->
+            <div class="footer-copyright py-3 text-center">
+                © 2018 Copyright:
+                <a href="https://davidyunius.com/"> davidyunius.com </a>
+            </div>
+            <!--/.Copyright-->
+
+        </footer>
+    </div>
+
     <!--/.Footer-->
     <script src="./script/vue.js"></script>
     <link rel="stylesheet" href="./css/style.css">
-    
-    
+
+
 </body>
 <script src="https://code.jquery.com/jquery-3.2.1.slim.min.js" integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN"
     crossorigin="anonymous"></script>
