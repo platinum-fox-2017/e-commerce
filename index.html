@@ -170,30 +170,13 @@
             </div>
         </div>
                 <div class="column col-1 col-md-12 col-sm-12"></div>
-                <!-- <div class="column col-2 col-md-6 col-sm-12">
-                        <div class="card">
-                            <div class="card-image">
-                                <img src="./assets/images/aa8ddfb2be8648b9bb75e5d408c73185_6b751e78-a626-4c36-bdaa-8b820aef55f1_600x600.jpg" onmouseover="this.src='./assets/images/color-film-for-polaroid-i-type-004668-stacks-3-oskar-smolokowski.jpg'" onmouseout="this.src='/assets/images/aa8ddfb2be8648b9bb75e5d408c73185_6b751e78-a626-4c36-bdaa-8b820aef55f1_600x600.jpg'"  class="img-responsive">
-                            </div>
-                            <div class="card-header">
-                                <div class="card-title h5">Polaroid</div>
-                                <div class="card-subtitle text-gray">Color 600 films</div>
-                                <div class="card-subtitle text-gray">$18.00</div>
-                            </div>
-                            <div class="card-body">
-                                Empower every person and every organization on the planet to achieve more.
-                            </div>
-                            <div class="card-footer">
-                                <button class="btn btn-primary">Buy</button>
-                            </div>
-                        </div>
-                </div> -->
-                <div class="column col-2 col-md-6 col-sm-12" v-for="name in names">
+                    <div class="column col-2 col-md-6 col-sm-12" v-for="name in names">
                         <div class="card">
                             <div class="card-image">
                                 <img v-if="showStock(name.type) == 0" :src="name.imageUrl[0]" class="img-responsive" style="opacity: 0.5">
-                                <img v-else :src="name.imageUrl[0]" onmouseover="mouseOver(name)" @mouseout="mouseOut(name)" class="img-responsive">
+                                <img v-else :src="name.imageUrl[0]" @mouseover="mouseOver(name)" @mouseout="mouseOut(name)" class="img-responsive">
                                 <!-- <img :src="name.imageUrl[0]" @mouseover="mouseOver(name)" @mouseout="mouseOut(name)" class="img-responsive"> -->
+                                <!-- <img src="./assets/images/aa8ddfb2be8648b9bb75e5d408c73185_6b751e78-a626-4c36-bdaa-8b820aef55f1_600x600.jpg" onmouseover="this.src='./assets/images/color-film-for-polaroid-i-type-004668-stacks-3-oskar-smolokowski.jpg'" onmouseout="this.src='/assets/images/aa8ddfb2be8648b9bb75e5d408c73185_6b751e78-a626-4c36-bdaa-8b820aef55f1_600x600.jpg'"  class="img-responsive"> -->
                                 <!-- <img class="img-responsive" :src="name.imageUrl[0]" @mouseover.native="this.src=''" > -->
                             </div>
                             <div class="card-header">

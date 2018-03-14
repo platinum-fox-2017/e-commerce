@@ -61,6 +61,7 @@ new Vue({
     data: {
         names, 
         product,
+        active: false,
         carts: []
     },
     methods: {
@@ -128,16 +129,13 @@ new Vue({
         showStock: function (type){
             let index = this.names.map(item => item.type).indexOf(type)
             return this.names[index].stock
-        },
+        }, 
         mouseOver: function (name){
             let type = name.type
-            // console.log(type)
-            // console.log('halo')
             let index = this.names.map(item => item.type).indexOf(type)
-            // console.log(index)
-            // console.log(this.names)
-            // console.log(this.names[index].imageUrl[1])
-            return this.names[index].imageUrl[1]
+            let firstImage = this.names[index].imageUrl[0]
+            let secondImage = this.names[index].imageUrl[1]
+            this.names[index].imageUrl[0] = this.names[index].imageUrl[1]
         },
         mouseOut: function (name){
             let type = name.type
