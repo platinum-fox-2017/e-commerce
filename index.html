@@ -5,7 +5,8 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
     <title>e-commerce</title>
-
+<!-- animate css -->
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/animate.css@3.5.2/animate.min.css">
 <!-- bootstrap -->
     <link href="//netdna.bootstrapcdn.com/bootstrap/3.2.0/css/bootstrap.min.css" rel="stylesheet" id="bootstrap-css">
     <script src="//netdna.bootstrapcdn.com/bootstrap/3.2.0/js/bootstrap.min.js"></script>
@@ -148,7 +149,7 @@
                                     <td data-th="Subtotal" class="text-center">{{dollarSign(setSubtotal(items.type, items.quantity))}}</td>
                                     <td class="actions" data-th="">
                                         <button class="btn btn-info btn-sm"><i class="fa fa-refresh"></i></button>
-                                        <button class="btn btn-danger btn-sm" @click='removeItem(items.type)'><i class="fa fa-trash-o"></i></button>								
+                                        <button class="btn btn-danger btn-sm" @click='removeItem(items.type, items.quantity)'><i class="fa fa-trash-o"></i></button>								
                                     </td>
                                 </tr>
                             </tbody>
@@ -190,17 +191,21 @@
                 <div class="column col-2 col-md-6 col-sm-12" v-for="name in names">
                         <div class="card">
                             <div class="card-image">
-                                <img :src="name.imageUrl[0]" @onmouseover="name.imageUrl[1]" class="img-responsive">
+                                <img v-if="showStock(name.type) == 0" :src="name.imageUrl[0]" class="img-responsive" style="opacity: 0.5">
+                                <img v-else :src="name.imageUrl[0]" onmouseover="mouseOver(name)" @mouseout="mouseOut(name)" class="img-responsive">
+                                <!-- <img :src="name.imageUrl[0]" @mouseover="mouseOver(name)" @mouseout="mouseOut(name)" class="img-responsive"> -->
                                 <!-- <img class="img-responsive" :src="name.imageUrl[0]" @mouseover.native="this.src=''" > -->
                             </div>
                             <div class="card-header">
                                 <div class="card-title h5">{{name.name}}</div>
                                 <div class="card-subtitle text-gray">{{name.type}}</div>
                                 <div class="card-subtitle text-gray">{{dollarSign(name.price)}}</div>
+                                <p v-model="">Items left in Stock: {{showStock(name.type)}}</p>
                             </div>
                             <div class="card-body">{{limitDesc(name.description)}}</div>
                             <div class="card-footer">
-                                <button class="btn btn-primary" @click="addToCart(name.name, name.type, name.price, name.imageUrl[0])">Buy</button>
+                                <button v-if="showStock(name.type) > 0"class="btn btn-primary animate pulse" @click="addToCart(name.name, name.type, name.price, name.imageUrl[0])">Buy</button>
+                                <button v-else class="btn btn-error">Sold Out</button>
                             </div>
                         </div>
                 </div>

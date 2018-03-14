@@ -96,8 +96,6 @@ new Vue({
             }
             this.carts.push(obj)
             this.reduceStock(type)
-            console.log(this.names)
-            // console.log(this.carts)
         },
         subtotal: function (){
             console.log(this.carts.quantity)
@@ -116,13 +114,35 @@ new Vue({
             }
             return total
         },
-        removeItem: function(type){
-            let index = this.carts.map(item => item.type).indexOf(type)
-            this.carts.splice(index, 1)
+        removeItem: function(type, quantity){
+            let indexProduct = this.names.map(item => item.type).indexOf(type)
+            this.names[indexProduct].stock += quantity
+
+            let indexCart = this.carts.map(item => item.type).indexOf(type)
+            this.carts.splice(indexCart, 1)
         },
         reduceStock: function (type) {
-            let index = this.carts.map(item => item.type).indexOf(type)
+            let index = this.names.map(item => item.type).indexOf(type)
             this.names[index].stock -= 1
+        },
+        showStock: function (type){
+            let index = this.names.map(item => item.type).indexOf(type)
+            return this.names[index].stock
+        },
+        mouseOver: function (name){
+            let type = name.type
+            // console.log(type)
+            // console.log('halo')
+            let index = this.names.map(item => item.type).indexOf(type)
+            // console.log(index)
+            // console.log(this.names)
+            // console.log(this.names[index].imageUrl[1])
+            return this.names[index].imageUrl[1]
+        },
+        mouseOut: function (name){
+            let type = name.type
+            let index = this.names.map(item => item.type).indexOf(type)
+            return this.names[index].imageUrl[1]
         }
     },
     computed: {
