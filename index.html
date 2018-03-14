@@ -5,6 +5,7 @@
     <meta charset="utf-8">
     <title>Faduino</title>
     <link rel="stylesheet" href="./style.css">
+    <link rel="icon" href="Assets/LOGO FM 2 copy emoji.png" >
     <!-- Latest compiled and minified CSS -->
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
     <link href="https://maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css" rel="stylesheet" integrity="sha384-wvfXpqpZZVQGK6TAh5PVlGOfQNHSoD2xbE+QkPxCAFlNEevoEH3Sl0sibVcOQVnN" crossorigin="anonymous">
@@ -12,23 +13,32 @@
 
 <body>
     <div id = "app">
-    <nav id="global-nav" class="navbar fixed-top navbar-expand-lg">
+
+    <!--  NAVIGATION BAR -->
+    <nav id="global-nav" class="navbar fixed-top navbar-expand-md">
+        <!--  LOGO ON NAVIGATION BAR -->
         <a id="site-title" class="navbar-brand" href="#">
            <img id="title-image" src="Assets/arudinoLogo White.png" class="d-inline-block align-top" alt="">
         </a>
-        <button id="btn-collapse" class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
-            <span class="navbar-toggler-icon"></span>
+
+        <!--  TOGGLE COLLAPSE BUTTON -->
+        <button id="btn-collapse" class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbar-collapse">
+            <span class="navbar-toggler-icon">&#9776;</span>
+
         </button>
 
-        <div class="collapse navbar-collapse" id="navbarSupportedContent">
+
+        <div class="collapse navbar-collapse" id="navbar-collapse">
             <ul id="navbar-header" class="navbar-nav mr-auto">
                 <li class="nav-item active">
                     <a class="nav-link" href="#">Home</a>
                 </li>
                 <li id="dropdown" class="nav-item dropdown">
-                    <a id="dropbtn" class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+
+                    <a id="dropbtn" class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-toggle="dropdown">
                       Products
                     </a>
+
                     <div id="dropdown-content" class="dropdown-menu" aria-labelledby="navbarDropdown">
                         <a class="dropdown-item" href="#">New Products</a>
                         <a class="dropdown-item" href="#">Special Offers</a>
@@ -39,9 +49,9 @@
 
             </ul>
 
-            <form class="form-inline my-2 my-lg-0">
-                <input id="search-bar" class="form-control mr-sm-2" type="search" placeholder="Search.." aria-label="Search">
-                <button class="btn btn-search my-2 my-sm-0" type="submit"><i class="fa fa-search"></i></button>
+            <form class="form-inline">
+                <input id="search-bar" class="form-control" type="search" placeholder="Search.." aria-label="Search">
+                <button class="btn btn-search" type="submit"><i class="fa fa-search"></i></button>
             </form>
 
             <ul class="nav navbar-nav">
@@ -53,7 +63,9 @@
                 </li>
 
             </ul>
-            <!-- </div> -->
+            </div>
+
+
     </nav>
 
 
@@ -86,7 +98,7 @@
                                     <td data-th="Product">
                                         <div class="row" >
                                             <div class="col-sm-4 hidden-xs d-none d-lg-block">
-                                                <img :src="itemCart.imageUrl" width=100; alt="..." class="img-responsive" />
+                                                <img :src="itemCart.imageUrl" width=100; alt="imageCart" class="img-responsive" />
                                             </div>
                                             <div class="col-sm-8">
                                                 <h6 class="nomargin">{{itemCart.name}}</h6>
@@ -95,12 +107,12 @@
                                     </td>
                                     <td data-th="Price">{{pricePrint(itemCart.price)}}</td>
                                     <td data-th="Quantity">
-                                        <input v-model="itemCart.quantity" type="number" class="form-control text-center">
+                                        <input v-model="itemCart.quantity" type="number" class="form-control text-center" min="1" :max="findStock(itemCart.id)">
                                     </td>
                                     <td data-th="Subtotal" class="text-center">{{pricePrint(setSubtotal(itemCart.id, itemCart.quantity))}}</td>
                                     <td class="actions" data-th="">
                                         <button class="btn btn-info btn-sm"><i class="fa fa-refresh"></i></button>
-                                        <button class="btn btn-danger btn-sm"><i class="fa fa-trash-o"></i></button>
+                                        <button @click="deleteFromCart(itemCart.id)" class="btn btn-danger btn-sm"><i class="fa fa-trash-o"></i></button>
                                     </td>
                                 </tr>
                             </tbody>
@@ -110,7 +122,7 @@
                                     <td><a href="#" class="btn btn-warning"><i class="fa fa-angle-left"></i> Continue Shopping</a></td>
                                     <td colspan="2" class="hidden-xs"></td>
                                     <td class="hidden-xs text-center"><strong>Total {{pricePrint(setTotalPrice())}}</strong></td>
-                                    <td><a href="#" class="btn btn-success btn-block">Checkout <i class="fa fa-angle-right"></i></a></td>
+                                    <td><a class="btn btn-success btn-block" @click="reupdateStock()">Checkout <i class="fa fa-angle-right"></i></a></td>
                                 </tr>
                             </tfoot>
                         </table>
@@ -161,7 +173,9 @@
 
                     <div class="card-image">
                         <img class="card-img-top" :src="item.imageUrl" alt="Card image cap">
-                        <p id="stocks" class=" btn btn-default card-text text-md-right small">Stocks: {{item.stock}}</p>
+                        <p id="stock-empty"  v-if="item.stock==0" class=" btn btn-default card-text text-md-right small">SOLD OUT</p>
+                        <p id="stocks" v-if="item.stock>0" class=" btn btn-default card-text text-md-right small">Stocks: {{item.stock}}</p>
+
 
                         <div class="overlay d-none d-md-block">
                             <div class="text">

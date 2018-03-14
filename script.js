@@ -70,7 +70,12 @@ var app = new Vue({
                 stock: 5
             },
         ],
-        itemsCart: []
+        itemsCart: [],
+        prevStock: []
+    },
+    created: function(){
+        this.prevStock = this.itemsList.map(val => val.stock);
+        console.log(`Previous Stock: ${this.prevStock}`)
     },
     methods: {
         pricePrint: function(price){
@@ -95,7 +100,8 @@ var app = new Vue({
                 this.itemsCart[index].quantity++;
                 this.itemsCart[index].subtotal = this.itemsCart[index].quantity*this.itemsCart[index].price;
             }
-            this.itemsList[indexStock].stock--;
+            this.updateStock(obj.id, 1);
+            // this.itemsList[indexStock].stock--;
 
         },
         calculateTotal: function(price, quant){
@@ -107,14 +113,14 @@ var app = new Vue({
             };
         },
         setSubtotal: function(id,quantity){
+            this.updateStock(id,quantity);
             let index = this.itemsCart.map(val => val.id).indexOf(id);
             this.itemsCart[index].subtotal = Number(quantity) * Number(this.itemsCart[index].price);
-
             return this.itemsCart[index].subtotal;
         },
         updateStock: function(id,quantity){
             let indexStock = this.itemsList.map(val => val.id).indexOf(id);
-            // this.itemsList[indexStock].stock+=quantity;
+            this.itemsList[indexStock].stock = this.prevStock[indexStock] - quantity;
         },
         setTotalPrice: function(){
             this.totalPrice = this.itemsCart.reduce((tot,val) => {
@@ -127,31 +133,26 @@ var app = new Vue({
                 return tot+Number(val.quantity);
             },0)
             return this.total;
+        },
+        reupdateStock: function () {
+            this.prevStock = this.itemsList.map(val => val.stock);
+            this.itemsCart = [];
+        },
+        findStock: function(id) {
+            let indexStock = this.itemsList.map(val => val.id).indexOf(id);
+            return this.prevStock[indexStock];
+        },
+        deleteFromCart(id) {
+            let index = this.itemsCart.map(val => val.id).indexOf(id);
+            this.itemsCart.splice(index,1);
+            this.updateStock(id,0);
         }
     },
     computed:{
 
     },
     watch: {
-        // itemsCart: {
-        //     handler: function(value) {
-        //         alert(JSON.stringify(value))
-        //
-        //     },
-        //     deep: true
-            // handler (val) {
-            //     this.itemsCart.map(item => {
-            //         item.subtotal = item.quantity*item.price;
-            //         return item;
-            //     });
-                // alert("tes")
 
-                // this.total = this.itemsCart.reduce((acc, val) => {
-                //     return acc+Number(val.subtotal);
-                // });
-            // },
-            // deep: true
-        // },
     }
 
 })
