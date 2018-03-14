@@ -7,10 +7,10 @@ Vue.use(Vuex)
 export default new Vuex.Store({
   state: {
     forSale: [
-      { invId: 1, name: 'Gergaji Mesin', image: '//placehold.it/200', price: 1000000 },
-      { invId: 2, name: 'Mesin Las Listrik', image: '//placehold.it/200', price: 900000 },
-      { invId: 3, name: 'Gerinda', image: '//placehold.it/200', price: 959000 },
-      { invId: 4, name: 'Bor Tangan', image: '//placehold.it/200', price: 9784000 }
+      { invId: 1, name: 'Gergaji Mesin', image: '//placehold.it/200', price: 1000000, stock: 21 },
+      { invId: 2, name: 'Mesin Las Listrik', image: '//placehold.it/200', price: 900000, stock: 21 },
+      { invId: 3, name: 'Gerinda', image: '//placehold.it/200', price: 959000, stock: 21 },
+      { invId: 4, name: 'Bor Tangan', image: '//placehold.it/200', price: 9784000, stock: 21 }
     ],
     inCart: []
   },
@@ -23,9 +23,11 @@ export default new Vuex.Store({
     }
   },
   mutations: {
-    ADD_TO_CART (state, id) { state.inCart.push(id) }
+    ADD_TO_CART (state, id) { state.inCart.push(id) },
+    REMOVE_FROM_CART (state, index) { state.inCart.splice(index, 1) }
   },
   actions: {
-    addToCart (context, id) { context.commit('ADD_TO_CART', id) }
+    addToCart (context, id) { context.commit('ADD_TO_CART', id) },
+    removeFromCart (context, index) { context.commit('REMOVE_FROM_CART', index) }
   }
 })

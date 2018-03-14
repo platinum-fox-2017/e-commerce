@@ -1,6 +1,7 @@
 <template>
   <div id="app" class="container my-5">
     <Header :total="inCart.length"/>
+    <Cart/>
     <br>
     <div class="row">
       <Item
@@ -9,15 +10,16 @@
         :id="item.invId"
         :name="item.name"
         :image="item.image"
-        :price="item.price"/>
+        :price="item.price"
+        :stock="item.stock"/>
     </div>
-    {{inCart}}
   </div>
 </template>
 
 <script>
 import Item from '@/components/Item.vue'
 import Header from '@/components/Header.vue'
+import Cart from './Cart.vue'
 export default {
   name: 'app',
   computed: {
@@ -25,7 +27,7 @@ export default {
     inCart () { return this.$store.getters.inCart } // menunjukkan status dari inCart di store.js
   },
   components: {
-    Item, Header // components yang dikirim ke index.html
+    Item, Header, Cart // components yang dikirim ke index.html
   }
 }
 </script>

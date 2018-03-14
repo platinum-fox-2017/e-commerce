@@ -6,9 +6,6 @@
 
   <!-- Links -->
   <ul class="navbar-nav">
-    <li>
-        <button class="btn btn-primary">Cart {{total}} Items</button>
-    </li>
     <!-- Dropdown -->
     <li class="nav-item dropdown">
       <a class="nav-link dropdown-toggle" href="#" id="navbardrop" data-toggle="dropdown">
