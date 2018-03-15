@@ -7,9 +7,9 @@
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm"
         crossorigin="anonymous">
+    <link href="https://fonts.googleapis.com/css?family=Lato" rel="stylesheet">
     <link rel="stylesheet" href="assets/styles.css">
-    <script src="https://unpkg.com/vue@2.5.15/dist/vue.js"></script>
-    <!-- <script src="https://cdn.jsdelivr.net/npm/vue@2.5.15/dist/vue.js"></script> -->
+    <link rel="shortcut icon" href="assets/img/favicon.ico" type="image/x-icon">
     <title>Qpisang</title>
 </head>
 
@@ -63,74 +63,45 @@
         </div>
         <!-- End of Modal -->
 
-        <header>
-            <nav class="navbar navbar-expand-lg navbar-light bg-light ">
-                <a class="navbar-brand " href="# ">QPisang</a>
-                <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarTogglerDemo01" aria-controls="navbarTogglerDemo01"
-                    aria-expanded="false" aria-label="Toggle navigation">
-                    <span class="navbar-toggler-icon"></span>
-                </button>
-                <div class="collapse navbar-collapse " id="navbarTogglerDemo01">
-                    <form class="form-inline my-2 my-lg-0 ">
-                        <input class="search form-control mr-sm-2 " type="search " placeholder="Cari produk
-                                " aria-label="Search ">
-                        <button class="search btn btn-outline-success my-2 my-sm-0 " type="submit ">Search</button>
-                    </form>
-                    <!-- Mobile Navigation -->
-                    <div class="d-block d-md-block d-lg-none ">
-                        <ul class="nav navbar-nav navbar-right ">
-                            <li class="text-center " style="padding:8px ">
-                                <a href="# " class="redirect-link " style="padding:15px ">DAFTAR</a>
-                            </li>
-                            <li class="text-center " style="padding:8px ">
-                                <a href="# " class="redirect-link " style="padding:15px ">MASUK</a>
-                            </li>
-                            <li class="text-center " style="padding:8px ">
-                                <a data-toggle="modal" data-target="#exampleModal">
-                                    <i class="fas fa-shopping-cart "></i>
-                                </a>
-                            </li>
-                        </ul>
-                    </div>
-                    <!-- end of Mobile Navigation -->
-                </div>
-                <!-- Desktop Navigation -->
-                <div class="d-none d-lg-block " style="float: right; ">
+        <!-- Navbar -->
+        <nav id="main-header" class="navbar navbar-expand-lg navbar-light bg-light">
+            <button class="navbar-toggler border-0" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent"
+                aria-expanded="false" aria-label="Toggle navigation">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+            <a class="navbar-brand d-lg-none navbar-brand-mobile">QPisang</a>
+            <a class="navbar-brand d-none d-lg-block">QPisang</a>
+            <button class="navbar-toggler border-0" type="button">
+                <a class="d-lg-none" data-toggle="modal" data-target="#exampleModal">
+                    <i class="fas fa-shopping-cart "></i>
+                </a>
+            </button>
+
+            <div class="collapse navbar-collapse" id="navbarSupportedContent">
+                <form class="form-inline my-2 my-lg-0 ">
+                    <input class="search form-control mr-sm-2 " type="search " placeholder="Cari produk " aria-label="Search ">
+                    <button class="search btn btn-outline-success my-2 my-sm-0 " type="submit ">Search</button>
+                </form>
+                <div class="d-block d-md-block d-lg-none ">
                     <ul class="nav navbar-nav navbar-right ">
-                        <li>
+                        <li class="text-center " style="padding:8px ">
                             <a href="# " class="redirect-link " style="padding:15px ">DAFTAR</a>
                         </li>
-                        <li>
+                        <li class="text-center " style="padding:8px ">
                             <a href="# " class="redirect-link " style="padding:15px ">MASUK</a>
-                        </li>
-                        <li>
-                            <a data-toggle="modal" data-target="#exampleModal">
-                                <i class="fas fa-shopping-cart "></i>
-                            </a>
                         </li>
                     </ul>
                 </div>
-                <!-- End of Desktop Navigation -->
-            </nav>
-        </header>
+            </div>
+        </nav>
+        <!-- Navbar -->
+
         <!-- Categories Header -->
-        <div class="main-category " style="background-color:#fff ">
+        <div class="main-category ">
             <div class=" container ">
-                <ul style="overflow:auto;margin: 0;padding: 0;white-space: nowrap; ">
-                    <li style="display: inline-block;padding: 8px 0; ">
-                        <a href=" " style="margin-right: 30px; ">PRIA</a>
-                    </li>
-                    <li style="display: inline-block;padding: 8px 0; ">
-                        <a href=" " style="margin-right: 30px; ">WANITA</a>
-                    </li>
-                    <li style="display: inline-block;padding: 8px 0; ">
-                        <a href=" " style="margin-right: 30px; ">JAM</a>
-                    </li>
-                    <li style="display: inline-block;padding: 8px 0; ">
-                        <a href=" " style="margin-right: 30px; ">FLASH SALE</a>
-                    </li>
-                    <li style="display: inline-block;padding: 8px 0; ">
-                        <a href=" " style="margin-right: 30px; ">FAVORITE</a>
+                <ul class="list-categories">
+                    <li v-for="category in categories ">
+                        <a v-bind:href=category.link>{{category.name}}</a>
                     </li>
                 </ul>
             </div>
@@ -164,22 +135,10 @@
         </div>
         <div class="container " style="padding-top:15px; ">
             <div class="row " style="border: 1px solid #d9d9d9;background: #fff; ">
-                <div class="col-md-4 ">
+                <div class="col-md-4 " v-for="tagline in webtaglines">
                     <div class="commerce-tagline ">
-                        <h3>Produk Unik dan Eksklusif</h3>
-                        <p class="card-text ">Pembuatan secara manual satu persatu.</p>
-                    </div>
-                </div>
-                <div class="col-md-4 ">
-                    <div class="commerce-tagline ">
-                        <h3>Dukung Produk Indonesia</h3>
-                        <p class="card-text ">Beli langsung dari para pengrajin lokal.</p>
-                    </div>
-                </div>
-                <div class="col-md-4 ">
-                    <div class="commerce-tagline ">
-                        <h3>Transaksi Aman dan Mudah</h3>
-                        <p class="card-text ">Jaminan uang kembali jika rusak/batal.</p>
+                        <h3>{{tagline.title}}</h3>
+                        <p class="card-text ">{{tagline.description}}</p>
                     </div>
                 </div>
             </div>
@@ -191,20 +150,21 @@
             <div class="row ">
                 <div class="col-md-3 " v-for="item in items ">
                     <div class="card item ">
-                        <img class="card-img-top " v-bind:src="item.image ">
+                        <img class="card-img-top img-fluid" v-bind:src="item.image ">
                         <div class="card-body item-body ">
                             <span class="item-name card-title ">{{item.name}}</span>
                             <br/>
-                            <span class="item-price ">{{item.price}}</span>
+                            <span class="item-price ">{{PrintPrice}}</span>
                         </div>
-                        <button class="btn btn-light add-to-cart " type="button" aria-expanded="false
-                                " aria-controls="collapseExample " v-on:click='addToCart(item)'>
+                        <button class="btn btn-light add-to-cart " type="button " aria-expanded="false
+                        " aria-controls="collapseExample " v-on:click='addToCart(item)'>
                             <i class="fas fa-shopping-cart ">Add To Cart</i>
                         </button>
                     </div>
                 </div>
             </div>
         </div>
+        <div class="footer-top"></div>
         <div class="footer-bottom " style="padding:20px;background-color:#fff ">
             <div class="container ">
                 <div class="row ">
@@ -222,6 +182,7 @@
     <link href="https://use.fontawesome.com/releases/v5.0.8/css/all.css " rel="stylesheet ">
     <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js " integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl "
         crossorigin="anonymous "></script>
+    <script src="https://unpkg.com/vue@2.5.15/dist/vue.js "></script>
     <script src="assets/vue.js "></script>
 </body>
 

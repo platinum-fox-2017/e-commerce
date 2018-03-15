@@ -1,6 +1,41 @@
 body {
     background-color: #f4f4f4;
+    font-family: 'Lato', sans-serif;
 }
+
+#main-header {
+    background-color: #fff;
+    border-bottom: 1px solid #ddd;
+}
+
+.navbar-brand-mobile {
+    left: 50%;
+    text-align: center;
+    margin: 0 auto;
+    display: block
+}
+
+.main-category {
+    background-color: #fff;
+}
+
+.list-categories {
+    overflow: auto;
+    margin: 0;
+    padding: 0;
+    white-space: nowrap;
+}
+
+.list-categories li {
+    display: inline-block;
+    padding: 8px 0;
+}
+
+.list-categories a {
+    margin-right: 30px;
+}
+
+/* Media Query */
 
 .card {
     margin-bottom: 20px;

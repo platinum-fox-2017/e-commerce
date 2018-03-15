@@ -27,11 +27,41 @@ var app = new Vue({
             image: 'assets/img/duke-city.jpg',
             sku: '0005'
         }],
+        categories: [{
+                name: 'PRIA',
+                link: '#pria'
+            },
+            {
+                name: 'WANITA',
+                link: '#wanita'
+            }, {
+                name: 'ANAK',
+                link: '#anak'
+            }, {
+                name: 'Rumah & Dekorasi',
+                link: '#rumah'
+            }, {
+                name: 'Pilihan Pisang',
+                link: '#pisang'
+            }
+        ],
+        webtaglines: [{
+            title: 'Produk Unik dan Eksklusif',
+            description: 'Pembuatan secara manual satu persatu.'
+        }, {
+            title: 'Dukung Produk Indonesia',
+            description: 'Beli langsung dari para pengrajin lokal.'
+        }, {
+            title: 'Transaksi Aman dan Mudah',
+            description: 'Jaminan uang kembali jika rusak/batal.'
+        }],
         carts: [],
         cartTotal: 0
     },
     computed: {
-
+        PrintPrice: function () {
+            return 'ssss'
+        }
     },
     methods: {
         addToCart: function (item) {
