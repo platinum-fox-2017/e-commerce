@@ -1,55 +1,9 @@
-body {
-background-color: whitesmoke
-}
-
-.navbar-brand {
-    color: #1C2841;
-}
-
-.img-fluid {
-    width: auto;
-    height: 240px;
-    margin: 0px auto;
-}
-
-#carouselExampleIndicators {
-    background-color: #1C2841
-}
-
-h1 {
-    font-family: monospace;
-    color: #1C2841;
-    text-align: center
-}
-
-nav {
-    font-family: Verdana;
-    background-color: whitesmoke
-}
-.menu {
-    color: #1C2841
-}
-
-#items {
-    background-color: white;
-    padding: 10px;
-}
-
-.card-body {
-    background-color: #1C2841;
-    color: white;
-}
-
-footer {
-    background-color: #1C2841;
-    color: white;
-}
-
-.jumbotron {
-    text-align: center
-}
-
 @import url(http://netdna.bootstrapcdn.com/font-awesome/4.0.3/css/font-awesome.min.css);
+
+h3{
+    font-family: Tahoma;
+}
+
 .col-item
 {
     border: 1px solid #E1E1E1;
