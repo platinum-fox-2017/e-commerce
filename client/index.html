@@ -14,6 +14,9 @@
       li {
         color: white
       }
+      .responsive-carousel {
+        height: 650px;
+      }
       @media only screen and (min-width: 320px) {
         h5 {
           font-size: 28px !important
@@ -28,6 +31,12 @@
       .card {
         margin-bottom: 15px;
       }
+
+      @media only screen and (max-width: 990px) {
+        .responsive-carousel {
+          height: initial;
+        }
+      }
     </style>
   </head>
   <body >
@@ -36,9 +45,6 @@
 
 
 <div class=""  id="app">
-
-
-
     <nav class="navbar navbar-expand-lg navbar navbar-dark bg-dark">
       <a class="navbar-brand" href="#">MyMarket</a>
       <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
@@ -75,10 +81,10 @@
       <li data-target="#carouselExampleIndicators" data-slide-to="1"></li>
       <li data-target="#carouselExampleIndicators" data-slide-to="2"></li>
     </ol>
-    <div class="carousel-inner">
+    <div class="carousel-inner responsive-carousel" >
       <div class="carousel-item active" >
         <img class="d-block w-100" src="img/vegetables.jpg" alt="First slide">
-        <div class="carousel-caption d-none d-md-block" style="height: 650px">
+        <div class="carousel-caption d-none d-md-block" >
           <h1>Fresh Food For a Better Life</h1>
           <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit.</p>
         </div>
@@ -122,70 +128,44 @@
         </div>
         <div class="col-md-8">
           <div class="jumbotron" style="background-color: dark">
-            <center>
-              <h1 id='demo'></h1>
-            </center>
+              <h1>Big sale</h1>
               <div class="row">
                 <div class="col-md-6" v-for="sale in sales">
-                  <div class="jumbotron" style="background-color: white	">
-                    <div class="text-center">
-                      <img :src="sale.urlImage" style="border-radius: 100%; width: 100px; height: 100px;" >
-                    </div>
-                    <h5 class="display-4">
-                      {{sale.title}} 
-                    </h5>
-                    <p class="lead">
-                      {{sale.message}}
-                    </p>
-                    <hr class="my-4">
-                    <p>
-                      {{sale.price}}$
-                    </p>
-                    <p class="lead">
-                      <button type="button" class="btn btn-primary" v-on:click="addToCart(sale.title,sale.urlImage,sale.message,sale.price)">Add to Cart</button>
-                    </p>
-                  </div>
+                  <component-two :sale="sale" @add-to-cart="addToCart"></component-two>
                 </div>
             </div>
           </div>
       </div>
-      <h1>
 
-      </h1>
+
       <div class="container" style="padding-top: 28px">
+
         <h1>Bestselling Items</h1>
         <div class="row">
             <div class="col-md-4" v-for="item in items">
-              <div class="card" style="width: 18rem;">
-                <img class="card-img-top" :src="item.urlImage" alt="Card image cap">
-                <div class="card-body">
-                  <h5 class="card-title">{{item.title}}</h5>
-                  <p class="card-text">{{item.message}}</p>
-                  <p class="card-text">{{item.price}}$</p>
-                  <button type="button" class="btn btn-primary" v-on:click="addToCart(item.title,item.urlImage,item.message,item.price)">Add to Cart</button>
-                </div>
-              </div>
+              <component-one :item="item" v-on:add-to-cart="addToCart"></component-one>
             </div>
         </div>
       </div>
     </div>
   </div>
+
   <div class="modal fade" id="exampleModalCenter" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
     <div class="modal-dialog modal-lg" role="document">
       <div class="modal-content">
         <div class="modal-header">
           <h5 class="modal-title" id="exampleModalLongTitle">Shopping Cart</h5>
+          <input type="text" name="" value="">
           <button type="button" class="close" data-dismiss="modal" aria-label="Close">
             <span aria-hidden="true">&times;</span>
           </button>
         </div>
+
         <div class="modal-body">
           <div class="card-body" v-for="cart in listCart">
             <div class="row">
               <div class="col-sm-2">
-
                 <img :src="cart.urlImage" alt="Avatar" style="border-radius: 100%; width: 100px; height: 100px" >
-
               </div>
               <div class="col-sm-2">
                 <h5 class="card-title">{{cart.title}}</h5>
@@ -206,8 +186,6 @@
                 </button>
               </div>
             </div>
-
-
           </div>
         </div>
         <div class="modal-footer">
@@ -221,189 +199,22 @@
 </div>
 
 
-
-
-
     <script src="https://code.jquery.com/jquery-3.2.1.slim.min.js" integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN" crossorigin="anonymous"></script>
     <script src="https://unpkg.com/sweetalert/dist/sweetalert.min.js"></script>
-    <script src="https://cdn.jsdelivr.net/npm/vue"></script>
+    <script src="https://unpkg.com/vue@2.5.16/dist/vue.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js" integrity="sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q" crossorigin="anonymous"></script>
     <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js" integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl" crossorigin="anonymous"></script>
-    <script>
+    <script src="js/component1.js" charset="utf-8"></script>
+    <script src="js/component2.js" charset="utf-8"></script>
+    <script src="js/script.js" charset="utf-8"></script>
 
-      const app = new Vue(({
-        el:'#app',
-        data: {
-          category: 'Market Category',
-          categories: [{
-            message: 'Fruit'
-          },{
-            message: 'Vegetable'
-          },{
-            message: 'Beverages'
-          },{
-            message: 'Bread/Bakery'
-          },{
-            message: 'Canned/Jarred Goods'
-          },{
-            message: 'Frozen Foods'
-          },{
-            message: 'Meat'
-          }],
-
-          items: [{
-            urlImage: 'img/3_3c56db34-c5c6-4ff1-b2c7-5cb0e3c710ea_grande.jpg',
-            title: 'Fruit A',
-            message: 'These are our fresh tomatoes from our beloved garden. Guaranteed fresh!',
-            price: 6
-          },{
-            urlImage: 'img/11_5674fc1f-11a0-4068-bc70-6d6835bc3a21_grande.jpg',
-            title: 'Fruit B',
-            message: `Some quick example text to build on the card title and make up the bulk of the card's content.`,
-            price: 9
-          },{
-            urlImage: 'img/12_grande.jpg',
-            title: 'Fruit C',
-            message: `Some quick example text to build on the card title and make up the bulk of the card's content.`,
-            price: 5
-          },{
-            urlImage: 'img/15_8fdea367-f778-4836-b1cb-54ef3e0c6f3b_grande.jpg',
-            title: 'Fruit D',
-            message: `Some quick example text to build on the card title and make up the bulk of the card's content.`,
-            price: 7
-          },{
-            urlImage: 'img/4_grande.jpg',
-            title: 'Fruit E',
-            message: `Some quick example text to build on the card title and make up the bulk of the card's content.`,
-            price: 10
-          },{
-            urlImage: 'img/abc.jpg',
-            title: 'Fruit F',
-            message: `Some quick example text to build on the card title and make up the bulk of the card's content.`,
-            price: 8
-          }],
-
-          sales: [{
-            urlImage: 'img/vinetoms.jpg',
-            title: 'Tomatoes',
-            message: 'These are our fresh tomatoes from our beloved garden. Guaranteed fresh!',
-            price: 3
-          },{
-            urlImage: 'img/lemon.jpg',
-            title: 'Lemonade',
-            message: `These are our fresh tomatoes from our beloved garden. Guaranteed fresh!`,
-            price: 3
-          },{
-            urlImage: 'img/cabe.jpg',
-            title: 'Chili',
-            message: `These are our fresh tomatoes from our beloved garden. Guaranteed fresh!`,
-            price: 3
-          },{
-            urlImage: 'img/daging.jpg',
-            title: 'Meat',
-            message: `These are our fresh tomatoes from our beloved garden. Guaranteed fresh!`,
-            price: 3
-          }],
-
-          listCart: []
-      },
-      methods: {
-        addToCart: function (data1,data2,data3,data4) {
-          swal("Hello!", `You just added ${data1} to your cart`, "success");
-          let first = false
-          let position
-          for (var i = 0; i < this.listCart.length; i++) {
-            if (this.listCart[i].title === data1) {
-              first = true
-              position = i
-            }
-          }
-          if (first) {
-            this.listCart[position].total = this.listCart[position].total + 1
-            this.listCart[position].price = this.listCart[position].price + data4
-          }
-          else {
-            var obj = {
-              title: data1,
-              urlImage: data2,
-              message: data3,
-              price: data4,
-              total: 1
-            }
-            this.listCart.push(obj)
-          }
-        },
-        reduce: function (name) {
-          for (var i = 0; i < this.listCart.length; i++) {
-            if (this.listCart[i].title === name) {
-              if (this.listCart[i].total > 1) {
-                let difference = this.listCart[i].price/this.listCart[i].total
-                this.listCart[i].total -= 1
-                this.listCart[i].price -= difference
-              }
-            }
-          }
-        },
-
-        add: function (name) {
-          for (var i = 0; i < this.listCart.length; i++) {
-            if (this.listCart[i].title === name) {
-              let difference = this.listCart[i].price/this.listCart[i].total
-                this.listCart[i].total += 1
-                this.listCart[i].price += difference
-            }
-          }
-        },
-
-        deleteData: function (name) {
-          for (var i = 0; i < this.listCart.length; i++) {
-            if (this.listCart[i].title === name) {
-              this.listCart.splice(i, 1)
-            }
-          }
-        }
-      }
-    }
-    ))
-
-    </script>
-    <script>
-
-var countDownDate = new Date("Mar 30, 2018 15:37:25").getTime();
-
-
-var x = setInterval(function() {
-
-
-    var now = new Date().getTime();
-
-
-    var distance = countDownDate - now;
-
-
-    var days = Math.floor(distance / (1000 * 60 * 60 * 24));
-    var hours = Math.floor((distance % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60));
-    var minutes = Math.floor((distance % (1000 * 60 * 60)) / (1000 * 60));
-    var seconds = Math.floor((distance % (1000 * 60)) / 1000);
-
-
-    document.getElementById("demo").innerHTML = 'BIG SALE TODAY <br>' + days + "d " + hours + "h "
-    + minutes + "m " + seconds + "s ";
-
-
-    if (distance < 0) {
-        clearInterval(x);
-        document.getElementById("demo").innerHTML = "EXPIRED";
-    }
-}, 1000);
-</script>
   </body>
   <footer class="mainfooter" role="contentinfo" style="background-color: #404040; padding-top:28px">
   <div class="footer-bottom">
     <div class="container">
       <div class="row">
         <div class="col-xs-12">
-          <p class="text-xs-center" style="color: white">&copy; Copyright 2016 - City of USA.  All rights reserved.</p>
+          <p class="text-xs-center" style="color: white">&copy; Copyright 2018 - Valensio Deva Prasetyo.  All rights reserved.</p>
         </div>
       </div>
     </div>
