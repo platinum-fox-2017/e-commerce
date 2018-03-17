@@ -53,6 +53,9 @@
     <div class="container">
       <div class="row">
         <div class="col-md-4 offset-md-4">
+          <div class="alert alert-danger" v-if="loginFail">
+            <b>Fail!</b> Wrong Credentials
+          </div>
           <div class="form-group">
             <label for="alamat">Username:</label>
             <input type="text" name="username" id="username" v-model="username" value="" class="form-control" />

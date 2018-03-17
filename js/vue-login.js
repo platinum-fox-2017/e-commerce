@@ -2,19 +2,22 @@ new Vue({
   el: '#app',
   data: {
     username: '',
-    password: ''
+    password: '',
+    loginFail: false,
   },
  created: function(){
     this.isLogin();
   },
   methods: {
     login: function(){
+      let app = this;
       request.post('/api/token',{username: this.username,password: this.password}).then(data =>{
-        console.log(data.data.token);
         localStorage.setItem('token',data.data.token);
 
       }).catch(err =>{
         console.log(err);
+        app.loginFail = true;
+        app.password = '';
       })
     },
     isLogin: function(){
