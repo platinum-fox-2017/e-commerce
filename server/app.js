@@ -14,9 +14,7 @@ var products = require('./routes/products');
 var app = express();
 
 mongoose.connect('mongodb://localhost/ecommerce');
-// view engine setup
-app.set('views', path.join(__dirname, 'views'));
-app.set('view engine', 'ejs');
+
 app.use(cors());
 
 // uncomment after placing your favicon in /public
@@ -48,7 +46,7 @@ app.use(function(err, req, res, next) {
 
   // render the error page
   res.status(err.status || 500).json({
-    err
+    message: err.message
 
   });
 });
