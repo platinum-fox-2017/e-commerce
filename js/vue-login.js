@@ -13,6 +13,7 @@ new Vue({
       let app = this;
       request.post('/api/token',{username: this.username,password: this.password}).then(data =>{
         localStorage.setItem('token',data.data.token);
+        window.location = '/admin/product.html'
 
       }).catch(err =>{
         console.log(err);
