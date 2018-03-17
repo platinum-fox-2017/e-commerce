@@ -1,49 +1,52 @@
-let carousel_banner = [
-  { imgUrl: './pictures/banners/g1-banner.jpg',
-    class: 'carousel-item active'
-  },
-  { imgUrl: './pictures/banners/g2-banner.jpg',
-    class: 'carousel-item'
-  },
-  {imgUrl: './pictures/banners/g3-banner.jpg',
-    class: 'carousel-item'
-  }
-]
+// let carousel_banner = [
+//   { imgUrl: './pictures/banners/g1-banner.jpg',
+//     class: 'carousel-item active'
+//   },
+//   { imgUrl: './pictures/banners/g2-banner.jpg',
+//     class: 'carousel-item'
+//   },
+//   {imgUrl: './pictures/banners/g3-banner.jpg',
+//     class: 'carousel-item'
+//   }
+// ]
+//
+// let promo_banners = [
+//   {
+//     imgUrl: './pictures/promo/promo_1.jpg'
+//   },
+//   {
+//     imgUrl: './pictures/promo/promo_1.jpg'
+//   },
+// ]
+//
+// let cakes = [
+//   {
+//     imgUrl: './pictures/cakes/thumb_1.jpg',
+//     title: 'Ombre Cake',
+//     price: 50
+//   },
+//   {
+//     imgUrl: './pictures/cakes/thumb_2.jpg',
+//     title: 'Korean Blossom',
+//     price: 60
+//   },
+//   {
+//     imgUrl: './pictures/cakes/thumb_3.jpg',
+//     title: 'Decorated Cupcake',
+//     price: 15
+//   },
+//   {
+//     imgUrl: './pictures/cakes/thumb_4.jpg',
+//     title: 'Special Cupcake',
+//     price: 20
+//   }
+// ]
 
-let promo_banners = [
-  {
-    imgUrl: './pictures/promo/promo_1.jpg'
-  },
-  {
-    imgUrl: './pictures/promo/promo_1.jpg'
-  },
-]
+let bannerUrl = 'http://ecommerce-server.teddydevstack.com/admin/carousel';
+let promoUrl = 'http://ecommerce-server.teddydevstack.com/admin/promo';
+let cakeUrl = 'http://ecommerce-server.teddydevstack.com/admin/cakes';
 
-let cakes = [
-  {
-    imgUrl: './pictures/cakes/thumb_1.jpg',
-    title: 'Ombre Cake',
-    price: '$50'
-  },
-  {
-    imgUrl: './pictures/cakes/thumb_2.jpg',
-    title: 'Korean Blossom',
-    price: '$60'
-  },
-  {
-    imgUrl: './pictures/cakes/thumb_3.jpg',
-    title: 'Decorated Cupcake',
-    price: '$15'
-  },
-  {
-    imgUrl: './pictures/cakes/thumb_4.jpg',
-    title: 'Special Cupcake',
-    price: '$20'
-  }
-]
-
-
-
+let carousel_data, promo_data, cake_data;
 
 Vue.component('carousel-comp', {
   template: `
@@ -108,7 +111,7 @@ Vue.component('product-comp', {
           <div class="row">
             <div class="col-sm-8">
               <h5 class="card-title margin-vert-3px font-1rem">{{cake.title}}</h5>
-              <h5 class="card-title margin-vert-3px font-1rem">{{cake.price}}</h5>
+              <h5 class="card-title margin-vert-3px font-1rem">$ {{cake.price}}</h5>
             </div>
             <div class="col-sm-4 flexbox justify align-items">
               <button class="btn btn-success" type="button" name="button" v-on:click='addItem(cake.title, cake.price, cake.imgUrl)'>Order</button>
@@ -121,6 +124,7 @@ Vue.component('product-comp', {
 
   `,
   props:['products'],
+
   methods: {
     addItem: function(title, price, url) {
       let newProduct = {
@@ -149,7 +153,7 @@ Vue.component('modal', {
       <img class="img-fluid" v-bind:src="item.imgUrl" alt="Card image cap">
       <div class="card-body">
         <h5 class="card-title">{{item.title}}</h5>
-        <h6 class="card-subtitle mb-2 text-muted">{{item.price}} - {{item.quantity}} Total: {{totalPrice(item.price, item.quantity)}}</h6>
+        <h6 class="card-subtitle mb-2 text-muted">$ {{item.price}} - {{item.quantity}} Total: {{totalPrice(item.price, item.quantity)}}</h6>
         <p class="card-text">Some quick example text to build on the card title and make up the bulk of the card's content.</p>
         <button class="btn btn-secondary" type="button" name="button" v-on:click='cartRemoveItem(item.title)'>-</button>
         <button class="btn btn-secondary" type="button" name="button" v-on:click='cartAddItem(item.title)'>+</button>
@@ -175,7 +179,7 @@ Vue.component('modal', {
     grandTotal: function() {
       let grandTotal = 0;
       this.cart.forEach(item => {
-        let priceNum = Number(item.price.slice(1));
+        let priceNum = Number(item.price);
         let total = item.quantity * priceNum;
         grandTotal += total;
       })
@@ -184,7 +188,7 @@ Vue.component('modal', {
   },
   methods: {
     totalPrice: function(price, quantity) {
-      let priceNum = Number(price.slice(1));
+      let priceNum = Number(price );
       let total = priceNum * quantity;
       return '$ '+ total;
     },
@@ -205,79 +209,101 @@ Vue.component('modal', {
   }
 })
 
-new Vue({
-  el: '#vueApp',
-  data: {
-    title: 'CakePlaza',
-    cart: [],
-    carousel_banner: carousel_banner,
-    promo_banners: promo_banners,
-    cakes: cakes
-  },
-  computed: {
-    cartSize : function() {
-      return this.cart.length;
-    },
-    grandTotal: function() {
-      let grandTotal = 0;
-      this.cart.forEach(item => {
-        let priceNum = Number(item.price.slice(1));
-        let total = item.quantity * priceNum;
-        grandTotal += total;
-      })
-      console.log(grandTotal);
-      return grandTotal;
-    }
-  },
-  methods: {
-    handleorder: function(ordering) {
-      let newProduct = ordering
-      // console.log(newProduct);
-      let search = this.cart.find(product => {
-        return product.title === newProduct.title;
-      })
-      if (search === undefined) {
-        this.cart.push(newProduct);
-        console.log(this.cart);
-        // console.log(this.cart[0]);
-      } else {
-        let index = this.cart.findIndex(data => {
-          return data.title == newProduct.title
-        });
-        // console.log(index);
-        this.cart[index].quantity += 1;
-        console.log(this.cart);
-      }
-    },
-    onAddItem: function(title) {
-      let index = this.cart.findIndex(data => {
-        return data.title == title
-      });
-      this.cart[index].quantity += 1;
-    },
-    onRemoveItem: function(title) {
-      let index = this.cart.findIndex(data => {
-        return data.title == title
-      });
-      if (this.cart[index].quantity === 1) {
-        if (!confirm('are you sure?')) {
-          return
+
+function getCarousel() {
+  return axios.get(bannerUrl);
+}
+function getPromo() {
+  return axios.get(promoUrl);
+}
+function getCakes() {
+  return axios.get(cakeUrl);
+}
+
+axios.all([getCarousel(),getPromo(),getCakes()])
+  .then(axios.spread(function (carousel, promo, cakes){
+    carousel_data = carousel.data.data;
+    promo_data = promo.data.data;
+    cake_data = cakes.data.data;
+    console.log(carousel_data);
+    console.log(promo_data);
+    console.log(cake_data);
+
+    new Vue({
+      el: '#vueApp',
+      data: {
+        title: 'CakePlaza',
+        cart: [],
+        carousel_banner: carousel_data,
+        promo_banners: promo_data,
+        cakes: cake_data
+      },
+      computed: {
+        cartSize : function() {
+          return this.cart.length;
+        },
+        grandTotal: function() {
+          let grandTotal = 0;
+          this.cart.forEach(item => {
+            let priceNum = Number(item.price.slice(1));
+            let total = item.quantity * priceNum;
+            grandTotal += total;
+          })
+          console.log(grandTotal);
+          return grandTotal;
+        }
+      },
+      methods: {
+        handleorder: function(ordering) {
+          let newProduct = ordering
+          // console.log(newProduct);
+          let search = this.cart.find(product => {
+            return product.title === newProduct.title;
+          })
+          if (search === undefined) {
+            this.cart.push(newProduct);
+            console.log(this.cart);
+            // console.log(this.cart[0]);
+          } else {
+            let index = this.cart.findIndex(data => {
+              return data.title == newProduct.title
+            });
+            // console.log(index);
+            this.cart[index].quantity += 1;
+            console.log(this.cart);
+          }
+        },
+        onAddItem: function(title) {
+          let index = this.cart.findIndex(data => {
+            return data.title == title
+          });
+          this.cart[index].quantity += 1;
+        },
+        onRemoveItem: function(title) {
+          let index = this.cart.findIndex(data => {
+            return data.title == title
+          });
+          if (this.cart[index].quantity === 1) {
+            if (!confirm('are you sure?')) {
+              return
+            }
+          }
+          this.cart[index].quantity -= 1;
+          if (this.cart[index].quantity === 0) {
+            this.cart.splice(index, 1);
+          }
+        },
+        onRemoveAll: function(title) {
+          if (!confirm('are you sure?')) {
+            return
+          }
+          let index = this.cart.findIndex(data => {
+            return data.title == title
+          });
+          this.cart.splice(index, 1);
         }
       }
-      this.cart[index].quantity -= 1;
-      if (this.cart[index].quantity === 0) {
-        this.cart.splice(index, 1);
-      }
-    },
-    onRemoveAll: function(title) {
-      if (!confirm('are you sure?')) {
-        return
-      }
-      let index = this.cart.findIndex(data => {
-        return data.title == title
-      });
-      this.cart.splice(index, 1);
-    }
-  }
 
-})
+    })
+
+  }))
