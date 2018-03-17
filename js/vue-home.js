@@ -24,7 +24,7 @@ for(var i = 0; i < 10; i++){
 new Vue({
   el: '#vue-app',
   data: {
-    products: products,
+    products: [],
     productCategory: productCategory,
     cartProducts: [],
     total: 0,
@@ -49,6 +49,9 @@ new Vue({
     search: function(newValue){
       this.searchingProduct();
     }
+  },
+  mounted(){
+    this.getProducts();
   },
   methods: {
     searchingProduct: function(){
@@ -104,6 +107,13 @@ new Vue({
       var index = this.cartProducts.findIndex(cart => cart.name == product.name);
       this.cartProducts.splice(index,1);
 
-    }
+    },
+    getProducts: function(){
+      request.get('/api/products').then(res =>{
+        this.products = res.data.data;
+      }).catch(err =>{
+        console.log(err);
+      });
+    },
   }
 })
