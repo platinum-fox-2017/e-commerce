@@ -30,7 +30,12 @@ new Vue({
       });
     },
     addProduct: function(){
-      request.post('/api/products',this.product).then(res =>{
+      const fileInput = document.querySelector( '#image' );
+      const formData = new FormData();
+      formData.append( 'image', fileInput.files[0] );
+      formData.append( 'name', this.product.name );
+      formData.append( 'price', this.product.price );
+      request.post('/api/products',formData,{ headers: {token: localStorage.token } }).then(res =>{
         this.products.push(res.data.data);
         this.clearForm();
       }).catch(err =>{
@@ -38,7 +43,7 @@ new Vue({
       });
     },
     deleteProduct: function(id){
-      request.delete(`/api/products/${id}`).then(res =>{
+      request.delete(`/api/products/${id}`,{ headers: {token: localStorage.token } }).then(res =>{
         this.getProducts();
         this.clearForm();
       }).catch(err =>{
@@ -46,7 +51,7 @@ new Vue({
       });
     },
     updateProduct: function(){
-      request.put(`/api/products/${this.product._id}/edit`,this.product).then(res =>{
+      request.put(`/api/products/${this.product._id}/edit`,this.product,{ headers: {token: localStorage.token } }).then(res =>{
         this.getProducts();
         this.clearForm();
       }).catch(err =>{

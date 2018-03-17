@@ -4,7 +4,7 @@ new Vue({
     username: '',
     password: ''
   },
-  mounted: function(){
+ created: function(){
     this.isLogin();
   },
   methods: {

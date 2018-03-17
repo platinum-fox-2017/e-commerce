@@ -16,10 +16,11 @@ module.exports = {
   },
   create: function (req,res) {
 
+    console.log(req.file)
       const input = {
         name: req.body.name,
         price: req.body.price,
-        image: req.body.image
+        image: req.file.cloudStoragePublicUrl
       }
      Product.create(input).then((data) =>{
        res.status(200).json({
