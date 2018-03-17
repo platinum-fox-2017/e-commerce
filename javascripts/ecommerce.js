@@ -45,30 +45,51 @@ let cakes = [
 
 
 
-Vue.component('carousel', {
+Vue.component('carousel-comp', {
   template: `
 
-  <div v-bind:class="banner.class" v-for='(banner, index) in carousel_banner' >
-    <img class="d-block w-100 bg-carousel" v-bind:src="banner.imgUrl" alt="First slide">
+  <div class="container-fluid bg-light full-width bottom-border">
+    <div id="item-of-the-day" class="carousel slide margin-0" data-ride="carousel">
+      <ol class="carousel-indicators">
+        <li data-target="#item-of-the-day" data-slide-to="0" class="active"></li>
+        <li data-target="#item-of-the-day" data-slide-to="1"></li>
+        <li data-target="#item-of-the-day" data-slide-to="2"></li>
+      </ol>
+        <div class="carousel-inner">
+          <div v-bind:class="banner.class" v-for='banner in banners' >
+            <img class="d-block w-100 bg-carousel" v-bind:src="banner.imgUrl" alt="First slide">
+          </div>
+        </div>
+      <a class="carousel-control-prev" href="#item-of-the-day" role="button" data-slide="prev">
+        <span class="carousel-control-prev-icon" aria-hidden="true"></span>
+        <span class="sr-only">Previous</span>
+      </a>
+      <a class="carousel-control-next" href="#item-of-the-day" role="button" data-slide="next">
+        <span class="carousel-control-next-icon" aria-hidden="true"></span>
+        <span class="sr-only">Next</span>
+      </a>
+    </div>
   </div>
+
   `,
-  props:['carousel-banner'],
+  props:['banners'],
   data: function() {
     return {
-      data: 'data'
+      data: ''
     }
   }
 })
 
-Vue.component('promo', {
+Vue.component('promo-comp', {
   template: `
 
   <div class="container-fluid full-width bottom-border flexbox flex-direct">
-    <div class="container-fluid margin-vert-30px flexbox  justify-around align-items" v-for='p_banner in promo_banners'>
+    <div class="container-fluid margin-vert-30px flexbox  justify-around align-items" v-for='p_banner in promos'>
       <img class=" margin-side-10px  img-fluid " width="490px" height="280px" v-bind:src="p_banner.imgUrl" alt="placeholder1">
     </div>
   </div>
   `,
+  props:['promos'],
   data: function() {
     return {
       promo_banners: promo_banners
@@ -76,12 +97,12 @@ Vue.component('promo', {
   }
 })
 
-Vue.component('product', {
+Vue.component('product-comp', {
   template: `
 
   <div class="container-fluid bg-white margin-vert-30px padding-bottom-30px bottom-border ">
     <div class=" row flex-simple margin-side-30px">
-      <div class="card card-width margin-vert-15px flex-items" v-for='(cake, index) in cakes' >
+      <div class="card card-width margin-vert-15px flex-items" v-for='cake in products' >
         <img class="card-img-top img-fluid" v-bind:src="cake.imgUrl" alt="Card image cap">
         <div class="card-body padding-vert-4px">
           <div class="row">
@@ -99,6 +120,19 @@ Vue.component('product', {
   </div>
 
   `,
+  props:['products'],
+  methods: {
+    addItem: function(title, price, url) {
+      let newProduct = {
+        title: title,
+        price: price,
+        imgUrl: url,
+        quantity: 1
+      };
+      this.$emit('order', newProduct)
+
+    }
+  },
   data: function() {
     return {
       cakes: cakes
@@ -108,20 +142,62 @@ Vue.component('product', {
 
 Vue.component('modal', {
   template: `
+  <div class="modal-body flexbox justify align-items flex-col">
 
-  <div class="card width" style="width: 100%;" v-for='item in cart'>
-    <img class="img-fluid" v-bind:src="item.imgUrl" alt="Card image cap">
-    <div class="card-body">
-      <h5 class="card-title">{{item.title}}</h5>
-      <h6 class="card-subtitle mb-2 text-muted">{{item.price}} - {{item.quantity}} Total: {{totalPrice(item.price, item.quantity)}}</h6>
-      <p class="card-text">Some quick example text to build on the card title and make up the bulk of the card's content.</p>
-      <button class="btn btn-secondary" type="button" name="button" v-on:click='cartRemoveItem(item.title)'>-</button>
-      <button class="btn btn-secondary" type="button" name="button" v-on:click='cartAddItem(item.title)'>+</button>
-      <button class="btn btn-danger" type="button" name="button" v-on:click='cartRemoveAll(item.title)'>Remove all</button>
+    <!-- card #1 -->
+    <div class="card width" style="width: 100%;" v-for='item in cart'>
+      <img class="img-fluid" v-bind:src="item.imgUrl" alt="Card image cap">
+      <div class="card-body">
+        <h5 class="card-title">{{item.title}}</h5>
+        <h6 class="card-subtitle mb-2 text-muted">{{item.price}} - {{item.quantity}} Total: {{totalPrice(item.price, item.quantity)}}</h6>
+        <p class="card-text">Some quick example text to build on the card title and make up the bulk of the card's content.</p>
+        <button class="btn btn-secondary" type="button" name="button" v-on:click='cartRemoveItem(item.title)'>-</button>
+        <button class="btn btn-secondary" type="button" name="button" v-on:click='cartAddItem(item.title)'>+</button>
+        <button class="btn btn-danger" type="button" name="button" v-on:click='cartRemoveAll(item.title)'>Remove all</button>
+      </div>
     </div>
+    <!-- grand total -->
+    <div class="card width" style="width: 100%;">
+      <div class="card-body">
+        <h5 class="card-title">Grand Total $ {{grandTotal}}</h5>
+      </div>
+    </div>
+
   </div>
 
+
   `,
+  props:['cart'],
+  computed: {
+    cartSize : function() {
+      return this.cart.length;
+    },
+    grandTotal: function() {
+      let grandTotal = 0;
+      this.cart.forEach(item => {
+        let priceNum = Number(item.price.slice(1));
+        let total = item.quantity * priceNum;
+        grandTotal += total;
+      })
+      return grandTotal;
+    }
+  },
+  methods: {
+    totalPrice: function(price, quantity) {
+      let priceNum = Number(price.slice(1));
+      let total = priceNum * quantity;
+      return '$ '+ total;
+    },
+    cartAddItem: function(title) {
+      this.$emit('add', title)
+    },
+    cartRemoveItem: function(title) {
+      this.$emit('reduce', title)
+    },
+    cartRemoveAll: function(title) {
+      this.$emit('remove', title)
+    }
+  },
   data: function() {
     return {
       cakes: cakes
@@ -154,13 +230,8 @@ new Vue({
     }
   },
   methods: {
-    addItem: function(title, price, url) {
-      let newProduct = {
-        title: title,
-        price: price,
-        imgUrl: url,
-        quantity: 1
-      };
+    handleorder: function(ordering) {
+      let newProduct = ordering
       // console.log(newProduct);
       let search = this.cart.find(product => {
         return product.title === newProduct.title;
@@ -178,18 +249,13 @@ new Vue({
         console.log(this.cart);
       }
     },
-    totalPrice: function(price, quantity) {
-      let priceNum = Number(price.slice(1));
-      let total = priceNum * quantity;
-      return '$ '+ total;
-    },
-    cartAddItem: function(title) {
+    onAddItem: function(title) {
       let index = this.cart.findIndex(data => {
         return data.title == title
       });
       this.cart[index].quantity += 1;
     },
-    cartRemoveItem: function(title) {
+    onRemoveItem: function(title) {
       let index = this.cart.findIndex(data => {
         return data.title == title
       });
@@ -203,7 +269,10 @@ new Vue({
         this.cart.splice(index, 1);
       }
     },
-    cartRemoveAll: function(title) {
+    onRemoveAll: function(title) {
+      if (!confirm('are you sure?')) {
+        return
+      }
       let index = this.cart.findIndex(data => {
         return data.title == title
       });

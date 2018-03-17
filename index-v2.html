@@ -1,0 +1,129 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Cake and Decoration</title>
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
+    <link rel="stylesheet" href="./style/boot.css">
+
+  </head>
+  <body>
+
+    <div id="vueApp">
+
+      <!-- navigation -->
+      <nav class="navbar bg-white no-top-padding bottom-border">
+        <nav class="navbar navbar-expand-lg navbar-light bg-white auto-margin side-border ">
+          <a class="navbar-brand" href="#">{{title}}</a>
+          <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+            <span class="navbar-toggler-icon"></span>
+          </button>
+
+          <div class="collapse navbar-collapse" id="navbarSupportedContent">
+            <ul class="navbar-nav mr-auto">
+              <li class="nav-item active">
+                <a class="nav-link" href="#">Home <span class="sr-only">(current)</span></a>
+              </li>
+              <li class="nav-item">
+                <a class="nav-link" href="#">Browse</a>
+              </li>
+              <li class="nav-item dropdown">
+                <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                  Categories
+                </a>
+                <div class="dropdown-menu" aria-labelledby="navbarDropdown">
+                  <a class="dropdown-item" href="#">Birthday Cake</a>
+                  <a class="dropdown-item" href="#">Buttercream Cake</a>
+                  <a class="dropdown-item" href="#">Wedding Cake</a>
+                  <div class="dropdown-divider"></div>
+                  <a class="dropdown-item" href="#">Custom Order</a>
+                </div>
+              </li>
+              <li class="nav-item">
+                <a class="nav-link" href="#">Classes</a>
+              </li>
+            </ul>
+            <form class="form-inline my-2 my-lg-0">
+              <button type="button" class="btn btn-info margin-side-5px" data-toggle="modal" data-target="#cartModal">
+                Cart ({{cartSize}})
+              </button>
+              <input class="form-control mr-sm-2 col-6" type="search" placeholder="Search" aria-label="Search">
+              <button class="btn btn-light my-2 my-sm-0" type="submit">Search</button>
+            </form>
+          </div>
+        </nav>
+      </nav>
+
+      <!-- carousel -->
+
+      <carousel-comp v-bind:banners="carousel_banner"></carousel-comp>
+
+
+      <!-- promos -->
+      <promo-comp v-bind:promos="promo_banners" ></promo-comp
+
+      <!-- product list -->
+      <product-comp v-bind:products="cakes" @order="handleorder"></product-comp>
+
+      <!-- footer -->
+      <div class="container-fluid bg-dark">
+        <div class="row bg-dark">
+          <div class="col-md-2 bg-dark p-2">
+          </div>
+          <div class="col-md-3 bg-dark px-2 py-5 py-5">
+            <h1 class="h6 text-muted">SUPPORT</h1>
+            <ul class="list-unstyled">
+              <li> <a class="text-muted" href="#">CONTACT US</a> </li>
+              <li> <a class="text-muted" href="#">DELIVERY</a> </li>
+              <li> <a class="text-muted" href="#">FAQ</a> </li>
+              <li> <a class="text-muted" href="#">ABOUT</a> </li>
+            </ul>
+          </div>
+          <div class="col-md-2 bg-dark p-2">
+          </div>
+          <div class="col-md-3 bg-dark px-2 py-5 py-5">
+            <h1 class="h6 text-muted">MY ACCOUNT</h1>
+            <ul class="list-unstyled">
+              <li> <a class="text-muted" href="#">LOGIN</a> </li>
+              <li> <a class="text-muted" href="#">ORDER HISTORY</a> </li>
+              <li> <a class="text-muted" href="#">TRACK ORDER</a> </li>
+              <li> <a class="text-muted" href="#">PROFILE</a> </li>
+            </ul>
+          </div>
+          <div class="col-md-2 bg-dark p-2">
+          </div>
+        </div>
+
+
+      </div>
+
+      <!-- Modal -->
+      <div class="modal fade" id="cartModal" tabindex="-1" role="dialog" aria-labelledby="cartModalTitle" aria-hidden="true">
+        <div class="modal-dialog" role="document">
+          <div class="modal-content">
+            <div class="modal-header">
+              <h5 class="modal-title" id="cartModalTitle">Cart</h5>
+              <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                <span aria-hidden="true">&times;</span>
+              </button>
+            </div>
+
+            <modal v-bind:cart="cart" @add="onAddItem" @reduce="onRemoveItem" @remove="onRemoveAll"></modal>
+            <div class="modal-footer">
+              <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+              <button type="button" class="btn btn-primary">Checkout</button>
+            </div>
+          </div>
+        </div>
+      </div>
+
+    </div>
+
+    <script src="https://code.jquery.com/jquery-3.2.1.slim.min.js" integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN" crossorigin="anonymous"></script>
+    <!-- <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js" integrity="sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q" crossorigin="anonymous"></script> -->
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js" integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl" crossorigin="anonymous"></script>
+    <script src="./lib/vue.js"></script>
+    <script src="./javascripts/ecommerce.js" ></script>
+  </body>
+</html>
