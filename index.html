@@ -56,55 +56,15 @@
       </nav>
 
       <!-- carousel -->
-      <div class="container-fluid bg-light full-width bottom-border">
-        <div id="item-of-the-day" class="carousel slide margin-0" data-ride="carousel">
-          <ol class="carousel-indicators">
-            <li data-target="#item-of-the-day" data-slide-to="0" class="active"></li>
-            <li data-target="#item-of-the-day" data-slide-to="1"></li>
-            <li data-target="#item-of-the-day" data-slide-to="2"></li>
-          </ol>
-          <div class="carousel-inner">
-            <div v-bind:class="banner.class" v-for='(banner, index) in carousel_banner' >
-              <img class="d-block w-100 bg-carousel" v-bind:src="banner.imgUrl" alt="First slide">
-            </div>
-          </div>
-          <a class="carousel-control-prev" href="#item-of-the-day" role="button" data-slide="prev">
-            <span class="carousel-control-prev-icon" aria-hidden="true"></span>
-            <span class="sr-only">Previous</span>
-          </a>
-          <a class="carousel-control-next" href="#item-of-the-day" role="button" data-slide="next">
-            <span class="carousel-control-next-icon" aria-hidden="true"></span>
-            <span class="sr-only">Next</span>
-          </a>
-        </div>
-      </div>
+
+      <carousel-comp v-bind:banners="carousel_banner"></carousel-comp>
+
 
       <!-- promos -->
-      <div class="container-fluid full-width bottom-border flexbox flex-direct">
-        <div class="container-fluid margin-vert-30px flexbox  justify-around align-items" v-for='p_banner in promo_banners'>
-          <img class=" margin-side-10px  img-fluid " width="490px" height="280px" v-bind:src="p_banner.imgUrl" alt="placeholder1">
-        </div>
-      </div>
+      <promo-comp v-bind:promos="promo_banners" ></promo-comp
 
       <!-- product list -->
-      <div class="container-fluid bg-white margin-vert-30px padding-bottom-30px bottom-border ">
-        <div class=" row flex-simple margin-side-30px">
-          <div class="card card-width margin-vert-15px flex-items" v-for='(cake, index) in cakes' >
-            <img class="card-img-top img-fluid" v-bind:src="cake.imgUrl" alt="Card image cap">
-            <div class="card-body padding-vert-4px">
-              <div class="row">
-                <div class="col-sm-8">
-                  <h5 class="card-title margin-vert-3px font-1rem">{{cake.title}}</h5>
-                  <h5 class="card-title margin-vert-3px font-1rem">{{cake.price}}</h5>
-                </div>
-                <div class="col-sm-4 flexbox justify align-items">
-                  <button class="btn btn-success" type="button" name="button" v-on:click='addItem(cake.title, cake.price, cake.imgUrl)'>Order</button>
-                </div>
-              </div>
-            </div>
-          </div>
-        </div>
-      </div>
+      <product-comp v-bind:products="cakes" @order="handleorder"></product-comp>
 
       <!-- footer -->
       <div class="container-fluid bg-dark">
@@ -148,30 +108,8 @@
                 <span aria-hidden="true">&times;</span>
               </button>
             </div>
-            <div class="modal-body flexbox justify align-items flex-col">
 
-
-              <!-- card #1 -->
-              <div class="card width" style="width: 100%;" v-for='item in cart'>
-                <img class="img-fluid" v-bind:src="item.imgUrl" alt="Card image cap">
-                <div class="card-body">
-                  <h5 class="card-title">{{item.title}}</h5>
-                  <h6 class="card-subtitle mb-2 text-muted">{{item.price}} - {{item.quantity}} Total: {{totalPrice(item.price, item.quantity)}}</h6>
-                  <p class="card-text">Some quick example text to build on the card title and make up the bulk of the card's content.</p>
-                  <button class="btn btn-secondary" type="button" name="button" v-on:click='cartRemoveItem(item.title)'>-</button>
-                  <button class="btn btn-secondary" type="button" name="button" v-on:click='cartAddItem(item.title)'>+</button>
-                  <button class="btn btn-danger" type="button" name="button" v-on:click='cartRemoveAll(item.title)'>Remove all</button>
-                </div>
-              </div>
-
-              <!-- grand total -->
-              <div class="card width" style="width: 100%;">
-                <div class="card-body">
-                  <h5 class="card-title">Grand Total $ {{grandTotal}}</h5>
-                </div>
-              </div>
-
-            </div>
+            <modal v-bind:cart="cart" @add="onAddItem" @reduce="onRemoveItem" @remove="onRemoveAll"></modal>
             <div class="modal-footer">
               <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
               <button type="button" class="btn btn-primary">Checkout</button>
@@ -185,7 +123,7 @@
     <script src="https://code.jquery.com/jquery-3.2.1.slim.min.js" integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN" crossorigin="anonymous"></script>
     <!-- <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js" integrity="sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q" crossorigin="anonymous"></script> -->
     <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js" integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl" crossorigin="anonymous"></script>
-    <script src="https://cdn.jsdelivr.net/npm/vue"></script>
-    <script src="./javascripts/vue.js" ></script>
+    <script src="./lib/vue.js"></script>
+    <script src="./javascripts/ecommerce.js" ></script>
   </body>
 </html>
