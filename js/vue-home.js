@@ -1,23 +1,9 @@
-var products = [];
-console.log(faker.commerce.department());
 var productCategory = [];
 
 for(var i = 0; i < 5; i++){
   var name = faker.commerce.department();
   productCategory.push({
     name
-  });
-}
-
-for(var i = 0; i < 10; i++){
-  var name = faker.commerce.productName();
-  var price = faker.commerce.price();
-  var image = faker.image.food();
-  
-  products.push({
-    name,
-    price,
-    image
   });
 }
 
@@ -64,7 +50,7 @@ new Vue({
         }
     },
     addProductCart: function(product){
-      var check = this.cartProducts.find(cart => cart.name == product.name);
+      var check = this.cartProducts.find(cart => cart._id == product._id);
       if(check){
         this.total = 0;
         this.cartProducts.map((cart) => {
@@ -82,6 +68,7 @@ new Vue({
 
       } else {
         this.cartProducts.push({
+          _id: product._id,
           name: product.name,
           price: product.price,
           image: product.image,
