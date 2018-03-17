@@ -27,11 +27,13 @@ new Vue({
     products: products,
     productCategory: productCategory,
     cartProducts: [],
-    total: 0
+    total: 0,
+    search: '',
+    searchData: []
   },
   watch: {
     cartProducts: {
-      handler(val){
+      handler(){
         var total = 0; 
         this.cartProducts.map(cart => {
           cart.subtotal = cart.quantity * cart.price;
@@ -44,8 +46,20 @@ new Vue({
       },
       deep: true
     },
+    search: function(newValue){
+      this.searchingProduct();
+    }
   },
   methods: {
+    searchingProduct: function(){
+      this.searchData = [];
+        for(var i = 0; i < this.products.length; i++){
+           var check = this.products[i].name.toLowerCase().search(this.search);
+           if(check >= 0){
+             this.searchData.push(this.products[i]);
+           }
+        }
+    },
     addProductCart: function(product){
       var check = this.cartProducts.find(cart => cart.name == product.name);
       if(check){

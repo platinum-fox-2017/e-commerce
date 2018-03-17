@@ -48,12 +48,8 @@
               My Cart ({{ cartProducts.length }})
             </a>
           </li>
-          <li class="nav-item">
-            <a class="nav-link" href="/login.html">Login</a>
-          </li>
         </ul>
         <form class="form-inline my-2 my-md-0">
-          <input class="form-control" type="text" placeholder="Search">
         </form>
       </div>
     </nav>
@@ -167,8 +163,15 @@
             </a>
           </div>
         <!-- end of carousel -->
+        <br>
+          <div class="input-group mb-3">
+            <div class="input-group-prepend">
+              <span class="input-group-text" id="basic-addon1"><i class="fa fa-search"></i></span>
+            </div>
+            <input type="text" class="form-control" v-model="search" placeholder="Search Product Here" aria-label="Search" aria-describedby="basic-addon1">
+          </div>
           <div class="row">
-            <div class="col-md-4" v-for="product in products">
+            <div class="col-md-4" v-for="product in products" v-if="search == ''">
               <div class="card"  >
                 <img class="card-img-top" :src="product.image" alt="Card image">
                 <div class="card-body">
@@ -177,6 +180,24 @@
                   <button type="button" href="#" class="btn btn-danger btn-sm btn-block" @click="addProductCart(product)"><i class="fa fa-shopping-cart"></i> Buy Now</button>
                   <a href="/detail.html" class="btn btn-warning btn-sm btn-block">Detail</a>
                 </div>
+              </div>
+            </div>
+            <!-- end card product -->
+            <div class="col-md-4" v-for="product in searchData" v-if="search != ''">
+              <div class="card"  >
+                <img class="card-img-top" :src="product.image" alt="Card image">
+                <div class="card-body">
+                  <h4 class="card-title">{{ product.name }}</h4>
+                  <p class="card-text">RP {{ product.price }}</p>
+                  <button type="button" href="#" class="btn btn-danger btn-sm btn-block" @click="addProductCart(product)"><i class="fa fa-shopping-cart"></i> Buy Now</button>
+                  <a href="/detail.html" class="btn btn-warning btn-sm btn-block">Detail</a>
+                </div>
+              </div>
+            </div>
+            <!-- end card product -->
+            <div class="col-md-12"  v-if="search != '' && searchData.length == 0">
+              <div class="alert alert-warning">
+                <b>"{{ search }}"</b> is not found
               </div>
             </div>
             <!-- end card product -->
