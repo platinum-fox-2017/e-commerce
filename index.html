@@ -173,27 +173,11 @@
           </div>
           <div class="row">
             <div class="col-md-4" v-for="product in products" v-if="search == ''">
-              <div class="card"  >
-                <img class="card-img-top" :src="product.image" alt="Card image">
-                <div class="card-body">
-                  <h4 class="card-title">{{ product.name }}</h4>
-                  <p class="card-text">RP {{ product.price }}</p>
-                  <button type="button" href="#" class="btn btn-danger btn-sm btn-block" @click="addProductCart(product)"><i class="fa fa-shopping-cart"></i> Buy Now</button>
-                  <a href="/detail.html" class="btn btn-warning btn-sm btn-block">Detail</a>
-                </div>
-              </div>
+              <card-product :product="product" v-on:add-to-cart="addProductCart(product)"></card-product>
             </div>
             <!-- end card product -->
             <div class="col-md-4" v-for="product in searchData" v-if="search != ''">
-              <div class="card"  >
-                <img class="card-img-top" :src="product.image" alt="Card image">
-                <div class="card-body">
-                  <h4 class="card-title">{{ product.name }}</h4>
-                  <p class="card-text">RP {{ product.price }}</p>
-                  <button type="button" href="#" class="btn btn-danger btn-sm btn-block" @click="addProductCart(product)"><i class="fa fa-shopping-cart"></i> Buy Now</button>
-                  <a href="/detail.html" class="btn btn-warning btn-sm btn-block">Detail</a>
-                </div>
-              </div>
+              <card-product :product="product" v-on:add-to-cart="addProductCart(product)"></card-product>
             </div>
             <!-- end card product -->
             <div class="col-md-12"  v-if="search != '' && searchData.length == 0">
@@ -308,6 +292,8 @@
     <script src="https://unpkg.com/axios/dist/axios.min.js"></script>
     <script src="https://unpkg.com/vue@2.5.15/dist/vue.js"></script>
     <script src="../js/axios-core.js" charset="utf-8"></script>
+    </script>
+    <script src="/js/vue-home-component.js">
     </script>
     <script src="/js/vue-home.js">
     </script>
