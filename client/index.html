@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>tokobuku.com</title>
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css">
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css">
+</head>
+<body>
+    <div id="body">
+        <header>
+            <nav class="navbar navbar-expand-lg fixed-top navbar-light bg-light">
+                <a class="navbar-brand">tokobuku.com</a>
+                <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarHeader" aria-controls="navbarHeader" aria-expanded="false" aria-label="Toggle navigation">
+                    <span class="navbar-toggler-icon"></span>
+                </button>
+                <list-menu
+                    :cart="cart"
+                ></list-menu>
+            </nav>
+            <carousel></carousel>
+        </header>
+        <cart-modal
+            :cart="cart"
+        ></cart-modal>
+        <div class="container" id="content">
+            <list-category
+                :categories="categories"
+                :items="items"
+                @add-item-to-cart="addToCart"
+            ></list-category>
+        </div>
+        
+        <tokobuku-footer></tokobuku-footer>
+    </div>
+</body>
+<script src="https://cdn.jsdelivr.net/npm/vue@2.5.15/dist/vue.js"></script>
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+<script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js"></script>
+<script src="https://unpkg.com/axios/dist/axios.min.js"></script>
+<script src="assets/js/axios-base-url.js"></script>
+
+<script src="components/menu.js"></script>
+<script src="components/carousel.js"></script>
+<script src="components/list-category.js"></script>
+<script src="components/list-item.js"></script>
+<script src="components/item.js"></script>
+<script src="components/footer.js"></script>
+<script src="components/cart-modal.js"></script>
+<script src="components/vue.js"></script>
+</html>
