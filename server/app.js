@@ -7,7 +7,7 @@ const mongoose = require('mongoose');
 const cors = require('cors');
 const port = process.env.PORT || 3000;
 
-mongoose.connect(`mongodb://${ process.env.DB_HOST }/${ process.env.DB_NAME }`, (err) => {
+mongoose.connect(`mongodb://${ process.env.DB_USER }@${ process.env.DB_HOST }/${ process.env.DB_NAME }`, (err) => {
     if(!err) console.log(`connect to database ${ process.env.DB_HOST }/${ process.env.DB_NAME }`);
 });
 
