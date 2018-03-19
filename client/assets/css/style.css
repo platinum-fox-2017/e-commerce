@@ -1,0 +1,30 @@
+@font-face {
+  font-family: judul;
+  src: url('../fonts/RammettoOne-Regular.ttf');
+}
+.card{
+  padding: 20px;
+  margin-top: 20px
+}
+body{
+  margin-bottom:100px;
+}
+footer{
+position: fixed;
+ left: 0;
+ bottom: 0;
+ width: 100%;
+ background-color: #333333;
+ color: white;
+}
+#sosmed{
+  color:white;
+  font-size:40px;
+  margin-right:10px;
+}
+#sosmed:hover {
+  color:aqua;
+}
+h5,h1,.st,h4{
+  font-family:judul;
+}
