@@ -15,11 +15,6 @@ export default new Router({
       component: Home
     },
     {
-      path: '/checkout',
-      name: 'Checkout',
-      component: Checkout
-    },
-    {
       path: '/add-product',
       name: 'AddProduct',
       component: AddProduct

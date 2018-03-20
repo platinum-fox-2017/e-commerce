@@ -31,11 +31,23 @@
                   </router-link>
                 </li>
               </ul>
+              <button id="fb-btn" class="btn btn-warning" @click="logoutFunc()">Logout</button> 
             </div>
+            
             <!-- Login -->
-            <button id="fb-btn" class="btn btn-primary" @click="login()" v-if="!token">Login with Facebook</button>
-            <button id="fb-btn" class="btn btn-primary" @click="logoutFunc()" v-else>Logout</button>
-            <!-- End of Login -->
+            <div class="btn-group" id="action"  v-if="!token">
+              <button id="fb-btn" class="btn btn-primary dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false"> Login with Facebook
+                <span class="caret"></span>
+              </button>
+              <ul class="dropdown-menu">
+                <li>
+                  <a href="#" @click.prevent="login('user')">Login as User</a>
+                </li>
+                <li>
+                  <a href="#" @click.prevent="login('admin')">Login as Admin</a>
+                </li>
+              </ul>
+            </div>
           </div>
 
         </div>
@@ -85,25 +97,41 @@
       start(){
         this.token = localStorage.getItem('tokenjwt')
       },
-      login() {
+      login(role) {
         let self = this
         FB.login((response) => {
           if(response.authResponse.accessToken){
-            self.$axios.get('http://localhost:3000/api/user/login',{
+            var apiUrl = 'http://localhost:3000/api/user/login'
+            if (role === 'admin') {
+              apiUrl = 'http://localhost:3000/api/user/login-admin'
+            }
+             self.$axios.get(apiUrl,{
               headers:{
                 fbtoken : response.authResponse.accessToken
               }
             })
-            .then(({data})=>{
-              self.token=data.token
+            .then(({ data })=>{
+              localStorage.setItem('user', JSON.stringify(data.user))
+              self.token = data.token
+              if (data.user.role === 'admin') {
+                console.log("data.user.role (admin) : ",data.user.role);
+                this.$store.dispatch('setRole', 'admin')
+                localStorage.setItem('role','admin')               
+              } else {
+                console.log("data.user.role (user) : ",data.user.role);
+                this.$store.dispatch('setRole', 'user')
+                localStorage.setItem('role','user')              
+              }
+              self.role = this.$store.getters.role
               localStorage.setItem('tokenjwt',data.token)
               console.log(data);
+              window.location.reload()
             })
             .catch(err=>{
               console.error(err);
               
             })
-          }else{
+          } else {
             console.log('not login');
           }
         }, {
@@ -115,6 +143,7 @@
         FB.logout(function (response) {
           self.token = null
           localStorage.clear()
+          window.location.reload()
         })
       }
     }

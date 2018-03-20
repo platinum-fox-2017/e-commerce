@@ -1,8 +1,9 @@
 const transaction = require('../models/transaction')
 
 module.exports = {
-  home: (req,res,next) =>{
-    transaction.find({
+  home: (req, res, next) =>{
+    transaction
+    .find({
       UserId: req.decoded._id
     })
     .populate(['UserId','ProductId'])

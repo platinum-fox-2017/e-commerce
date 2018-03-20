@@ -1,12 +1,13 @@
 const Product = require('../models/product')
 
 module.exports = {
-  home: (req,res,next) =>{
-    Product.find()
-      .then(products=>{
+  home: (req, res, next) => {
+    Product
+      .find()
+      .then(products => {
         res.json(products)
       })
-      .catch(err=>{
+      .catch(err => {
         next(err)
       })
   },
@@ -15,12 +16,12 @@ module.exports = {
     Product
       .create({
         name: String(req.body.name), 
-        price: String(req.body.price), 
-        stock: String(req.body.stock), 
+        price: Number(req.body.price), 
+        stock: Number(req.body.stock), 
         category: String(req.body.category), 
         imageURL: String(req.body.imageURL)
       })
-      .then( data => {
+      .then(data => {
         res.status(201).send({
           message: '1 product created',
           data
@@ -35,13 +36,13 @@ module.exports = {
     Product
       .findByIdAndUpdate(req.params.id,{
         name: String(req.body.name), 
-        price: String(req.body.price), 
-        stock: String(req.body.stock), 
+        price: Number(req.body.price), 
+        stock: Number(req.body.stock), 
         category: String(req.body.category), 
         imageURL: String(req.body.imageURL)
       })
-      .then( data => {
-        res.status(201).send({
+      .then(data => {
+        res.status(200).send({
           message: '1 product updated',
           data
         })
@@ -50,9 +51,10 @@ module.exports = {
         next(err);
       })  
   },
-  destroy: (req,res,next) => {
-    Product.findByIdAndRemove(req.params.id)
-      .then(product=>{
+  destroy: (req, res, next) => {
+    Product
+      .findByIdAndRemove(req.params.id)
+      .then(product => {
         res.json(product)
       })
       .catch(err=>{

@@ -22,13 +22,11 @@
               <input type="text" class="form-control" placeholder="Product Stock" v-model="product.stock">
             </div>
           </div>
-          <div class="form-group">
+          <div class="form-group" >
             <label for="" class="control-label col-xs-2">Category</label>
-            <div class="col-xs-8">
+            <div class="col-xs-8" >
               <select class="form-control" id="sel1" v-model="product.category">
-                <option>Coupe</option>
-                <option>Sedan</option>
-                <option>SUV</option>
+                <option v-for="category in categories" :key="category._id">{{ category.name }}</option>
               </select>
             </div>
           </div>
@@ -41,10 +39,14 @@
 
           <div class="form-group">
             <div class="col-xs-offset-2 col-xs-10">
-              <button type="submit" class="btn btn-primary" @click.prevent="addProduct">Add Product</button>
+              <button type="submit" class="btn btn-primary" @click.prevent="addProduct(product)">Add Product</button>
             </div>
           </div>
         </form>
+        <div class="col-md-offset-3 col-md-6">
+          <img :src="product.imageURL" align="middle" height="150px">
+        </div>
+    
       </div>
     </div>
   </div>
@@ -54,39 +56,17 @@
   import axios from 'axios'
 
   export default {
-    data() {
-      return {
-        product: {
-          name: '',
-          price: '',
-          stock: '',
-          category: '',
-          imageURL: ''
-        }
+    computed: {
+      product () {
+        return this.$store.getters.products
+      },
+      categories () {
+        return this.$store.getters.categories
       }
     },
     methods: {
-      addProduct() {
-        let newProduct = {
-          name: this.product.name,
-          price: this.product.price,
-          stock: this.product.stock,
-          category: this.product.category,
-          imageURL: this.product.imageURL
-        }
-        console.log(newProduct);
-        
-        axios.post('http://localhost:3000/api/product',newProduct,{
-          headers: {
-            tokenjwt: localStorage.getItem('tokenjwt')
-          }
-        })
-          .then(response => {
-            console.log(response);
-          })
-          .catch(err => {
-            console.log(err);
-          })
+      addProduct(product) {
+        this.$store.dispatch('addProduct', product)
       }
     }
   }

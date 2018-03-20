@@ -1,7 +1,7 @@
 const mongoose = require('mongoose');
 const Schema = mongoose.Schema;
 
-let productSchema = new Schema (
+let transactionSchema = new Schema (
     {
         UserId : {
           type: Schema.Types.ObjectId,
@@ -18,4 +18,4 @@ let productSchema = new Schema (
     }
 )
 
-module.exports = mongoose.model('transaction', productSchema)
+module.exports = mongoose.model('transaction', transactionSchema)

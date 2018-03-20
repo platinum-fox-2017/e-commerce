@@ -8,10 +8,6 @@ let productSchema = new Schema (
         stock: Number,
         category: String,
         imageURL: String,
-        created_date: {
-          type: Date,
-          default: Date.now 
-        }
     },
     {
         timestamps: true
