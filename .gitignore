@@ -1,0 +1,4 @@
+/server/node_modules
+/server/.env
+/server/package-lock.json
+/server/todo-fancy-108b384ed741.json
