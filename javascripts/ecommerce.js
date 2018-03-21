@@ -42,11 +42,6 @@
 //   }
 // ]
 
-let bannerUrl = 'http://ecommerce-server.teddydevstack.com/admin/carousel';
-let promoUrl = 'http://ecommerce-server.teddydevstack.com/admin/promo';
-let cakeUrl = 'http://ecommerce-server.teddydevstack.com/admin/cakes';
-
-let carousel_data, promo_data, cake_data;
 
 Vue.component('carousel-comp', {
   template: `
@@ -95,7 +90,7 @@ Vue.component('promo-comp', {
   props:['promos'],
   data: function() {
     return {
-      promo_banners: promo_banners
+      // promo_banners: promo_banners
     }
   }
 })
@@ -139,7 +134,7 @@ Vue.component('product-comp', {
   },
   data: function() {
     return {
-      cakes: cakes
+      // cakes: cakes
     }
   }
 })
@@ -204,10 +199,16 @@ Vue.component('modal', {
   },
   data: function() {
     return {
-      cakes: cakes
+      // cakes: cakes
     }
   }
 })
+
+let bannerUrl = 'http://ecommerce-server.teddydevstack.com/admin/carousel';
+let promoUrl = 'http://ecommerce-server.teddydevstack.com/admin/promo';
+let cakeUrl = 'http://ecommerce-server.teddydevstack.com/admin/cakes';
+
+let carousel_data, promo_data, cake_data;
 
 
 function getCarousel() {
