@@ -4,6 +4,13 @@ var favicon = require('serve-favicon');
 var logger = require('morgan');
 var cookieParser = require('cookie-parser');
 var bodyParser = require('body-parser');
+var cors = require('cors')
+
+const mongoose = require('mongoose')
+
+mongoose.connect('mongodb://localhost:27017/ecommerce')
+
+
 
 var index = require('./routes/index');
 const users = require('./routes/users');
@@ -12,6 +19,13 @@ const transaction = require('./routes/transaction');
 
 var app = express();
 
+app.use(cors()) 
+var db = mongoose.connection;
+db.on('error', console.error.bind(console, 'connection error:'));
+db.once('open', function() {
+  // we're connected!
+  console.log('connected to db')
+});
 // view engine setup
 app.set('views', path.join(__dirname, 'views'));
 app.set('view engine', 'ejs.');
