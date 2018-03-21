@@ -13,17 +13,23 @@ const {
 } = require('../controllers/admin.controllers')
 
 const {
-    AddItem
+    AddItem,
+    showAllItems,
+    showItem,
+    updateItem
 } = require('../controllers/item.controllers')
 
+// public
+router.get('/items', showAllItems)
+router.get('/items/:itemId', showItem)
+
+// admin
 router.post('/admin/create', createAdmin)
 router.post('/admin/login', loginAdmin)
 
-// item
-router.post('/admin/additem', multer.single('image'), imgUpload.sendUploadToGCS, (req, res) => {
-    console.log(req.file)
-    console.log('masuk?')
-})
 
+// item admin only
+router.post('/admin/additem', AddItem)
+router.put('/admin/items/:itemId', updateItem)
 
 module.exports = router
