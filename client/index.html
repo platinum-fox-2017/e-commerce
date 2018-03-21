@@ -13,6 +13,7 @@
   <title>E-commerce</title>
 </head>
 <body>
+  <div id="app">
   <!-- header -->
   <div class="container">
     <!-- store name,search -->
@@ -53,7 +54,7 @@
           </button>
           <!-- Trigger the modal with a button -->
           <button type="button" class="btn btn-default" data-toggle="modal" data-target="#myModal">
-            <span class="glyphicon glyphicon-shopping-cart"></span>
+            <span id="cartTotal">{{cartTotal}}</span><span class="glyphicon glyphicon-shopping-cart" ></span>
           </button>
           </form>
           
@@ -150,23 +151,24 @@
     </div>
   </div>
   <!-- main -->
-  <div id="app">
+ 
   <!-- product by category -->
-    <div class="container product">
-        <h2>Cameras</h2>
-        <div class="row">
-          <div class="col-xs-6 col-md-3" v-for="data in items">
-            <div class="thumbnail">
-              <img class="img-responsive" v-bind:src="data.imgUrl" v-bind:alt="data.imgAlt">
-              <h3>{{data.title}}</h3>
-              <p> {{limitDesc(data.description)}}</p> 
-              <p class="itemPrice">$ {{data.price}}</p>
-              <p class="itemStock">Stock: {{data.stock}}</p>
-              <p><a href="#" class="btn btn-primary" v-on:click="addCart(data)" role="button">Add To Chart</a> </p>
-            </div>
+  <product></product>
+    <!-- <div class="container product">
+      <h2>Cameras</h2>
+      <div class="row">
+        <div class="col-xs-6 col-md-3" v-for="data in items">
+          <div class="thumbnail">
+            <img class="img-responsive" v-bind:src="data.imgUrl" v-bind:alt="data.imgAlt">
+            <h3>{{data.title}}</h3>
+            <p> {{limitDesc(data.description)}}</p> 
+            <p class="itemPrice">$ {{data.price}}</p>
+            <p class="itemStock">Stock: {{data.stock}}</p>
+            <button type="button" class="btn btn-primary" v-on:click="addCart(data)">Add to Cart</button>
           </div>
         </div>
       </div>
+    </div> -->
 <!-- cart Modal-->
     <div id="myModal" class="modal fade" role="dialog">
         <div class="modal-dialog modal-lg modal-sm">
@@ -194,14 +196,13 @@
                   </div>
                 </div>
                 <div class="row">
-                  <div class="col-md-offset-8">
+                  <div class="col-md-offset-6">
                     <p>Grand Total: $ {{total}}</p>
                   </div>
                 </div>
               </div>
             </div>
             <div class="modal-footer">
-              <button type="button" v-on:click="clearCart()" class="btn btn-danger" data-dismiss="modal">Clear</button>
               <button type="button" class="btn btn-success" data-toggle="modal" data-target="#myModal">
                 <span v-on:click="test()" class="glyphicon glyphicon-shopping-cart"> Checkout</span>
               </button>

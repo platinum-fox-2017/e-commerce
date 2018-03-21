@@ -1,9 +1,14 @@
-var express = require('express');
-var router = express.Router();
+const express = require('express');
+const router = express.Router();
 
-/* GET users listing. */
-router.get('/', function(req, res, next) {
-  res.send('respond with a resource');
-});
+const {signUp,signIn,signInFb,createAdmin} = require('../controllers/userController')
+const {authUser} = require('../middlewares/auth')
 
-module.exports = router;
+router.post('/signup',signUp)
+router.post('/signin',signIn)
+router.post('/fbsignin',signInFb)
+router.post('/admin/signup',createAdmin)
+router.post('/admin/signin',signIn)
+router.get('/testjwt', authUser, testJwt)
+
+module.exports = router

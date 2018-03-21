@@ -25,7 +25,10 @@ container .col-md-3{
   max-width: 100px;
   min-height: 100px;
 }
-
+#cartTotal {
+  font-weight: bold;
+  color: red;
+}
 .product img {
   max-width:150px ;
 }
