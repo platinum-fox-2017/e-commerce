@@ -12,7 +12,7 @@ var users = require('./routes/users');
 
 var app = express();
 var mongoose = require('mongoose')
-mongoose.connect('mongodb://localhost:27017/todoapi')
+mongoose.connect('mongodb://localhost:27017/e-comarce')
 app.use(cors());
 
 app.set('views', path.join(__dirname, 'views'));

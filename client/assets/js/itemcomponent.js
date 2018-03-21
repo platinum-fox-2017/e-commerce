@@ -1,6 +1,6 @@
 Vue.component('items',{
   template:`<div class="card">
-    <img class="card-img-top" :src='item.foto' style="height:200px;">
+    <img class="card-img-top" :src='item.picture' style="height:200px;">
     <div class="card-body">
       <h5 class="card-title">{{item.title}}</h5>
       <p class="card-text">{{item.descripsi}}</p>

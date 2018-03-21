@@ -3,21 +3,21 @@ Vue.component('carts',{
   <div class="row">
     <div class="col-sm-12 col-md-4">
       <div class="col-md-12">
-        <img :src="listcart.foto" class="card-img-top img-responsive">
+        <img :src="listcart.itemid.picture" class="card-img-top img-responsive">
       </div>
       <div align="center">
-        <h4>{{listcart.title}}</h4>
+        <h4>{{listcart.itemid.title}}</h4>
       </div>
     </div>
     <div class="col-sm-12 col-md-3" style="padding-top:50px;" >
-      <button type="button" class="btn btn-secondary" v-on:click="deletetotal(listcart.id)">- </button><span> {{listcart.total}} </span><button type="button" class="btn btn-secondary" v-on:click="addtotal(listcart.id)"> +</button>
+      <button type="button" class="btn btn-secondary" v-on:click="deletetotal(listcart._id)">- </button><span> {{listcart.qty}} </span><button type="button" class="btn btn-secondary" v-on:click="addtotal(listcart._id)"> +</button>
     </div>
     <div class="col-sm-12 col-md-2" style="padding-top:50px;">
-      <span>Rp.{{listcart.harga}}</span>
+      <span>Rp.{{listcart.totalbiaya}}</span>
     </div>
     <div class="col-sm-12 col-md-3" style="padding-top:45px;">
       <button type="button" class="btn btn-danger" v-on:click="deletelistcart(listcart)"><span class="oi oi-circle-x"></span></button>
-      <!-- <button type="button" class="btn btn-success" v-on:click="buylistcart(listcart.id)"><span class="oi oi-check"></span></button> -->
+      <!-- <button type="button" class="btn btn-success" v-on:click="buylistcart(listcart.userid)"><span class="oi oi-check"></span></button> -->
       <button type="button" class="btn btn-success"><span class="oi oi-check"></span></button>
     </div>
   </div>`,

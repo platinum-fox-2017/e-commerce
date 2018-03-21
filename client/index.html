@@ -9,6 +9,7 @@
     <link href="assets/css/open-iconic-bootstrap.css" rel="stylesheet">
     <link rel="stylesheet" href="assets/css/foundation-icons.css" />
     <link rel="stylesheet" href="assets/css/style.css" />
+    <script src="https://unpkg.com/axios/dist/axios.min.js"></script>
     <script src="https://unpkg.com/sweetalert/dist/sweetalert.min.js"></script>
     <script src="https://unpkg.com/vue@2.5.16/dist/vue.js"></script>
   </head>
@@ -21,7 +22,7 @@
       <div class="collapse navbar-collapse" id="navbarNav">
         <ul class="navbar-nav mr-auto">
           <li class="nav-item">
-            <a class="nav-link" href="#items">Items</a>
+            <a class="nav-link" data-toggle="modal" href="#items">Items</a>
           </li>
           <li class="nav-item dropdown">
         <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
@@ -37,7 +38,7 @@
             <a class="nav-link active" data-toggle="modal" data-target="#exampleModalLong"><span class="oi oi-cart" style="font-size:20px;margin-right:10px"></span></a>
           </li>
           <li class="nav-item">
-            <a class="nav-link" href="#">Logout <span class="oi oi-account-logout"></span></a>
+            <a class="nav-link" onclick="logout()">Logout <span class="oi oi-account-logout"></span></a>
           </li>
        </ul>
      </div>
@@ -52,7 +53,7 @@
         <div class="carousel-item active">
           <img class="d-block w-100" src="assets/img/headers.png" alt="First slide">
           <div class="carousel-caption d-none d-md-block">
-            <h5 style="color:grey">Selamat Datang Username</h5>
+            <h5 style="color:grey">Selamat Datang <span id="namaku"></span> </h5>
           </div>
         </div>
       </div>
@@ -93,6 +94,27 @@
           </div>
         </div>
 
+
+        <div class="modal fade" id="modaladditem" tabindex="-1" role="dialog" aria-labelledby="exampleModalLongTitle" aria-hidden="true">
+          <div class="modal-dialog modal-lg" role="document">
+            <div class="modal-content">
+              <div class="modal-header">
+                <h5 class="modal-title" id="exampleModalLongTitle">Add items</h5>
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                  <span aria-hidden="true">&times;</span>
+                </button>
+              </div>
+                <div class="modal-body">
+                  <additems @tambahitem='additem'></additems>
+                </div>
+                <div class="modal-footer">
+
+                  <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+                </div>
+              </div>
+            </div>
+          </div>
+
       <hr>
       <div class="Items" id="items">
         <h1 style="text-align :center">Items</h1>
@@ -110,22 +132,23 @@
         </div>
         <div class="col-lg-3 col-sm-12 offset-lg-3">
           <div class="float-right">
-            <a class="item"><i class="fi-social-github" id="sosmed"></i>  </a>
-            <a class="item"><i class="fi-social-facebook" id="sosmed"></i> </a>
-            <a class="item"><i class="fi-social-linkedin" id="sosmed"></i> </a>
-            <a class="item"><i class="fi-social-tumblr" id="sosmed"></i> </a>
-            <a class="item"><i class="fi-social-twitter" id="sosmed"></i> </a>
+            <a class="item" href="https://github.com/irsyadpahlapi" target="_blank"><i class="fi-social-github" id="sosmed"></i>  </a>
+            <a class="item" href="https://www.facebook.com/irsyadepahlapi" target="_blank"><i class="fi-social-facebook" id="sosmed"></i> </a>
+            <a class="item" href="https://www.linkedin.com/in/irsyad-pahlapi-139ba615b/" target="_blank"><i class="fi-social-linkedin" id="sosmed"></i> </a>
+            <a class="item" href="#" target="_blank"><i class="fi-social-tumblr" id="sosmed"></i> </a>
+            <a class="item" href="https://twitter.com/MamenGuwe" target="_blank"><i class="fi-social-twitter" id="sosmed"></i> </a>
           </div>
       </div>
-
-
     </footer>
-
     <script type="text/javascript" src="assets/js/jquery-3.2.1.slim.min.js"></script>
     <script type="text/javascript" src="assets/js/popper.min.js"></script>
     <script type="text/javascript" src="assets/js/bootstrap.js"></script>
     <script type="text/javascript" src="assets/js/bootstrap.min.js"></script>
     <script type="text/javascript" src="assets/js/jquery.js"></script>
+    <script type="text/javascript" src="assets/js/itemcomponent.js"></script>
+    <script type="text/javascript" src="assets/js/cartcomponent.js"></script>
+    <script type="text/javascript" src="assets/js/additemcomponent.js"></script>
+    <script type="text/javascript" src="assets/js/script.js"></script>
     <script type="text/javascript">
       $('a').click(function(){
         $('html, body').animate({
@@ -134,14 +157,78 @@
         return false;
       });
     </script>
-
-    <script type="text/javascript" src="assets/js/itemcomponent.js"></script>
-    <script type="text/javascript" src="assets/js/cartcomponent.js"></script>
-    <script type="text/javascript" src="assets/js/script.js">
-
-    </script>
     <script type="text/javascript">
+    if(localStorage.token===undefined){
+      $(window).attr('location', 'login.html')
+    }
+    // if(localStorage.status!='user'){
+    //   $(window).attr('location', 'login.html')
+    // }
+    window.fbAsyncInit = function() {
+      FB.init({
+        appId      : '592784331071735',
+        cookie     : true,
+        xfbml      : true,
+        version    : 'v2.12'
+      });
+      FB.AppEvents.logPageView();
+      FB.getLoginStatus(function(response) {
+        statusChangeCallback(response);
+      });
+    };
 
+    (function(d, s, id) {
+      var js, fjs = d.getElementsByTagName(s)[0];
+      if (d.getElementById(id)) return;
+      js = d.createElement(s); js.id = id;
+      js.src = 'https://connect.facebook.net/id_ID/sdk.js#xfbml=1&version=v2.12&appId=592784331071735&autoLogAppEvents=1';
+      fjs.parentNode.insertBefore(js, fjs);
+    }(document, 'script', 'facebook-jssdk'));
+
+     function checkLoginState() {
+       FB.getLoginStatus(function(response) {
+         statusChangeCallback(response);
+       });
+     }
+
+     function statusChangeCallback(response){
+       if(response.status === 'connected'){
+         sendTokenToServer(localStorage.token);
+       }else{
+         location.reload();
+         console.log('not connected');
+       }
+     }
+
+     function sendTokenToServer(token) {
+       $.ajax({
+         type: 'GET',
+         url: 'http://localhost:3000/',
+         headers: {
+           token: token,
+           tokenfb: localStorage.tokenfb
+         },
+         success: function(resp) {
+           $('#namaku').html(resp.name)
+         },
+         error: function(error) {
+           console.error('Failed send to server');
+           console.log(error);
+         }
+       })
+     };
+
+    function logout () {
+      window.FB.getLoginStatus(function (response) {
+        if (response.status === 'connected') {
+          window.FB.logout(function (response) {
+            console.log('logout ', response)
+            localStorage.clear()
+            window.location.href = '/login.html'
+          })
+        }
+      })
+    }
     </script>
   </body>
 </html>

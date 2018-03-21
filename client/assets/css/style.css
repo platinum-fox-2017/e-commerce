@@ -28,3 +28,6 @@ position: fixed;
 h5,h1,.st,h4{
   font-family:judul;
 }
+a{
+  cursor:pointer;
+}
