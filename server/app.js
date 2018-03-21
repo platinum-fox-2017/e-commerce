@@ -8,7 +8,7 @@ var cors = require('cors')
 
 const mongoose = require('mongoose')
 
-mongoose.connect('mongodb://localhost:27017/ecommerce')
+mongoose.connect('mongodb://localhost:27017/ecommerceit')
 
 
 
