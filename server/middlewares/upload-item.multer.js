@@ -18,7 +18,7 @@ module.exports = {
         });
 
         stream.on('error', err => {
-            req.file[index].cloudStorageError = err;
+            req.body.cloudStorageError = err;
             next(err);
         });
 

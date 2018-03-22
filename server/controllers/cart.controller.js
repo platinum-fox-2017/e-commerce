@@ -1,8 +1,9 @@
 const Cart = require('../models/cart.model');
+const mongoose = require('mongoose');
 
 module.exports = {
     findAll: (req, res) => {
-        Cart.find((err, cart) => {
+        Cart.findOne({}, (err, cart) => {
             if (err) res.status(500).send({ message: err });
 
             res.status(200).send({
@@ -24,13 +25,28 @@ module.exports = {
     },
 
     insert: (req, res) => {
-        new Cart(req.body).save(err => {
-            if (err) res.status(500).send({ message: err });
+        Cart.findOne({}, (err, cart) => {
+            if (!cart) {
+                let newCart = new Cart();
+                newCart.item.push(req.body.item);
 
-            res.status(201).send({
-                message: `add ${ req.body._id } to cart`
-            });
-        })
+                newCart.save(err => {
+                    if (err) res.status(500).send({ message: err });     
+                    res.status(201).send({
+                        message: `add ${ req.body.item } to cart`
+                    });
+                });
+            } else {
+                cart.item.push(req.body.item);
+                
+                cart.save(err => {
+                    if (err) res.status(500).send({ message: err });     
+                    res.status(201).send({
+                        message: `add ${ req.body.item } to cart`
+                    });
+                });
+            }
+        });
     },
 
     edit: (req, res) => {
@@ -45,13 +61,26 @@ module.exports = {
     },
 
     drop: (req, res) => {
-        Cart.findByIdAndRemove(req.params.id, (err, cart) => {
-            if (err) res.status(500).send({ message: err });
-
-            res.status(200).send({
-                message: `drop ${ cart._id } from cart`
+        Cart.findOne({}, (err, cart) => {
+            cart.item = cart.item.filter(item => item != req.params.id);
+            
+            cart.save(err => {
+                if (err) res.status(500).send({ message: err });     
+                res.status(200).send({
+                    message: `drop item from cart`
+                });
             });
         });
+    },
+
+    dropAll: (req, res) => {
+        Cart.findOneAndRemove({}, (err, cart) => {
+            console.log(cart)
+            if (err) res.status(500).send({ message: err });
+            res.status(200).send({
+                message: `drop item from cart`
+            });
+        })
     },
 
     getTotal: (req, res) => {

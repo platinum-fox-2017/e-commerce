@@ -37,16 +37,16 @@ Vue.component('cart-modal', {
                                 <td data-th="Subtotal" class="text-center">{{ item.price * item.quantity }}</td>
                                 <td class="actions" data-th="">
                                     <button class="btn btn-info btn-sm"><i class="fa fa-refresh"></i></button>
-                                    <button class="btn btn-danger btn-sm"><i class="fa fa-trash-o"></i></button>								
+                                    <button class="btn btn-danger btn-sm" @click="removeItem(mergeCart(cart), item._id)"><i class="fa fa-trash-o"></i></button>								
                                 </td>
                             </tr>
                         </tbody>
                         <tfoot>
                             <tr>
-                                <td><a href="#" class="btn btn-warning"><i class="fa fa-angle-left"></i> Continue Shopping</a></td>
+                                <td><a href="#" class="btn btn-warning" data-dismiss="modal"><i class="fa fa-angle-left"></i> Continue Shopping</a></td>
                                 <td colspan="2" class="hidden-xs"></td>
                                 <td class="hidden-xs text-center"><strong>Total Rp {{ totalPrice(cart) }}</strong></td>
-                                <td><a href="#" class="btn btn-success btn-block">Checkout <i class="fa fa-angle-right"></i></a></td>
+                                <td><a class="btn btn-success btn-block" @click="checkout" data-dismiss="modal">Checkout <i class="fa fa-angle-right"></i></a></td>
                             </tr>
                         </tfoot>
                     </table>
@@ -58,21 +58,22 @@ Vue.component('cart-modal', {
     methods: {
         mergeCart: function(cart) {
             let items = [];
+
             cart.forEach(element => {
                 let existing = items.filter(item => {
-                    return item._id == element.item._id
+                    return item._id == element._id
                 });
-
+                
                 if (existing.length) {
                     let existingIndex = items.indexOf(existing[0]);
                     items[existingIndex].quantity += 1;
                 } else {
                     items.push({
-                        ...element.item, quantity: 1
+                        ...element, quantity: 1
                     });
                 }
             });
-
+            
             return items;
         },
 
@@ -83,6 +84,19 @@ Vue.component('cart-modal', {
             });
 
             return sum;
+        },
+
+        removeItem: function(items, id) {
+            let quantity = 0;
+            items.forEach(item => {
+                if (item._id == id) quantity = item.quantity;
+            })
+
+            this.$emit('remove-item-from-cart', { id, quantity });
+        },
+
+        checkout: function() {
+            this.$emit('checkout');
         }
     }
 });

@@ -20,20 +20,17 @@
                     :cart="cart"
                 ></list-menu>
             </nav>
-            <carousel></carousel>
         </header>
         <cart-modal
             :cart="cart"
             @remove-item-from-cart="removeItem"
             @checkout="checkout"
         ></cart-modal>
-        <div class="container" id="content">
-            <list-category
+        <div id="main" style="margin-top: 120px">
+            <admin
                 :categories="categories"
-                :items="items"
-                @add-item-to-cart="addToCart"
-            ></list-category>
-        </div>
+            ></admin>
+        </div>        
         
         <tokobuku-footer></tokobuku-footer>
     </div>
@@ -45,10 +42,7 @@
 <script src="assets/js/axios-base-url.js"></script>
 
 <script src="components/menu.js"></script>
-<script src="components/carousel.js"></script>
-<script src="components/list-category.js"></script>
-<script src="components/list-item.js"></script>
-<script src="components/item.js"></script>
+<script src="/components/admin.js"></script>
 <script src="components/footer.js"></script>
 <script src="components/cart-modal.js"></script>
 <script src="components/vue.js"></script>

@@ -7,13 +7,13 @@ new Vue({
     },
     methods: {
         getAllItems: function(callback) {
-            request.get('items')
+            request.get('items/')
             .then(response => callback(response.data.items))
             .catch(err => console.log(err))
         },
 
         getAllCategories: function(callback) {
-            request.get('categories')
+            request.get('categories/')
             .then(response => callback(response.data.categories))
             .catch(err => console.log(err))
         },
@@ -40,6 +40,18 @@ new Vue({
             .catch(err => console.log(err))
         },
 
+        removeItemFromCart: function(id, callback) {
+            request.delete('cart/' + id)
+            .then(response => callback())
+            .catch(err => console.log(err))
+        },
+
+        removeCart: function(callback) {
+            request.delete('cart/all/')
+            .then(response => callback())
+            .catch(err => console.log(err))
+        },
+
         getAllItemInCart: function(callback) {
             request.get('cart/')
             .then(response => callback(response.data.cart))
@@ -52,26 +64,36 @@ new Vue({
                     this.insertCart(id, () => {
                         this.getAllItems(items => this.items = items);
                         this.getAllCategories(categories => this.categories = categories);
-                        this.getAllItemInCart(cart => this.cart = cart);
+                        this.getAllItemInCart(cart => this.cart = cart.item);
                     })
                 })
             })
         },
 
-        // countItem: function() {
-            
-        // }
+        removeItem: function(obj) {
+            this.getItemById(obj.id, item => {
+                this.updateStock(obj.id, item.stock + obj.quantity, () => {
+                    this.removeItemFromCart(obj.id, () => {
+                        this.getAllItems(items => this.items = items);
+                        this.getAllCategories(categories => this.categories = categories);
+                        this.getAllItemInCart(cart => this.cart = cart.item);
+                    })
+                })
+            })
+        },
+
+        checkout: function() {
+            this.removeCart(() => {
+                this.getAllItems(items => this.items = items);
+                this.getAllCategories(categories => this.categories = categories);
+                this.cart = [];
+            })
+        }
+
     },
-    // computed: {
-        // totalItemInCart: function() {
-        //     this.getAllItemInCart(() => {
-        //         return 6;
-        //     })
-        // }
-    // },
     created: function() {
         this.getAllItems(items => this.items = items);
         this.getAllCategories(categories => this.categories = categories);
-        this.getAllItemInCart(cart => this.cart = cart);
+        this.getAllItemInCart(cart => this.cart = cart.item);
     }
 });

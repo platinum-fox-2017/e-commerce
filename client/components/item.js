@@ -23,16 +23,6 @@ Vue.component('item', {
         },
 
         addToCart: function(id) {
-            // request.get('items/' + id)
-            // .then(response => {
-            //     request.put('items/' + id, {
-            //         stock: (response.data.item.stock - 1)
-            //     })
-            // })
-            // .catch(err => console.log(err))
-            // request.put('items/' + id, {
-            //     stock: 
-            // })
             this.$emit('addItemToCart', id);
         }
     }

@@ -19,6 +19,9 @@ Vue.component('list-menu', {
                 <a class="nav-link" href="#">Sign in</a>
             </li>
             <li class="nav-item">
+                <a class="nav-link" href="admin.html">Admin</a>
+            </li>
+            <li class="nav-item">
                 <a class="nav-link" href="#"><i class="fa fa-search"></i></a>
             </li>
             <li class="nav-item">

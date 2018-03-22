@@ -11,7 +11,7 @@ Vue.component('tokobuku-footer', {
         
                 <div class="col-md-2 col-lg-2 col-xl-2 mx-auto mt-4">
                     <h6 class="text-uppercase mb-4 font-weight-bold">Products</h6>
-                    <p><a href="#">Books</a></p>
+                    <p><a href="/">Books</a></p>
                 </div>
                 <hr class="w-70 clearfix d-md-none">
             

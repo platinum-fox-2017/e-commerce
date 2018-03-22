@@ -2,5 +2,5 @@ const mongoose = require('mongoose');
 const Schema = mongoose.Schema;
 
 module.exports = mongoose.model('Cart', new Schema({
-    item: { type: Schema.ObjectId, ref: 'Item' }
+    item: [{ type: Schema.ObjectId, ref: 'Item' }]
 }));
