@@ -6,8 +6,6 @@ const userSchema = new Schema({
   email: String,
   password: String,
   role: String,
-  phone: String,
-  address: String,
   fbId: String,
   createdAt: { 
     type: Date,

@@ -3,8 +3,8 @@ const bcrypt = require('bcrypt');
 const saltRounds = 10;
 const salt = bcrypt.genSaltSync(saltRounds);
 const jwt = require('jsonwebtoken');
-const FB        = require('fb')
-require('dotenv').load();
+const FB = require('fb')
+// require('dotenv').load();
 
 module.exports={
   signUp:(req,res)=>{
@@ -13,9 +13,7 @@ module.exports={
       name:req.body.name,
       email:req.body.email,
       password:hash,
-      role: 'user',
-      phone: req.body.phone,
-      address: req.body.address
+      role: 'user'
     }
     User.findOne({
       email:req.body.email
@@ -57,7 +55,7 @@ module.exports={
         console.log("ini data user===",dataUser)
         let checkPass = bcrypt.compareSync(req.body.password,dataUser.password)
         if(checkPass){
-          let token = jwt.sign({id:dataUser._id,email:dataUser.email},'secret')
+          let token = jwt.sign({id:dataUser._id,email:dataUser.email},process.env.SECRET)
           res.status(200).json({
             message:"login success",
             data:{
@@ -83,6 +81,7 @@ module.exports={
   },
   
   signInFb : (req,res)=>{
+    console.log('signin fb')
     FB.api('me',{fields:['id','name','email'],access_token:req.headers.fb_token},(userFbToken)=>{
       if(userFbToken){
         User.findOne({
@@ -95,6 +94,7 @@ module.exports={
             User.create({
               name:userFbToken.name,
               email:userFbToken.email,
+              role: 'user',
               password: null,
               fbId : userFbToken.id
             },(err,newUser)=>{

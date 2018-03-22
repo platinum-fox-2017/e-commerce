@@ -18,6 +18,7 @@ module.exports={
     let input = {
       sku : req.body.task,
       title: req.body.title,
+      category: req.body.category,
       description: req.body.description,
       price : req.body.price,
       stock : req.body.stock,

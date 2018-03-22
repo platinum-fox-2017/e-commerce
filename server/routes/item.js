@@ -7,6 +7,6 @@ const {showItem,addItem,updateItem,removeItem} = require('../controllers/item.co
 router.get('/',showItem)
 router.post('/',addItem)
 router.put('/:id',updateItem)
-router.delete('/:id',removeTodo)
+router.delete('/:id',removeItem)
 
 module.exports = router

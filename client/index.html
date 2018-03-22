@@ -59,8 +59,8 @@
           </form>
           
           <ul class="nav navbar-nav navbar-right">
-            <li><a href="#">Sign In</a></li>
-            <li><a href="#">Create an Account</a></li>
+            <li><div class="fb-login-button" data-max-rows="1" data-size="medium" data-button-type="continue_with" data-show-faces="false" data-auto-logout-link="true" data-use-continue-as="false" scope="public_profile,email" onlogin="checkLoginState()"></div></li>
+            <li><a href="#">Log Out</a></li>
           </ul>
         </div>
       </div>
@@ -153,8 +153,8 @@
   <!-- main -->
  
   <!-- product by category -->
-  <product></product>
-    <!-- <div class="container product">
+  <!-- <product></product> -->
+    <div class="container product">
       <h2>Cameras</h2>
       <div class="row">
         <div class="col-xs-6 col-md-3" v-for="data in items">
@@ -163,12 +163,11 @@
             <h3>{{data.title}}</h3>
             <p> {{limitDesc(data.description)}}</p> 
             <p class="itemPrice">$ {{data.price}}</p>
-            <p class="itemStock">Stock: {{data.stock}}</p>
             <button type="button" class="btn btn-primary" v-on:click="addCart(data)">Add to Cart</button>
           </div>
         </div>
       </div>
-    </div> -->
+    </div>
 <!-- cart Modal-->
     <div id="myModal" class="modal fade" role="dialog">
         <div class="modal-dialog modal-lg modal-sm">
@@ -186,7 +185,7 @@
                     <p>{{cart.title}}</p>
                   </div>
                   <div class="col-xs-4 col-md-2">
-                    <p>{{cart.qty}} @ $ {{cart.price}}</p>
+                    <p>{{cart.quantity}} @ $ {{cart.price}}</p>
                   </div>
                   <div class="col-xs-4 col-md-2">
                     <p>$ {{cart.subTotal}}</p>
@@ -215,14 +214,19 @@
   </div>
   <!-- footer -->
   <footer class="container-fluid text-center">
-    <p>&copy; 2018 CamSiasm</p>
+    <p>&copy; 2018 Kameraku</p>
     <form class="form-inline">Get deals & promo:
       <input type="email" class="form-control" size="50" placeholder="Email Address">
       <button type="button" class="btn btn-danger">Sign Up</button>
     </form>
     
   </footer>
+  <script src="https://code.jquery.com/jquery-3.3.1.min.js" integrity="sha256-FgpCb/KJQlLNfOu91ta32o/NMZxltwRo8QtmkMRdAu8=" crossorigin="anonymous"></script>
+  <script src="https://unpkg.com/axios/dist/axios.min.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/vue/dist/vue.js"></script>
 
-  <script src="home.js"></script>
+  <script src="./loginfb.js"></script>
+  <script src="./home.js"></script>
+  
 </body>
 </html>

@@ -10,6 +10,7 @@ const transactionSchema = new Schema({
   type: Schema.Types.ObjectId,
   ref: 'Item'
   },
+  quantity: Number,
   createdAt: { 
     type: Date,
     default: Date.now
