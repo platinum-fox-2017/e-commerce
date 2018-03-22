@@ -15,7 +15,7 @@ const names = [{
     stock: 7,
     description: "With its sharp, boxy design, Polaroid's 600 system fit right in, turning instant analog photography into an icon of popular culture. ",
     imageUrl: [ './assets/images/997a5ea65d614690b580afb65db3fa4f_600x600.jpg',
-                './assets/images/997a5ea65d614690b580afb65db3fa4f_600x600.jpg']
+                './assets/images/c7e7a2268f9f4f87a44525e2b3004e3d_c52db247-fb71-425c-a8a3-e5f5e2bd22d0_600x600.jpg']
 },{
     name: "Polaroid",
     category: "Camera",
