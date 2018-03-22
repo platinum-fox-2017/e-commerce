@@ -131,11 +131,15 @@ new Vue({
             return this.names[index].stock
         }, 
         mouseOver: function (name){
+            console.log('halo')
             let type = name.type
             let index = this.names.map(item => item.type).indexOf(type)
             let firstImage = this.names[index].imageUrl[0]
+            console.log(firstImage)
             let secondImage = this.names[index].imageUrl[1]
+            console.log(secondImage)
             this.names[index].imageUrl[0] = this.names[index].imageUrl[1]
+            console.log('ini hasil akhir', this.names[index].imageUrl[0])
         },
         mouseOut: function (name){
             let type = name.type
