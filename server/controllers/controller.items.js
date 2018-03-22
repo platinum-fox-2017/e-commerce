@@ -9,7 +9,6 @@ module.exports={
         })
     },
     addItem (req, res){
-        console.log(req.file)
         Item.create({
             name: req.body.name,
             price: req.body.price,

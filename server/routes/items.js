@@ -12,13 +12,6 @@ const upload = multer({
 })
 
 router.get('/', listItem);
-// router.post('/',addItem);
-// router.post('/', upload.single('avatar'),sendUploadToGCS,function (req, res) {
-//     res.status(200).json({
-//       "req.body" : req.body,
-//       "req.file":req.file
-//     })
-// });
 router.post('/', upload.single('avatar'),sendUploadToGCS,addItem);
 router.put('/:id', editItem);
 router.delete('/:id', removeItem);

@@ -99,7 +99,7 @@ new Vue({
                 name: objItem.name,
                 price: objItem.price,
                 subtotal: objItem.price,
-                image: objItem.imgSource,
+                image: objItem.image,
                 quantity: 1
             }
             for(let i=0; i<this.items.length; i++){

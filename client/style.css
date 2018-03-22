@@ -72,3 +72,7 @@ a:link, a:active {
 .footer-info p{
     margin-bottom:  1px;
 }
+.contain{
+    padding-top: 80px;
+    padding-bottom: 20px;
+}
