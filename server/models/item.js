@@ -14,7 +14,7 @@ const itemSchema = new Schema({
     price: {
         type: Number
     },
-    images: {
+    image: {
         type: String
     }
 })

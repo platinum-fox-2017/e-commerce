@@ -6,7 +6,7 @@ const AddItem = (req, res) => {
     item.description = req.body.description
     item.price = req.body.price
     item.stock = req.body.stock
-
+    item.image = req.file.cloudStoragePublicUrl
     item.save()
         .then((data) => {
             res.status(201).json({

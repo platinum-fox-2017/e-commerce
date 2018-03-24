@@ -5,7 +5,7 @@ const config = {
 }
 const storage = Storage({
     projectId: config.PROJECT_ID,
-    keyFilename: './gcp.json'
+    keyFilename: './Hacktiv8Training-e9994bb868cf.json'
 });
 
 
@@ -21,14 +21,12 @@ let ImgUpload = {};
 // the real middleware
 
 ImgUpload.sendUploadToGCS = (req, res, next) => {
-
     if (!req.file) {
         return next('upload mungkin gagal');
     }
 
     const gcsname = Date.now() + '.' + req.file.originalname.split('.').pop();
     const file = bucket.file(gcsname);
-
     // prepare the stream
     const stream = file.createWriteStream({
         metadata: {
