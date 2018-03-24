@@ -14,25 +14,14 @@ a#header-text.btn.btn-link.dropdown-toggle {
     transition: 0.3s;
     cursor: pointer;
 }
-/* #header {
-    background-color: rgba(255, 255, 255, 0.802)
-} */
 header {
-    margin-top:5px;
     margin-bottom:6px;
-    display: -webkit-flex, inline-flex;
-}
-/* #bar {
+    z-index: 10;
     position: fixed;
-    z-index:1;
-    background-color: yellow;
-} */
-/* .navbar{
-    padding:10px;
-    margin-left:10px;
-    margin-right:10px;
-    box-shadow: 2px black;
-} */
+    width: 100vw;
+    background-color: rgba(255, 255, 255, 0.802);
+    padding: 10px;
+}
 #img-header{
     /* padding: 10pfx; */
     margin-top:5px;
@@ -171,9 +160,6 @@ header {
     text-align: center;
 }
 
-
-
-
 .site-footer{
     position: relative;
     /* box-sizing: border-box; */
@@ -276,9 +262,9 @@ p > a:hover, a:focus, a:active {
     vertical-align: middle;
 }
 @media screen and (max-width: 600px) {
-    table#cart tbody td .form-control{
+    table#cart tbody td .form-control {
+        display: inline !important;
 		width:20%;
-		display: inline !important;
 	}
 	.actions .btn{
 		width:36%;
@@ -291,20 +277,15 @@ p > a:hover, a:focus, a:active {
 	.actions .btn-danger{
 		float:right;
 	}
-	
 	table#cart thead { display: none; }
 	table#cart tbody td { display: block; padding: .6rem; min-width:320px;}
 	table#cart tbody tr td:first-child { background: #333; color: #fff; }
 	table#cart tbody td:before {
 		content: attr(data-th); font-weight: bold;
 		display: inline-block; width: 8rem;
-	}
-	
-	
-	
+	}	
 	table#cart tfoot td{display:block; }
-	table#cart tfoot td .btn{display:block;}
-	
+	table#cart tfoot td .btn{display:block;}	
 }
 
 #img-sizing {

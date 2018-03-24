@@ -1,213 +1,60 @@
 <!DOCTYPE html>
 <html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <meta http-equiv="X-UA-Compatible" content="ie=edge">
-    <title>Poladroid</title>
-<!-- animate css -->
-    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/animate.css@3.5.2/animate.min.css">
-<!-- bootstrap -->
-    <link href="//netdna.bootstrapcdn.com/bootstrap/3.2.0/css/bootstrap.min.css" rel="stylesheet" id="bootstrap-css">
-    <script src="//netdna.bootstrapcdn.com/bootstrap/3.2.0/js/bootstrap.min.js"></script>
-    <script src="//code.jquery.com/jquery-1.11.1.min.js"></script>
-    <link href="//maxcdn.bootstrapcdn.com/font-awesome/4.1.0/css/font-awesome.min.css" rel="stylesheet">
+    <head>
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <meta http-equiv="X-UA-Compatible" content="ie=edge">
+        <title>Poladroid</title>
+    <!-- animate css -->
+        <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/animate.css@3.5.2/animate.min.css">
+    <!-- bootstrap -->
+        <link href="//netdna.bootstrapcdn.com/bootstrap/3.2.0/css/bootstrap.min.css" rel="stylesheet" id="bootstrap-css">
+        <script src="//netdna.bootstrapcdn.com/bootstrap/3.2.0/js/bootstrap.min.js"></script>
+        <script src="//code.jquery.com/jquery-1.11.1.min.js"></script>
+        <link href="//maxcdn.bootstrapcdn.com/font-awesome/4.1.0/css/font-awesome.min.css" rel="stylesheet">
 
-<!-- spectre -->
-    <link rel="stylesheet" href="https://unpkg.com/spectre.css/dist/spectre.min.css">
-    <link rel="stylesheet" href="https://unpkg.com/spectre.css/dist/spectre-exp.min.css">
-    <link rel="stylesheet" href="https://unpkg.com/spectre.css/dist/spectre-icons.min.css">
-    <link rel="stylesheet" href="./assets/styles/style.css">
-</head>
-<body>
-    <header>
-            <div class="container" id="header">   
-                <div class="columns">     
-                    <div class="column col-3 text-center">
-                        <div class="col-content">
-                            <img id="img-header" src="./assets/images/img_header_polaroid-originals.svg">
-                        </div>
-                    </div>
-                    <div class="column col-6 text-center">
-                        <div class="dropdown">
-                                <a href="#" class="btn btn-link dropdown-toggle" id="header-text" tabindex="0">
-                                    Products
-                                </a>
-                                <!-- menu component -->
-                                <ul class="menu">
-                                    <div id="header_font">Instant Film</div>
-                                    <div id="header_font">Vintage Cameras</div>
-                                    <div id="header_font">New Cameras</div>
-                                </ul>
-                        </div>
-                    </div>       
-                    <div class="column col-1 text-center">
-                        <div class="col-content">
-                            <img id="img-header" src="./assets/images/icon-search.svg">
-                        </div>
-                    </div>
-                    <div class="column col-1 text-center">
-                        <div class="col-content">
-                            <img id="img-header" src="./assets/images/icon-account.svg">
-                        </div>
-                    </div>
-
-                    <div class="column col-1 text-center">
-                        <div class="col-content" cursor="pointer">
-                            <img id="img-header" onclick="showModal()" data-toggle="modal" data-target="#exampleModal" src="./assets/images/icon-cart.svg">
-                        </div>
-                    </div>
-
-                </div>
-            </div>
-        
-
-    </header>
-    <div id="app">
-        <div class="container" id="video-contain">
-            <video autoplay muted loop class="video-responsive" object-fit= "cover" frameborder="0" webkitallowfullscreen mozallowfullscreen allowfullscreen type="video/mp4" src="./assets/images/hp-video.one-shot-ellen.mp4" ></video>    
-            <div class="video-text">
-                <div class="heading">
-                    <h1>One shot.</h1>
-                    <h1>Make it count.</h1>
-                </div>
-                <div class="sub-heading">
-                    <h5>The Polaroid OneStep 2 is a new instant camera</h5>
-                    <h5>anyone can use to make every day stand out.</h5>
-                </div>
-            </div>
+    <!-- spectre -->
+        <link rel="stylesheet" href="https://unpkg.com/spectre.css/dist/spectre.min.css">
+        <link rel="stylesheet" href="https://unpkg.com/spectre.css/dist/spectre-exp.min.css">
+        <link rel="stylesheet" href="https://unpkg.com/spectre.css/dist/spectre-icons.min.css">
+        <link rel="stylesheet" href="./assets/styles/style.css">
+    </head>
+    <body id="whole-page">
+        <div id="app">
+            <homehead :showmodal="showmodal"></homehead>
+            <vid></vid>
+            <category></category>
+            <cart 
+                :closemodal="closemodal" 
+                :checkout="checkout" 
+                :remove-item="removeItem" 
+                :dollar-sign="dollarSign" 
+                :set-subtotal="setSubtotal"
+                :carts="carts"
+                :total="total"  
+            ></cart>         
+            <products
+                :add-to-cart="addToCart"
+                :limit-desc="limitDesc"
+                :show-stock="showStock"
+                :dollar-sign="dollarSign"
+                :allitems="allitems"
+            ></products>
         </div>
-        <div class="photocontain">
-            <div class="flex-container">
-                <div class="photo-border">
-                    <div class="photo">
-                        <img src="./assets/images/Bridging-assets-Homepage-Polaroids-FILM_600x600.jpg">
-                    </div>
-                    <div class="photo-text">
-                        <h6>Shop Instant films</h6>
-                    </div>
-                </div>
-                <div class="photo-border">
-                    <div class="photo">
-                        <img src="./assets/images/Bridging-assets-Homepage-Polaroids-VINTAGE-CAMS_600x600.jpg">
-                    </div>
-                    <div class="photo-text">
-                        <h6>Shop Vintage Cameras</h6>
-                    </div>
-                </div>
-                <div class="photo-border">
-                    <div class="photo">
-                        <img src="./assets/images/PO_Banner_update_600x600.jpg">
-                    </div>
-                    <div class="photo-text">
-                        <h6>Shop New Cameras</h6>
-                    </div>
-                </div>
+        <!-- vue js -->
+        <script src="https://unpkg.com/axios/dist/axios.min.js"></script>
+        <script src="https://cdn.jsdelivr.net/npm/vue"></script>
+        <script src="./assets/js/product-component.js"></script>
+        <script src="./assets/js/cart-component.js"></script>
+        <script src="./assets/js/homehead-component.js"></script>
+        <script src="./assets/js/video-component.js"></script>
+        <script src="./assets/js/category-component.js"></script>
+        <script src="./assets/js/vue.js"></script>
+        <!--  -->
+        <footer class="site-footer">
+            <div class="footer-content">
+                <p>created by <a href="https://herbyherado.github.io" target="_blank" class="text-link" rel="nofollow">Herby Herado</a></p>
             </div>
-        </div>
-        <div class="product-container">
-            <div class="product-headings">
-                <h1>Our Most Wanted Products</h1>
-            </div>
-            <div class="container">
-                <div class="columns">
-                        <!-- modals // to activate/deactivate class = active/none -->
-        <div class="modal" id="modal-id">
-                <a href="#close" class="modal-overlay" aria-label="Close"></a>
-                <div class="modal-container">
-                    <div class="modal-header">
-                    <a href="#close" class="btn btn-clear float-right" aria-label="Close" onclick="closeModal()"></a>
-                    <div class="modal-title h5">Your Cart</div>
-                    </div>
-                    <div class="modal-body">
-                    <div class="content">
-                        <table id="cart" class="table table-hover table-condensed">
-                                <thead>
-                                    <tr>
-                                        <th style="width:50%">Product</th>
-                                        <th style="width:10%">Price</th>
-                                        <th style="width:8%">Quantity</th>
-                                        <th style="width:22%" class="text-center">Subtotal</th>
-                                        <th style="width:10%"></th>
-                                    </tr>
-                                </thead>
-                                <tbody>
-                                    <tr v-for="items in carts">
-                                        <td data-th="Product">
-                                            <div class="row">
-                                                <div class="col-sm-2 hidden-sm" id="img-sizing"><img :src="items.picture" alt="..." class="img-responsive"/></div>
-                                                <div class="col-sm-10">
-                                                    <h4 class="nomargin">{{items.name}}</h4>
-                                                    <p>{{items.type}}</p>
-                                                </div>
-                                            </div>
-                                        </td>
-                                        <td data-th="Price">${{items.price}}</td>
-                                        <td data-th="Quantity">
-                                            <input type="number" min='1' v-model="items.quantity" class="form-control text-center" :value="items.quantity">
-                                        </td>
-                                        <td data-th="Subtotal" class="text-center">{{dollarSign(setSubtotal(items.type, items.quantity))}}</td>
-                                        <td class="actions" data-th="">
-                                            <button class="btn btn-info btn-sm"><i class="fa fa-refresh"></i></button>
-                                            <button class="btn btn-danger btn-sm" @click='removeItem(items.type, items.quantity)'><i class="fa fa-trash-o"></i></button>								
-                                        </td>
-                                    </tr>
-                                </tbody>
-                                <tfoot>
-                                    <tr class="visible-xs">
-                                        <td class="text-center"><strong>Total</strong></td>
-                                    </tr>
-                                    <tr>
-                                        <td><a href="#" class="btn btn-warning" onclick="closeModal()"><i class="fa fa-angle-left"></i> Continue Shopping</a></td>
-                                        <td colspan="2" class="hidden-xs"></td>
-                                        <td class="hidden-xs text-center"><strong>Total {{dollarSign(total())}}</strong></td>
-                                        <td><a href="#" class="btn btn-success btn-block">Checkout <i class="fa fa-angle-right"></i></a></td>
-                                    </tr>
-                                </tfoot>
-                            </table>
-                        </div>
-                    </div>
-                </div>
-            </div>
-                    <div class="column col-1 col-md-12 col-sm-12"></div>
-                        <div class="column col-2 col-md-6 col-sm-12" v-for="name in names">
-                            <div class="card">
-                                <div class="card-image">
-                                    <img v-if="showStock(name.type) == 0" :src="name.imageUrl[0]" class="img-responsive" style="opacity: 0.5">
-                                    <img v-else :src="name.imageUrl[0]" @mouseover="mouseOver(name)" @mouseout="mouseOut(name)" class="img-responsive" :title="name.imageUrl[0]">
-                                    <!-- <img :src="name.imageUrl[0]" @mouseover="mouseOver(name)" @mouseout="mouseOut(name)" class="img-responsive"> -->
-                                    <!-- <img src="./assets/images/aa8ddfb2be8648b9bb75e5d408c73185_6b751e78-a626-4c36-bdaa-8b820aef55f1_600x600.jpg" onmouseover="this.src='./assets/images/color-film-for-polaroid-i-type-004668-stacks-3-oskar-smolokowski.jpg'" onmouseout="this.src='/assets/images/aa8ddfb2be8648b9bb75e5d408c73185_6b751e78-a626-4c36-bdaa-8b820aef55f1_600x600.jpg'"  class="img-responsive"> -->
-                                    <!-- <img class="img-responsive" :src="name.imageUrl[0]" @mouseover.native="this.src=''" > -->
-                                </div>
-                                <div class="card-header">
-                                    <div class="card-title h5">{{name.name}}</div>
-                                    <div class="card-subtitle text-gray">{{name.type}}</div>
-                                    <div class="card-subtitle text-gray">{{dollarSign(name.price)}}</div>
-                                    <p v-model="">Items left in Stock: {{showStock(name.type)}}</p>
-                                </div>
-                                <div class="card-body">{{limitDesc(name.description)}}</div>
-                                <div class="card-footer">
-                                    <button v-if="showStock(name.type) > 0"class="btn btn-primary animate pulse" @click="addToCart(name.name, name.type, name.price, name.imageUrl[0])">Buy</button>
-                                    <button v-else class="btn btn-error">Sold Out</button>
-                                </div>
-                            </div>
-                    </div>
-                    <div class="column col-1 col-sm-12"></div>
-                </div>
-            </div>
-        </div>
-    </div>
-    <!-- vue js -->
-    <script src="https://cdn.jsdelivr.net/npm/vue"></script>
-    <script src="./assets/js/vue.js"></script>
-    <!--  -->
-    <footer class="site-footer">
-        <div class="footer-content">
-            <p>created by <a href="https://herbyherado.github.io" target="_blank" class="text-link" rel="nofollow">Herby Herado</a></p>
-        </div>
-    </footer>
-
-    
-
-</body>
+        </footer>
+    </body>
 </html>

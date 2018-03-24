@@ -1,50 +1,3 @@
-const names = [{
-    name: "Polaroid",
-    category: "Camera",
-    type: "SX-70 Land Camera",
-    price: 399.99,
-    stock: 8,
-    description: "The Polaroid SX-70 is one of the most famous instant cameras in the world. It was the first instant SLR camera ever made, and the first to use Polaroid’s now-iconic instant film which brought photos to life the moment they left the camera.",
-    imageUrl: [ './assets/images/108ec8a814b24d0f9f0ec06966a6148f_ecb74c59-71af-43e8-b357-84043790f9f1_600x600.jpg',
-                './assets/images/362b405cf1ec4fc2bc470c6a2aada817_ec33ffa9-5aa7-4d7a-a572-6deaffe46c1b_600x600.jpg']
-},{
-    name: "Polaroid",
-    category: "Camera",
-    type: "600 Camera - Square",
-    price: 129.99,
-    stock: 7,
-    description: "With its sharp, boxy design, Polaroid's 600 system fit right in, turning instant analog photography into an icon of popular culture. ",
-    imageUrl: [ './assets/images/997a5ea65d614690b580afb65db3fa4f_600x600.jpg',
-                './assets/images/c7e7a2268f9f4f87a44525e2b3004e3d_c52db247-fb71-425c-a8a3-e5f5e2bd22d0_600x600.jpg']
-},{
-    name: "Polaroid",
-    category: "Camera",
-    type: "OneStep 2 i-Type Camera",
-    price: 119.99,
-    stock: 15,
-    description: "The OneStep 2 is a new polaroid camera that blends classic design with contemporary style.",
-    imageUrl: [ './assets/images/500c4f6cdddc4398b2cd6cb6af2a1c79_600x600.jpg',
-                './assets/images/c103f8303f7b4e7093333212fe65b056_600x600.jpg']
-},{
-    name: "Polaroid",
-    category: "Instant Films",
-    type: "i-Type Core Film Triple Pack",
-    price: 45.00,
-    stock: 24,
-    description: "With this special bundle, you get two packs of color and one pack of black & white film for your i-Type camera, all with a classic white frame.",
-    imageUrl: [ './assets/images/bdf1c41758ff443d8fd4fc068fd3887c_46f65cac-1af6-4b51-a632-31629aa717d5_600x600.jpg',
-                './assets/images/iType-Color-WhiteFrame-Frangipani_Beatt-WebStack-00468-01.jpg']
-},{
-    name: "Polaroid",
-    category: "Instant Films",
-    type: "600 Core Film Triple Pack",
-    price: 55.00,
-    stock: 20,
-    description: "With this special bundle, you get two packs of color and one pack of black & white film for your 600 camera, all with a classic white frame.",
-    imageUrl: [ './assets/images/aa8ddfb2be8648b9bb75e5d408c73185_6b751e78-a626-4c36-bdaa-8b820aef55f1_600x600.jpg',
-                './assets/images/color-film-for-polaroid-i-type-004668-stacks-3-oskar-smolokowski.jpg']
-}]
-
 const product = [{
     imageUrl : './assets/images/Bridging-assets-Homepage-Polaroids-FILM_600x600.jpg',
     description: 'Shop Instant films'
@@ -55,16 +8,33 @@ const product = [{
     imageUrl : './assets/images/PO_Banner_update_600x600.jpg',
     description: 'Shop New Cameras'
 }]
+Vue.config.devtools = true
 
 new Vue({
     el: '#app',
     data: {
-        names, 
+        allitems: [], 
         product,
         active: false,
-        carts: []
+        carts: [],
+        checkoutItems: []
+    },
+    components: {
+        // category: category,
+        // vid: vid,
+        // homehead: homehead,
+        // cart: cart,
+        // product: product
     },
     methods: {
+        checkout: function () {
+            console.log(this.carts)
+            localStorage.setItem('shoppingcart', JSON.stringify(this.carts))
+            $('#whole-page').addClass('animated slideOutLeft')
+            setTimeout(function(){
+                window.location.href = 'checkout.html'
+            },400)
+        },
         dollarSign: function(price){
             return `$${price.toFixed(2)}`
         },
@@ -91,12 +61,14 @@ new Vue({
                 if (this.carts[i].type === obj.type){
                     this.carts[i].quantity++
                     this.carts[i].subtotal = this.carts[i].price * this.carts[i].quantity
+                    this.cartTrigger()
                     this.reduceStock(type)
                     return 
                 }
             }
             this.carts.push(obj)
             this.reduceStock(type)
+            this.cartTrigger()
         },
         subtotal: function (){
             console.log(this.carts.quantity)
@@ -116,46 +88,70 @@ new Vue({
             return total
         },
         removeItem: function(type, quantity){
-            let indexProduct = this.names.map(item => item.type).indexOf(type)
-            this.names[indexProduct].stock += quantity
+            let indexProduct = this.allitems.map(item => item.type).indexOf(type)
+            this.allitems[indexProduct].stock += quantity
 
             let indexCart = this.carts.map(item => item.type).indexOf(type)
             this.carts.splice(indexCart, 1)
         },
         reduceStock: function (type) {
-            let index = this.names.map(item => item.type).indexOf(type)
-            this.names[index].stock -= 1
+            let index = this.allitems.map(item => item.type).indexOf(type)
+            this.allitems[index].stock -= 1
         },
         showStock: function (type){
-            let index = this.names.map(item => item.type).indexOf(type)
-            return this.names[index].stock
-        }, 
-        mouseOver: function (name){
-            console.log('halo')
-            let type = name.type
-            let index = this.names.map(item => item.type).indexOf(type)
-            let firstImage = this.names[index].imageUrl[0]
-            console.log(firstImage)
-            let secondImage = this.names[index].imageUrl[1]
-            console.log(secondImage)
-            this.names[index].imageUrl[0] = this.names[index].imageUrl[1]
-            console.log('ini hasil akhir', this.names[index].imageUrl[0])
+            let index = this.allitems.map(item => item.type).indexOf(type)
+            return this.allitems[index].stock
         },
-        mouseOut: function (name){
-            let type = name.type
-            let index = this.names.map(item => item.type).indexOf(type)
-            return this.names[index].imageUrl[1]
-        }
+        removeOrder: function () {
+
+        },
+        placeOrder: function () {
+            swal("Order Placed", "You're package will be delivered soon", "success");
+            this.checkoutItems = []
+            localStorage.clear()
+        },
+        showmodal: function (){
+            $('.modal').addClass('active')
+        },
+        closemodal: function () {
+            $('.modal').removeClass('active')
+        },
+        cartTrigger: function () {
+            $("#cart").addClass('animated rubberBand').one('webkitAnimationEnd mozAnimationEnd MSAnimationEnd oanimationend animationend' , function () {
+                $("#cart").removeClass('animated rubberBand')
+            })
+        } 
     },
     computed: {
+        totalCheckout: function () {
+            let total = 0
+            this.checkoutItems.map(item => total += (item.price * item.quantity))
+            return total
+        },
+        displayItems: function () {
+            return this.checkoutItems
+        }
     },
+    created(){
+      let $http = axios.create({
+        baseURL: 'http://localhost:3000'
+      })
+
+      $http.get('/item')
+        .then(items => {
+            items.data.items.map(each => this.allitems.push(each))
+            // console.log(this.allitems)
+            let insideCart = JSON.parse(localStorage.getItem('shoppingcart'))
+            console.log('ini inside cart')
+            console.log(insideCart)
+            if (insideCart.length > 0){
+                this.checkoutItems = insideCart
+                console.log('ini checkout items')
+                console.log(this.checkoutItems)
+            }
+        })
+        .catch(err => {
+            console.log(err)
+        })
+    }
 })
-
-
-function showModal(){
-    $('.modal').addClass('active')
-}
-
-function closeModal(){
-    $('.modal').removeClass('active')
-}
