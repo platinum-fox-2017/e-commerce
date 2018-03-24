@@ -4,12 +4,26 @@ var favicon = require('serve-favicon');
 var logger = require('morgan');
 var cookieParser = require('cookie-parser');
 var bodyParser = require('body-parser');
+var bcrypt = require('bcrypt');
+require('dotenv').config()
+
+const cors = require('cors');
+const mongoose = require('mongoose');
+mongoose.connect('mongodb://localhost:27017/e-commerce', (err) => {
+  if (!err) {
+    console.log('connect to Database');
+  }
+  else {
+    throw new Error(err)
+  }
+});
 
 var index = require('./routes/index');
 var users = require('./routes/users');
+var apis = require('./routes/api');
 
 var app = express();
-
+app.use(cors())
 // view engine setup
 app.set('views', path.join(__dirname, 'views'));
 app.set('view engine', 'ejs');
@@ -24,6 +38,7 @@ app.use(express.static(path.join(__dirname, 'public')));
 
 app.use('/', index);
 app.use('/users', users);
+app.use('/api', apis);
 
 // catch 404 and forward to error handler
 app.use(function(req, res, next) {

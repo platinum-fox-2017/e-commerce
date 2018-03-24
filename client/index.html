@@ -4,9 +4,9 @@
     <meta charset="utf-8">
     <title>e-commerce</title>
     <meta charset="utf-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
-    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
-    <link href="css/open-iconic-bootstrap.css" rel="stylesheet">
+      <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+      <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
+      <link href="css/open-iconic-bootstrap.css" rel="stylesheet">
     <style>
       body {
         background-color: rgb(255,255,255)
@@ -31,7 +31,6 @@
       .card {
         margin-bottom: 15px;
       }
-
       @media only screen and (max-width: 990px) {
         .responsive-carousel {
           height: initial;
@@ -39,14 +38,11 @@
       }
     </style>
   </head>
-  <body >
+  <body>
 
-
-
-
-<div class=""  id="app">
+<div id="app">
     <nav class="navbar navbar-expand-lg navbar navbar-dark bg-dark">
-      <a class="navbar-brand" href="#">MyMarket</a>
+      <a class="navbar-brand" href="#">Fruitashop</a>
       <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
         <span class="navbar-toggler-icon"></span>
       </button>
@@ -62,7 +58,7 @@
             <a class="nav-link" href="#">Items <span class="sr-only">(current)</span></a>
           </li>
           <li class="nav-item active">
-            <a class="nav-link" data-toggle="modal" data-target="#exampleModalCenter" >Cart<span class="sr-only">(current)</span></a>
+            <a class="nav-link" data-toggle="modal" data-target="#exampleModalCenter" style="cursor: pointer;">Cart<span class="sr-only">(current)</span></a>
           </li>
         </ul>
         <form class="form-inline my-2 my-lg-0">
@@ -85,8 +81,6 @@
       <div class="carousel-item active" >
         <img class="d-block w-100" src="img/vegetables.jpg" alt="First slide">
         <div class="carousel-caption d-none d-md-block" >
-          <h1>Fresh Food For a Better Life</h1>
-          <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit.</p>
         </div>
       </div>
       <div class="carousel-item">
@@ -114,29 +108,6 @@
 
   <div class="container" style="padding-top: 28px; padding-bottom: 28px">
     <div class="row">
-        <div class="col-md-4">
-          <div class="jumbotron" style="background-color: #404040">
-            <h5 style="color: white">
-              {{category}}
-            </h5>
-            <ul>
-              <li v-for="list in categories">
-                {{list.message}}
-              </li>
-            </ul>
-          </div>
-        </div>
-        <div class="col-md-8">
-          <div class="jumbotron" style="background-color: dark">
-              <h1>Big sale</h1>
-              <div class="row">
-                <div class="col-md-6" v-for="sale in sales">
-                  <component-two :sale="sale" @add-to-cart="addToCart"></component-two>
-                </div>
-            </div>
-          </div>
-      </div>
-
 
       <div class="container" style="padding-top: 28px">
 
@@ -155,39 +126,16 @@
       <div class="modal-content">
         <div class="modal-header">
           <h5 class="modal-title" id="exampleModalLongTitle">Shopping Cart</h5>
-          <input type="text" name="" value="">
           <button type="button" class="close" data-dismiss="modal" aria-label="Close">
             <span aria-hidden="true">&times;</span>
           </button>
         </div>
 
-        <div class="modal-body">
-          <div class="card-body" v-for="cart in listCart">
-            <div class="row">
-              <div class="col-sm-2">
-                <img :src="cart.urlImage" alt="Avatar" style="border-radius: 100%; width: 100px; height: 100px" >
-              </div>
-              <div class="col-sm-2">
-                <h5 class="card-title">{{cart.title}}</h5>
-              </div>
-              <div class="col-sm-4">
-                <h5 class="card-title">
-                  <button type="button" class="btn btn-secondary" v-on:click="reduce(cart.title)">-</button>
-                  {{cart.total}}
-                  <button type="button" class="btn btn-secondary" v-on:click="add(cart.title)">+</button>
-                </h5>
-              </div>
-              <div class="col-sm-2">
-                <h5 class="card-title">{{cart.price}}$</h5>
-              </div>
-              <div class="col-sm-2">
-                <button type="button" class="btn btn-danger" v-on:click="deleteData(cart.title)">
-                  <span class="oi oi-trash"></span>
-                </button>
-              </div>
-            </div>
-          </div>
-        </div>
+        <component-two :listcart="listCart"
+        v-on:reduce-cart="reduce"
+        v-on:add-cart="add"
+        v-on:delete-cart="deleteData"></component-two>
+
         <div class="modal-footer">
           <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
           <button type="button" class="btn btn-primary">Checkout</button>
@@ -195,11 +143,11 @@
       </div>
     </div>
   </div>
-
 </div>
 
 
     <script src="https://code.jquery.com/jquery-3.2.1.slim.min.js" integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN" crossorigin="anonymous"></script>
+    <script src="https://unpkg.com/axios/dist/axios.min.js"></script>
     <script src="https://unpkg.com/sweetalert/dist/sweetalert.min.js"></script>
     <script src="https://unpkg.com/vue@2.5.16/dist/vue.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js" integrity="sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q" crossorigin="anonymous"></script>
