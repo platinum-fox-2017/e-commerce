@@ -9,7 +9,7 @@ module.exports = {
       price: req.body.price,
       stock: req.body.stock,
       description: req.body.description,
-      imageUrl: req.body.imageUrl
+      imageUrl: req.file.cloudStoragePublicUrl
     })
       .then(item => {
         res.status(200).json({
