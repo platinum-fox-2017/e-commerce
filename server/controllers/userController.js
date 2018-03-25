@@ -4,10 +4,11 @@ const saltRounds = 10;
 const salt = bcrypt.genSaltSync(saltRounds);
 const jwt = require('jsonwebtoken');
 const FB = require('fb')
-// require('dotenv').load();
+require('dotenv').load();
 
 module.exports={
   signUp:(req,res)=>{
+    console.log("sign up",req,body)
     let hash = bcrypt.hashSync(req.body.password,salt)
     let newUser ={
       name:req.body.name,

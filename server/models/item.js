@@ -8,7 +8,6 @@ const itemSchema = new Schema({
   description: String,
   price : Number,
   imgUrl : String,
-  imgAlt : String,
   createdAt: { 
     type: Date,
     default: Date.now

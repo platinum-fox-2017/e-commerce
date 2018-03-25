@@ -4,12 +4,14 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <meta http-equiv="X-UA-Compatible" content="ie=edge">
-  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" integrity="sha384-BVYiiSIFeK1dGmJRAkycuHAHRg32OmUcww7on3RYdg4Va+PmSTsz/K68vbdEjh4u" crossorigin="anonymous">
+  <!-- Latest compiled and minified CSS -->
+  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
+  <!-- jQuery library -->
   <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+  <!-- Latest compiled JavaScript -->
   <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
   <link rel="stylesheet" type="text/css" href="index.css">
-  <script src="https://cdnjs.cloudflare.com/ajax/libs/vue/2.5.15/vue.min.js"></script>
   <title>E-commerce</title>
 </head>
 <body>
@@ -43,8 +45,8 @@
                 <li><a href="#">Nikon</a></li>
                 </ul>
             </li>
-            <li><a href="#">FAQ</a></li>
             <li><a href="#">Contact</a></li>
+            <li><a href="./admin.html">Admin</a></li>
           </ul>
           <form class="navbar-form navbar-right" action="/search">
             <div class="form-group">
@@ -59,9 +61,12 @@
           </form>
           
           <ul class="nav navbar-nav navbar-right">
-            <li><div class="fb-login-button" data-max-rows="1" data-size="medium" data-button-type="continue_with" data-show-faces="false" data-auto-logout-link="true" data-use-continue-as="false" scope="public_profile,email" onlogin="checkLoginState()"></div></li>
+            <li><a id="loginfb"><div class="fb-login-button" data-max-rows="1" data-size="medium" data-button-type="continue_with" data-show-faces="false" data-auto-logout-link="true" data-use-continue-as="false" scope="public_profile,email" onlogin="checkLoginState()"></div></a></li>
+            <li v-if="userId == null"><a>or</a></li>
+            <li v-if="userId == null"><a href="" data-toggle="modal" data-target="#signInModal">Sign In</a></li>
+            <li v-if="userId == null"><a href="" data-toggle="modal" data-target="#signUpModal">Sign Up</a></li>
             <li v-if="userId != null">
-              <a href="" onclick="logOut()" >Sign Out</a>
+              <a href="" @click="logOutButtonClick" >Sign Out</a>
             </li>
           </ul>
         </div>
@@ -153,8 +158,6 @@
     </div>
   </div>
   <!-- main -->
- 
-  <!-- product by category -->
   <!-- <product></product> -->
     <div class="container product">
       <h2>Cameras</h2>
@@ -213,20 +216,77 @@
       
         </div>
       </div>
+
+ <!-- modal sign up -->
+  
+ <div id="signUpModal" class="modal fade" role="dialog">
+  <div class="modal-dialog modal-sm modal-lg">
+
+    <div class="modal-content">
+      <div class="modal-header">
+        <button type="button" class="close" data-dismiss="modal">&times;</button>
+        <h4 class="modal-title">Sign Up</h4>
+      </div>
+      <div class="modal-body">
+        <form>
+            <div class="form-group">
+              <label for="addUser">Name</label>
+              <input type="text" placeholder="your name..." class="form-control" v-model="objUser.name">
+              <label for="addUser">Email</label>
+              <input type="email" placeholder="your email..." class="form-control" v-model="objUser.email">
+              <label for="addUser">Password</label>
+              <input type="password" placeholder="your password..." class="form-control" v-model="objUser.password">
+            </div>
+            <button type="button" class="btn btn-default" @click="createUser">Sign Up</button>
+            <!-- <button type="button" class="btn btn-default" v-on:click="test">test</button> -->
+          </form>
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+      </div>
+    </div>
+
   </div>
+</div>
+<!-- modal login -->
+<div id="signInModal" class="modal fade" role="dialog">
+  <div class="modal-dialog modal-sm modal-lg">
+
+    <div class="modal-content">
+      <div class="modal-header">
+        <button type="button" class="close" data-dismiss="modal">&times;</button>
+        <h4 class="modal-title">Sign In</h4>
+      </div>
+      <div class="modal-body">
+        <form>
+            <div class="form-group">
+              <label for="addUser">Email</label>
+              <input type="email" placeholder="your email..." class="form-control" v-model="userLogin.email">
+              <label for="addUser">Password</label>
+              <input type="password" placeholder="your password..." class="form-control" v-model="userLogin.password">
+            </div>
+            <button type="button" class="btn btn-default" @click="loginUser">Log In</button>
+          </form>
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+      </div>
+    </div>
+
+  </div>
+</div>  
+  </div>
+ 
   <!-- footer -->
   <footer class="container-fluid text-center">
     <p>&copy; 2018 Kameraku</p>
-    <!-- <form class="form-inline">Get deals & promo:
-      <input type="email" class="form-control" size="50" placeholder="Email Address">
-      <button type="button" class="btn btn-danger">Sign Up</button>
-    </form> -->
-    
   </footer>
   <script src="https://code.jquery.com/jquery-3.3.1.min.js" integrity="sha256-FgpCb/KJQlLNfOu91ta32o/NMZxltwRo8QtmkMRdAu8=" crossorigin="anonymous"></script>
   <script src="https://unpkg.com/axios/dist/axios.min.js"></script>
   <script src="https://cdn.jsdelivr.net/npm/vue/dist/vue.js"></script>
+  
 
+  <script src="./component.signup.js" charset="utf-8"></script>
   <script src="./loginfb.js"></script>
   <script src="./home.js"></script>
   

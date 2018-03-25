@@ -57,3 +57,5 @@ typings/
 # dotenv environment variables file
 .env
 
+#gcs
+.Todo fancy-4f5a6356f469.json

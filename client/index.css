@@ -68,10 +68,15 @@ container .col-md-3{
 }
 footer {
   background-color: #a9a9a9;
-  padding: 25px;
+  padding: 5px;
   color: white;
 }
 
-#fbbutton {
-  margin-top: 10px;
+#loginfb{
+  padding: 10px;
+}
+
+#welcome{
+  margin-top:200px;
+  padding-top: 200px;
 }

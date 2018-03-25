@@ -4,7 +4,7 @@ require('dotenv').load();
 
 module.exports={
   authUser : function(req,res,next){
-    console.log("masuk middleware",req.headers)
+    // console.log("masuk middleware",req.headers)
     let token = req.headers.token
     if(token){
       try{

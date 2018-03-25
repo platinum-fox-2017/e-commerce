@@ -1,12 +1,9 @@
 
 const app =new Vue({
-  el:"#app",
+  el:"#admin",
   data:{
     token: localStorage.getItem('token'),
     userId: localStorage.getItem('userId'),
-    items:[],
-    carts:[],
-    total:0,
     objUser: {
       name: '',
       email: '',
@@ -90,32 +87,6 @@ const app =new Vue({
           })
         }
     },
-    checkOut: function(){
-      let self = this
-      console.log("checkout",self.carts)
-      for(let i =0;i<self.carts.length;i++){
-        console.log(self.carts[i]._id)
-      axios({
-        method:'put',
-        url:`http://localhost:3000/transactions/${self.carts[i]._id}`,
-        data:self.carts[i]
-      }).then(function(response){
-        console.log("res check",response)
-        self.showCart()
-      }).catch(function(err){
-        console.log(err)
-      })
-      }
-      
-    },
-    limitDesc: function(desc){
-      if (desc.length > 100){
-          desc = desc.substr(0,100) + '...'
-      } else {
-         desc = desc
-      }
-      return desc
-    },
     createUser : function(){
       // alert("sign up")
       console.log("ini form input===",this.objUser)
@@ -160,22 +131,5 @@ const app =new Vue({
     }
   },
   computed:{
-    cartTotal : function(){
-      console.log("length cart",this.carts.length)
-      let count = 0
-      for(let i =0; i<this.carts.length;i++){
-        count+= this.carts[i].quantity
-      }
-      console.log(count,"count")
-      return count
-    },
-    grandTotal: function (){
-      let total  = 0
-      for(let i =0; i<this.carts.length;i++){
-        total+= (this.carts[i].quantity * this.carts[i].price)
-      }
-      console.log(total,"count")
-      return total
-    }
   }
 })

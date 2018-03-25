@@ -21,9 +21,7 @@ module.exports={
       category: req.body.category,
       description: req.body.description,
       price : req.body.price,
-      stock : req.body.stock,
       imgUrl : req.body.imgUrl,
-      imgAlt : req.body.imgAlt,
     }
     const item = new Item(input)
     console.log("======",Item);
@@ -47,9 +45,7 @@ module.exports={
       title: req.body.title,
       description: req.body.description,
       price : req.body.price,
-      stock : req.body.stock,
       imgUrl : req.body.imgUrl,
-      imgAlt : req.body.imgAlt,
     }
     console.log(id)
     Item.findOneAndUpdate(id,input,{new:true},(err,beforeUpdate)=>{

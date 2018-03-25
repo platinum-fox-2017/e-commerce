@@ -56,15 +56,17 @@ function checkLoginState() {
 
 function logout() {
   console.log('masuk sini')
-  if(fbId !==null){
-    FB.logout(function(response) {
-      localStorage.clear()
-      console.log('user log out fb')
-      // statusChangeCallback(response)
-    })
-  }else{
-    localStorage.clear()
-  }
+  console.log("fbid",this.fbId)
+  localStorage.clear()
+  // if(this.fbId !==null){
+  //   FB.logout(function(response) {
+  //     localStorage.clear()
+  //     console.log('user log out fb')
+  //     // statusChangeCallback(response)
+  //   })
+  // }else{
+  //   localStorage.clear()
+  // }
    
 }
 

@@ -12,11 +12,12 @@ const mongoose = require('mongoose')
 mongoose.connect('mongodb://localhost:27017/ecommerce')
 
 
-
+const {authUser} = require('./middlewares/auth')
 var index = require('./routes/index');
 const users = require('./routes/users');
 const item = require('./routes/item');
 const transaction = require('./routes/transaction');
+const dataUser = require('./routes/dataUser')
 
 var app = express();
 
@@ -42,7 +43,8 @@ app.use(express.static(path.join(__dirname, 'public')));
 app.use('/', index);
 app.use('/users', users);
 app.use('/items', item);
-app.use('/transactions', transaction);
+app.use('/transactions', authUser,transaction);
+app.use('/datauser',dataUser)
 
 // catch 404 and forward to error handler
 app.use(function(req, res, next) {
