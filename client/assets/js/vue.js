@@ -20,11 +20,6 @@ new Vue({
         checkoutItems: []
     },
     components: {
-        // category: category,
-        // vid: vid,
-        // homehead: homehead,
-        // cart: cart,
-        // product: product
     },
     methods: {
         checkout: function () {
@@ -133,10 +128,6 @@ new Vue({
         }
     },
     created(){
-      let $http = axios.create({
-        baseURL: 'http://localhost:3000'
-      })
-
       $http.get('/item')
         .then(items => {
             items.data.items.map(each => this.allitems.push(each))

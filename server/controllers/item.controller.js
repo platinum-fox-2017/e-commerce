@@ -40,9 +40,12 @@ module.exports = {
       })
   },
   updateItem: (req, res) => {
-    console.log(req.body.name)
+    console.log('ini nama', req.body.name)
+    console.log('ini body', req.body)
+    console.log('ini params', req.params)
     Item.findByIdAndUpdate(req.params.id, {
-      ...req.body
+      ...req.body,
+      imageUrl: req.file.cloudStoragePublicUrl
     })
       .exec()
       .then(item => {

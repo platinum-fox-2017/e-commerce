@@ -15,7 +15,7 @@ router.get('/', getAllItems)
 router.get('/:id', getItemById)
 // router.post('/', createItem)
 router.post('/', upload.single('image'), sendUploadToGCS, createItem)
-router.put('/:id', updateItem)
+router.post('/:id', upload.single('image'), sendUploadToGCS, updateItem)
 router.delete('/:id', deleteItem)
 
 module.exports = router
