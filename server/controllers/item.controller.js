@@ -16,50 +16,38 @@ module.exports={
   },
   addItem:(req,res)=>{
     let input = {
-      sku : req.body.task,
+      sku : req.body.sku,
       title: req.body.title,
       category: req.body.category,
       description: req.body.description,
       price : req.body.price,
-      imgUrl : req.body.imgUrl,
+      image: req.body.image,
+      // image: req.file.cloudStoragePublicUrl,
     }
-    const item = new Item(input)
-    console.log("======",Item);
-    item.save().then(data=>{
-      res.status(200).json({
-        message:"Item created",
-        Item:data
-      })
-    }).catch(error=>{
-      res.status(400).json({
-        message:"error",
-        error
-      })
-    })
-  },
-  updateItem:(req,res)=>{
-    console.log("ini update",req.body)
-    let id = {_id:req.params.id}
-    let input = {
-      sku : req.body.task,
-      title: req.body.title,
-      description: req.body.description,
-      price : req.body.price,
-      imgUrl : req.body.imgUrl,
-    }
-    console.log(id)
-    Item.findOneAndUpdate(id,input,{new:true},(err,beforeUpdate)=>{
-      if(!err){
-        res.status(200).json({
-          message:"update success",
+    Item.findOne({
+      sku:req.body.sku
+    }).then(data=>{
+      if(data){
+        res.status(400).json({
+          message:"item sku already registered!"
         })
       }else{
-        res.status(400).json({
-          message:"error",
-          err
+        const item = new Item(input)
+        console.log("======",Item);
+        item.save().then(data=>{
+          res.status(200).json({
+            message:"Item created",
+            Item:data
+          })
+        }).catch(error=>{
+          res.status(400).json({
+            message:"error",
+            error
+          })
         })
       }
     })
+    
   },
   removeItem:(req,res)=>{
     let id = {_id:req.params.id}

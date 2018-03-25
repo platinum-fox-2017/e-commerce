@@ -1,13 +1,16 @@
-
+window.onload = function () {
 const app =new Vue({
   el:"#admin",
   data:{
     token: localStorage.getItem('token'),
     userId: localStorage.getItem('userId'),
-    objUser: {
-      name: '',
-      email: '',
-      password: ''
+    newItem: {
+      sku:'',
+      title: '',
+      category: '',
+      description: '',
+      price: '',
+      image: ''
     },
     userLogin:{
       email:'',
@@ -15,94 +18,28 @@ const app =new Vue({
     },
   },
   created: function() {
-    this.showItem()
-    this.showCart()
   },
   methods:{
-    showItem: function(){
+    addNewItem:function(){
+      alert(this.newItem)
       let self = this
-      axios({
-        method: 'get',
-        url: 'http://localhost:3000/items/'
-      }).then(function(response){
-        console.log('ini response show',response)
-        self.items = response.data.listItem
-      })
-    },
-    showCart: function(){
-      let self = this
-      axios({
-        method: 'get',
-        url: 'http://localhost:3000/transactions',
-        headers:{
-          token:self.token,
-          userid: self.userId
-        }
-      }).then(function(response){
-        console.log('ini response carts',response.data.listTransaction)
-        console.log(self.userId)
-        self.carts= response.data.listTransaction
-      })
-    },
-    addCart:function(cart){
-      let self = this
-      // alert("add to cart?")
-      console.log("addcart",cart)
-      if(this.userId != null){
+      console.log("additem",this.newItem)
+      // if(this.userId != null){
         axios({
           method: 'post',
-          url: 'http://localhost:3000/transactions',
-          headers:{
-            userid:self.userId
-          },
-          data:cart
+          url: 'http://localhost:3000/items',
+          data:this.newItem
         }).then(function(response){
-          console.log("respon cart",response)
-          self.showCart()
+          console.log("respon item",response)
         }).catch(function(err){
           console.log(err)
         })
-      }else{
-        alert("Login first!")
-      }
+      // }else{
+      //   alert("Login first!")
+      // }
     },
-    removeCart :function(data){
-      console.log(data)
-      let self =this
-        let check = confirm("Remove item from cart?")
-        if(check === true){
-          axios({
-            method: 'delete',
-            url: `http://localhost:3000/transactions/${data._id}`,
-            headers:{
-              userid:self.userId
-            },
-            data:data
-          }).then(function(response){
-            console.log("respon cart",response)
-            // location.reload()
-            self.showCart()
-          }).catch(function(err){
-            console.log(err)
-          })
-        }
-    },
-    createUser : function(){
-      // alert("sign up")
-      console.log("ini form input===",this.objUser)
-      // alert(this.objUser)
-      axios({
-        method : 'post',
-        url : 'http://localhost:3000/users/signup',
-        data:this.objUser,
-      })
-      .then(function (resSignUp) {
-        console.log("resLogin",JSON.stringify(resSignUp));
-        // location.reload()
-      })
-      .catch(function (error) {
-        console.log(error);
-      });
+    test: function (){
+      alert('test')
     },
     loginUser : function(){
       console.log("login user===",this.userLogin)
@@ -129,7 +66,6 @@ const app =new Vue({
       // location.reload();
       
     }
-  },
-  computed:{
   }
 })
+}

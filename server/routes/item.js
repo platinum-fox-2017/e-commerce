@@ -2,9 +2,9 @@ const express = require('express');
 const router = express.Router();
 const multer = require('multer')
 const uploadImage = require('../middlewares/uploadGCS')
-const {showItem,addItem,updateItem,removeItem} = require('../controllers/item.controller')
+const {showItem,addItem,removeItem} = require('../controllers/item.controller')
 
-const uploadDisk = multer({
+const upload = multer({
   storage:multer.memoryStorage(),
   limits: {
     fileSize: 5 * 1024 * 1024
@@ -12,8 +12,8 @@ const uploadDisk = multer({
 })
 
 router.get('/',showItem)
-router.post('/',uploadDisk.single('image'),uploadImage.sendUploadToGCS,addItem)
-router.put('/:id',updateItem)
+router.post('/',addItem)
+// router.post('/',upload.single('image'),uploadImage.sendUploadToGCS,addItem)
 router.delete('/:id',removeItem)
 
 module.exports = router

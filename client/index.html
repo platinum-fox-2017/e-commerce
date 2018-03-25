@@ -164,7 +164,7 @@
       <div class="row">
         <div class="col-xs-6 col-md-3" v-for="data in items">
           <div class="thumbnail">
-            <img class="img-responsive" v-bind:src="data.imgUrl" v-bind:alt="data.imgAlt">
+            <img class="img-responsive" v-bind:src="data.image" alt="camera">
             <h3>{{data.title}}</h3>
             <p> {{limitDesc(data.description)}}</p> 
             <p class="itemPrice">$ {{data.price}}</p>
@@ -186,7 +186,7 @@
               <div class="container">
                 <div class="row" v-for="cart in carts">
                   <div class="col-xs-8 col-md-4" >
-                    <a class="thumbnail pull-left" href="#"><img class="img-responsive" v-bind:src="cart.itemId.imgUrl" v-bind:alt="cart.itemId.imgAlt"></a>
+                    <a class="thumbnail pull-left" href="#"><img class="img-responsive" v-bind:src="cart.itemId.image" alt="camera"></a>
                     <p>{{cart.itemId.title}}</p>
                   </div>
                   <div class="col-xs-4 col-md-2">

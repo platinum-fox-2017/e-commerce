@@ -109,8 +109,8 @@ const app =new Vue({
       
     },
     limitDesc: function(desc){
-      if (desc.length > 100){
-          desc = desc.substr(0,100) + '...'
+      if (desc.length > 90){
+          desc = desc.substr(0,90) + '...'
       } else {
          desc = desc
       }
