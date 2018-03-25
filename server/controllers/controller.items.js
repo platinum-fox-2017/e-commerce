@@ -19,7 +19,11 @@ module.exports={
         }).catch(err=>res.send(err))
     },
     editItem(req, res){
-        Item.findByIdAndUpdate(req.params.id, req.body).then(data=>{
+        Item.findByIdAndUpdate(req.params.id, {
+            name: req.body.name,
+            price: req.body.price,
+            stock: req.body.stock,
+        }).then(data=>{
             res.send({
                 message:'updated',
                 data

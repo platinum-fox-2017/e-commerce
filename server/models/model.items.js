@@ -7,6 +7,8 @@ const itemSchema = new Schema({
   stock: Number,
   image: String,
   status: { type: String, default: 'terbaru' },
+},{
+  timestamps: true
 });
 
 const Item = mongoose.model('Item',itemSchema)

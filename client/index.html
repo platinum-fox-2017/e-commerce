@@ -10,7 +10,9 @@
     <script src="https://code.jquery.com/jquery-3.2.1.slim.min.js" integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN" crossorigin="anonymous"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js" integrity="sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q" crossorigin="anonymous"></script>
     <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js" integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl" crossorigin="anonymous"></script>
+    <script src="https://unpkg.com/sweetalert/dist/sweetalert.min.js"></script>
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.4.0/css/font-awesome.min.css">
+    
     <title>Ecommerce</title>
   </head>
   <body>
@@ -25,7 +27,6 @@
             <li class="nav-item dropdown">
               <a class="nav-link dropdown-toggle" href="http://example.com" id="dropdown01" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">Category</a>
               <div class="dropdown-menu" aria-labelledby="dropdown01">
-                <a class="dropdown-item" href="#">Basics</a>
                 <a class="dropdown-item" href="#">Jilbab</a>
                 <a class="dropdown-item" href="#">Pakaian Wanita</a>
                 <a class="dropdown-item" href="#">Produk Beauty</a>
@@ -43,7 +44,12 @@
             <li>
               <button class="btn btn-sm btn-outline-info" data-toggle="modal" data-target="#cartModal" ><span class="fa fa-shopping-cart fa-2x"></span></button>
             </li>
-            <li><a href="#" style="color:white;"><button class="btn btn-info" data-toggle="modal" data-target="#exampleModal">Sign In</button></a></li>
+            <li v-if="!localStorage.getItem('fbToken')"><a href="#" style="color:white;"><button class="btn btn-info" data-toggle="modal" data-target="#exampleModal">Sign In</button></a></li>
+            <li v-else><a href="#" style="color:white;"><button class="btn btn-info" @click="logout()">Sign Out</button></a></li>
+            <!-- <li>
+                <div class="fb-login-button" data-max-rows="1" data-size="large" data-button-type="login_with" data-show-faces="false" 
+                data-auto-logout-link="true" data-use-continue-as="false"></div>
+            </li> -->
           </ul>
         </div>
     </nav>
@@ -134,16 +140,10 @@
             </button>
           </div>
           <div class="modal-body">
-            <form action="index.html">
-              <div class="form-group">
-                <label for="recipient-email" class="form-control-label">Email:</label>
-                <input type="text" class="form-control" id="email">
-              </div>
-              <div class="form-group">
-                <label for="message-text" class="form-control-label">Password:</label>
-                <input type="text" class="form-control" id="password">
-              </div>
-            </form>
+              <div class="fb-login-button" data-max-rows="1" data-size="large" 
+              data-button-type="login_with" data-show-faces="false" data-auto-logout-link="true" 
+              data-use-continue-as="false"
+              onlogin="checkLoginState()"></div>
           </div>
           <div class="modal-footer">
             <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
@@ -152,26 +152,16 @@
         </div>
       </div>
     </div>
-    <div class="modal fade" id="cartModal" tabindex="-1" role="dialog" aria-labelledby="cartModalLabel" aria-hidden="true">
-      <div class="modal-dialog" role="document">
-        <div class="modal-content">
-          <div class="modal-header">
-            <h5 class="modal-title" id="cartModalLabel">Keranjang Belanja</h5>
-            <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-            <span aria-hidden="true">&times;</span>
-            </button>
-          </div>
-         <modal :cart="cart" @add="addItem" @reduce="substractItem"></modal>
-          <div class="modal-footer">
-            <button type="button" class="btn btn-info" data-dismiss="modal">belanja lagi</button>
-            <button type="button" class="btn btn-primary">lanjutkan pembayaran</button>
-          </div>
-        </div>
-      </div>
-    </div>
+   
+         <modal :cart="cart" @add="addItem" @reduce="substractItem" @process="process"></modal>
+        
   </div>
+  
+  <div id="status"></div>
   <script src="https://cdn.jsdelivr.net/npm/vue@2.5.16/dist/vue.js"></script>
-<script src="assets/script/component.js"></script>
-<script src="assets/script/data.js"></script>
+  <script src="assets/script/fbLogin.js"></script>
+  <script src="assets/script/component.js"></script>
+  <script src="assets/script/data.js"></script>
+
   </body>
 </html>

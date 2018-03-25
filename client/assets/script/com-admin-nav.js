@@ -16,11 +16,15 @@ Vue.component('admin-nav',{
           </li>
         </ul>
         <ul class="nav navbar-nav navbar-right">
-          <li><button class="btn btn-info" >Sign Out</button></li>
+          <li><button class="btn btn-info" @click="signout" >Sign Out</button></li>
         </ul>
       </div>
       </div>
   </nav>
     `,
-   
+   methods:{
+    signout(){
+        this.$emit('signout')
+    }
+   }
 })

@@ -1,0 +1,65 @@
+<!DOCTYPE html>
+<html lang="en" >
+
+<head>
+  <meta charset="UTF-8">
+  <title>Login Admin Form</title>
+      <link rel="stylesheet" href="assets/css/style.css">
+      <script src="https://cdn.jsdelivr.net/npm/vue@2.5.16/dist/vue.js"></script>
+</head>
+<body>
+<div id="admin-login">
+  <div class="login-page">
+  <div class="form">
+    <!-- <form class="register-form">
+      <input type="text" v-model="objAdmin.name" placeholder="name"/>
+      <input type="password" v-model="objAdmin.password" placeholder="password"/>
+      <input type="text" v-model="objAdmin.email" placeholder="email address"/>
+      <button @click="signup">create</button>
+      <p class="message">Already registered? <a href="#">Sign In</a></p>
+    </form> -->
+    <form class="login-form">
+      <input type="text" v-model="email" placeholder="email"/>
+      <input type="password" v-model="password" placeholder="password"/>
+      <button @click="login">login</button>
+      <p class="message">Not registered? <a href="#">Create an account</a></p>
+    </form>
+  </div>
+</div>
+</div>
+  <script src='http://cdnjs.cloudflare.com/ajax/libs/jquery/2.1.3/jquery.min.js'></script>
+  <script src="https://unpkg.com/axios/dist/axios.min.js"></script>
+  <!-- <script src="assets/script/vue-admin.js"></script> -->
+  <!-- <script>
+    $('.message a').click(function(){
+   $('form').animate({height: "toggle", opacity: "toggle"}, "slow");
+    });
+  </script> -->
+  <script>
+    new Vue({
+      el: '#admin-login',
+      data: {
+              email:'',
+              password:''
+      },
+      methods:{
+        login:function(){
+          alert('haii')
+          axios({
+                method : 'post',
+                url : 'http://localhost:3000/admin/signin',
+                data:{
+                    email:this.email, 
+                    password:this.password,
+                }
+            }).then((response)=>{
+              alert ('huhuh')
+                localStorage.setItem('token', response.data.token)
+                window.location.href='admin.html'
+            }).catch(err=>console.log(err))
+        }
+      }
+    })
+  </script>
+</body>
+</html>
