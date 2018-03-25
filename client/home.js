@@ -10,6 +10,7 @@ const app =new Vue({
   },
   created: function() {
     this.showItem()
+    this.showCart()
   },
   methods:{
     showItem: function(){
@@ -22,7 +23,23 @@ const app =new Vue({
         self.items = response.data.listItem
       })
     },
+    showCart: function(){
+      let self = this
+      axios({
+        method: 'get',
+        url: 'http://localhost:3000/transactions/',
+        headers:{
+          token:self.token,
+          userid: self.userId
+        }
+      }).then(function(response){
+        console.log('ini response carts',response.data.listTransaction)
+        console.log(self.userId)
+        self.carts= response.data.listTransaction
+      })
+    },
     addCart:function(cart){
+      let self = this
       // alert("add to cart?")
       console.log("addcart",cart)
       if(this.userId != null){
@@ -30,58 +47,57 @@ const app =new Vue({
           method: 'post',
           url: 'http://localhost:3000/transactions',
           headers:{
-            userId:this.userId
+            userid:self.userId
           },
           data:cart
         }).then(function(response){
           console.log("respon cart",response)
+          self.showCart()
         }).catch(function(err){
           console.log(err)
         })
       }else{
         alert("Login first!")
       }
-      
-      // let obj={
-      //   title:data.title,
-      //   category:data.category,
-      //   description:data.description,
-      //   price:data.price,
-      //   imgUrl:data.imgUrl,
-      //   imgAlt:data.imgAlt,
-      //   sku:data.sku,
-      //   qty: 1,
-      //   subTotal: data.price
-      //   }
-      // for(let i = 0; i<this.carts.length; i++) {
-      //   console.log('masuk sini')
-      //   if (this.carts[i].sku === data.sku) {
-      //     console.log('sama')
-      //     this.carts[i].qty ++
-      //     this.carts[i].subTotal = this.carts[i].price * this.carts[i].qty
-      //     this.total += data.price
-      //     return
-      //   }
-      // }
-      
-      // this.carts.push(obj)
-      // this.total += obj.price
     },
     removeCart :function(data){
       console.log(data)
-      let carts = this.carts
-      for(let i = 0; i<carts.length; i++) {
-        if (carts[i].sku === data.sku) {
-          let check = confirm("Remove item from cart?")
-          if(check === true){
-            carts.splice(i,1)
-            this.total -= data.subTotal
-            let index = this.items.map(item => item.sku).indexOf(data.sku)
-            return
-          }
-          
+      let self =this
+        let check = confirm("Remove item from cart?")
+        if(check === true){
+          axios({
+            method: 'delete',
+            url: `http://localhost:3000/transactions/${data._id}`,
+            headers:{
+              userid:self.userId
+            },
+            data:data
+          }).then(function(response){
+            console.log("respon cart",response)
+            // location.reload()
+            self.showCart()
+          }).catch(function(err){
+            console.log(err)
+          })
         }
+    },
+    checkOut: function(){
+      let self = this
+      console.log("checkout",self.carts)
+      for(let i =0;i<self.carts.length;i++){
+        console.log(self.carts[i]._id)
+      axios({
+        method:'put',
+        url:`http://localhost:3000/transactions/${self.carts[i]._id}`,
+        data:self.carts[i]
+      }).then(function(response){
+        console.log("res check",response)
+        self.showCart()
+      }).catch(function(err){
+        console.log(err)
+      })
       }
+      
     },
     limitDesc: function(desc){
       if (desc.length > 100){
@@ -94,11 +110,21 @@ const app =new Vue({
   },
   computed:{
     cartTotal : function(){
+      console.log("length cart",this.carts.length)
       let count = 0
       for(let i =0; i<this.carts.length;i++){
-        count+= this.carts[i].qty
+        count+= this.carts[i].quantity
       }
+      console.log(count,"count")
       return count
+    },
+    grandTotal: function (){
+      let total  = 0
+      for(let i =0; i<this.carts.length;i++){
+        total+= (this.carts[i].quantity * this.carts[i].price)
+      }
+      console.log(total,"count")
+      return total
     }
   }
 })

@@ -2,8 +2,10 @@ const Transaction = require('../models/transaction')
 const User = require('../models/user')
 module.exports={
   showTransaction:(req,res)=>{
+    console.log(req.headers.userid)
     Transaction.find({
-      'userId': req.body.userId
+      userId: req.headers.userid,
+      status: 'pending'
     })
     .populate('userId')
     .populate('itemId')
@@ -18,11 +20,14 @@ module.exports={
     })
   },
   addTransaction:(req,res)=>{
-    console.log("server add",req.headers)
+    console.log("server add",req.body)
+    console.log(req.headers.userid)
     let input = {
       userId : req.headers.userid,
       itemId: req.body._id,
-      quantity: 1
+      quantity: 1,
+      price: req.body.price,
+      status: 'pending'
     }
     Transaction.findOne({
       userId : req.headers.userid,
@@ -63,7 +68,10 @@ module.exports={
     let id = {_id:req.params.id}
     let input = {
       userId : req.body.userId,
-      itemId: req.body.itemId,
+      itemId: req.body._id,
+      quantity: 1,
+      price: req.body.price,
+      status: 'checkout'
     }
     Transaction.findOneAndUpdate(id,input,{new:true},(err,beforeUpdate)=>{
       if(!err){
@@ -92,5 +100,24 @@ module.exports={
         })
       }
     })
-  }
+  },
+  getCheckout:(req,res)=>{
+    console.log(req.headers.userid)
+    Transaction.find({
+      userId: req.headers.userid,
+      status: 'checkout'
+    })
+    .populate('userId')
+    .populate('itemId')
+    
+    .exec()
+    .then(listTransaction=>{
+      res.status(200).json({
+        message:"success",
+        listTransaction
+      })
+    }).catch(err=>{
+      res.status(400).json(err)
+    })
+  },
 }

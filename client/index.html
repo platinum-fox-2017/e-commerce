@@ -60,7 +60,9 @@
           
           <ul class="nav navbar-nav navbar-right">
             <li><div class="fb-login-button" data-max-rows="1" data-size="medium" data-button-type="continue_with" data-show-faces="false" data-auto-logout-link="true" data-use-continue-as="false" scope="public_profile,email" onlogin="checkLoginState()"></div></li>
-            <li><a href="#">Log Out</a></li>
+            <li v-if="userId != null">
+              <a href="" onclick="logOut()" >Sign Out</a>
+            </li>
           </ul>
         </div>
       </div>
@@ -181,14 +183,14 @@
               <div class="container">
                 <div class="row" v-for="cart in carts">
                   <div class="col-xs-8 col-md-4" >
-                    <a class="thumbnail pull-left" href="#"><img class="img-responsive" v-bind:src="cart.imgUrl" v-bind:alt="cart.imgAlt"></a>
-                    <p>{{cart.title}}</p>
+                    <a class="thumbnail pull-left" href="#"><img class="img-responsive" v-bind:src="cart.itemId.imgUrl" v-bind:alt="cart.itemId.imgAlt"></a>
+                    <p>{{cart.itemId.title}}</p>
                   </div>
                   <div class="col-xs-4 col-md-2">
-                    <p>{{cart.quantity}} @ $ {{cart.price}}</p>
+                    <p>{{cart.quantity}} @ $ {{cart.itemId.price}}</p>
                   </div>
                   <div class="col-xs-4 col-md-2">
-                    <p>$ {{cart.subTotal}}</p>
+                    <p>$ {{cart.itemId.price * cart.quantity}}</p>
                   </div>
                   <div class="col-xs-2 col-md-1">
                     <button type="button" v-on:click="removeCart(cart)" class="btn btn-danger">Remove</button>
@@ -196,14 +198,14 @@
                 </div>
                 <div class="row">
                   <div class="col-md-offset-6">
-                    <p>Grand Total: $ {{total}}</p>
+                    <p>Grand Total: $ {{grandTotal}}</p>
                   </div>
                 </div>
               </div>
             </div>
             <div class="modal-footer">
               <button type="button" class="btn btn-success" data-toggle="modal" data-target="#myModal">
-                <span v-on:click="test()" class="glyphicon glyphicon-shopping-cart"> Checkout</span>
+                <span v-on:click="checkOut()" class="glyphicon glyphicon-shopping-cart"> Checkout</span>
               </button>
               <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
             </div>
@@ -215,10 +217,10 @@
   <!-- footer -->
   <footer class="container-fluid text-center">
     <p>&copy; 2018 Kameraku</p>
-    <form class="form-inline">Get deals & promo:
+    <!-- <form class="form-inline">Get deals & promo:
       <input type="email" class="form-control" size="50" placeholder="Email Address">
       <button type="button" class="btn btn-danger">Sign Up</button>
-    </form>
+    </form> -->
     
   </footer>
   <script src="https://code.jquery.com/jquery-3.3.1.min.js" integrity="sha256-FgpCb/KJQlLNfOu91ta32o/NMZxltwRo8QtmkMRdAu8=" crossorigin="anonymous"></script>

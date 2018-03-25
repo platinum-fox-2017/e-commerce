@@ -1,0 +1,12 @@
+{
+  "type": "service_account",
+  "project_id": "todo-fancy-198007",
+  "private_key_id": "4f5a6356f469ff761c3eabe86645d9258865e2d7",
+  "private_key": "-----BEGIN PRIVATE KEY-----\nMIIEvgIBADANBgkqhkiG9w0BAQEFAASCBKgwggSkAgEAAoIBAQDGgfNBMP6HJbFm\nVTj1HNPbmCQ+D/CpCj4XXXKTTTjpqYabceC/dCYLug29oko/i81pTNdueC7j8gh1\nJnBV56tW29DWcm3Eu5CBC9E29RNV7LJIPRg5WZn3vsL1BqKfWsRWMOh+f8Z7u6FF\nzGc3/kbbMMBh1zc+bqazzY+GXyfnt4u9TR3gf89hz1bI5sZpXXD5E8dTALL4pLWv\nkhz6fF7uIswNRxYtAgd5aDRE5CS2JMoj06kkIEtu6/kzEj+x8d5l/TUGXDnYkOco\nBr04+2d9loGZQVTl2yzV5ns4lVeG2RqWcv3+orJV4u9lfRL2wKo6Tl6lcYQE93rh\nvGc3b/bnAgMBAAECggEABo8lsApD5shOj9CSFLtSnsdsryZMr/E4MwJx9j8Ped0R\npxJAuGLInQuVR6ZUqLvgWjHhTnOnLP4C3IgcHyKMDU8vG97lFKKT+EehLp0zedvb\n2jo2kjKNPVvuyjTha72OjkCIdiGXt9/vyMQjxvxecACw4qq/Vw9F79wDeY+sXGIr\n099s6ptvEGZRprrIm5rsDNf7Bm6beAzWWtDhUSEw2oAFbXowcHkChMdcXrE5s0RL\ncsIUqkifAetnX9iHJXGlyiBYilZ9Fi67RdSN6J840VqJppyEagzv+VVGFJdLvvLB\nKY+ceKUYaDg3D05Bc/SsOeB+ZZJjgzHi+3eVtCM8EQKBgQDl2dV2sWo7J3natTpp\nf8PEcY7Nupnel36q38CG28By2JJc5g8EA9gZCde29nfaV7zt5KLtBc02INLfs8ZN\nE/SF2EzbDY+bdSqiAWfL6/4AtVTlcjuwutmImjwlDjnFssKQJanqdoF8jz0SkXn1\navmWcuN84Wc3yIW7k2QsARnxkQKBgQDdF0aeIuzzeMQ/mlSqLkf3oAvCKWE52cDb\n+sNTU3VKC2mMluu2WIQSwOmMfbLhCbQV0ADdpi6FBAuWirdZaRyWOwnwy7Ilm96u\nD8QnIMLU87fi1DDYxEr+GwIQbuEdl4BkOBFcy9xIeekJRocTHizXTgqPtw/I8hjx\n66AHOrek9wKBgDpL65Y1HUpvkrpj6LLFUvPKEXwgbdJE/j18jqolpkP6pfSl7P0J\ntI91LZ8cF/3q7uIvcRtIs2mdHZ7bS9pUy1n/KE8Ou3OkXfHFBXx1GHE5jJS9SmJi\nobXB2KtVVlXMJwjEZLow4FqlQcop15LlVPRRo10TFkjRtQmEMo3uoZPhAoGBAJ7B\nPukAZSry1eBh3leRAgZSev8BnZnfvXd4Gdd0fy0bAsB8AmeeKcAZm9pQzCiBQjnD\ncUu3L4I+BGAl3UArlOZfIGUyrwoIYZ6VHaGHCb/F/Y24Fhcg5ESQeiv4olcQWZYd\nGIKMs/Gq8GXDqexVZ5d2p2jI52HATZ8xNWjbhdDDAoGBAKlN2tD76PGcD/55hcDv\ndV6L0H+fVhcaUB095RlSByfZaoQuKoaNAzrCYvPisD+eUyNMRhrW3O2TUayBULG1\nIkL8FOjk02aamx9htKR00ip9pfpoZFzuRFrM4fOH1D1VwANmwOScxY8lBbYQxfaM\nTx+OMScjk0KTQtLQBsc1o0Xa\n-----END PRIVATE KEY-----\n",
+  "client_email": "kameraku-haripermadi-com@todo-fancy-198007.iam.gserviceaccount.com",
+  "client_id": "117876927521968516614",
+  "auth_uri": "https://accounts.google.com/o/oauth2/auth",
+  "token_uri": "https://accounts.google.com/o/oauth2/token",
+  "auth_provider_x509_cert_url": "https://www.googleapis.com/oauth2/v1/certs",
+  "client_x509_cert_url": "https://www.googleapis.com/robot/v1/metadata/x509/kameraku-haripermadi-com%40todo-fancy-198007.iam.gserviceaccount.com"
+}
