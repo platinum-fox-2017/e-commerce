@@ -18,6 +18,8 @@ const {
 
 const { addUser } = require("../controllers/user.controllers");
 
+const { checkout, alltransaction } = require("../controllers/transaction.controllers")
+
 // public
 router.get("/items", showAllItems);
 router.get("/items/:itemId", showItem);
@@ -28,10 +30,14 @@ router.post("/login", addUser);
 router.post("/admin/create", createAdmin);
 router.post("/admin/login", loginAdmin);
 
+// transaction
+router.get("/alltransaction", alltransaction)
+router.post("/checkout", checkout)
+
 // item admin only
 router.post(
   "/admin/additem",
-  multer.single("image"),
+  multer.single("file"),
   imgUpload.sendUploadToGCS,
   AddItem
 );

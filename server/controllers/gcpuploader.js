@@ -21,6 +21,8 @@ let ImgUpload = {};
 // the real middleware
 
 ImgUpload.sendUploadToGCS = (req, res, next) => {
+    console.log('masuk?????')
+    console.log(req.file)
     if (!req.file) {
         return next('upload mungkin gagal');
     }
