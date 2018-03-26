@@ -10,7 +10,7 @@
     <link href="https://fonts.googleapis.com/css?family=Lato" rel="stylesheet">
     <link rel="stylesheet" href="assets/styles/styles.css">
     <link rel="shortcut icon" href="assets/img/favicon.ico" type="image/x-icon">
-    <title>Qpisang</title>
+    <title>QQQ</title>
 </head>
 
 <body>
@@ -76,7 +76,7 @@
                                 <button type="button " class="btn btn-danger btn-secondary btn-bloc k " v-on:click="clearCart()">Clear Cart</button>
                             </div>
                         </div>
-                        <button type="button " class="btn btn-primary btn-block ">Proceed Checkout</button>
+                        <button type="button " class="btn btn-primary btn-block " @click="checkout" data-dismiss="modal">Proceed Checkout</button>
                     </div>
                 </div>
             </div>
@@ -122,29 +122,65 @@
                         </button>
                     </div>
                     <div class="modal-body">
-                        <form>
+                        <form enctype="multipart/form-data">
                             <div class="form-group">
                                 <label class="col-form-label">Name:</label>
-                                <input type="text" class="form-control">
+                                <input type="text" v-model="name" class="form-control">
                             </div>
                             <div class="form-group">
                                 <label class="col-form-label">Price:</label>
-                                <input type="text" class="form-control">
+                                <input type="text" v-model="price" class="form-control">
                             </div>
                             <div class="form-group">
                                 <label>Image</label>
-                                <input type="file" class="form-control-file">
+                                <input type="file" id="file" ref="file" v-on:change="handleFileUpload()" class="form-control-file">
                             </div>
                             <div class="form-group">
                                 <label class="col-form-label">Description:</label>
-                                <textarea class="form-control"></textarea>
+                                <textarea v-model="description" class="form-control"></textarea>
                             </div>
                         </form>
                     </div>
                     <div class="modal-footer">
-                        <button type="button" class="btn btn-primary" v-on:click="">Upload</button>
+                        <button type="button" class="btn btn-primary" v-on:click="addItem()">Upload</button>
                     </div>
                 </div>
+            </div>
+        </div>
+
+        <!-- Modal -->
+        <div class="modal fade" id="transactionModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+            <div class="modal-dialog" role="document">
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                            <span aria-hidden="true">&times;</span>
+                        </button>
+                </div>
+                <div class="modal-body">
+                    <div class="div">
+                            <table class="table">
+                                    <thead>
+                                      <tr>
+                                        <th scope="col">#</th>
+                                        <th scope="col">Transaction ID</th>
+                                        <th scope="col">Total</th>
+                                      </tr>
+                                    </thead>
+                                    <tbody v-for="(order,index) in orders">
+                                      <tr>
+                                        <th scope="row">{{ index }}</th>
+                                        <td>{{ order._id }}</td>
+                                        <td>{{ order.cartTotal }}</td>
+                                      </tr>
+                                    </tbody>
+                                  </table>
+                    </div>
+                </div>
+                <div class="modal-footer">
+                <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+                </div>
+            </div>
             </div>
         </div>
 
@@ -168,6 +204,7 @@
             <div class="collapse navbar-collapse" id="navbarSupportedContent">
                 <div class="d-block d-md-block d-lg-none ">
                     <ul class="nav navbar-nav navbar-right ">
+                        <a href="#" v-if="access_token" class="redirect-link p-2 text-white" data-toggle="modal" data-target="#transactionModal">All Transaction</a>
                         <a href="#" v-if="!access_token" class="redirect-link p-2 text-white" onclick="fb_login() ">LOGIN USER</a>
                         <a href="#" v-if="access_token" class="redirect-link p-2 text-white" onclick="fb_logout() ">LOGOUT USER</a>
                         <a href="#" v-if="!admin_jwt" class="redirect-link p-2 text-white" data-toggle="modal" data-target="#adminModal">LOGIN ADMIN</a>
@@ -179,6 +216,7 @@
 
             <!-- Desktop -->
             <li class="text-center d-none d-lg-block p-8" style="list-style:none">
+                <a href="#" v-if="access_token" class="redirect-link p-2 text-white" data-toggle="modal" data-target="#transactionModal">All Transaction</a>
                 <a href="#" v-if="!access_token" class="redirect-link p-2 text-white" onclick="fb_login() ">LOGIN USER</a>
                 <a href="#" v-if="access_token" class="redirect-link p-2 text-white" onclick="fb_logout() ">LOGOUT USER</a>
                 <a href="#" v-if="!admin_jwt" class="redirect-link p-2 text-white" data-toggle="modal" data-target="#adminModal">LOGIN ADMIN</a>
