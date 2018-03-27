@@ -12,31 +12,9 @@ Vue.component('NavbarAdmin', {
 
       </li>
       <li class="nav-item active">
-        <a class="nav-link" href="#">Home</a>
+        <a class="nav-link" href="index.html">Home</a>
       </li>
-      <li id="dropdown2" class="nav-item dropdown">
-
-        <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown2" role="button" data-toggle="dropdown">
-       Products
-      </a>
-
-        <div id="dropdown-content2" class="dropdown-menu" aria-labelledby="navbarDropdown">
-          <a class="dropdown-item" href="#">New Products</a>
-          <a class="dropdown-item" href="#">Special Offers</a>
-          <a class="dropdown-item" href="#">Arduino</a>
-        </div>
-      </li>
-
-
     </ul>
-
-
-
-      <ul class="nav navbar-nav">
-        <li class="nav-item">
-          <a class="nav-link" href="#">Admin</a>
-        </li>
-      </ul>
 
   </nav>
   `,

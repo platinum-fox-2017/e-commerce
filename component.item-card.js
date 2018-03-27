@@ -30,8 +30,7 @@ Vue.component('item-card', {
     </div>
   `,
   props:['item'],
-  data: {
-
+  data: function () {
   },
   methods: {
     addToCart: function(obj){

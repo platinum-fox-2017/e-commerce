@@ -45,7 +45,7 @@ Vue.component('Navbar', {
 
       <ul class="nav navbar-nav">
         <li class="nav-item">
-          <a class="nav-link" href="#">Sign In</a>
+          <a class="nav-link" href="admin.html">Admin</a>
         </li>
         <li>
           <a class="nav-link d-none d-md-block" href="#" data-toggle="modal" data-target="#cartModal"><i class="fa fa-shopping-cart"></i> Cart <span class="badge">{{totalitems}}</span></a>
