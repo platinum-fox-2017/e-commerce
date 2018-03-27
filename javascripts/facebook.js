@@ -101,8 +101,8 @@ function testAPI(token) {
 
     // axios
     let localhost = 'http://localhost:3000';
-    let deploy = 'http://phase-two.teddydevstack.com';
-    axios.post(`${localhost}/users/signup`, {response:response})
+    let deploy = 'http://ecommerce-server.teddydevstack.com';
+    axios.post(`${deploy}/users/signup`, {response:response})
     .then((serverRes) => {
       console.log(serverRes)
       if (serverRes.data) {
@@ -142,8 +142,8 @@ function logout(){
 
 function admin(){
   let localhost = 'http://localhost:3000';
-  let deploy = 'http://phase-two.teddydevstack.com';
-  axios.get(`${localhost}/users/admin`, {headers: {token: localStorage.getItem('jwtToken')}})
+  let deploy = 'http://ecommerce-server.teddydevstack.com';
+  axios.get(`${deploy}/users/admin`, {headers: {token: localStorage.getItem('jwtToken')}})
   .then(({data}) => {
     console.log(data)
     if (data.status === 'approved') {
