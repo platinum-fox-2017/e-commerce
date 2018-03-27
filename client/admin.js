@@ -16,15 +16,19 @@ const app =new Vue({
       email:'',
       password:''
     },
+    objUser: {
+      name: '',
+      email: '',
+      password: ''
+    },
   },
   created: function() {
   },
   methods:{
     addNewItem:function(){
-      alert(this.newItem)
       let self = this
+      // alert(self.newItem)
       console.log("additem",this.newItem)
-      // if(this.userId != null){
         axios({
           method: 'post',
           url: 'http://localhost:3000/items',
@@ -34,9 +38,6 @@ const app =new Vue({
         }).catch(function(err){
           console.log(err)
         })
-      // }else{
-      //   alert("Login first!")
-      // }
     },
     test: function (){
       alert('test')
@@ -45,7 +46,7 @@ const app =new Vue({
       console.log("login user===",this.userLogin)
       axios({
         method : 'post',
-        url : 'http://localhost:3000/users/signin',
+        url : 'http://localhost:3000/login/admin/signin',
         data:this.userLogin
       })
       .then(function (resSignIn) {
@@ -65,7 +66,24 @@ const app =new Vue({
       localStorage.clear()
       // location.reload();
       
-    }
+    },
+    createUser : function(){
+      // alert("sign up")
+      console.log("ini form input===",this.objUser)
+      // alert(this.objUser)
+      axios({
+        method : 'post',
+        url : 'http://localhost:3000/login/admin/signup',
+        data:this.objUser,
+      })
+      .then(function (resSignUp) {
+        console.log("resLogin",JSON.stringify(resSignUp));
+        // location.reload()
+      })
+      .catch(function (error) {
+        console.log(error);
+      });
+    },
   }
 })
 }

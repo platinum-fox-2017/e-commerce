@@ -24,6 +24,7 @@ module.exports={
       image: req.body.image,
       // image: req.file.cloudStoragePublicUrl,
     }
+    console.log(input)
     Item.findOne({
       sku:req.body.sku
     }).then(data=>{

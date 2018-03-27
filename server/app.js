@@ -17,7 +17,7 @@ var index = require('./routes/index');
 const users = require('./routes/users');
 const item = require('./routes/item');
 const transaction = require('./routes/transaction');
-const dataUser = require('./routes/dataUser')
+const login = require('./routes/login')
 
 var app = express();
 
@@ -42,9 +42,9 @@ app.use(express.static(path.join(__dirname, 'public')));
 
 app.use('/', index);
 app.use('/users', users);
-app.use('/items', item);
+app.use('/items',item);
 app.use('/transactions', authUser,transaction);
-app.use('/datauser',dataUser)
+app.use('/login', login)
 
 // catch 404 and forward to error handler
 app.use(function(req, res, next) {

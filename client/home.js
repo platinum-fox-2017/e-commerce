@@ -26,7 +26,7 @@ const app =new Vue({
       let self = this
       axios({
         method: 'get',
-        url: 'http://localhost:3000/items/'
+        url: 'http://localhost:3000/items'
       }).then(function(response){
         console.log('ini response show',response)
         self.items = response.data.listItem
@@ -122,7 +122,7 @@ const app =new Vue({
       // alert(this.objUser)
       axios({
         method : 'post',
-        url : 'http://localhost:3000/users/signup',
+        url : 'http://localhost:3000/login/admin/signup',
         data:this.objUser,
       })
       .then(function (resSignUp) {
@@ -137,7 +137,7 @@ const app =new Vue({
       console.log("login user===",this.userLogin)
       axios({
         method : 'post',
-        url : 'http://localhost:3000/users/signin',
+        url : 'http://localhost:3000/login/admin/signin',
         data:this.userLogin
       })
       .then(function (resSignIn) {

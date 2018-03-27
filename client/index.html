@@ -46,7 +46,6 @@
                 </ul>
             </li>
             <li><a href="#">Contact</a></li>
-            <li><a href="./admin.html">Admin</a></li>
           </ul>
           <form class="navbar-form navbar-right" action="/search">
             <div class="form-group">
@@ -61,7 +60,7 @@
           </form>
           
           <ul class="nav navbar-nav navbar-right">
-            <li><a id="loginfb"><div class="fb-login-button" data-max-rows="1" data-size="medium" data-button-type="continue_with" data-show-faces="false" data-auto-logout-link="true" data-use-continue-as="false" scope="public_profile,email" onlogin="checkLoginState()"></div></a></li>
+            <li v-if="userId == null"><a id="loginfb"><div class="fb-login-button" data-max-rows="1" data-size="medium" data-button-type="continue_with" data-show-faces="false" data-auto-logout-link="false" data-use-continue-as="false" scope="public_profile,email" onlogin="checkLoginState()"></div></a></li>
             <li v-if="userId == null"><a>or</a></li>
             <li v-if="userId == null"><a href="" data-toggle="modal" data-target="#signInModal">Sign In</a></li>
             <li v-if="userId == null"><a href="" data-toggle="modal" data-target="#signUpModal">Sign Up</a></li>
@@ -174,9 +173,10 @@
       </div>
     </div>
 <!-- cart Modal-->
+<!-- <cart :carts="carts" @removecart="removeCart" @checkout="checkOut"></cart> -->
     <div id="myModal" class="modal fade" role="dialog">
         <div class="modal-dialog modal-lg modal-sm">
-          <!-- Modal content-->
+          
           <div class="modal-content">
             <div class="modal-header">
               <button type="button" class="close" data-dismiss="modal">&times;</button>
@@ -218,36 +218,7 @@
       </div>
 
  <!-- modal sign up -->
-  
- <div id="signUpModal" class="modal fade" role="dialog">
-  <div class="modal-dialog modal-sm modal-lg">
-
-    <div class="modal-content">
-      <div class="modal-header">
-        <button type="button" class="close" data-dismiss="modal">&times;</button>
-        <h4 class="modal-title">Sign Up</h4>
-      </div>
-      <div class="modal-body">
-        <form>
-            <div class="form-group">
-              <label for="addUser">Name</label>
-              <input type="text" placeholder="your name..." class="form-control" v-model="objUser.name">
-              <label for="addUser">Email</label>
-              <input type="email" placeholder="your email..." class="form-control" v-model="objUser.email">
-              <label for="addUser">Password</label>
-              <input type="password" placeholder="your password..." class="form-control" v-model="objUser.password">
-            </div>
-            <button type="button" class="btn btn-default" @click="createUser">Sign Up</button>
-            <!-- <button type="button" class="btn btn-default" v-on:click="test">test</button> -->
-          </form>
-      </div>
-      <div class="modal-footer">
-        <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
-      </div>
-    </div>
-
-  </div>
-</div>
+  <signup :objuser="objUser" @createuser="createUser"></signup>
 <!-- modal login -->
 <div id="signInModal" class="modal fade" role="dialog">
   <div class="modal-dialog modal-sm modal-lg">
@@ -265,7 +236,7 @@
               <label for="addUser">Password</label>
               <input type="password" placeholder="your password..." class="form-control" v-model="userLogin.password">
             </div>
-            <button type="button" class="btn btn-default" @click="loginUser">Log In</button>
+            <button type="button" class="btn btn-default" @click="loginUser" data-dismiss="modal">Log In</button>
           </form>
       </div>
       <div class="modal-footer">
@@ -287,6 +258,7 @@
   
 
   <script src="./component.signup.js" charset="utf-8"></script>
+  <script src="./component.cart.js" charset="utf-8"></script>
   <script src="./loginfb.js"></script>
   <script src="./home.js"></script>
   

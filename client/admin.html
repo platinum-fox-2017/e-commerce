@@ -15,26 +15,27 @@
   <link rel="stylesheet" type="text/css" href="index.css">
 </head>
 <body>
-  <nav class="navbar navbar-default">
-      <div class="container-fluid">
-        <div class="navbar-header">
-          <a class="navbar-brand" href="#">KameraKu</a>
-        </div>
-        <ul class="nav navbar-nav">
-          <li class="active"><a href="#">Home</a></li>
-          <li v-if="userId == null"><a href="" data-toggle="modal" data-target="#signInModal">Sign In</a></li>
-          <li v-if="userId != null">
-            <a href="" @click="logOutButtonClick" >Sign Out</a>
-          </li>
-        </ul>
-      </div>
-      </nav>
   <div id="admin">
-    <div class="container text-center">
-      <h2>Welcome to Admin Page</h2>
-    </div>
+    <nav class="navbar navbar-default">
+        <div class="container-fluid">
+          <div class="navbar-header">
+            <a class="navbar-brand" href="#">KameraKu</a>
+          </div>
+          <ul class="nav navbar-nav">
+            <li class="active"><a href="#">Home</a></li>
+            <li v-if="userId == null"><a href="" data-toggle="modal" data-target="#signInModal">Sign In</a></li>
+            <li v-if="userId == null"><a href="" data-toggle="modal" data-target="#signUpModal">Sign Up</a></li>
+            <li v-if="userId != null">
+              <a href="" @click="logOutButtonClick" >Sign Out</a>
+            </li>
+          </ul>
+        </div>
+        </nav>
+      <div class="container text-center">
+        <h2>Welcome to Admin Page</h2>
+      </div>
     
-<div class="container text-center">
+<div class="container text-center" v-if="userId != null">
   <!-- modal add item -->
   <button type="button" class="btn btn-info btn-lg" data-toggle="modal" data-target="#addItemModal">Add new item</button>
   </div>
@@ -43,7 +44,7 @@
     <div class="modal-dialog modal-sm modal-lg">
   
       <div class="modal-content">
-        <div class="modal-header">
+        <div class="modal-header" >
           <button type="button" class="close" data-dismiss="modal">&times;</button>
           <h4 class="modal-title">Add New Item</h4>
         </div>
@@ -63,7 +64,7 @@
                 <label for="addItem">Image</label>
                 <input type="text" class="form-control" v-model="newItem.image">
               </div>
-              <button type="button" class="btn btn-default" @click="addNewItem">Submit</button>
+              <button type="button" class="btn btn-default" @click="addNewItem" data-dismiss="modal">Submit</button>
               
             </form>
         </div>
@@ -92,7 +93,7 @@
                 <label for="addUser">Password</label>
                 <input type="password" placeholder="your password..." class="form-control" v-model="userLogin.password">
               </div>
-              <button type="button" class="btn btn-default" @click="loginUser">Log In</button>
+              <button type="button" class="btn btn-default" @click="loginUser" data-dismiss="modal">Log In</button>
             </form>
         </div>
         <div class="modal-footer">
@@ -102,6 +103,35 @@
   
     </div>
   </div> 
+<!-- sign up modal -->
+  <div id="signUpModal" class="modal fade" role="dialog">
+    <div class="modal-dialog modal-sm modal-lg">
+  
+      <div class="modal-content">
+        <div class="modal-header">
+          <button type="button" class="close" data-dismiss="modal">&times;</button>
+          <h4 class="modal-title">Sign Up</h4>
+        </div>
+        <div class="modal-body">
+          <form>
+              <div class="form-group">
+                <label for="addTodo">Name</label>
+                <input type="text" placeholder="your name..." class="form-control" v-model="objUser.name">
+                <label for="addTodo">Email</label>
+                <input type="email" placeholder="your email..." class="form-control" v-model="objUser.email">
+                <label for="addTodo">Password</label>
+                <input type="password" placeholder="your password..." class="form-control" v-model="objUser.password">
+              </div>
+              <button type="button" class="btn btn-default" @click="createUser" data-dismiss="modal">Sign Up</button>
+            </form>
+        </div>
+        <div class="modal-footer">
+          <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+        </div>
+      </div>
+  
+    </div>
+  </div>
   
   </div> <!-- end id admin vue -->
   
