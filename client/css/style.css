@@ -39,11 +39,11 @@ header a{
     padding:40px;
 }
 
-#category-list {
+.category-list {
     margin-top:15px;
 }
 
-#category-list button{
+.category-list button{
     background: #e8491d;
     color:white;
 }
