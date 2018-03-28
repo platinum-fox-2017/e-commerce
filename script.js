@@ -40,7 +40,7 @@ var app = new Vue({
         this.formData.set('stock', this.newItem.stock);
         axios({
             method: 'post',
-            url: 'http://localhost:3000/items/upload',
+            url: 'http://faduino.server.fadhilmch.com/items/upload',
             data: this.formData,
             config: {
               headers: {
@@ -62,11 +62,12 @@ var app = new Vue({
       }
     },
     fetchData: function () {
-      axios.get('http://localhost:3000/items')
+      axios.get('http://faduino.server.fadhilmch.com/items')
         .then(response => {
           this.itemsList = response.data.data;
           this.prevStock = this.itemsList.map(val => val.stock);
-          // console.log(`Previous Stock: ${this.prevStock}`)
+          console.log(this.itemsList)
+          console.log(`Previous Stock: ${this.prevStock}`)
         })
         .catch(err => {
           console.log("Error : " + err);
@@ -87,10 +88,10 @@ var app = new Vue({
       return price * quant;
     },
     setSubtotal: function(_id, quantity) {
-      this.updateStock({
-        id: _id,
-        quantity: quantity
-      });
+      // this.updateStock({
+      //   id: _id,
+      //   quantity: quantity
+      // });
       let index = this.itemsCart.map(val => val._id).indexOf(_id);
       this.itemsCart[index].subtotal = Number(quantity) * Number(this.itemsCart[index].price);
       return this.itemsCart[index].subtotal;
@@ -99,11 +100,13 @@ var app = new Vue({
       let _id = obj.id;
       let quantity = obj.quantity;
       let indexStock = this.itemsList.map(val => val._id).indexOf(_id);
+      console.log(quantity)
       this.itemsList[indexStock].stock = this.prevStock[indexStock] - quantity;
-      // console.log(`Stock: ${this.itemsList[indexStock].stock} Name: ${this.itemsList[indexStock].name}`)
+      console.log(`Stock: ${this.itemsList[indexStock].stock} Name: ${this.itemsList[indexStock].name}`)
 
     },
     addToCart: function(obj) {
+      console.log(obj)
       let index = this.itemsCart.map(val => val._id).indexOf(obj._id);
       let indexStock = this.itemsList.map(val => val._id).indexOf(obj._id);
 
@@ -125,7 +128,8 @@ var app = new Vue({
         id: obj._id,
         quantity: 1
       });
-      // this.itemsList[indexStock].stock--;
+      console.log(this.itemsList[indexStock].stock)
+      this.itemsList[indexStock].stock--;
     },
     setTotalPrice: function() {
       this.totalPrice = this.itemsCart.reduce((tot, val) => {
@@ -192,7 +196,7 @@ var app = new Vue({
     deleteItem: function(id) {
       axios({
         method: 'delete',
-        url: `http://localhost:3000/items/${id}`
+        url: `http://faduino.server.fadhilmch.com/items/${id}`
       }).then(data => {
         console.log('succeed delete')
         let indexDelete = this.itemsList.map(val => val._id).indexOf(id);

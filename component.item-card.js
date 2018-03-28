@@ -31,9 +31,12 @@ Vue.component('item-card', {
   `,
   props:['item'],
   data: function () {
+    return {}
   },
   methods: {
     addToCart: function(obj){
+      console.log(this.item)
+      console.log(obj)
       this.$emit('addtocart', obj);
     },
     checkStock: function(stock){
