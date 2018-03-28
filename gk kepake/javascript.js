@@ -1,3 +1,0 @@
-$(".button-register").click(function(){
-    
-})
