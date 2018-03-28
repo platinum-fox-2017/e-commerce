@@ -1,0 +1,68 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" integrity="sha384-BVYiiSIFeK1dGmJRAkycuHAHRg32OmUcww7on3RYdg4Va+PmSTsz/K68vbdEjh4u"
+        crossorigin="anonymous">
+    <link rel="stylesheet" href="./css/style.css">
+    <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/vue@2.5.15/dist/vue.js"></script>
+    <link href="//maxcdn.bootstrapcdn.com/font-awesome/4.1.0/css/font-awesome.min.css" rel="stylesheet">
+    <link rel="stylesheet" href="https://unpkg.com/flickity@2/dist/flickity.min.css">
+    <script src="https://unpkg.com/flickity@2/dist/flickity.pkgd.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/axios/0.18.0/axios.js"></script>
+</head>
+
+<body>
+    <div id="app">
+        <component-header :objactiveuser="objUser"></component-header>
+        <component-signin v-if="signInFormActive==true && objUser.token == undefined" @sign-up="showSignUpForm"></component-signin>
+        <component-signup v-if="signUpFormActive==true && objUser.token == undefined" @cancel-login="hideSignUpForm"></component-signup>
+        <component-carousel v-if="objUser.token != undefined  && checkoutActive == false"></component-carousel>
+        
+        <div class="container" v-for="category in categories" v-if="objUser.token != undefined  && checkoutActive == false && successActive==false">
+            <component-category :category="category"></component-category v-if="objUser.token != undefined  && checkoutActive == false && successActive==false">
+            <div class="col-sm-6 col-md-4" v-for="item in items" v-if="item.category == category.name" v-if="objUser.token != undefined && checkoutActive == false && successActive==false">
+                <div class="thumbnail" v-if="objUser.token != undefined  && checkoutActive == false && successActive==false">
+                    <component-item :item="item" @add-item-to-chart="addToChart" v-if="objUser.token != undefined && checkoutActive == false && successActive==false"></component-item>
+                </div>
+            </div>
+        </div>
+
+        <component-chart v-if="objUser.token != undefined" :carts=carts @checkout-click="checkCheckout" @delete-item="deleteItemChart">
+        </component-chart>
+
+        <component-checkout v-if="checkoutActive==true && objUser.token != undefined && successActive!=true" :carts=carts :objactiveuser="objUser" @success-transaction="showSuccess" @back-home="backToHome">
+        </component-checkout>
+
+        <component-success v-if="successActive==true && objUser.token != undefined" :objuseractive="objUser" @back-home="backToHome"></component-success>
+        
+        <!-- <component-footer></component-footer> -->
+    </div>
+
+    <script src="./js/component-header.js"></script>
+    <script src="./js/component-signin.js"></script>
+    <script src="./js/component-signup.js"></script>
+    <script src="./js/component-carousel.js"></script> 
+    <script src="./js/component-item.js"></script>
+    <script src="./js/component-category.js"></script>
+    <script src="./js/component-chart.js"></script>
+    <script src="./js/component-footer.js"></script>      
+    <script src="./js/component-checkout.js"></script>                
+    <script src="./js/component-success.js"></script>                
+    <script src="./js/root.js"></script>
+    <script>
+        function checkDoang() {
+            alert('Ada kok !')
+        }
+    </script>
+
+</body>
+
+</html>

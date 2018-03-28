@@ -1,0 +1,101 @@
+body {
+    background: #f4f4f4;
+}
+
+header {
+    background:#35424a;
+    color:white;
+    min-height: 70px;
+}
+
+header #branding {
+    font-weight: bold;
+}
+
+header .highlight {
+    color:#e8491d;
+}
+
+.button-search{
+    background:#e8491d;
+}
+
+header form {
+    margin-top:15px;
+}
+
+header .icon-cart {
+    margin-top:20px;
+    float:right;
+}
+
+header a{
+    text-decoration: none;
+    color:white;
+}
+
+.hoops{
+    height:300px;
+    padding:40px;
+}
+
+.category-list {
+    margin-top:15px;
+}
+
+.category-list button{
+    background: #e8491d;
+    color:white;
+}
+
+footer{
+    background: #35424a;
+    min-height: 150px;
+    color:white;
+}
+
+.footer{
+    position: absolute;
+    right: 0;
+    bottom: 0;
+    left: 0;
+    padding: 1rem;
+    text-align: center;
+}
+
+/* Cart */
+
+.table>tbody>tr>td, .table>tfoot>tr>td{
+    vertical-align: middle;
+}
+@media screen and (max-width: 600px) {
+    table#cart tbody td .form-control{
+		width:20%;
+		display: inline !important;
+	}
+	.actions .btn{
+		width:36%;
+		margin:1.5em 0;
+	}
+	
+	.actions .btn-info{
+		float:left;
+	}
+	.actions .btn-danger{
+		float:right;
+	}
+	
+	table#cart thead { display: none; }
+	table#cart tbody td { display: block; padding: .6rem; min-width:320px;}
+	table#cart tbody tr td:first-child { background: #333; color: #fff; }
+	table#cart tbody td:before {
+		content: attr(data-th); font-weight: bold;
+		display: inline-block; width: 8rem;
+	}
+	
+	
+	
+	table#cart tfoot td{display:block; }
+	table#cart tfoot td .btn{display:block;}
+	
+}
