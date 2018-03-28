@@ -142,7 +142,7 @@ Vue.component('admin-item',{
                 this.formData.append('stock', this.stock)
                 this.formData.append('avatar', this.file)
           
-                axios.post('http://localhost:3000/product', this.formData)
+                axios.post('http://ecommerce-server.srohimah.com/product', this.formData)
                   .then(response => {
                     console.log(response)
                   }).catch(err => {

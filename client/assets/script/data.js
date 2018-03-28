@@ -4,14 +4,8 @@ new Vue({
         items: [],
         cart: []
     },
-    // beforeCreate: function(){
-    //     let token = localStorage.getItem('tokenFb')
-    //     if(window.location.href == 'http://localhost:8824/login.html' && token) {
-    //         window.location = 'shop.html'
-    //       }
-    // },
     created: function () {
-        axios.get('http://localhost:3000/product').then(response => {
+        axios.get('http://ecommerce-server.srohimah.com/product').then(response => {
             this.items = response.data.data.map(val => val)
         }).catch(err => console.log(err))
     },

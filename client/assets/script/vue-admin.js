@@ -18,7 +18,7 @@ new Vue({
     created:function(){
         axios({
             method:'get',
-            url:'http://localhost:3000/product',
+            url:'http://ecommerce-server.srohimah.com/product',
             headers:{
                 token : localStorage.token
             },
@@ -30,7 +30,7 @@ new Vue({
         signup:function(){
             axios({
                 method:'post',
-                url:'http://localhost:3000/admin/signup',
+                url:'http://ecommerce-server.srohimah.com/admin/signup',
                 data:{
                     name : this.objAdmin.name,
                     password: this.objAdmin.password,
@@ -44,7 +44,7 @@ new Vue({
            alert(this.objAdmin.password)
             axios({
                 method:"post",
-                url :"http://localhost:3000/admin/signin",
+                url :"http://ecommerce-server.srohimah.com/admin/signin",
                 data:{
                     email: this.objAdmin.email,
                     password: this.objAdmin.password
@@ -82,7 +82,7 @@ new Vue({
                 if (willDelete) {
                     axios({
                         method:'delete',
-                        url:`http://localhost:3000/product/${id}`,
+                        url:`http://ecommerce-server.srohimah.com/${id}`,
                         // headers:{
                         //     token : localStorage.token
                         // },
@@ -108,7 +108,7 @@ new Vue({
             this.formData.append('stock', this.stock)
             this.formData.append('avatar', this.file)
         
-            axios.post('http://localhost:3000/product', this.formData)
+            axios.post('http://ecommerce-server.srohimah.com/product', this.formData)
                 .then(response => {
                 console.log(response)
                 }).catch(err => {
@@ -118,7 +118,7 @@ new Vue({
         editProduct:function(id){
             axios({
                 method : 'put',
-                url : 'http://localhost:3000/product/'+id,
+                url : 'http://ecommerce-server.srohimah.com/product/'+id,
                 data:{
                     name:this.objitem.name, 
                     price:this.objitem.price,
