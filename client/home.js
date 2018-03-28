@@ -26,7 +26,7 @@ const app =new Vue({
       let self = this
       axios({
         method: 'get',
-        url: 'http://localhost:3000/items'
+        url: 'http://api-kameraku.haripermadi.com/items'
       }).then(function(response){
         console.log('ini response show',response)
         self.items = response.data.listItem
@@ -36,7 +36,7 @@ const app =new Vue({
       let self = this
       axios({
         method: 'get',
-        url: 'http://localhost:3000/transactions',
+        url: 'http://api-kameraku.haripermadi.com/transactions',
         headers:{
           token:self.token,
           userid: self.userId
@@ -54,7 +54,7 @@ const app =new Vue({
       console.log('user id', self.userId)
       axios({
         method: 'post',
-        url: 'http://localhost:3000/transactions',
+        url: 'http://api-kameraku.haripermadi.com/transactions',
         headers:{
           userid:self.userId
         },
@@ -73,7 +73,7 @@ const app =new Vue({
         if(check === true){
           axios({
             method: 'delete',
-            url: `http://localhost:3000/transactions/${data._id}`,
+            url: `http://api-kameraku.haripermadi.com/transactions/${data._id}`,
             headers:{
               userid:self.userId
             },
@@ -94,7 +94,7 @@ const app =new Vue({
         console.log(self.carts[i]._id)
       axios({
         method:'put',
-        url:`http://localhost:3000/transactions/${self.carts[i]._id}`,
+        url:`http://api-kameraku.haripermadi.com/transactions/${self.carts[i]._id}`,
         data:self.carts[i]
       }).then(function(response){
         console.log("res check",response)
@@ -119,7 +119,7 @@ const app =new Vue({
       // alert(this.objUser)
       axios({
         method : 'post',
-        url : 'http://localhost:3000/login/signup',
+        url : 'http://api-kameraku.haripermadi.com/login/signup',
         data:this.objUser,
       })
       .then(function (resSignUp) {
@@ -134,7 +134,7 @@ const app =new Vue({
       console.log("login user===",this.userLogin)
       axios({
         method : 'post',
-        url : 'http://localhost:3000/login/signin',
+        url : 'http://api-kameraku.haripermadi.com/login/signin',
         data:this.userLogin
       })
       .then(function (resSignIn) {

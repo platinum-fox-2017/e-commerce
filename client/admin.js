@@ -31,7 +31,7 @@ const app =new Vue({
       console.log("additem",this.newItem)
         axios({
           method: 'post',
-          url: 'http://localhost:3000/items',
+          url: 'http://api-kameraku.haripermadi.com/items',
           data:this.newItem
         }).then(function(response){
           console.log("respon item",response)
@@ -47,7 +47,7 @@ const app =new Vue({
       console.log("login user===",this.userLogin)
       axios({
         method : 'post',
-        url : 'http://localhost:3000/login/admin/signin',
+        url : 'http://api-kameraku.haripermadi.com/login/admin/signin',
         data:this.userLogin
       })
       .then(function (resSignIn) {
@@ -72,7 +72,7 @@ const app =new Vue({
       // alert(this.objUser)
       axios({
         method : 'post',
-        url : 'http://localhost:3000/login/admin/signup',
+        url : 'http://api-kameraku.haripermadi.com/login/admin/signup',
         data:this.objUser,
       })
       .then(function (resSignUp) {
