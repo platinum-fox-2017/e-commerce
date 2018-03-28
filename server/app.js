@@ -9,7 +9,8 @@ require('dotenv').load();
 
 const mongoose = require('mongoose')
 
-mongoose.connect('mongodb://localhost:27017/ecommerce')
+// mongoose.connect('mongodb://localhost:27017/ecommerce')
+mongoose.connect('mongodb://ecomm2018:e1234@ds145148.mlab.com:45148/ecommerce2018')
 
 
 const {authUser} = require('./middlewares/auth')
@@ -43,7 +44,7 @@ app.use(express.static(path.join(__dirname, 'public')));
 app.use('/', index);
 app.use('/users', users);
 app.use('/items',item);
-app.use('/transactions', authUser,transaction);
+app.use('/transactions',transaction);
 app.use('/login', login)
 
 // catch 404 and forward to error handler

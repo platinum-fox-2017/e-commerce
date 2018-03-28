@@ -52,23 +52,19 @@ const app =new Vue({
       // alert("add to cart?")
       console.log("addcart",cart)
       console.log('user id', self.userId)
-      if(this.userId != null){
-        axios({
-          method: 'post',
-          url: 'http://localhost:3000/transactions',
-          headers:{
-            userid:self.userId
-          },
-          data:cart
-        }).then(function(response){
-          console.log("respon cart",response)
-          self.showCart()
-        }).catch(function(err){
-          console.log(err)
-        })
-      }else{
-        alert("Login first!")
-      }
+      axios({
+        method: 'post',
+        url: 'http://localhost:3000/transactions',
+        headers:{
+          userid:self.userId
+        },
+        data:cart
+      }).then(function(response){
+        console.log("respon cart",response)
+        self.showCart()
+      }).catch(function(err){
+        console.log(err)
+      })
     },
     removeCart :function(data){
       console.log(data)

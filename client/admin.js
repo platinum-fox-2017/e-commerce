@@ -35,6 +35,7 @@ const app =new Vue({
           data:this.newItem
         }).then(function(response){
           console.log("respon item",response)
+          location.reload()
         }).catch(function(err){
           console.log(err)
         })
