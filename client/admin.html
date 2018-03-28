@@ -19,7 +19,7 @@
         <admin-nav @signout="signout"></admin-nav>
             <div class="contain">
                     <div class="container">
-                              <admin-item :items='items' @remove="deleteProduct" @additem="addProduct" @edit="editProduct"
+                              <admin-item :items='items' @remove="deleteProduct" @edit="editProduct"
                                 v-on:paylodname ="getpayloadname"
                                 v-on:payloadprice ="getpayloadprice"
                                 v-on:payloadstock ="getpayloadstock">

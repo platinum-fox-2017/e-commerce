@@ -12,18 +12,16 @@
   <div class="login-page">
   <div class="form">
     <!-- <form class="register-form">
-      <input type="text" v-model="objAdmin.name" placeholder="name"/>
-      <input type="password" v-model="objAdmin.password" placeholder="password"/>
-      <input type="text" v-model="objAdmin.email" placeholder="email address"/>
+      <input type="text" v-model="name" placeholder="name"/>
+      <input type="password" v-model="password" placeholder="password"/>
+      <input type="text" v-model="email" placeholder="email address"/>
       <button @click="signup">create</button>
       <p class="message">Already registered? <a href="#">Sign In</a></p>
     </form> -->
-    <form class="login-form">
-      <input type="text" v-model="email" placeholder="email"/>
+      <input type="email" v-model="email" placeholder="email"/>
       <input type="password" v-model="password" placeholder="password"/>
-      <button @click="login">login</button>
+      <button @click="login()">login</button>
       <p class="message">Not registered? <a href="#">Create an account</a></p>
-    </form>
   </div>
 </div>
 </div>
@@ -39,21 +37,32 @@
     new Vue({
       el: '#admin-login',
       data: {
-              email:'',
-              password:''
+        email:'',
+        password:''
       },
       methods:{
+        // signup:function(){
+        //     axios({
+        //         method:'post',
+        //         url:'http://localhost:3000/admin/signup',
+        //         data:{
+        //             name : name,
+        //             password: password,
+        //             email : email
+        //         }
+        //     }).then(data=>{
+        //         console.log(data)
+        //     }).catch(err=>console.log(err))
+        // },
         login:function(){
-          alert('haii')
           axios({
                 method : 'post',
-                url : 'http://localhost:3000/admin/signin',
+                url : 'localhost:3000/admin/signin',
                 data:{
                     email:this.email, 
                     password:this.password,
                 }
             }).then((response)=>{
-              alert ('huhuh')
                 localStorage.setItem('token', response.data.token)
                 window.location.href='admin.html'
             }).catch(err=>console.log(err))

@@ -1,13 +1,13 @@
 const Storage = require('@google-cloud/storage');
 const config = {
-  CLOUD_BUCKET: 'hijabana.srohimah.com',
+  CLOUD_BUCKET: 'ecommerce-image.srohimah.com',
   PROJECT_ID: 'first-deploy-198005'
 }
 
 // prepare storage
 const storage = Storage({
   projectId: config.PROJECT_ID,
-  keyFilename: 'first-deploy-2115f8696651.json'
+  keyFilename: 'first-deploy-b6d4d20ae6ea.json'
 });
 
 // set which bucket
@@ -19,9 +19,8 @@ function getPublicUrl (filename) {
 }
 
 // the real middleware
-
 function sendUploadToGCS (req, res, next) {
-  console.log(req.file)
+ 
   if (!req.file) {
     return next('upload mungkin gagal');
   }
@@ -35,15 +34,17 @@ function sendUploadToGCS (req, res, next) {
       contentType: req.file.mimetype
     }
   });
-
+  console.log("----",gcsname)
   // handle when upload error
   stream.on('error', (err) => {
+    console.log("errrr======")
     req.file.cloudStorageError = err;
     next(err); 
   });
 
   // handle when upload finish
   stream.on('finish', () => {
+    console.log('streamm,,.........')
     req.file.cloudStorageObject = gcsname;
     file.makePublic(). //make the uploaded file public
       then(() => {

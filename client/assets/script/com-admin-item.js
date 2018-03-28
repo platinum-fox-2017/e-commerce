@@ -53,7 +53,7 @@ Vue.component('admin-item',{
                                 </div>
                                 <div class="md-form mb-3">
                                     <label for="defaultForm-stock">Image</label>                       
-                                    <input type="file" id="image" name="image" class="form-control validate" accept="image/*">
+                                    <input type="file" id="image" name="image" @change="getFile" class="form-control validate" accept="image/*">
                                 </div>
                             </div>
                             <div class="modal-footer d-flex justify-content-center">
@@ -92,11 +92,11 @@ Vue.component('admin-item',{
                     </div>
                     <div class="md-form mb-3">
                         <label for="defaultForm-stock">Image</label>                       
-                        <input type="file" id="image" name="image" class="form-control validate" accept="image/*">
+                        <input type="file" id="image" name="image" @change="getFile" class="form-control validate" accept="image/*">
                     </div>
                 </div>
                 <div class="modal-footer d-flex justify-content-center">
-                    <button class="btn btn-primary" @click="addItem">Add Product</button>
+                    <button class="btn btn-primary" @click="addItem" data-dismiss="modal">Add Product</button>
                 </div>
             </div>
     </div>
@@ -109,13 +109,14 @@ Vue.component('admin-item',{
             name: '',
             price: '',
             stock: '',
-            image: ''
+            formData : new FormData(),
+            file: null
         }
     },
     methods:{
         getFile : function(event){
-            let pict = event.target.files
-            this.image = pict[0]
+            console.log(this)
+            this.file = event.target.files[0];
         },
         onInputName:function(event){
             this.name = event.target.value
@@ -136,7 +137,18 @@ Vue.component('admin-item',{
             this.$emit('remove', id);
         },
         addItem:function(){
-            this.$emit('additem')
+                this.formData.append('name', this.name)
+                this.formData.append('price', this.price)
+                this.formData.append('stock', this.stock)
+                this.formData.append('avatar', this.file)
+          
+                axios.post('http://localhost:3000/product', this.formData)
+                  .then(response => {
+                    console.log(response)
+                  }).catch(err => {
+                    console.log(err.response)
+                  })
+                //   this.$emit('additem')
         },
         editItem:function(id){
             this.$emit('edit', id)

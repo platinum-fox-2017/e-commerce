@@ -5,7 +5,8 @@ new Vue({
             name: '',
             price: '',
             stock: '',
-            file: null,            
+            file: null,
+            formData  : new FormData()            
         },
         objAdmin:{
             email:'',
@@ -26,19 +27,19 @@ new Vue({
         }).catch(err=>console.log(err))
     },
     methods: {
-        // signup:function(){
-        //     axios({
-        //         method:'post',
-        //         url:'http://localhost:3000/admin/signup',
-        //         data:{
-        //             name : this.objAdmin.name,
-        //             password: this.objAdmin.password,
-        //             email : this.objAdmin.email
-        //         }
-        //     }).then(data=>{
-        //         console.log(data)
-        //     }).catch(err=>console.log(err))
-        // },
+        signup:function(){
+            axios({
+                method:'post',
+                url:'http://localhost:3000/admin/signup',
+                data:{
+                    name : this.objAdmin.name,
+                    password: this.objAdmin.password,
+                    email : this.objAdmin.email
+                }
+            }).then(data=>{
+                console.log(data)
+            }).catch(err=>console.log(err))
+        },
         login:function(){
            alert(this.objAdmin.password)
             axios({
@@ -101,46 +102,19 @@ new Vue({
         currencyFormat: function (price) {
             return price.toLocaleString()
         },
-        addProduct:function() {
-                let formData=new FormData()
-                formData.set('name', this.objitem.name)
-                formData.set('price', this.objitem.price)
-                formData.set('stock', this.objitem.stock)
-                formData.set('image', this.objitem.image[0])
-          
-                axios.post('http://localhost:3000/product', formData)
-                  .then(response => {
-                    console.log(response)
-                  }).catch(err => {
-                    console.log(err.response)
-                  })
-              },
-
-            // this.formData.set('image', this.file[0])
-            // this.formData.set('name', this.objitem.name);
-            // this.formData.set('price', this.objitem.price)
-            // this.formData.set('stock', this.objitem.stock)
-            // axios({
-            //     method : 'post',
-            //     url : 'http://localhost:3000/product',
-            //     data:{
-            //         name:this.objitem.name, 
-            //         price:this.objitem.price,
-            //         stock:this.objitem.stock
-            //     },
-            //     // headers:{
-            //     //     token : localStorage.token
-            //     // },
-            //     // data:this.formData,               
-            //     // config = {
-            //     //     headers: {
-            //     //       'content-type': 'multipart/form-data'
-            //     //     }
-            // }).then((response)=>{
-            //     location.reload();
-            // }).catch(err=>console.log(err))
-            
-        // },
+        addProduct: function (){
+            this.formData.append('name', this.name)
+            this.formData.append('price', this.price)
+            this.formData.append('stock', this.stock)
+            this.formData.append('avatar', this.file)
+        
+            axios.post('http://localhost:3000/product', this.formData)
+                .then(response => {
+                console.log(response)
+                }).catch(err => {
+                console.log(err.response)
+                })
+        },
         editProduct:function(id){
             axios({
                 method : 'put',
@@ -148,16 +122,9 @@ new Vue({
                 data:{
                     name:this.objitem.name, 
                     price:this.objitem.price,
-                    stock:this.objitem.stock
+                    stock:this.objitem.stock,
+                    Image:this.objitem.file
                 },
-                // headers:{
-                //     token : localStorage.token
-                // },
-                // data:this.formData,               
-                // config = {
-                //     headers: {
-                //       'content-type': 'multipart/form-data'
-                //     }
             }).then((response)=>{
                 location.reload();
             }).catch(err=>console.log(err))
