@@ -51,6 +51,7 @@ const app =new Vue({
       let self = this
       // alert("add to cart?")
       console.log("addcart",cart)
+      console.log('user id', self.userId)
       if(this.userId != null){
         axios({
           method: 'post',
@@ -122,12 +123,12 @@ const app =new Vue({
       // alert(this.objUser)
       axios({
         method : 'post',
-        url : 'http://localhost:3000/login/admin/signup',
+        url : 'http://localhost:3000/login/signup',
         data:this.objUser,
       })
       .then(function (resSignUp) {
         console.log("resLogin",JSON.stringify(resSignUp));
-        // location.reload()
+        location.reload()
       })
       .catch(function (error) {
         console.log(error);
@@ -137,14 +138,14 @@ const app =new Vue({
       console.log("login user===",this.userLogin)
       axios({
         method : 'post',
-        url : 'http://localhost:3000/login/admin/signin',
+        url : 'http://localhost:3000/login/signin',
         data:this.userLogin
       })
       .then(function (resSignIn) {
         console.log("resLogin",resSignIn.data.data.id);
         localStorage.setItem('token',resSignIn.data.data.token)
         localStorage.setItem('userId',resSignIn.data.data.id)
-        // location.reload();
+        location.reload();
 
       })
       .catch(function (error) {
@@ -155,7 +156,7 @@ const app =new Vue({
     logOutButtonClick : function (){
       console.log('user log out')
       localStorage.clear()
-      // location.reload();
+      location.reload();
       
     }
   },

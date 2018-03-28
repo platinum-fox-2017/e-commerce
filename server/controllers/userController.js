@@ -168,36 +168,51 @@ module.exports={
   },
   signInAdmin:(req,res)=>{
     console.log("ini sign in ",req.body)
-    User.findOne({
-      email:req.body.email
-    })
-    .exec()
-    .then(dataUser=>{
-      if(dataUser.role == 'admin'){
-        console.log("ini data admin===",dataUser)
-        let checkPass = bcrypt.compareSync(req.body.password,dataUser.password)
-        if(checkPass){
-          let token = jwt.sign({id:dataUser._id,email:dataUser.email},process.env.SECRET)
-          res.status(200).json({
-            message:"login success",
-            data:{
-              id:dataUser._id,
-              name:dataUser.name,
-              email:dataUser.email,
-              token :token
-            }
-          })
-        }else{
-          res.status(400).json({
-            message:"admin only"
-          })
+    if(req.body.email =='admin@kameraku.com' && req.body.password == 'admin'){
+      res.status(200).json({
+        message:'login success',
+        admin:{
+          id:123,
+          name: 'admin1',
+          email:'admin@kameraku.com',
+          token:'1234admin'
         }
-      }else{
-        res.status(400).json({
-          message:"sign in failed!"
-        })
-      }
-    })
+      })
+    }else{
+      res.status(400).json({
+        message:'admin only!'
+      })
+    }
+    // User.findOne({
+    //   email:req.body.email
+    // })
+    // .exec()
+    // .then(dataUser=>{
+    //   if(dataUser.role == 'admin'){
+    //     console.log("ini data admin===",dataUser)
+    //     let checkPass = bcrypt.compareSync(req.body.password,dataUser.password)
+    //     if(checkPass){
+    //       let token = jwt.sign({id:dataUser._id,email:dataUser.email},process.env.SECRET)
+    //       res.status(200).json({
+    //         message:"login success",
+    //         data:{
+    //           id:dataUser._id,
+    //           name:dataUser.name,
+    //           email:dataUser.email,
+    //           token :token
+    //         }
+    //       })
+    //     }else{
+    //       res.status(400).json({
+    //         message:"admin only"
+    //       })
+    //     }
+    //   }else{
+    //     res.status(400).json({
+    //       message:"sign in failed!"
+    //     })
+    //   }
+    // })
 
   },
   testJwt : (req,res)=>{

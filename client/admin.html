@@ -23,9 +23,9 @@
           </div>
           <ul class="nav navbar-nav">
             <li class="active"><a href="#">Home</a></li>
-            <li v-if="userId == null"><a href="" data-toggle="modal" data-target="#signInModal">Sign In</a></li>
-            <li v-if="userId == null"><a href="" data-toggle="modal" data-target="#signUpModal">Sign Up</a></li>
-            <li v-if="userId != null">
+            <li v-if="token == null"><a href="" data-toggle="modal" data-target="#signInModal">Sign In</a></li>
+            <!-- <li v-if="token == null"><a href="" data-toggle="modal" data-target="#signUpModal">Sign Up</a></li> -->
+            <li v-if="token != null">
               <a href="" @click="logOutButtonClick" >Sign Out</a>
             </li>
           </ul>
@@ -35,7 +35,7 @@
         <h2>Welcome to Admin Page</h2>
       </div>
     
-<div class="container text-center" v-if="userId != null">
+<div class="container text-center" v-if="token != null">
   <!-- modal add item -->
   <button type="button" class="btn btn-info btn-lg" data-toggle="modal" data-target="#addItemModal">Add new item</button>
   </div>
@@ -104,7 +104,7 @@
     </div>
   </div> 
 <!-- sign up modal -->
-  <div id="signUpModal" class="modal fade" role="dialog">
+  <!-- <div id="signUpModal" class="modal fade" role="dialog">
     <div class="modal-dialog modal-sm modal-lg">
   
       <div class="modal-content">
@@ -131,7 +131,7 @@
       </div>
   
     </div>
-  </div>
+  </div> -->
   
   </div> <!-- end id admin vue -->
   

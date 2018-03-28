@@ -27,7 +27,7 @@ Vue.component('cart',{
                 </div>
                 <div class="row">
                   <div class="col-md-offset-6">
-                    <p>Grand Total: $ {{grandTotal}}</p>
+                    <p>Grand Total: $ {{grandtotal}}</p>
                   </div>
                 </div>
               </div>
@@ -43,7 +43,7 @@ Vue.component('cart',{
         </div>
       </div>
   `,
-  props:['carts'],
+  props:['carts', 'grandtotal'],
   methods: {
     removeCart: function(cart){
       this.$emit('removecart', cart)

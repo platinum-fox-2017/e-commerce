@@ -3,7 +3,7 @@ const app =new Vue({
   el:"#admin",
   data:{
     token: localStorage.getItem('token'),
-    userId: localStorage.getItem('userId'),
+    // userId: localStorage.getItem('userId'),
     newItem: {
       sku:'',
       title: '',
@@ -50,14 +50,13 @@ const app =new Vue({
         data:this.userLogin
       })
       .then(function (resSignIn) {
-        console.log("resLogin",resSignIn.data.data.id);
-        localStorage.setItem('token',resSignIn.data.data.token)
-        localStorage.setItem('userId',resSignIn.data.data.id)
-        // location.reload();
+        console.log("resLogin",resSignIn);
+        localStorage.setItem('token',resSignIn.data.admin.token)
+        // localStorage.setItem('userId',resSignIn.data.data.id)
+        location.reload();
 
       })
       .catch(function (error) {
-        alert('wrong email/password')
         console.log(error);
       });
     },
@@ -65,7 +64,6 @@ const app =new Vue({
       console.log('user log out')
       localStorage.clear()
       // location.reload();
-      
     },
     createUser : function(){
       // alert("sign up")
