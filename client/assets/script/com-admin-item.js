@@ -5,10 +5,7 @@ Vue.component('admin-item',{
         <button class="btn btn-primary float-right" data-toggle="modal" data-target="#modalAddItem"><span class="fa fa-plus">Add Product</span></button>
     </div>
     <div class="row">
-    <div class="col-sm-3 bg-success">
-            <p>Lorem ipsum...</p>
-    </div>
-    <div class="col-sm-9">
+    <div class="col-sm-12">
     <table class="table table-striped">
         <thead>
             <th>Name</th>
@@ -18,7 +15,10 @@ Vue.component('admin-item',{
         </thead>
         <tbody>
             <tr v-for="item in items">
-                <td>{{item.name}}</td>
+                <td>
+                <img :src="item.image" class="img-responsive" style="width:50px;" > 
+                {{item.name}}
+                </td>
                 <td>{{item.price}}</td>
                 <td>{{item.stock}}</td>
                 <td>
