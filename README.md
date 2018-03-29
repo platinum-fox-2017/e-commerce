@@ -30,6 +30,7 @@ npm run dev
 ----------|----------|---------------
 /login/signup | POST | sign up user
 /login/signin | POST | login user
+/login/fbsignin | POST | login user with facebook
 /login/admin/signin | POST | login admin
 /transaction | GET | show all transaction
 /transaction | POST | add new transaction
