@@ -9,6 +9,7 @@ const server = 'http://localhost:3000'
 const app = new Vue(({
   el:'#app',
   data: {
+    token: localStorage.getItem('token'),
 
     items: [],
 
@@ -20,7 +21,7 @@ const app = new Vue(({
   },
   methods: {
     addToCart: function (obj) {
-      swal("Hello!", `You just added ${obj.title} to your cart`, "success");
+      swal("Hello!", `You just added ${obj.name} to your cart`, "success");
       axios({
         method: 'post',
         url: `${server}/api/cart`,
@@ -98,6 +99,20 @@ const app = new Vue(({
         url: 'http://localhost:3000/api/item'
       }).then(({data}) => {
         this.items = data.data_item
+      })
+    },
+
+    deleteCart: function () {
+      swal("Thanks for buying from our Store :)");
+      axios({
+        method: 'get',
+        url: 'http://localhost:3000/api/cart/delete',
+        headers: {
+          token: localStorage.token
+        }
+      }).then(({ data }) => {
+        console.log(data);
+        this.showCart()
       })
     }
   }

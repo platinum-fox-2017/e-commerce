@@ -122,5 +122,17 @@ module.exports = {
         })
       })
     })
+  },
+  deleteMany: function (req, res) {
+    console.log(req.headers);
+    let token = req.headers.token
+    let decoded = jwt.verify(token, process.env.SECRET)
+    UserItem.deleteMany({
+      userId: decoded._id
+    }).then(data => {
+      res.status(200).json({
+        message: 'success delete data'
+      })
+    })
   }
 }

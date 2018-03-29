@@ -49,27 +49,15 @@
       <div class="collapse navbar-collapse" id="navbarSupportedContent">
         <ul class="navbar-nav mr-auto">
           <li class="nav-item active">
-            <a class="nav-link" href="#">Home <span class="sr-only">(current)</span></a>
-          </li>
-          <li class="nav-item active">
-            <a class="nav-link" href="#">Category <span class="sr-only">(current)</span></a>
-          </li>
-          <li class="nav-item active">
-            <a class="nav-link" href="#">Items <span class="sr-only">(current)</span></a>
-          </li>
-          <li class="nav-item active">
-            <a class="nav-link" data-toggle="modal" data-target="#exampleModalCenter" style="cursor: pointer;">Cart<span class="sr-only">(current)</span></a>
+            <a class="nav-link" data-toggle="modal" data-target="#exampleModalCenter" style="cursor: pointer;">Shopping Cart<span class="sr-only">(current)</span></a>
           </li>
         </ul>
-        <form class="form-inline my-2 my-lg-0">
-          <input class="form-control mr-sm-2" type="search" placeholder="Your food here" aria-label="Search">
-          <button class="btn btn-outline-success my-2 my-sm-0" type="submit">Search</button>
-        </form>
+        <div class="center">
+          <div class="fb-login-button" data-max-rows="1" data-size="large" data-button-type="login_with" data-show-faces="false" data-auto-logout-link="false" data-use-continue-as="false" onlogin="checkLoginState();" v-show="!token"></div>
+          <button class="btn btn-danger"  onclick="logout()" type="button" v-show="token"> Logout <i class="fa fa-sign-out"></i></button>
+        </div>
       </div>
     </nav>
-
-
-
 
   <div id="carouselExampleIndicators" class="carousel slide" data-ride="carousel">
     <ol class="carousel-indicators">
@@ -108,13 +96,14 @@
 
   <div class="container" style="padding-top: 28px; padding-bottom: 28px">
     <div class="row">
-
       <div class="container" style="padding-top: 28px">
-
+        <div class="alert alert-info" role="alert" v-show="!token">
+          Login to continue shopping
+        </div>
         <h1>Bestselling Items</h1>
         <div class="row">
             <div class="col-md-4" v-for="item in items">
-              <component-one :item="item" v-on:add-to-cart="addToCart"></component-one>
+              <component-one :item="item" :token="token" v-on:add-to-cart="addToCart"></component-one>
             </div>
         </div>
       </div>
@@ -137,8 +126,9 @@
         v-on:delete-cart="deleteData"></component-two>
 
         <div class="modal-footer">
+
           <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
-          <button type="button" class="btn btn-primary">Checkout</button>
+          <button type="button" class="btn btn-primary" @click="deleteCart" data-dismiss="modal">Checkout</button>
         </div>
       </div>
     </div>
@@ -155,7 +145,7 @@
     <script src="js/component1.js" charset="utf-8"></script>
     <script src="js/component2.js" charset="utf-8"></script>
     <script src="js/script.js" charset="utf-8"></script>
-
+    <script src="./lib/fbsdk.js"></script>
   </body>
   <footer class="mainfooter" role="contentinfo" style="background-color: #404040; padding-top:28px">
   <div class="footer-bottom">

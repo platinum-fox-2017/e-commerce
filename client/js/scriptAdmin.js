@@ -1,8 +1,6 @@
-// if (!localStorage.) {
-//
-// }
-
-
+if (localStorage.role !== 'admin') {
+  window.location = 'index.html'
+}
 
 new Vue({
   el: '#vue-app',

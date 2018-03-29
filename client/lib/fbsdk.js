@@ -2,7 +2,7 @@
 
 window.fbAsyncInit = function() {
   FB.init({
-    appId      : '1813436898701714',
+    appId      : '1574957469223942',
     cookie     : true,
     xfbml      : true,
     version    : 'v2.12'
@@ -33,29 +33,16 @@ function statusChangeCallback(response) {
         }
       }).then(function(response) {
         console.log(response);
-        if (response.status === 200 && window.location.pathname === '/login.html') {
-        localStorage.token = response.data.token;
-        localStorage.role = response.data.role
+        if (response.status === 200) {
+        localStorage.setItem('token', response.data.token)
+        localStorage.setItem('role', response.data.role)
         // window.location = 'index.html';
-          if (localStorage.role == 'admin') {
+          if (localStorage.role === 'admin') {
             window.location = 'admin.html'
-          }
-          else {
-            window.location = 'index.html'
           }
         }
       });
-    } else {
-      document.getElementById('status').innerHTML = 'Please log ' +
-        'into this app.';
     }
-}
-
-function logOut() {
-  localStorage.clear();
-  FB.logout(function(response) {
-    window.location = 'login.html';
-  });
 }
 
 function checkLoginState() {
@@ -67,6 +54,7 @@ function checkLoginState() {
 function logout() {
   window.FB.logout(function (response) {
     localStorage.clear()
-    window.location = 'login.html'
+    // statusChangeCallback(response)
+    window.location.reload()
   })
 }

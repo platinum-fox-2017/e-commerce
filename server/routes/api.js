@@ -1,7 +1,7 @@
 var express = require('express');
 var router = express.Router();
 const { addItem,showItem } = require('../controllers/item.js');
-const { addCart,showCart,deleteCart,updateCartMin,updateCartMax } = require('../controllers/userItem.js');
+const { addCart,showCart,deleteCart,updateCartMin,updateCartMax,deleteMany } = require('../controllers/userItem.js');
 
 
 /* GET users listing. */
@@ -12,5 +12,6 @@ router.get('/cart' , showCart)
 router.delete('/cart/:id_user/:id_item', deleteCart)
 router.get('/cart/updateMin', updateCartMin)
 router.get('/cart/updateMax', updateCartMax)
+router.get('/cart/delete', deleteMany)
 
 module.exports = router;

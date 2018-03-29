@@ -6,15 +6,15 @@ Vue.component('component-two', {
         <div class="col-sm-2">
           <img :src="cart.itemId.image" alt="Avatar" style="border-radius: 100%; width: 100px; height: 100px" >
         </div>
-        <div class="col-sm-2">
+        <div class="col-sm-3">
           <h5 class="card-title">{{cart.itemId.name}}</h5>
         </div>
-        <div class="col-sm-4">
-          <h5 class="card-title">
+        <div class="col-sm-3">
+          <h6 class="card-title">
             <button type="button" class="btn btn-secondary" v-on:click="reduce(cart)">-</button>
             {{cart.quantity}}
             <button type="button" class="btn btn-secondary" v-on:click="add(cart)">+</button>
-          </h5>
+          </h6>
         </div>
         <div class="col-sm-2">
           <h5 class="card-title">{{cart.totalPrice}}$</h5>
