@@ -120,16 +120,21 @@ var app = new Vue({
           imageUrl: obj.imageUrl,
           subtotal: obj.quantity * obj.price
         });
+        this.updateStock({
+          id: obj._id,
+          quantity: 1
+        });
       } else {
         this.itemsCart[index].quantity++;
         this.itemsCart[index].subtotal = this.itemsCart[index].quantity * this.itemsCart[index].price;
+        this.updateStock({
+          id: obj._id,
+          quantity: this.itemsCart[index].quantity
+        });
       }
-      this.updateStock({
-        id: obj._id,
-        quantity: 1
-      });
+
       console.log(this.itemsList[indexStock].stock)
-      this.itemsList[indexStock].stock--;
+      // this.itemsList[indexStock].stock--;
     },
     setTotalPrice: function() {
       this.totalPrice = this.itemsCart.reduce((tot, val) => {
@@ -226,7 +231,7 @@ var app = new Vue({
     }
   },
   watch: {
-
+    itemsCart
   },
   mounted: function() {
     this.$nextTick(function() {

@@ -58,9 +58,9 @@
                     </td>
                     <td data-th="Price">{{pricePrint(itemCart.price)}}</td>
                     <td data-th="Quantity">
-                      <input v-model="itemCart.stock" type="number" class="form-control text-center" min="1" :max="findStock(itemCart._id)">
+                      <input v-model="itemCart.quantity" type="number" class="form-control text-center" min="1" :max="findStock(itemCart._id)">
                     </td>
-                    <td data-th="Subtotal" class="text-center">{{pricePrint(setSubtotal(itemCart._id, itemCart.stock))}}</td>
+                    <td data-th="Subtotal" class="text-center">{{pricePrint(setSubtotal(itemCart._id, itemCart.quantity))}}</td>
                     <td class="actions" data-th="">
                       <button class="btn btn-info btn-sm"><i class="fa fa-refresh"></i></button>
                       <button @click="deleteFromCart(itemCart._id)" class="btn btn-danger btn-sm"><i class="fa fa-trash-o"></i></button>
