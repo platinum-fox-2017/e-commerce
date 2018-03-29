@@ -231,7 +231,6 @@ var app = new Vue({
     }
   },
   watch: {
-    itemsCart
   },
   mounted: function() {
     this.$nextTick(function() {
