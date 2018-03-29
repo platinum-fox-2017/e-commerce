@@ -40,3 +40,6 @@ npm run dev
 /items | GET | show all item
 /items | POST | add new item
 
+#Demo
+
+For demo apps you can access [kameraku.haripermadi.com](http://kameraku.haripermadi.com)
