@@ -4,9 +4,6 @@ layouting e-commerce web app
 # what is kameraKu?
 adalah sebuah web app e-commerce sederhana dimana user bisa sign up dan login, lalu bisa menambahkan produk ke dalam cart.
 Terdapat pula halaman admin untuk menambahkan item baru.
-Halaman admin bisa diakses dengan menggunakan email dann password berikut:
-email: admin@kameraku.com
-password: admin
 
 #Build set up
 
@@ -46,3 +43,10 @@ For demo apps you can access [kameraku.haripermadi.com](http://kameraku.hariperm
 
 For admin page
 [kameraku.haripermadi.com/admin.html](http://kameraku.haripermadi.com/admin.html)
+
+Halaman admin bisa diakses dengan menggunakan email dan password berikut:
+
+```
+email: admin@kameraku.com
+password: admin
+```
