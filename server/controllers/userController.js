@@ -55,7 +55,7 @@ module.exports={
         console.log("ini data user===",dataUser)
         let checkPass = bcrypt.compareSync(req.body.password,dataUser.password)
         if(checkPass){
-          let token = jwt.sign({id:dataUser._id,email:dataUser.email},process.env.SECRET)
+          let token = jwt.sign({id:dataUser._id,email:dataUser.email},'secret')
           res.status(200).json({
             message:"login success",
             data:{
@@ -183,36 +183,6 @@ module.exports={
         message:'admin only!'
       })
     }
-    // User.findOne({
-    //   email:req.body.email
-    // })
-    // .exec()
-    // .then(dataUser=>{
-    //   if(dataUser.role == 'admin'){
-    //     console.log("ini data admin===",dataUser)
-    //     let checkPass = bcrypt.compareSync(req.body.password,dataUser.password)
-    //     if(checkPass){
-    //       let token = jwt.sign({id:dataUser._id,email:dataUser.email},process.env.SECRET)
-    //       res.status(200).json({
-    //         message:"login success",
-    //         data:{
-    //           id:dataUser._id,
-    //           name:dataUser.name,
-    //           email:dataUser.email,
-    //           token :token
-    //         }
-    //       })
-    //     }else{
-    //       res.status(400).json({
-    //         message:"admin only"
-    //       })
-    //     }
-    //   }else{
-    //     res.status(400).json({
-    //       message:"sign in failed!"
-    //     })
-    //   }
-    // })
 
   },
   testJwt : (req,res)=>{
