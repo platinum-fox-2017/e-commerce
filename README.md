@@ -43,3 +43,6 @@ npm run dev
 #Demo
 
 For demo apps you can access [kameraku.haripermadi.com](http://kameraku.haripermadi.com)
+
+For admin page
+[kameraku.haripermadi.com/admin.html](http://kameraku.haripermadi.com/admin.html)
