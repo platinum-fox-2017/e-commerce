@@ -27,7 +27,7 @@ function statusChangeCallback(response) {
     console.log("log in and authenticated")
     axios({
       method:'post',
-      url:'http://api-kameraku.haripermadi.com/users/fbsignin',
+      url:'http://api-kameraku.haripermadi.com/login/fbsignin',
       headers :{
         fb_token:response.authResponse.accessToken
       }
