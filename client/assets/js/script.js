@@ -142,16 +142,28 @@ var app = new Vue({
         }
       }
     },
-    buylistcart:function(id){
+    buylistcart:function(data){
+      console.log(data);
       for(let i=0;i<this.listcart.length;i++){
-        if(this.listcart[i].id===id){
+        if(this.listcart[i]._id===data._id){
           this.listcart[i].sold=true
-          swal({
-            title: "Good job!",
-            text: "Terimakasih sudah berbelanja disini!",
-            icon: "success",
-            button: "Aww yiss!",
-          });
+          axios.put(`http://localhost:3000/buyitem/${data._id}`,{
+            qty:data.qty,
+            totalbiaya:data.totalbiaya,
+            sold:true
+          })
+          .then(response => {
+            console.log(response);
+            swal({
+              title: "Good job!",
+              text: "Terimakasih sudah berbelanja disini!",
+              icon: "success",
+              button: "Aww yiss!",
+            });
+          })
+          .catch(err => {
+            console.log(err);
+          })
         }
       }
     },

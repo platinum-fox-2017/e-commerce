@@ -164,17 +164,34 @@ module.exports = {
   showsellitem:(req,res) => {
     let token=req.headers.token
     let decoded  = jwt.verify(token, process.env.SECRET)
-    UserItem.find({userid: decoded.userId}).populate('itemid').exec().then((item) => {
+    UserItem.find({userid: decoded.userId,sold:false}).populate('itemid').exec().then((item) => {
       res.status(200).send(item)
     })
   },
-  deletesellitem:(req,res)=>{
-   UserItem.deleteMany({userid: req.params.userid,itemid:req.params.itemid})
-   .then(data=>{
-     console.log('succes delete');
-     res.status(200).send(data)
-   }).catch(error=>{
-     res.status(500).send(error)
-   })
- }
+  deletesellitem:(req,res) => {
+     UserItem.deleteMany({userid: req.params.userid,itemid:req.params.itemid})
+     .then(data=>{
+       console.log('succes delete');
+       res.status(200).send(data)
+     }).catch(error=>{
+       res.status(500).send(error)
+     })
+   },
+  buyitems:(req,res) => {
+    UserItem.updateOne(
+      {_id:req.params.id},
+      {$set:
+          {
+            qty:req.body.qty,
+            totalbiaya:req.body.totalbiaya,
+            sold:req.body.sold,
+          }
+    })
+      .then(datas => {
+        res.status(200).send(datas)
+      }).catch(error=>{
+        console.log('error update');
+        res.status(500).send(error)
+      })
+  }
 }

@@ -17,8 +17,7 @@ Vue.component('carts',{
     </div>
     <div class="col-sm-12 col-md-3" style="padding-top:45px;">
       <button type="button" class="btn btn-danger" v-on:click="deletelistcart(listcart)"><span class="oi oi-circle-x"></span></button>
-      <!-- <button type="button" class="btn btn-success" v-on:click="buylistcart(listcart.userid)"><span class="oi oi-check"></span></button> -->
-      <button type="button" class="btn btn-success"><span class="oi oi-check"></span></button>
+      <button type="button" class="btn btn-success" v-on:click="buylistcart(listcart)"><span class="oi oi-check"></span></button>
     </div>
   </div>`,
   props:['listcart'],
@@ -31,6 +30,10 @@ Vue.component('carts',{
     },
     addtotal:function(item){
       this.$emit('addtotal',item)
+    },
+    buylistcart:function(item){
+      console.log('jaha');
+      this.$emit('buylistcart',item)
     }
   }
 })

@@ -84,7 +84,7 @@
             </div>
               <div class="modal-body">
                 <div class="row border-bottom" style="margin-bottom:20px" v-for="listcart in listcart" v-if="listcart.sold===false">
-                  <carts :listcart="listcart" @deleteitem='deletelistcart' @deletetotal='deletetotal' @addtotal='addtotal'></carts>
+                  <carts :listcart="listcart" @deleteitem='deletelistcart' @deletetotal='deletetotal' @addtotal='addtotal' @buylistcart='buylistcart'></carts>
                 </div>
               </div>
               <div class="modal-footer">
@@ -166,7 +166,7 @@
     // }
     window.fbAsyncInit = function() {
       FB.init({
-        appId      : '592784331071735',
+        appId      : '1035330659955386',
         cookie     : true,
         xfbml      : true,
         version    : 'v2.12'
