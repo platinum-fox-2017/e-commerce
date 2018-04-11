@@ -1,0 +1,63 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" integrity="sha384-BVYiiSIFeK1dGmJRAkycuHAHRg32OmUcww7on3RYdg4Va+PmSTsz/K68vbdEjh4u"
+        crossorigin="anonymous">
+    <link rel="stylesheet" href="./css/style.css">
+    <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/vue@2.5.15/dist/vue.js"></script>
+    <link href="//maxcdn.bootstrapcdn.com/font-awesome/4.1.0/css/font-awesome.min.css" rel="stylesheet">
+    <link rel="stylesheet" href="https://unpkg.com/flickity@2/dist/flickity.min.css">
+    <script src="https://unpkg.com/flickity@2/dist/flickity.pkgd.min.js"></script>
+</head>
+
+<body>
+    <div id="app">
+        <input type="text" v-model="keyword">
+        <table>
+            <th>Nama</th>
+            <th>Umur</th>
+            <tr v-for="member in members" >
+                <td>{{ filteredData.nama }}</td>
+                <td>{{ filteredData.umur }}</td>
+            </tr>
+        </table>
+    </div>
+    <script>
+        new Vue({
+            el: '#app',
+            data: {
+                message: 'Hello world',
+                keyword : '',
+                members: [
+                    {
+                        nama: 'Reynaldi Ananda',
+                        umur: 14
+                    },
+                    {
+                        nama: 'Irsan Hasyim',
+                        umur: 13
+                    },
+                    {
+                        nama: 'Sheila Keizia',
+                        umur: 17
+                    }
+                ]
+            },
+            computed : {
+                filteredData : function() {
+                    return this.members.filter((this.keyword))
+                }
+            }
+
+        })
+    </script>
+</body>
+
+</html>
