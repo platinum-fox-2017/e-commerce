@@ -1,4 +1,4 @@
-const UserItem = require('../models/userItem')
+const UserItem = require('../models/useritem')
 const jwt = require('jsonwebtoken');
 
 module.exports = {
@@ -53,7 +53,10 @@ module.exports = {
     })
   },
   showCart: function (req, res) {
+    console.log(req.headers);
+    console.log('haha');
     let token = req.headers.token
+    console.log(token);
     let decoded = jwt.verify(token, process.env.SECRET)
     console.log(decoded);
     UserItem.find({
