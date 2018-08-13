@@ -1,0 +1,98 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width" />
+    <title>Ekom</title>
+     <!-- Latest compiled and minified CSS -->
+    <link rel="stylesheet" href="/css/bootstrap.min.css">
+
+    <!-- jQuery library -->
+    <script src="/js/jquery.js"></script>
+
+    <!-- Popper JS -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js"></script>
+
+
+    <!-- Latest compiled JavaScript -->
+    <script src="/js/bootstrap.min.js"></script>
+    <style type="text/css" media="screen">
+      .container {
+        margin-top: 20px
+      }
+      .material-icons {
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      vertical-align: middle;
+      }
+
+      .card {
+        margin-top: 20px;
+      }
+      .list-group {
+        margin-top: 10px;
+      }
+
+    </style>
+  </head>
+  <body>
+  <div id="app">
+    
+     <!-- A grey horizontal navbar that becomes vertical on small screens --> <!-- A grey horizontal navbar that becomes vertical on small screens --> <nav class="navbar navbar-expand-sm navbar-dark bg-dark"> <a class="navbar-brand" href="/index.html">Ekom</a> <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarsExample03" aria-controls="navbarsExample03" aria-expanded="false" aria-label="Toggle navigation"> <span class="navbar-toggler-icon"></span> </button> <div class="collapse navbar-collapse" id="navbarsExample03"> <ul class="navbar-nav mr-auto"> <li class="nav-item"> <a class="nav-link" href="../index.html">Home <span class="sr-only">(current)</span></a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link" href="./product.html">Product <span class="sr-only">(current)</span></a>
+          </li>
+        </ul>
+      </div>
+    </nav>
+    <div class="container">
+      <div class="row">
+        <div class="col-md-4">
+          <div class="form-group">
+            <label for="alamat">Name:</label>
+            <input type="text" name="name" id="name" v-model="product.name"value="" class="form-control" />
+          </div>
+          <div class="form-group">
+            <label for="price">Price:</label>
+            <input type="text" name="price" id="price" v-model="product.price"value="" class="form-control" />
+          </div>
+          <div class="form-group">
+            <label for="image">Image:</label>
+            <input type="file" name="image" id="image" value="" class="form-control" />
+          </div>
+          <button type="button" @click="addProduct" class="btn btn-primary" v-if="!isEdit">Create Product</button>
+          <button type="button" @click="updateProduct" class="btn btn-warning" v-if="isEdit">Edit Product</button>
+          <button type="button" @click="cancelEdit" class="btn btn-danger" v-if="isEdit">Cancel Edit</button>
+        </div>
+        <div class="col-md-8">
+            <table class="table">
+              <thead>
+                <th>Name</th>
+                <th>Price</th>
+                <th>Image</th>
+                <th>Action</th>
+              </thead>
+              <tbody>
+                <tr v-for="product in products">
+                  <td>{{product.name}}</td>
+                  <td>{{product.price}}</td>
+                  <td>{{product.image}}</td>
+                  <td>
+                    <button class="btn btn-danger btn-sm" @click="deleteProduct(product._id)"  >Delete</button>
+                    <button class="btn btn-warning btn-sm" @click="editProduct(product)"  >Edit</button></td>
+                </tr>
+              </tbody>
+            </table>
+        </div>
+      </div>
+    </div>
+  </div>
+  <!-- end div app -->
+    <script src="https://unpkg.com/axios/dist/axios.min.js"></script>
+    <script src="https://unpkg.com/vue@2.5.15/dist/vue.js"></script>
+    <script src="../js/axios-core.js" charset="utf-8"></script>
+    <script src="../js/vue-product.js" charset="utf-8"></script>
+  </body>
+</html>
