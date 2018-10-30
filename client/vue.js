@@ -2,12 +2,12 @@ new Vue({
     el: '#app',
     data: {
       carousels: [{
-          images: "./images/alpstein_massif_swiss_alps-wallpaper-1920x1080.jpg"
+          images: "https://images.wallpaperscraft.com/image/night_city_panorama_river_120786_3840x2160.jpg"
       },{
-          images: "./images/boat_reflection-wallpaper-1600x900.jpg"
+          images: "https://images.wallpaperscraft.com/image/night_city_panorama_sea_shore_119801_3840x2160.jpg"
       }],
       contents:[{
-        image: "//06.img.avito.st/640x480/4140232806.jpg",
+        image: "http://06.img.avito.st/640x480/4140232806.jpg",
         destination: "Bali Island",
         price: 1000,
         days:"5 days",
