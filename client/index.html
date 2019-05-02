@@ -1,0 +1,435 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta http-equiv="X-UA-Compatible" content="ie=edge">
+  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
+  <link rel="stylesheet" href="./asset/style/style2.css">
+  <script src="https://cdn.jsdelivr.net/npm/vue@2.5.15/dist/vue.js"></script>
+  <script src="https://code.jquery.com/jquery-3.2.1.slim.min.js" integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN" crossorigin="anonymous"></script>
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+  <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
+  <script src="//code.jquery.com/jquery-1.11.1.min.js"></script>
+  <title>Home: PaluGada</title>
+</head>
+<body>
+  <div id="app">
+        <nav class="navbar navbar-default">
+                <div class="container-fluid">
+                  <!-- Brand and toggle get grouped for better mobile display -->
+                  <div class="navbar-header">
+                    <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#bs-example-navbar-collapse-1" aria-expanded="false">
+                      <span class="sr-only">Toggle navigation</span>
+                      <span class="icon-bar"></span>
+                      <span class="icon-bar"></span>
+                      <span class="icon-bar"></span>
+                    </button>
+                    <a class="navbar-brand" href="#">PaluGada</a>
+                  </div>
+              
+                  <!-- Collect the nav links, forms, and other content for toggling -->
+                  <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
+                    <ul class="nav navbar-nav">
+                      <li class="dropdown">
+                        <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">Category <span class="caret"></span></a>
+                        <ul class="dropdown-menu">
+                          <li><a href="#">Sport</a></li>
+                          <li><a href="#">Fashion</a></li>
+                          <li><a href="#">Households</a></li>
+                          <li><a href="#">Electronics</a></li>
+                          <li><a href="#">Automotive</a></li>
+                          <li><a href="#">Hobby</a></li>
+                          <li role="separator" class="divider"></li>
+                          <li><a href="#">Need a request?</a></li>
+                        </ul>
+                      </li>
+                    </ul>
+                    <form class="navbar-form navbar-left">
+                      <div class="form-group">
+                        <input type="text" class="form-control" placeholder="Search">
+                      </div>
+                      <button type="submit" class="btn btn-success">Search</button>
+                    </form>
+                    <ul class="nav navbar-nav navbar-right">
+                      <li class="dropdown">
+                        <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false"><i class="fa fa-shopping-cart"></i> Cart <span class="badge badge-secondary">{{cart.length}}</span></a>
+                        <ul class="dropdown-menu">
+                        <li>
+                            <div class="row" v-for="item in cart">
+                                    <div class="col-md-4">
+                                        <img :src="item.image" class="img img-responsive" alt="item_purchased">
+                                    </div>
+                                    <div class="col-md-4">
+                                        <p>{{item.name}}</p>
+                                    </div>
+                                    <div class="col-md-2">
+                                        <p>{{item.qty}}</p>
+                                    </div>
+                                    <div class="col-md-2">
+                                        <p>{{item.price}}</p>
+                                    </div>
+                            </div>
+                        </li>
+                          <li role="separator" class="divider"></li>
+                          <li><button href="#" class="btn btn-primary btn-block" data-toggle="modal" data-target="#myModal">Shopping Cart</button></li>
+                        </ul>
+                      </li>
+                      <li class="dropdown">
+                        <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">User <span class="caret"></span></a>
+                        <ul class="dropdown-menu">
+                          <li><a href="#">Profile</a></li>
+                          <li><a href="#">Acccount Setting</a></li>
+                          <li role="separator" class="divider"></li>
+                          <li><a href="#" class="btn btn-danger">Logout</a></li>
+                        </ul>
+                      </li>
+                    </ul>
+                  </div>
+                </div>
+              </nav>
+      <div class="modal fade" id="myModal" role="dialog">
+        <div class="modal-dialog modal-lg">
+          <!-- Modal content-->
+          <div class="modal-content">
+            <div class="modal-header">
+              <div class="container-fluid">
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                  <span aria-hidden="true">&times;</span>
+                </button>
+                <h4 class="modal-title">Shopping Cart</h4>
+              </div>
+            </div>
+              <div class="modal-body">
+                <div class="container-fluid">
+                  <div class="row">
+                    <div class="col-md-6">
+                      <p>Item Name</p>
+                    </div>
+                    <div class="col-md-2">
+                      <p>Quantity</p>
+                    </div>
+                    <div class="col-md-2">
+                      <p>Price</p>
+                    </div>
+                    <div class="col-md-2">
+                      <p>Action</p>
+                    </div>
+                  </div>
+                  <div class="row" v-for="item in cart">
+                    <div class="col-md-6">
+                      <p>{{item.name}}</p>
+                    </div>
+                    <div class="col-md-2">
+                      <p>{{item.qty}}</p>
+                    </div>
+                    <div class="col-md-2">
+                      <p>$ {{item.price}}</p>
+                    </div>
+                    <div class="col-md-2">
+                        <button class="glyphicon glyphicon-trash" @click="deleteItem(item)"></button>
+                        <button style="font-size:12px">Pay Now <i class="fa fa-money"></i></button>
+                    </div>
+                  </div>
+                  <div class="row">
+                    <div class="col-md-10">
+                      Total
+                    </div>
+                    <div class="col-md-2">
+                      $ {{total}}
+                    </div>
+                  </div>
+                </div>
+              </div>
+              <div class="modal-footer">
+                <button type="button" @click="clearCart()" class="btn btn-danger">Clear Cart</button>
+                <button type="button" class="btn btn-primary" data-dismiss="modal">Close</button>
+              </div>
+            </div>
+        </div>
+    </div>
+
+<div class="container">
+    <div class="row">
+        <div class="row">
+            <div class="col-sm-9">
+                <h3>
+                    Hot Item With Discount 🔥 </h3>
+            </div>
+            <div class="col-sm-3 hidden-xs">
+                <!-- Controls -->
+                <div class="controls pull-right">
+                    <a class="left fa fa-chevron-left btn btn-success" href="#carousel_1"
+                        data-slide="prev"></a><a class="right fa fa-chevron-right btn btn-success" href="#carousel_1"
+                            data-slide="next"></a>
+                </div>
+            </div>
+        </div>
+
+        <div class="container visible-xs" id="2">
+            <div class="text-center">
+                <ul style="overflow:auto; padding: 8px; white-space: nowrap;">
+                    <li role="presentation" style="display: inline-block" v-for="item in itemLists_1">
+                        <a class="menu" href="#" style="margin:10px">
+                            <div class="col-item">
+                                <div class="photo">
+                                    <img :src="item.image" style="height:50%;width:50%;" alt="">
+                                </div>
+                                <div class="info">
+                                    <div class="row">
+                                        <div class="price col-xs-6">
+                                            <h6>
+                                                {{item.name}}
+                                            </h6>
+                                            <h6 class="price-text-color">
+                                                {{item.price}}
+                                            </h6>
+                                        </div>
+                                        <div class="col-xs-6">
+                                            <p class="btn-add" @click="addToCart(item)">
+                                                <i class="fa fa-shopping-cart"></i><a href="#">Add to cart</a>
+                                            </p> 
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </a>
+                    </li>
+                </ul>
+            </div>
+        </div>
+
+        <div id="carousel_1" class="carousel slide hidden-xs" data-ride="carousel">
+            <!-- Wrapper for slides -->
+            <div class="carousel-inner">
+                <div class="item active">
+                    <div class="row">
+                        <div class="col-sm-3" v-for="item in itemLists_1">
+                            <div class="col-item">
+                                <div class="photo">
+                                    <img :src="item.image" class="d-block w-100 thumbnail img-responsive" alt="a" />
+                                </div>
+                                <div class="info">
+                                    <div class="row">
+                                        <div class="price col-sm-6">
+                                            <h5>
+                                                {{item.name}}</h5>
+                                            <h5 class="price-text-color">
+                                                $ {{item.price}}</h5>
+                                        </div>
+                                        <div class="rating hidden-sm col-sm-6">
+                                            <i class="price-text-color fa fa-star"></i><i class="price-text-color fa fa-star">
+                                            </i><i class="price-text-color fa fa-star"></i><i class="price-text-color fa fa-star">
+                                            </i><i class="fa fa-star"></i>
+                                        </div>
+                                    </div>
+                                    <div class="separator clear-left">
+                                        <p class="btn-add" @click="addToCart(item)">
+                                            <i class="fa fa-shopping-cart"></i><a href="#" class="hidden-sm">Add to cart</a></p>
+                                        <p class="btn-details">
+                                            <i class="fa fa-list"></i><a href="#" class="hidden-sm">More details</a></p>
+                                    </div>
+                                    <div class="clearfix">
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="item">
+                    <div class="row">
+                        <div class="col-sm-3" v-for="item in itemLists_2">
+                            <div class="col-item">
+                                <div class="photo">
+                                    <img :src="item.image" class="d-block w-100 thumbnail img-responsive" alt="a" />
+                                </div>
+                                <div class="info">
+                                    <div class="row">
+                                        <div class="price col-sm-6">
+                                            <h5>
+                                                {{item.name}}</h5>
+                                            <h5 class="price-text-color">
+                                                $ {{item.price}}</h5>
+                                        </div>
+                                        <div class="rating hidden-sm col-sm-6">
+                                            <i class="price-text-color fa fa-star"></i><i class="price-text-color fa fa-star">
+                                            </i><i class="price-text-color fa fa-star"></i><i class="price-text-color fa fa-star">
+                                            </i><i class="fa fa-star"></i>
+                                        </div>
+                                    </div>
+                                    <div class="separator clear-left">
+                                        <p class="btn-add" @click="addToCart(item)">
+                                            <i class="fa fa-shopping-cart"></i><a href="#" class="hidden-sm">Add to cart</a></p>
+                                        <p class="btn-details">
+                                            <i class="fa fa-list"></i><a href="#" class="hidden-sm">More details</a></p>
+                                    </div>
+                                    <div class="clearfix">
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="row">
+        <div class="row">
+            <div class="col-sm-9">
+                <h3>
+                    Internet Sensation</h3>
+            </div>
+            <div class="col-sm-3">
+                <!-- Controls -->
+                <div class="controls pull-right hidden-xs">
+                    <a class="left fa fa-chevron-left btn btn-primary" href="#carousel"
+                        data-slide="prev"></a><a class="right fa fa-chevron-right btn btn-primary" href="#carousel"
+                            data-slide="next"></a>
+                </div>
+            </div>
+        </div>
+
+        <div class="container visible-xs" id="2">
+                <div class="text-center">
+                    <ul style="overflow:auto; padding: 8px; white-space: nowrap;">
+                        <li role="presentation" style="display: inline-block" v-for="item in hotItemList_2">
+                            <a class="menu" href="#" style="margin:10px">
+                                <div class="col-item">
+                                    <div class="photo">
+                                        <img :src="item.image" style="height:50%;width:50%;" alt="">
+                                    </div>
+                                    <div class="info">
+                                        <div class="row">
+                                            <div class="price col-xs-6">
+                                                <h6>
+                                                    {{item.name}}
+                                                </h6>
+                                                <h6 class="price-text-color">
+                                                    {{item.price}}
+                                                </h6>
+                                            </div>
+                                            <div class="col-xs-6">
+                                                <p class="btn-add" @click="addToCart(item)">
+                                                    <i class="fa fa-shopping-cart"></i><a href="#">Add to cart</a>
+                                                </p> 
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </a>
+                        </li>
+                    </ul>
+                </div>
+            </div>
+
+        <div id="carousel" class="carousel slide hidden-xs" data-ride="carousel">
+            <!-- Wrapper for slides -->
+            <div class="carousel-inner">
+                <div class="item active">
+                    <div class="row">
+                        <div class="col-sm-4" v-for="hotItem in hotItemList_1">
+                            <div class="col-item">
+                                <div class="photo">
+                                    <img :src="hotItem.image" class="d-block w-100 thumbnail img-responsive" alt="a" />
+                                </div>
+                                <div class="info">
+                                    <div class="row">
+                                        <div class="price col-sm-6">
+                                            <h5>
+                                                {{hotItem.name}}</h5>
+                                            <h5 class="price-text-color">
+                                                $ {{hotItem.price}}</h5>
+                                        </div>
+                                        <div class="rating hidden-sm col-sm-6">
+                                            <i class="price-text-color fa fa-star"></i><i class="price-text-color fa fa-star">
+                                            </i><i class="price-text-color fa fa-star"></i><i class="price-text-color fa fa-star">
+                                            </i><i class="fa fa-star"></i>
+                                        </div>
+                                    </div>
+                                    <div class="separator clear-left">
+                                        <p class="btn-add" @click="addToCart(hotItem)">
+                                            <i class="fa fa-shopping-cart"></i><a href="#" class="hidden-sm">Add to cart</a></p>
+                                        <p class="btn-details">
+                                            <i class="fa fa-list"></i><a href="#" class="hidden-sm">More details</a></p>
+                                    </div>
+                                    <div class="clearfix">
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="item">
+                    <div class="row">
+                        <div class="col-sm-4" v-for="hotItem in hotItemList_2">
+                            <div class="col-item">
+                                <div class="photo">
+                                    <img :src="hotItem.image" class="d-block w-100 thumbnail img-responsive" alt="a" />
+                                </div>
+                                <div class="info">
+                                    <div class="row">
+                                        <div class="price col-sm-6">
+                                            <h5>
+                                                {{hotItem.name}}</h5>
+                                            <h5 class="price-text-color">
+                                                $ {{hotItem.price}}</h5>
+                                        </div>
+                                        <div class="rating hidden-sm col-sm-6">
+                                            <i class="price-text-color fa fa-star"></i><i class="price-text-color fa fa-star">
+                                            </i><i class="price-text-color fa fa-star"></i><i class="price-text-color fa fa-star">
+                                            </i><i class="fa fa-star"></i>
+                                        </div>
+                                    </div>
+                                    <div class="separator clear-left">
+                                        <p class="btn-add" @click="addToCart(hotItem)">
+                                            <i class="fa fa-shopping-cart"></i><a href="#" class="hidden-sm">Add to cart</a></p>
+                                        <p class="btn-details">
+                                            <i class="fa fa-list"></i><a href="#" class="hidden-sm">More details</a></p>
+                                    </div>
+                                    <div class="clearfix">
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+<footer class="page-footer font-small indigo pt-0" style="margin:10px;padding:10px">
+    <div class="container-fluid">
+        <div class="row">
+            <div class="col-sm-12 py-5">
+                <div class="mb-5 text-center">
+                    <a class="fb-ic" href="http://facebook.com/prabhataputra">
+                        <i class="fa fa-facebook fa-lg white-text mr-sm-5 mr-3 fa-2x"> </i>
+                    </a>
+                    <a class="tw-ic" href="http://twitter.com/adhiartaputra">
+                        <i class="fa fa-twitter fa-lg white-text mr-sm-5 mr-3 fa-2x"> </i>
+                    </a>
+                    <a class="gplus-ic" href="http://googleplus.com/adhiartaputra">
+                        <i class="fa fa-google-plus fa-lg white-text mr-sm-5 mr-3 fa-2x"> </i>
+                    </a>
+                    <a class="li-ic" href="http://linkedin.com/adhiartaprabhataputra">
+                        <i class="fa fa-linkedin fa-lg white-text mr-sm-5 mr-3 fa-2x"> </i>
+                    </a>
+                    <a class="ins-ic" href="http://instagram.com/adhiartaputra">
+                        <i class="fa fa-instagram fa-lg white-text mr-sm-5 mr-3 fa-2x"> </i>
+                    </a>
+                    <a class="pin-ic" href="http://pinterest.com/adhiartaputra">
+                        <i class="fa fa-pinterest fa-lg white-text fa-2x"> </i>
+                    </a>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="footer-copyright py-3 text-center" style="padding:10px">
+        © 2018 Copyright:
+        <a href="https://mdbootstrap.com/material-design-for-bootstrap/"> palugada-corp.com </a>
+    </div>
+  </footer>
+</div>
+</body>
+<script src="./asset/js/vue.js"></script>
+</html>
