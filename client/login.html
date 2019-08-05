@@ -1,0 +1,138 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="utf-8">
+    <title></title>
+    <link rel="stylesheet" href="assets/css/bootstrap.css">
+    <link rel="stylesheet" href="assets/css/bootstrap.min.css">
+    <link href="assets/css/open-iconic-bootstrap.css" rel="stylesheet">
+    <link rel="stylesheet" href="assets/css/style.css" />
+    <script src="https://unpkg.com/axios/dist/axios.min.js"></script>
+    <script src="https://unpkg.com/vue@2.5.16/dist/vue.js"></script>
+
+    <style media="screen">
+    .btn-primary:hover{
+      border:0px;
+    }
+    .btn-primary:hover{
+      background-color: white;
+      color:#007bff;
+    }
+
+    </style>
+  </head>
+  <body >
+    <div class="" id="app">
+      <nav class="navbar navbar-expand-lg navbar-light" style="background-color: #404745;">
+        <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+          <span class="navbar-toggler-icon"></span>
+        </button>
+
+        <div class="collapse navbar-collapse" id="navbarSupportedContent">
+          <ul class="navbar-nav mr-auto">
+          </ul>
+          <form class="form-inline my-2 my-lg-0">
+            <ul class="nav navbar-top-links navbar-right" style="float: right;">
+              <li><button class="btn btn-primary justify-content-end" :id="btnLogin" type="button" onclick="getStatusFB()"> {{btnLogin}}</button></li>
+            </ul>
+          </form>
+        </div>
+      </nav>
+
+    </div>
+
+
+    <script type="text/javascript" src="assets/js/jquery.js"></script>
+    <script type="text/javascript">
+    var app = new Vue({
+      el:'#app',
+      data:{
+        message:'hello world',
+        items:"",
+        btnLogin:'Login With Facebook',
+        listcart:[]
+      }
+    })
+
+    </script>
+    <script>
+        if(localStorage.token){
+          $(window).attr('location', 'index.html')
+        }
+
+        window.fbAsyncInit = function() {
+          FB.init({
+            appId      : '1035330659955386',
+            cookie     : true,
+            xfbml      : true,
+            version    : 'v2.12'
+          });
+
+          FB.AppEvents.logPageView();
+        };
+
+        (function(d, s, id) {
+          var js, fjs = d.getElementsByTagName(s)[0];
+          if (d.getElementById(id)) return;
+          js = d.createElement(s); js.id = id;
+          js.src = 'https://connect.facebook.net/id_ID/sdk.js#xfbml=1&version=v2.12&appId=592784331071735&autoLogAppEvents=1';
+          fjs.parentNode.insertBefore(js, fjs);
+        }(document, 'script', 'facebook-jssdk'));
+
+        function getStatusFB () {
+          this.loginFB(e => {
+            console.log(e)
+            this.getProfileFB()
+          })
+        }
+
+        function loginFB (callback) {
+          window.FB.login(function (response) {
+            if (response.authResponse) {
+              localStorage.setItem('tokenfb', response.authResponse.accessToken)
+              callback(response)
+            } else {
+              console.log('Unknow connected facebook')
+            }
+          }, { scope: 'email,public_profile' })
+        }
+
+        function getProfileFB () {
+          console.log('tokenfb : ', localStorage.getItem('tokenfb'))
+          $.ajax({
+            type: 'POST',
+            url: 'http://localhost:3000/',
+            data: {
+              data: localStorage.getItem('tokenfb')
+            },
+            success: function(resp) {
+              localStorage.token = resp.data.token
+              localStorage.status = resp.data.status
+              if (resp.data.status==='admin') {
+                $(window).attr('location', 'admin.html')
+              }else{
+                $(window).attr('location', 'index.html')
+              }
+
+            },
+            error: function(error) {
+              console.error('Failed send to server');
+              console.log(error);
+            }
+          })
+        }
+
+        function logout () {
+          window.FB.getLoginStatus(function (response) {
+            if (response.status === 'connected') {
+              window.FB.logout(function (response) {
+                console.log('logout ', response)
+                localStorage.clear()
+                window.location.href = '/login.html'
+              })
+            }
+          })
+        }
+  </script>
+  </body>
+</html>

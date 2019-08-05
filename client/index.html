@@ -1,0 +1,234 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Irman Apotik</title>
+    <link rel="stylesheet" href="assets/css/bootstrap.css">
+    <link rel="stylesheet" href="assets/css/bootstrap.min.css">
+    <link href="assets/css/open-iconic-bootstrap.css" rel="stylesheet">
+    <link rel="stylesheet" href="assets/css/foundation-icons.css" />
+    <link rel="stylesheet" href="assets/css/style.css" />
+    <script src="https://unpkg.com/axios/dist/axios.min.js"></script>
+    <script src="https://unpkg.com/sweetalert/dist/sweetalert.min.js"></script>
+    <script src="https://unpkg.com/vue@2.5.16/dist/vue.js"></script>
+  </head>
+  <body>
+    <nav class="navbar navbar-expand-lg navbar-dark bg-dark">
+      <a class="navbar-brand st" href="#">K-Man</a>
+      <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
+        <span class="navbar-toggler-icon"></span>
+      </button>
+      <div class="collapse navbar-collapse" id="navbarNav">
+        <ul class="navbar-nav mr-auto">
+          <li class="nav-item">
+            <a class="nav-link" data-toggle="modal" href="#items">Items</a>
+          </li>
+          <li class="nav-item dropdown">
+        <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+          Categori
+        </a>
+        <div class="dropdown-menu" aria-labelledby="navbarDropdown">
+          <a class="dropdown-item" href="#">Obat Generik</a>
+          <a class="dropdown-item" href="#">Obat Langka</a>
+      </li>
+        </ul>
+        <ul class="navbar-nav">
+          <li class="nav-item">
+            <a class="nav-link active" data-toggle="modal" data-target="#exampleModalLong"><span class="oi oi-cart" style="font-size:20px;margin-right:10px"></span></a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link" onclick="logout()">Logout <span class="oi oi-account-logout"></span></a>
+          </li>
+       </ul>
+     </div>
+    </nav>
+
+
+    <div id="carouselExampleIndicators" class="carousel slide" data-ride="carousel">
+      <ol class="carousel-indicators">
+        <li data-target="#carouselExampleIndicators" data-slide-to="0" class="active"></li>
+      </ol>
+      <div class="carousel-inner">
+        <div class="carousel-item active">
+          <img class="d-block w-100" src="assets/img/headers.png" alt="First slide">
+          <div class="carousel-caption d-none d-md-block">
+            <h5 style="color:grey">Selamat Datang <span id="namaku"></span> </h5>
+          </div>
+        </div>
+      </div>
+      <a class="carousel-control-prev" href="#carouselExampleIndicators" role="button" data-slide="prev">
+        <span class="carousel-control-prev-icon" aria-hidden="true"></span>
+        <span class="sr-only">Previous</span>
+      </a>
+      <a class="carousel-control-next" href="#carouselExampleIndicators" role="button" data-slide="next">
+        <span class="carousel-control-next-icon" aria-hidden="true"></span>
+        <span class="sr-only">Next</span>
+      </a>
+    </div>
+    <nav aria-label="breadcrumb">
+      <ol class="breadcrumb">
+        <li class="breadcrumb-item active"><a href="index.html">Home</a></li>
+      </ol>
+    </nav>
+
+    <div id='app' class="container">
+      <div class="modal fade" id="exampleModalLong" tabindex="-1" role="dialog" aria-labelledby="exampleModalLongTitle" aria-hidden="true">
+        <div class="modal-dialog modal-lg" role="document">
+          <div class="modal-content">
+            <div class="modal-header">
+              <h5 class="modal-title" id="exampleModalLongTitle">Shop Cart</h5>
+              <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                <span aria-hidden="true">&times;</span>
+              </button>
+            </div>
+              <div class="modal-body">
+                <div class="row border-bottom" style="margin-bottom:20px" v-for="listcart in listcart" v-if="listcart.sold===false">
+                  <carts :listcart="listcart" @deleteitem='deletelistcart' @deletetotal='deletetotal' @addtotal='addtotal' @buylistcart='buylistcart'></carts>
+                </div>
+              </div>
+              <div class="modal-footer">
+                <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+              </div>
+            </div>
+          </div>
+        </div>
+
+
+        <div class="modal fade" id="modaladditem" tabindex="-1" role="dialog" aria-labelledby="exampleModalLongTitle" aria-hidden="true">
+          <div class="modal-dialog modal-lg" role="document">
+            <div class="modal-content">
+              <div class="modal-header">
+                <h5 class="modal-title" id="exampleModalLongTitle">Add items</h5>
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                  <span aria-hidden="true">&times;</span>
+                </button>
+              </div>
+                <div class="modal-body">
+                  <additems @tambahitem='additem'></additems>
+                </div>
+                <div class="modal-footer">
+
+                  <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+                </div>
+              </div>
+            </div>
+          </div>
+
+      <hr>
+      <div class="Items" id="items">
+        <h1 style="text-align :center">Items</h1>
+        <div class="row">
+          <div class="col-sm-3 .col-lg-3" v-for="items in items">
+            <items :item="items" @tambahitem='addtocart'></items>
+          </div>
+        </div>
+      </div>
+    </div>
+    <footer>
+      <div class="row">
+        <div class="col-lg-6 col-sm-12">
+          <p style="padding-top:20px;"> &copy; Copy right irsyad pahlapi & bootstrap</p>
+        </div>
+        <div class="col-lg-3 col-sm-12 offset-lg-3">
+          <div class="float-right">
+            <a class="item" href="https://github.com/irsyadpahlapi" target="_blank"><i class="fi-social-github" id="sosmed"></i>  </a>
+            <a class="item" href="https://www.facebook.com/irsyadepahlapi" target="_blank"><i class="fi-social-facebook" id="sosmed"></i> </a>
+            <a class="item" href="https://www.linkedin.com/in/irsyad-pahlapi-139ba615b/" target="_blank"><i class="fi-social-linkedin" id="sosmed"></i> </a>
+            <a class="item" href="#" target="_blank"><i class="fi-social-tumblr" id="sosmed"></i> </a>
+            <a class="item" href="https://twitter.com/MamenGuwe" target="_blank"><i class="fi-social-twitter" id="sosmed"></i> </a>
+          </div>
+      </div>
+    </footer>
+    <script type="text/javascript" src="assets/js/jquery-3.2.1.slim.min.js"></script>
+    <script type="text/javascript" src="assets/js/popper.min.js"></script>
+    <script type="text/javascript" src="assets/js/bootstrap.js"></script>
+    <script type="text/javascript" src="assets/js/bootstrap.min.js"></script>
+    <script type="text/javascript" src="assets/js/jquery.js"></script>
+    <script type="text/javascript" src="assets/js/itemcomponent.js"></script>
+    <script type="text/javascript" src="assets/js/cartcomponent.js"></script>
+    <script type="text/javascript" src="assets/js/additemcomponent.js"></script>
+    <script type="text/javascript" src="assets/js/script.js"></script>
+    <script type="text/javascript">
+      $('a').click(function(){
+        $('html, body').animate({
+            scrollTop: $( $(this).attr('href') ).offset().top
+        }, 500);
+        return false;
+      });
+    </script>
+    <script type="text/javascript">
+    if(localStorage.token===undefined){
+      $(window).attr('location', 'login.html')
+    }
+    // if(localStorage.status!='user'){
+    //   $(window).attr('location', 'login.html')
+    // }
+    window.fbAsyncInit = function() {
+      FB.init({
+        appId      : '1035330659955386',
+        cookie     : true,
+        xfbml      : true,
+        version    : 'v2.12'
+      });
+      FB.AppEvents.logPageView();
+      FB.getLoginStatus(function(response) {
+        statusChangeCallback(response);
+      });
+    };
+
+    (function(d, s, id) {
+      var js, fjs = d.getElementsByTagName(s)[0];
+      if (d.getElementById(id)) return;
+      js = d.createElement(s); js.id = id;
+      js.src = 'https://connect.facebook.net/id_ID/sdk.js#xfbml=1&version=v2.12&appId=592784331071735&autoLogAppEvents=1';
+      fjs.parentNode.insertBefore(js, fjs);
+    }(document, 'script', 'facebook-jssdk'));
+
+     function checkLoginState() {
+       FB.getLoginStatus(function(response) {
+         statusChangeCallback(response);
+       });
+     }
+
+     function statusChangeCallback(response){
+       if(response.status === 'connected'){
+         sendTokenToServer(localStorage.token);
+       }else{
+         location.reload();
+         console.log('not connected');
+       }
+     }
+
+     function sendTokenToServer(token) {
+       $.ajax({
+         type: 'GET',
+         url: 'http://localhost:3000/',
+         headers: {
+           token: token,
+           tokenfb: localStorage.tokenfb
+         },
+         success: function(resp) {
+           $('#namaku').html(resp.name)
+         },
+         error: function(error) {
+           console.error('Failed send to server');
+           console.log(error);
+         }
+       })
+     };
+
+    function logout () {
+      window.FB.getLoginStatus(function (response) {
+        if (response.status === 'connected') {
+          window.FB.logout(function (response) {
+            console.log('logout ', response)
+            localStorage.clear()
+            window.location.href = '/login.html'
+          })
+        }
+      })
+    }
+    </script>
+  </body>
+</html>
