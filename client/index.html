@@ -1,0 +1,258 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm"
+        crossorigin="anonymous">
+    <link href="https://fonts.googleapis.com/css?family=Lato" rel="stylesheet">
+    <link rel="stylesheet" href="assets/styles/styles.css">
+    <link rel="shortcut icon" href="assets/img/favicon.ico" type="image/x-icon">
+    <title>QQQ</title>
+</head>
+
+<body>
+    <div id="app">
+        <!-- CART MODAL -->
+        <div class="modal fade" id="cartModal" tabindex="-1" role="dialog" aria-labelledby="cartModalTitle" aria-hidden="true">
+            <div class="modal-dialog modal-md" role="document">
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <h5 class="modal-title" id="cartModalLabel">Shopping Cart</h5>
+                        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                            <span aria-hidden="true">&times;</span>
+                        </button>
+                    </div>
+                    <div class="modal-body">
+                        <div class="container-fluid">
+                            <ul class="list-unstyled" v-for="cart in carts">
+                                <li class="media">
+                                    <img class="mr-3" style="width:64px;height:auto" v-bind:src="cart.image ">
+                                    <div class="media-body">
+                                        <div class="row">
+                                            <div class="col-lg-12">
+                                                <p class="mt-0 mb-1">{{cart.name}}</p>
+                                            </div>
+                                            <div class="col-md-2">
+                                                <p>QTY</p>
+                                            </div>
+                                            <div class="col-md-10">
+                                                <p>{{cart.quantity}}</p>
+                                            </div>
+                                            <div class="col-md-2">
+                                                <p>PRICE</p>
+                                            </div>
+                                            <div class="col-md-10">
+                                                <p>{{cart.price}}</p>
+                                            </div>
+                                            <div class="col-md-2">
+                                                <p>TOTAL</p>
+                                            </div>
+                                            <div class="col-md-10">
+                                                <p>{{cart.total}}</p>
+                                            </div>
+                                            <a class="btn btn-link" aria-pressed="true">
+                                                <i class="fas fa-trash" v-on:click="clearOneCart(cart)"></i>
+                                            </a>
+                                        </div>
+                                    </div>
+                                </li>
+                            </ul>
+                            <div class="row">
+                                <div class="col-md-9">
+                                    <span>Cart Total</span>
+                                </div>
+                                <div class="col-md-2">
+                                    <span>{{cartTotal}}</span>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="modal-footer ">
+                        <div class="container">
+                            <div class="col-12">
+                                <button type="button " class="btn btn-danger btn-secondary btn-bloc k " v-on:click="clearCart()">Clear Cart</button>
+                            </div>
+                        </div>
+                        <button type="button " class="btn btn-primary btn-block " @click="checkout" data-dismiss="modal">Proceed Checkout</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- ADMIN LOGIN MODAL -->
+        <div class="modal fade" id="adminModal" tabindex="-1" role="dialog" aria-labelledby="adminModalLabel" aria-hidden="true">
+            <div class="modal-dialog" role="document">
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <h5 class="modal-title" id="adminModalLabel">Login</h5>
+                        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                            <span aria-hidden="true">&times;</span>
+                        </button>
+                    </div>
+                    <div class="modal-body">
+                        <form>
+                            <div class="form-group">
+                                <label class="col-form-label">E-mail</label>
+                                <input class="form-control" name="email" type="text" placeholder="Email" v-model="email">
+                            </div>
+                            <div class="form-group">
+                                <label class="col-form-label">Password</label>
+                                <input type="password" class="form-control" v-model="password">
+                            </div>
+                        </form>
+                    </div>
+                    <div class="modal-footer">
+                        <button type="button" class="btn btn-primary" v-on:click="adminlogin(email,password)" data-dismiss="modal">Login</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- ADD ITEM MODAL -->
+        <div class="modal fade" id="addItemModal" tabindex="-1" role="dialog" aria-labelledby="addItemModalLabel" aria-hidden="true">
+            <div class="modal-dialog" role="document">
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <h5 class="modal-title">New Item</h5>
+                        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                            <span aria-hidden="true">&times;</span>
+                        </button>
+                    </div>
+                    <div class="modal-body">
+                        <form enctype="multipart/form-data">
+                            <div class="form-group">
+                                <label class="col-form-label">Name:</label>
+                                <input type="text" v-model="name" class="form-control">
+                            </div>
+                            <div class="form-group">
+                                <label class="col-form-label">Price:</label>
+                                <input type="text" v-model="price" class="form-control">
+                            </div>
+                            <div class="form-group">
+                                <label>Image</label>
+                                <input type="file" id="file" ref="file" v-on:change="handleFileUpload()" class="form-control-file">
+                            </div>
+                            <div class="form-group">
+                                <label class="col-form-label">Description:</label>
+                                <textarea v-model="description" class="form-control"></textarea>
+                            </div>
+                        </form>
+                    </div>
+                    <div class="modal-footer">
+                        <button type="button" class="btn btn-primary" v-on:click="addItem()">Upload</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Modal -->
+        <div class="modal fade" id="transactionModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+            <div class="modal-dialog" role="document">
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                            <span aria-hidden="true">&times;</span>
+                        </button>
+                </div>
+                <div class="modal-body">
+                    <div class="div">
+                            <table class="table">
+                                    <thead>
+                                      <tr>
+                                        <th scope="col">#</th>
+                                        <th scope="col">Transaction ID</th>
+                                        <th scope="col">Total</th>
+                                      </tr>
+                                    </thead>
+                                    <tbody v-for="(order,index) in orders">
+                                      <tr>
+                                        <th scope="row">{{ index }}</th>
+                                        <td>{{ order._id }}</td>
+                                        <td>{{ order.cartTotal }}</td>
+                                      </tr>
+                                    </tbody>
+                                  </table>
+                    </div>
+                </div>
+                <div class="modal-footer">
+                <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+                </div>
+            </div>
+            </div>
+        </div>
+
+        <!-- Navbar -->
+        <nav id="main-header" class="navbar navbar-expand-lg navbar-light bg-dark text-white">
+            <!-- Mobile -->
+            <button class="navbar-toggler border-0 p-0 " type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent"
+                aria-expanded="false" aria-label="Toggle navigation">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+
+            <a class="navbar-brand d-lg-none navbar-brand-mobile">Q</a>
+            <a class="navbar-brand d-none d-lg-block">Q</a>
+
+            <button class="navbar-toggler border-0 p-0" type="button">
+                <a class="d-lg-none text-white" data-toggle="modal" data-target="#cartModal">
+                    <i class="fas fa-shopping-cart "></i>
+                </a>
+            </button>
+
+            <div class="collapse navbar-collapse" id="navbarSupportedContent">
+                <div class="d-block d-md-block d-lg-none ">
+                    <ul class="nav navbar-nav navbar-right ">
+                        <a href="#" v-if="access_token" class="redirect-link p-2 text-white" data-toggle="modal" data-target="#transactionModal">All Transaction</a>
+                        <a href="#" v-if="!access_token" class="redirect-link p-2 text-white" onclick="fb_login() ">LOGIN USER</a>
+                        <a href="#" v-if="access_token" class="redirect-link p-2 text-white" onclick="fb_logout() ">LOGOUT USER</a>
+                        <a href="#" v-if="!admin_jwt" class="redirect-link p-2 text-white" data-toggle="modal" data-target="#adminModal">LOGIN ADMIN</a>
+                        <a href="#" v-if="admin_jwt" class="redirect-link p-2 text-white" data-toggle="modal" data-target="#addItemModal">ADD ITEM</a>
+                        <a href="#" v-if="admin_jwt" class="redirect-link p-2 text-white" v-on:click="logoutadmin()">LOGOUT ADMIN</a>
+                    </ul>
+                </div>
+            </div>
+
+            <!-- Desktop -->
+            <li class="text-center d-none d-lg-block p-8" style="list-style:none">
+                <a href="#" v-if="access_token" class="redirect-link p-2 text-white" data-toggle="modal" data-target="#transactionModal">All Transaction</a>
+                <a href="#" v-if="!access_token" class="redirect-link p-2 text-white" onclick="fb_login() ">LOGIN USER</a>
+                <a href="#" v-if="access_token" class="redirect-link p-2 text-white" onclick="fb_logout() ">LOGOUT USER</a>
+                <a href="#" v-if="!admin_jwt" class="redirect-link p-2 text-white" data-toggle="modal" data-target="#adminModal">LOGIN ADMIN</a>
+                <a href="#" v-if="admin_jwt" class="redirect-link p-2 text-white" data-toggle="modal" data-target="#addItemModal">ADD ITEM</a>
+                <a href="#" v-if="admin_jwt" class="redirect-link p-2 text-white" v-on:click="logoutadmin()">LOGOUT ADMIN</a>
+            </li>
+
+            <div class="d-none d-lg-block d-print-block ">
+                <a data-toggle="modal" data-target="#cartModal">
+                    <i class="fas fa-shopping-cart "></i>
+                </a>
+            </div>
+
+        </nav>
+
+        <items-component :items="items " v-on:add-item="addToCart "></items-component>
+        <footer-component></footer-component>
+
+    </div>
+    <script src="https://unpkg.com/axios/dist/axios.min.js "></script>
+    <script src="assets/scripts/fbsdk.js "></script>
+    <script src="https://code.jquery.com/jquery-3.2.1.slim.min.js " integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN "
+        crossorigin="anonymous "></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js " integrity="sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q "
+        crossorigin="anonymous "></script>
+    <link href="https://use.fontawesome.com/releases/v5.0.8/css/all.css " rel="stylesheet ">
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js " integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl "
+        crossorigin="anonymous "></script>
+    <script src="https://unpkg.com/vue@2.5.15/dist/vue.js "></script>
+    <script src="https://unpkg.com/vee-validate@2.0.6/dist/vee-validate.js"></script>
+    <script>
+        Vue.use(VeeValidate)
+    </script>
+    <script src="assets/scripts/item.component.js "></script>
+    <script src="assets/scripts/footer.component.js "></script>
+    <script src="assets/scripts/main.js "></script>
+</body>
+
+</html>

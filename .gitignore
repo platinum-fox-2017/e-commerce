@@ -1,0 +1,5 @@
+.vscode
+.DS_Store
+server/node_modules/
+server/.env
+server/Hacktiv8Training-e9994bb868cf.json
