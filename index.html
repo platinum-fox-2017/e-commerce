@@ -1,0 +1,118 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta http-equiv="X-UA-Compatible" content="ie=edge">
+  <title>Faduino</title>
+  <link rel="stylesheet" href="./style.css">
+  <link rel="icon" href="Assets/arduino-logo-small.png">
+  <!-- Latest compiled and minified CSS -->
+  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
+  <link href="https://maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css" rel="stylesheet" integrity="sha384-wvfXpqpZZVQGK6TAh5PVlGOfQNHSoD2xbE+QkPxCAFlNEevoEH3Sl0sibVcOQVnN" crossorigin="anonymous">
+</head>
+
+<body>
+  <div class="app">
+
+    <!-- NAVIGATION BAR -->
+    <navbar :totalitems="getTotalItems()"></navbar>
+
+
+    <!-- MODAL -->
+    <div class="modal fade" id="cartModal">
+      <div class="modal-dialog modal-lg">
+        <div class="modal-content">
+
+          <!-- Modal Header -->
+          <div class="modal-header">
+            <h4 class="modal-title">Shopping Cart</h4>
+            <button type="button" class="close" data-dismiss="modal">&times;</button>
+          </div>
+
+          <!-- Modal body -->
+          <div class="modal-body">
+            <div class="container">
+              <table id="cart" class="table table-hover table-condensed">
+                <thead>
+                  <tr>
+                    <th style="width:50%">Product</th>
+                    <th style="width:10%">Price</th>
+                    <th style="width:8%">Quantity</th>
+                    <th style="width:22%" class="text-center">Subtotal</th>
+                    <th style="width:10%"></th>
+                  </tr>
+                </thead>
+                <tbody>
+                  <tr v-for="itemCart in itemsCart">
+                    <td data-th="Product">
+                      <div class="row">
+                        <div class="col-sm-4 hidden-xs d-none d-lg-block">
+                          <img :src="itemCart.imageUrl" width=100; alt="imageCart" class="img-responsive" />
+                        </div>
+                        <div class="col-sm-8">
+                          <h6 class="nomargin">{{itemCart.name}}</h6>
+                        </div>
+                      </div>
+                    </td>
+                    <td data-th="Price">{{pricePrint(itemCart.price)}}</td>
+                    <td data-th="Quantity">
+                      <input v-model="itemCart.quantity" type="number" class="form-control text-center" min="1" :max="findStock(itemCart._id)">
+                    </td>
+                    <td data-th="Subtotal" class="text-center">{{pricePrint(setSubtotal(itemCart._id, itemCart.quantity))}}</td>
+                    <td class="actions" data-th="">
+                      <button class="btn btn-info btn-sm"><i class="fa fa-refresh"></i></button>
+                      <button @click="deleteFromCart(itemCart._id)" class="btn btn-danger btn-sm"><i class="fa fa-trash-o"></i></button>
+                    </td>
+                  </tr>
+                </tbody>
+                <tfoot>
+
+                  <tr>
+                    <td><a href="#" class="btn btn-warning"><i class="fa fa-angle-left"></i> Continue Shopping</a></td>
+                    <td colspan="2" class="hidden-xs"></td>
+                    <td class="hidden-xs text-center"><strong>Total {{pricePrint(setTotalPrice())}}</strong></td>
+                    <td><a class="btn btn-success btn-block" @click="reupdateStock()">Checkout <i class="fa fa-angle-right"></i></a></td>
+                  </tr>
+                </tfoot>
+              </table>
+            </div>
+          </div>
+
+
+        </div>
+      </div>
+    </div>
+
+    <carousel></carousel>
+
+
+    <div class="container">
+      <h2 class='category-title'>Featured Products</h2>
+      <div class="row">
+        <div class="col-lg-4 col-md-6 col-sm-12 col-xs-12" v-for="item in itemsList">
+          <item-card :item="item" @addtocart="addToCart"></item-card>
+        </div>
+      </div>
+    </div>
+
+    <footer-content></footer-content>
+
+
+
+
+  </div>
+
+    <script src="https://code.jquery.com/jquery-3.3.1.min.js" integrity="sha256-FgpCb/KJQlLNfOu91ta32o/NMZxltwRo8QtmkMRdAu8=" crossorigin="anonymous"></script>
+    <script src="https://unpkg.com/axios/dist/axios.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/vue@2.5.15/dist/vue.js"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js" integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl" crossorigin="anonymous"></script>
+    <script src="component.item-card.js" charset="utf-8"></script>
+    <script src="component.navbar.js" charset="utf-8"></script>
+    <script src="component.carousel.js" charset="utf-8"></script>
+    <script src="component.footer.js" charset="utf-8"></script>
+    <script src="script.js" charset="utf-8"></script>
+</body>
+
+</html>
