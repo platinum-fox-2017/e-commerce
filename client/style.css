@@ -1,0 +1,40 @@
+@media (max-width: 320px){
+    .nav-main {
+        font-size: 14px
+    }
+    #nav-sales{
+        font-size: 14px
+    }
+    .card-title {
+        font-size: 14px
+    }
+    .card-text {
+        font-size: 12px
+    }
+    .card-price {
+        font-size: 14px
+    }
+    #card-cart {
+        font-size: 10px
+    }
+}
+@media (min-width: 321px) and (max-width: 720px){
+    .nav-main {
+        font-size: 18px
+    }
+    #nav-sales{
+        font-size: 18px
+    }
+    .card-title {
+        font-size: 18px
+    }
+    .card-text {
+        font-size: 14px
+    }
+    .card-price {
+        font-size: 14px
+    }
+    #card-cart {
+        font-size: 14px
+    }
+}
