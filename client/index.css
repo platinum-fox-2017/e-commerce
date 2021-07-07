@@ -1,0 +1,82 @@
+body {
+  margin: 0px;
+  padding: 0px;
+  background-color: #efefef;
+}
+header .row{
+  display: flex;
+  align-items: center;
+}
+container .col-md-3{
+  background-color: navy;
+  margin: 2px;
+}
+.container h4 {
+  color:black;
+}
+.container h2 {
+  font-size: 23px;
+}
+.carousel img {
+  max-height: 450px;
+  width: 100%;
+}
+#category img{
+  max-width: 100px;
+  min-height: 100px;
+}
+#cartTotal {
+  font-weight: bold;
+  color: red;
+}
+.product img {
+  max-width:150px ;
+}
+.product h3 {
+  font-size: 16px;
+  text-align: center;
+  font-weight: bold;
+}
+.product btn {
+  text-align: center;
+}
+.itemPrice{
+  font-weight: bold;
+}
+.itemStock {
+  font-weight: bold;
+}
+.cart{
+  margin-top: 50px;
+}
+.cart a{
+  color: black;
+  margin:2px;
+  text-align: justify
+}
+.btn-primary {
+  width: 100%;
+}
+.modal img {
+  max-width: 50px;;
+}
+.modal a{
+  text-align: center;
+}
+.table-responsive .col-xs{
+  max-width: 270px;
+}
+footer {
+  background-color: #a9a9a9;
+  padding: 5px;
+  color: white;
+}
+
+#loginfb{
+  padding: 10px;
+}
+
+#welcome{
+  margin-top:200px;
+  padding-top: 200px;
+}

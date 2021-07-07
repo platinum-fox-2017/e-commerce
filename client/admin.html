@@ -1,0 +1,148 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta http-equiv="X-UA-Compatible" content="ie=edge">
+  <title>Admin-kameraku</title>
+  <!-- Latest compiled and minified CSS -->
+  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
+  <!-- jQuery library -->
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+  <!-- Latest compiled JavaScript -->
+  <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+  <link rel="stylesheet" type="text/css" href="index.css">
+</head>
+<body>
+  <div id="admin">
+    <nav class="navbar navbar-default">
+        <div class="container-fluid">
+          <div class="navbar-header">
+            <a class="navbar-brand" href="#">KameraKu</a>
+          </div>
+          <ul class="nav navbar-nav">
+            <li class="active"><a href="#">Home</a></li>
+            <li v-if="token == null"><a href="" data-toggle="modal" data-target="#signInModal">Sign In</a></li>
+            <!-- <li v-if="token == null"><a href="" data-toggle="modal" data-target="#signUpModal">Sign Up</a></li> -->
+            <li v-if="token != null">
+              <a href="" @click="logOutButtonClick" >Sign Out</a>
+            </li>
+          </ul>
+        </div>
+        </nav>
+      <div class="container text-center">
+        <h2>Welcome to Admin Page</h2>
+      </div>
+    
+<div class="container text-center" v-if="token != null">
+  <!-- modal add item -->
+  <button type="button" class="btn btn-info btn-lg" data-toggle="modal" data-target="#addItemModal">Add new item</button>
+  </div>
+
+  <div id="addItemModal" class="modal fade" role="dialog">
+    <div class="modal-dialog modal-sm modal-lg">
+  
+      <div class="modal-content">
+        <div class="modal-header" >
+          <button type="button" class="close" data-dismiss="modal">&times;</button>
+          <h4 class="modal-title">Add New Item</h4>
+        </div>
+        <div class="modal-body">
+          <form>
+              <div class="form-group">
+                <label for="addItem">SKU</label>
+                <input type="text" placeholder="sku..." class="form-control" v-model="newItem.sku">
+                <label for="addItem">Title</label>
+                <input type="text" placeholder="item name..." class="form-control" v-model="newItem.title">
+                <label for="addItem">Category</label>
+                <input type="text" placeholder="item category..." class="form-control" v-model="newItem.category">
+                <label for="addItem">Description</label>
+                <input type="text" placeholder="descrtiption..." class="form-control" v-model="newItem.description">
+                <label for="addItem">Price</label>
+                <input type="number" class="form-control" v-model="newItem.price">
+                <label for="addItem">Image</label>
+                <input type="text" class="form-control" v-model="newItem.image">
+              </div>
+              <button type="button" class="btn btn-default" @click="addNewItem" data-dismiss="modal">Submit</button>
+              
+            </form>
+        </div>
+        <div class="modal-footer">
+          <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+        </div>
+      </div>
+  
+    </div>
+  </div> 
+  
+  <!-- modal login -->
+  <div id="signInModal" class="modal fade" role="dialog">
+    <div class="modal-dialog modal-sm modal-lg">
+  
+      <div class="modal-content">
+        <div class="modal-header">
+          <button type="button" class="close" data-dismiss="modal">&times;</button>
+          <h4 class="modal-title">Sign In</h4>
+        </div>
+        <div class="modal-body">
+          <form>
+              <div class="form-group">
+                <label for="addUser">Email</label>
+                <input type="email" placeholder="your email..." class="form-control" v-model="userLogin.email">
+                <label for="addUser">Password</label>
+                <input type="password" placeholder="your password..." class="form-control" v-model="userLogin.password">
+              </div>
+              <button type="button" class="btn btn-default" @click="loginUser" data-dismiss="modal">Log In</button>
+            </form>
+        </div>
+        <div class="modal-footer">
+          <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+        </div>
+      </div>
+  
+    </div>
+  </div> 
+<!-- sign up modal -->
+  <!-- <div id="signUpModal" class="modal fade" role="dialog">
+    <div class="modal-dialog modal-sm modal-lg">
+  
+      <div class="modal-content">
+        <div class="modal-header">
+          <button type="button" class="close" data-dismiss="modal">&times;</button>
+          <h4 class="modal-title">Sign Up</h4>
+        </div>
+        <div class="modal-body">
+          <form>
+              <div class="form-group">
+                <label for="addTodo">Name</label>
+                <input type="text" placeholder="your name..." class="form-control" v-model="objUser.name">
+                <label for="addTodo">Email</label>
+                <input type="email" placeholder="your email..." class="form-control" v-model="objUser.email">
+                <label for="addTodo">Password</label>
+                <input type="password" placeholder="your password..." class="form-control" v-model="objUser.password">
+              </div>
+              <button type="button" class="btn btn-default" @click="createUser" data-dismiss="modal">Sign Up</button>
+            </form>
+        </div>
+        <div class="modal-footer">
+          <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+        </div>
+      </div>
+  
+    </div>
+  </div> -->
+  
+  </div> <!-- end id admin vue -->
+  
+   <!-- footer -->
+   <footer class="container-fluid text-center navbar-fixed-bottom">
+    <p>&copy; 2018 Kameraku</p>
+  </footer>
+  <script src="https://code.jquery.com/jquery-3.3.1.min.js" integrity="sha256-FgpCb/KJQlLNfOu91ta32o/NMZxltwRo8QtmkMRdAu8=" crossorigin="anonymous"></script>
+  <script src="https://unpkg.com/axios/dist/axios.min.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/vue/dist/vue.js"></script>
+  
+  <script src="./admin.js"></script>
+</body>
+</html>
