@@ -1,0 +1,63 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
+    <link rel="stylesheet" href="./style/boot.css">
+    <title>Login</title>
+  </head>
+  <body>
+    <nav class="navbar bg-white no-top-padding bottom-border">
+      <nav class="navbar navbar-expand-lg navbar-light bg-white auto-margin side-border ">
+        <a class="navbar-brand" href="/">To Home</a>
+        <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+          <span class="navbar-toggler-icon"></span>
+        </button>
+
+        <div class="collapse navbar-collapse" id="navbarSupportedContent">
+          <ul class="navbar-nav mr-auto">
+            <li class="nav-item active">
+              <a class="nav-link" href="/">Home <span class="sr-only">(current)</span></a>
+            </li>
+            <li class="nav-item">
+              <a class="nav-link" href="#">Browse</a>
+            </li>
+            <li class="nav-item dropdown">
+              <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                Categories
+              </a>
+              <div class="dropdown-menu" aria-labelledby="navbarDropdown">
+                <a class="dropdown-item" href="#">Birthday Cake</a>
+                <a class="dropdown-item" href="#">Buttercream Cake</a>
+                <a class="dropdown-item" href="#">Wedding Cake</a>
+                <div class="dropdown-divider"></div>
+                <a class="dropdown-item" href="#">Custom Order</a>
+              </div>
+            </li>
+            <li class="nav-item">
+              <a class="nav-link" href="/login.html">Login</a>
+            </li>
+          </ul>
+        </div>
+      </nav>
+    </nav>
+
+    <section class="text-center margin-top-md">
+      <h1 class="h3 mb-3 font-weight-normal">Please sign in</h1>
+      <div class="fb-login-button" data-scope="public_profile, email" onlogin="checkLoginState();" data-max-rows="1" data-size="large" data-button-type="continue_with" data-show-faces="false" data-auto-logout-link="false" data-use-continue-as="false"></div>
+      <button type="button" name="button" class="fb-logout-button logout-style" onclick="logout()">
+        logout
+      </button>
+      <button type="button" name="button" class="btn logout-style" id="management" style="display:none" onclick="admin()">Management</button>
+
+      <script
+        src="https://code.jquery.com/jquery-3.3.1.min.js"
+        integrity="sha256-FgpCb/KJQlLNfOu91ta32o/NMZxltwRo8QtmkMRdAu8="
+        crossorigin="anonymous"></script>
+      <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js" integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl" crossorigin="anonymous"></script>
+      <script src="https://unpkg.com/axios/dist/axios.min.js"></script>
+      <script src="./javascripts/facebook.js" charset="utf-8"></script>
+    </section>
+  </body>
+</html>
