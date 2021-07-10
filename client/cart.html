@@ -1,0 +1,74 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<script src="https://unpkg.com/axios/dist/axios.min.js"></script>
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+<script src="https://unpkg.com/sweetalert/dist/sweetalert.min.js"></script>
+<link type="text/css" rel="stylesheet" href="assets/css/style-checkout.css"/>
+</head>
+<body>
+  <div id="checkout">
+<h2>Form Checkout</h2>
+<div class="row">
+  <div class="col-75">
+    <div class="container">
+
+        <div class="row">
+          <div class="col-50">
+            <h3>Alamat Pengiriman</h3>
+            <label for="fname"><i class="fa fa-user"></i> Nama Lengkap</label>
+            <input type="text" id="fname" name="firstname" placeholder="Siti Rohimah">
+            <label for="email"><i class="fa fa-envelope"></i> Email</label>
+            <input type="text" id="email" name="email" placeholder="siti@example.com">
+            <label for="adr"><i class="fa fa-address-card-o"></i> Alamat</label>
+            <input type="text" id="adr" name="address" placeholder="jl sultan iskandar muda">
+            <label for="city"><i class="fa fa-institution"></i> Kota</label>
+            <input type="text" id="city" name="city" placeholder="Jakarta Selatan">
+            <div class="row">
+              <div class="col-50">
+                <label for="state">Kecamatan</label>
+                <input type="text" id="state" name="state" placeholder="Kebayoran Lama Selatan">
+              </div>
+              <div class="col-50">
+                <label for="zip">Kode Post</label>
+                <input type="text" id="zip" name="zip" placeholder="10001">
+              </div>
+            </div>
+          </div>
+
+          <div class="col-50">
+            <h3>Metode Pembayaran</h3>
+            <label for="fname">Hanya Bisa dilakukan melalui transfer, silakan isi data pembayaran dibawah ini:</label>
+            <label for="cname">Nama Bank</label>
+            <input type="text" id="cname" name="cardname" placeholder="Mandiri">
+            <label for="ccnum">No Rekening</label>
+            <input type="text" id="ccnum" name="cardnumber" placeholder="1111-2222-3333-4444">
+            <label for="expmonth">Nama Pemilik Rekening</label>
+            <input type="text" id="expmonth" name="expmonth" placeholder="Siti Rohimah">
+          </div>
+        </div>
+        <button class="btn" @click="checkout">Lanjutkan Pembayaran</button>
+    
+    </div>
+  </div>
+  <div class="col-25">
+    <div class="container">
+      <h4>Ringkasan Belanja<span class="price" style="color:black"><i class="fa fa-shopping-cart"></i> <b>{{carts.length}}</b></span></h4>
+      <p v-for="data in carts">
+        <span >{{data.name}}</span> <span class="price">{{currencyFormat(data.subtotal)}}</span>
+      </p>
+      <p>
+        <span >Biaya Pengiriman</span> <span class="price">17000</span>
+      </p>
+      <hr>
+      <p>Total <span class="price" style="color:black"><b>Rp {{currencyFormat(getTotal()+17000)}}</b></span></p>
+    </div>
+  </div>
+</div>
+</div>
+<script src="https://cdn.jsdelivr.net/npm/vue@2.5.16/dist/vue.js"></script>
+<script src="assets/script/com-checkout.js"></script>
+
+</body>
+</html>

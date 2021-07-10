@@ -1,0 +1,130 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <link rel="stylesheet" href="style.css" type="text/css">
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
+    <script src="https://unpkg.com/axios/dist/axios.min.js"></script>
+    <script src="https://code.jquery.com/jquery-3.2.1.slim.min.js" integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN" crossorigin="anonymous"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js" integrity="sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q" crossorigin="anonymous"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js" integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl" crossorigin="anonymous"></script>
+    <script src="https://unpkg.com/sweetalert/dist/sweetalert.min.js"></script>
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.4.0/css/font-awesome.min.css">
+    <title>Ecommerce</title>
+  </head>
+  <body>
+    <div id="produk">    
+    <navbar @signout="logout"></navbar>
+    <div class="slide">
+      <div class="container">
+        <div id="demo" class="carousel slide" data-ride="carousel">
+          <ul class="carousel-indicators">
+            <li data-target="#demo" data-slide-to="0" class="active"></li>
+            <li data-target="#demo" data-slide-to="1"></li>
+            <li data-target="#demo" data-slide-to="2"></li>
+          </ul>
+          <div class="carousel-inner">
+            <div class="carousel-item active">
+              <img src="assets/images/banner-1.jpeg" alt="Los Angeles" width="100%">
+            </div>
+            <div class="carousel-item">
+              <img src="assets/images/banner-1.jpeg" alt="Chicago" width="100%">
+            </div>
+            <div class="carousel-item">
+              <img src="assets/images/banner-1.jpeg" alt="New York" width="100%">
+            </div>
+          </div>
+          <a class="carousel-control-prev" href="#demo" data-slide="prev">
+          <span class="carousel-control-prev-icon"></span>
+          </a>
+          <a class="carousel-control-next" href="#demo" data-slide="next">
+          <span class="carousel-control-next-icon"></span>
+          </a>
+        </div>
+      </div>
+    </div>
+    <div class="container">
+      <div class="category">
+        <h4>Terbaru</h4>
+        <hr>
+        <div class="row">   
+            <div class="col-sm-2" v-for="item in items" v-if="item.status == 'terbaru'">
+              <new-item :item='item' @order="addToCart"> </new-item>
+            </div>
+        </div>
+      </div>
+      <div class="category">
+        <h4>Promo</h4>
+        <hr>
+        <div class="row">
+            <div class="col-sm-3" v-for="item in items" v-if="item.status == 'promo'">
+              <new-item :item='item' @order="addToCart"> </new-item>
+            </div>
+        </div>
+      </div>
+    </div>
+    <div class="page-footer">
+      <div class="container">
+        <div class="row row-footer">
+          <div class="col-sm-7 footer-info">
+            <h5>Tentang Hijabana</h5>
+            <p>Hijabana adalah sebuah ecommerce yang menyediakan kebutuhan hijab untuk semua wanita yang sangat nyaman dan berkelas</p>
+          </div>
+          <div class="col-sm-3 footer-info">
+            <h5>Kontak</h5>
+            <p><i class="fa fa-map-marker"></i> &nbsp; &nbsp; Jl. Dago 25 Kanayakan dalam</p>
+            <p><i class="fa fa-envelope-square"></i> &nbsp; &nbsp; info@hijabana.com</p>
+            <p><i class="fa fa-mobile"></i> &nbsp; &nbsp; +62 812 9012 3454</p>
+          </div>
+          <div class="col-sm-2 footer-info">
+            <h5>Ikuti Kami</h5>
+            <p><a href="facebook.com"><i class="fa fa-facebook-square"></i>&nbsp; &nbsp;hijabana</a></p>
+            <p><a href="instagram.com"><i class="fa fa-instagram"></i>&nbsp; &nbsp;hijabana_id</a></p>
+            <p><a href="twitter.com"><i class="fa fa-twitter"></i>&nbsp; &nbsp;hijabana</a></p>
+          </div>
+        </div>
+        <hr>
+        <div class="footer-copyright py-3 text-center">
+          <i style="color:white;">© 2018 Copyright:
+          <a href="#" style="color:white;"> Hijabana </a></i>
+        </div>
+      </div>
+    </div>
+    <div class="modal fade" id="exampleModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+      <div class="modal-dialog" role="document">
+        <div class="modal-content">
+          <div class="modal-header">
+            <h5 class="modal-title" id="exampleModalLabel">Sign In</h5>
+            <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+            <span aria-hidden="true">&times;</span>
+            </button>
+          </div>
+          <div class="modal-body">
+              <div class="fb-login-button" data-max-rows="1" data-size="large" 
+              data-button-type="login_with" data-show-faces="false" data-auto-logout-link="true" 
+              data-use-continue-as="false"
+              onlogin="checkLoginState()"></div>
+          </div>
+          <div class="modal-footer">
+            <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+            <button type="button" class="btn btn-primary">Sign in</button>
+          </div>
+        </div>
+      </div>
+    </div>
+   
+         <modal :cart="cart" @add="addItem" @reduce="substractItem" @process="process"></modal>
+        
+  </div>
+  
+  <div id="status"></div>
+  <script src="https://cdn.jsdelivr.net/npm/vue@2.5.16/dist/vue.js"></script>
+  <script src="assets/script/fbLogin.js"></script>
+  <script src="assets/script/component.js"></script>
+  <script src="assets/script/com-navbar.js"></script>
+  <script src="assets/script/data.js"></script>
+
+  </body>
+</html>
